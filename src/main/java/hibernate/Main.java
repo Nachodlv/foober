@@ -1,5 +1,6 @@
-package model;
+package hibernate;
 
+import model.Person;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;

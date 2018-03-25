@@ -12,6 +12,6 @@
         <property name="show_sql">true</property>
         <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
-        <mapping class="model.Person"/>
+        <mapping class="model.FranchiseOwner"/>
     </session-factory>
 </hibernate-configuration>
