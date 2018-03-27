@@ -5,12 +5,10 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import javax.persistence.PersistenceException;
-
 public class FOFunctionality {
 
     public static void addFranchiseOwner(String email, String name, String password, int phone, String address,
-                                         int menuId, int tippingPercentage){
+                                         int menuId, int tippingPercentage) {
 
         FranchiseOwner franchiseOwner = new FranchiseOwner();
         franchiseOwner.setEmail(email);
@@ -21,13 +19,13 @@ public class FOFunctionality {
         franchiseOwner.setMenuId(menuId);
         franchiseOwner.setTippingPercentage(tippingPercentage);
 
-        Session session = HibernateUtil.getSessionFactory().openSession();;
+        Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
             session.save(franchiseOwner);
             transaction.commit();
-        }catch (HibernateException ex) {
+        } catch (HibernateException ex) {
         // If there are any exceptions, roll back the changes
         if (transaction != null) {
             transaction.rollback();
@@ -51,7 +49,7 @@ public class FOFunctionality {
 
     public static FranchiseOwner deleteFranchiseOwner(String email){
         FranchiseOwner franchiseOwner = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();;
+        Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
@@ -73,9 +71,9 @@ public class FOFunctionality {
     }
 
 
-    public static void  modifyFranchiseOwner(String email, String name, String password, int phone, String address,
-                                                      int menuId, int tippingPercentag){
-        Session session = HibernateUtil.getSessionFactory().openSession();;
+    public static void modifyFranchiseOwner(String email, String name, String password, int phone, String address,
+                                                      int menuId, int tippingPercentage) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
@@ -86,7 +84,7 @@ public class FOFunctionality {
             franchiseOwner.setPhone(phone);
             franchiseOwner.setAddress(address);
             franchiseOwner.setMenuId(menuId);
-            franchiseOwner.setTippingPercentage(tippingPercentag);
+            franchiseOwner.setTippingPercentage(tippingPercentage);
 
             session.update(franchiseOwner);
             transaction.commit();
