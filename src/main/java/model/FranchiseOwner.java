@@ -23,6 +23,18 @@ public class FranchiseOwner {
     @Column(name = "tippingPercentage")
     private int tippingPercentage;
 
+    public FranchiseOwner() {
+    }
+
+    public FranchiseOwner(String email, String name, String password, int phone, String address, int menuId, int tippingPercentage) {
+        Email = email;
+        this.name = name;
+        this.password = password;
+        this.phone = phone;
+        this.address = address;
+        this.menuId = menuId;
+        this.tippingPercentage = tippingPercentage;
+    }
 
     public String getEmail() {
         return Email;
