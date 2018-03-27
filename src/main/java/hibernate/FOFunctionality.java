@@ -6,26 +6,11 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-public class FOFunctionality {
+public class FOFunctionality extends Model{
 
-    public static <T> void addModel(T t) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = null;
-        try {
-            transaction = session.beginTransaction();
-            session.save(t);
-            transaction.commit();
-        } catch (HibernateException ex) {
-        // If there are any exceptions, roll back the changes
-        if (transaction != null) {
-            transaction.rollback();
-        }
-        // Print the Exception
-        ex.printStackTrace();
-        } finally {
-            // Close the session
-            session.close();
-        }
+    @Override
+    public Class returnClass() {
+        return FranchiseOwner.class;
     }
 
     public static FranchiseOwner getFranchiseOwner(String email){
