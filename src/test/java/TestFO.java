@@ -67,4 +67,14 @@ public class TestFO {
         FOFunctionality.addFranchiseOwner("TEST", "B", "C",1, "D", 2, 3);
         FOFunctionality.addFranchiseOwner("TEST2", "B", "C",1, "D", 2, 3);
     }
+
+    @Test
+    public void testModify(){
+        FOFunctionality.addFranchiseOwner("TEST", "El puestito de Alberto", "alberto123",
+                1562240533, "Rawson4060", 123, 10);
+        FOFunctionality.modifyFranchiseOwner("TEST", "El puestito de Alberto", "alberto123",
+                1562240533, "Parana", 123, 10);
+        FranchiseOwner franchiseOwner = FOFunctionality.getFranchiseOwner("TEST");
+        assertEquals(franchiseOwner.getAddress(), "Parana");
+    }
 }
