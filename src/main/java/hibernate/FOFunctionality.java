@@ -1,29 +1,19 @@
 package hibernate;
 
 import model.FranchiseOwner;
+import model.Model;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 public class FOFunctionality {
 
-    public static void addFranchiseOwner(String email, String name, String password, int phone, String address,
-                                         int menuId, int tippingPercentage) {
-
-        FranchiseOwner franchiseOwner = new FranchiseOwner();
-        franchiseOwner.setEmail(email);
-        franchiseOwner.setName(name);
-        franchiseOwner.setPassword(password);
-        franchiseOwner.setPhone(phone);
-        franchiseOwner.setAddress(address);
-        franchiseOwner.setMenuId(menuId);
-        franchiseOwner.setTippingPercentage(tippingPercentage);
-
+    public static <T> void addModel(T t) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
-            session.save(franchiseOwner);
+            session.save(t);
             transaction.commit();
         } catch (HibernateException ex) {
         // If there are any exceptions, roll back the changes

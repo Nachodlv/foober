@@ -28,8 +28,8 @@ public class TestFO {
 
     @Test
     public void testAddingGetting(){
-        FOFunctionality.addFranchiseOwner("TEST", "El puestito de Alberto", "alberto123",
-                1562240533, "Rawson4060", 123, 10);
+        FOFunctionality.addModel(new FranchiseOwner("TEST", "El puestito de Alberto", "alberto123",
+                1562240533, "Rawson4060", 123, 10));
 
         FranchiseOwner franchiseOwner = FOFunctionality.getFranchiseOwner("TEST");
         assertEquals(franchiseOwner.getPhone(), 1562240533);
@@ -43,8 +43,8 @@ public class TestFO {
 
     @Test
     public void testDelete(){
-        FOFunctionality.addFranchiseOwner("TEST", "El puestito de Alberto", "alberto123",
-                1562240533, "Rawson4060", 123, 10);
+        FOFunctionality.addModel(new FranchiseOwner("TEST", "El puestito de Alberto", "alberto123",
+                1562240533, "Rawson4060", 123, 10));
         FOFunctionality.deleteFranchiseOwner("TEST");
         FranchiseOwner franchiseOwner = FOFunctionality.getFranchiseOwner("TEST");
         assertEquals(franchiseOwner, null);
@@ -58,23 +58,24 @@ public class TestFO {
 
     @Test(expected = PersistenceException.class)
     public void testRepeatedKey(){
-        FOFunctionality.addFranchiseOwner("TEST", "B", "C",1, "D", 2, 3);
-        FOFunctionality.addFranchiseOwner("TEST", "C", "D",2, "E", 3, 4);
+        FOFunctionality.addModel(new FranchiseOwner("TEST", "B", "C",1, "D", 2, 3));
+        FOFunctionality.addModel(new FranchiseOwner("TEST", "C", "D",2, "E", 3, 4));
     }
 
     @Test
     public void testRepeatedFieldsButKey(){
-        FOFunctionality.addFranchiseOwner("TEST", "B", "C",1, "D", 2, 3);
-        FOFunctionality.addFranchiseOwner("TEST2", "B", "C",1, "D", 2, 3);
+        FOFunctionality.addModel(new FranchiseOwner("TEST", "B", "C",1, "D", 2, 3));
+        FOFunctionality.addModel(new FranchiseOwner("TEST2", "B", "C",1, "D", 2, 3));
     }
 
     @Test
     public void testModify(){
-        FOFunctionality.addFranchiseOwner("TEST", "El puestito de Alberto", "alberto123",
-                1562240533, "Rawson4060", 123, 10);
+        FOFunctionality.addModel(new FranchiseOwner("TEST", "El puestito de Alberto", "alberto123",
+                1562240533, "Rawson4060", 123, 10));
         FOFunctionality.modifyFranchiseOwner("TEST", "El puestito de Alberto", "alberto123",
                 1562240533, "Parana", 123, 10);
         FranchiseOwner franchiseOwner = FOFunctionality.getFranchiseOwner("TEST");
         assertEquals(franchiseOwner.getAddress(), "Parana");
+        System.out.println(FranchiseOwner.class);
     }
 }
