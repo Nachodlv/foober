@@ -28,6 +28,8 @@ DS_Store
 .gradle
 /build/
 out/
+db/
+lib/
 
 # Ignore Gradle GUI config
 gradle-app.setting
