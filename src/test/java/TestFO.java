@@ -70,11 +70,10 @@ public class TestFO {
 
     @Test
     public void testModify(){
-        FranchiseOwner franchiseOwner = new FranchiseOwner("TEST", "El puestito de Alberto", "alberto123",
-                1562240533, "Rawson4060", 123, 10);
+        FranchiseOwner franchiseOwner = new FranchiseOwner("TEST", "A", "B",3, "R", 123, 10);
         FOFunctionality.addModel(franchiseOwner);
-        franchiseOwner.setAddress("Parana");
-        FOFunctionality.modifyFranchiseOwner(franchiseOwner);
+        franchiseOwner.setAddress("S");
+        FOFunctionality.modifyModel(franchiseOwner);
         FranchiseOwner newFranchiseOwner = FOFunctionality.getFranchiseOwner("TEST");
         assertEquals(franchiseOwner.getAddress(), newFranchiseOwner.getAddress());
     }
