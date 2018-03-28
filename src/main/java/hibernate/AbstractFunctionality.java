@@ -1,4 +1,4 @@
-package model;
+package hibernate;
 
 import hibernate.HibernateUtil;
 import org.hibernate.HibernateException;
@@ -7,9 +7,7 @@ import org.hibernate.Transaction;
 
 import java.io.Serializable;
 
-public abstract class Model <T extends Serializable, K>{
-    //public abstract T getKey();
-    public abstract Class<K> returnClass();
+public abstract class AbstractFunctionality {
 
     public static <T> void addModel(T t) {
         Transaction transaction = null;

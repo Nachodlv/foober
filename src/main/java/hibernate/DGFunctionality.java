@@ -1,7 +1,6 @@
 package hibernate;
 
 import model.DeliveryGuy;
-import model.Model;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -9,12 +8,7 @@ import org.hibernate.Transaction;
 /**
  * @author Gonzalo de Achaval
  */
-public class DGFunctionality extends Model {
-
-    @Override
-    public Class returnClass() {
-        return DeliveryGuy.class;
-    }
+public class DGFunctionality extends AbstractFunctionality {
 
     public static DeliveryGuy getDeliveryGuy(String email){
         Session session = HibernateUtil.getSessionFactory().openSession();

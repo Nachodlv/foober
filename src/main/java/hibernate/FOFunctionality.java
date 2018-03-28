@@ -1,17 +1,11 @@
 package hibernate;
 
 import model.FranchiseOwner;
-import model.Model;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-public class FOFunctionality extends Model{
-
-    @Override
-    public Class returnClass() {
-        return FranchiseOwner.class;
-    }
+public class FOFunctionality extends AbstractFunctionality {
 
     public static FranchiseOwner getFranchiseOwner(String email){
         Session session = HibernateUtil.getSessionFactory().openSession();
