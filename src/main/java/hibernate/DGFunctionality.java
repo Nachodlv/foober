@@ -13,7 +13,7 @@ public class DGFunctionality extends AbstractFunctionality {
     public static DeliveryGuy getDeliveryGuy(String email) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        DeliveryGuy deliveryGuy = session.get(DeliveryGuy.class, String.valueOf(email));
+        DeliveryGuy deliveryGuy = session.get(DeliveryGuy.class, email);
         session.close();
 
         return deliveryGuy;
@@ -24,7 +24,7 @@ public class DGFunctionality extends AbstractFunctionality {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            deliveryGuy = session.get(DeliveryGuy.class, String.valueOf(email));
+            deliveryGuy = session.get(DeliveryGuy.class, email);
             session.delete(deliveryGuy);
             transaction.commit();
         } catch (HibernateException ex) {
@@ -34,30 +34,6 @@ public class DGFunctionality extends AbstractFunctionality {
             ex.printStackTrace();
         }
         return deliveryGuy;
-    }
-
-
-    public static void modifyDeliveryGuy(String email, String name, String password, int phone, String id,
-                                         int meansOfTransport) {
-        Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-            DeliveryGuy deliveryGuy = session.get(DeliveryGuy.class, String.valueOf(email));
-            deliveryGuy.setEmail(email);
-            deliveryGuy.setName(name);
-            deliveryGuy.setPassword(password);
-            deliveryGuy.setPhone(phone);
-            deliveryGuy.setId(id);
-            deliveryGuy.setMeansOfTransport(meansOfTransport);
-
-            session.update(deliveryGuy);
-            transaction.commit();
-        } catch (HibernateException ex) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            ex.printStackTrace();
-        }
     }
 }
 

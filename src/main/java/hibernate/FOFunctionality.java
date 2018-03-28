@@ -21,7 +21,7 @@ public class FOFunctionality extends AbstractFunctionality {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            franchiseOwner = session.get(FranchiseOwner.class, String.valueOf(email));
+            franchiseOwner = session.get(FranchiseOwner.class, email);
             session.delete(franchiseOwner);
             transaction.commit();
         } catch (HibernateException ex) {
@@ -31,20 +31,5 @@ public class FOFunctionality extends AbstractFunctionality {
             ex.printStackTrace();
         }
         return franchiseOwner;
-    }
-
-
-    public static void modifyFranchiseOwner(FranchiseOwner franchiseOwner) {
-        Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-            session.update(franchiseOwner);
-            transaction.commit();
-        } catch (HibernateException ex) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            ex.printStackTrace();
-        }
     }
 }

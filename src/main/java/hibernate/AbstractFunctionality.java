@@ -19,4 +19,18 @@ public abstract class AbstractFunctionality {
             ex.printStackTrace();
         }
     }
+
+    public static <T> void modifyModel(T model) {
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            session.update(model);
+            transaction.commit();
+        } catch (HibernateException ex) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            ex.printStackTrace();
+        }
+    }
 }
