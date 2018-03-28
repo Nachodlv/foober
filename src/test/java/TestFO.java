@@ -70,12 +70,12 @@ public class TestFO {
 
     @Test
     public void testModify(){
-        FOFunctionality.addModel(new FranchiseOwner("TEST", "El puestito de Alberto", "alberto123",
-                1562240533, "Rawson4060", 123, 10));
-        FOFunctionality.modifyFranchiseOwner("TEST", "El puestito de Alberto", "alberto123",
-                1562240533, "Parana", 123, 10);
-        FranchiseOwner franchiseOwner = FOFunctionality.getFranchiseOwner("TEST");
-        assertEquals(franchiseOwner.getAddress(), "Parana");
-        System.out.println(FranchiseOwner.class);
+        FranchiseOwner franchiseOwner = new FranchiseOwner("TEST", "El puestito de Alberto", "alberto123",
+                1562240533, "Rawson4060", 123, 10);
+        FOFunctionality.addModel(franchiseOwner);
+        franchiseOwner.setAddress("Parana");
+        FOFunctionality.modifyFranchiseOwner(franchiseOwner);
+        FranchiseOwner newFranchiseOwner = FOFunctionality.getFranchiseOwner("TEST");
+        assertEquals(franchiseOwner.getAddress(), newFranchiseOwner.getAddress());
     }
 }
