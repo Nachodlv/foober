@@ -14,5 +14,6 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
         <mapping class="model.FranchiseOwner"/>
         <mapping class="model.DeliveryGuy"/>
+        <mapping class="model.UserAccount"/>
     </session-factory>
 </hibernate-configuration>

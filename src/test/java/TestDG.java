@@ -24,6 +24,7 @@ public class TestDG {
         con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/testdb", "SA", "");
         stmt = con.createStatement();
         stmt.executeUpdate("DELETE FROM DELIVERYGUY WHERE EMAIL='TEST' OR EMAIL='TEST2'");
+        stmt.executeUpdate("DELETE FROM USERACCOUNT WHERE EMAIL='TEST' OR EMAIL='TEST2'");
     }
 
     @Test

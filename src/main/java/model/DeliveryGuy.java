@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.ArrayList;
 
 /**
  * @author Gonzalo de Achaval
@@ -12,14 +13,14 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="deliveryGuy")
-public class DeliveryGuy {
-    @Id
-    @Column(name="email")
-    private String Email;
+public class DeliveryGuy extends UserAccount{
+    //@Id
+    //@Column(name="email")
+    //private String Email;
     @Column(name="name")
     private String name;
-    @Column(name = "password")
-    private String password;
+    //@Column(name = "password")
+    //private String password;
     @Column(name = "phone")
     private int phone;
     @Column(name="id")
@@ -28,24 +29,26 @@ public class DeliveryGuy {
     private int meansOfTransport;
 
     public DeliveryGuy(String email, String name, String password, int phone, String id, int meansOfTransport) {
-        Email = email;
+        super(email,password,"DG");
+        //Email = email;
         this.name = name;
-        this.password = password;
+        //this.password = password;
         this.phone = phone;
         this.id = id;
         this.meansOfTransport = meansOfTransport;
+
     }
 
     public DeliveryGuy() {
     }
 
-    public String getEmail() {
-        return Email;
-    }
+    //public String getEmail() {
+    //    return Email;
+    //}
 
-    public void setEmail(String email) {
-        Email = email;
-    }
+    //public void setEmail(String email) {
+    //    Email = email;
+    //}
 
     public String getName() {
         return name;
@@ -55,13 +58,13 @@ public class DeliveryGuy {
         this.name = name;
     }
 
-    public String getPassword() {
-        return password;
-    }
+    //public String getPassword() {
+    //    return password;
+    //}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    //public void setPassword(String password) {
+    //    this.password = password;
+    //}
 
     public int getPhone() {
         return phone;
