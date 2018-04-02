@@ -17,11 +17,15 @@
     <table border="0">
         <tr>
             <td>User Name</td>
-            <td><input type="text" name="userName" value= "${user.userName}" /> </td>
+            <td><label>
+                <input type="text" name="userName" value="${user.userName}"/>
+            </label></td>
         </tr>
         <tr>
             <td>Password</td>
-            <td><input type="password" name="password" value= "${user.password}" /> </td>
+            <td><label>
+                <input type="password" name="password" value="${user.password}"/>
+            </label></td>
         </tr>
 
         <tr>

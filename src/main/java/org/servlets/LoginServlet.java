@@ -27,7 +27,7 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
 
         RequestDispatcher dispatcher //
-                = this.getServletContext().getRequestDispatcher("/WEB-INF/views/loginView.jsp");
+                = this.getServletContext().getRequestDispatcher("/loginView.jsp");
 
         dispatcher.forward(request, response);
     }
@@ -38,15 +38,17 @@ public class LoginServlet extends HttpServlet {
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        UserAccount userAccount = UAFunctionality.getUserAccount(email);
+        System.out.println("Received" + email + password);
 
+        UserAccount userAccount = UAFunctionality.getUserAccount(email);
+        System.out.println("User got!");
         if (userAccount == null || !userAccount.getPassword().equals(password)) {
             String errorMessage = "Invalid email or Password";
 
             request.setAttribute("errorMessage", errorMessage);
 
             RequestDispatcher dispatcher //
-                    = this.getServletContext().getRequestDispatcher("/WEB-INF/views/loginView.jsp");
+                    = this.getServletContext().getRequestDispatcher("/loginView.jsp");
 
             dispatcher.forward(request, response);
             return;

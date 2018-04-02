@@ -3,6 +3,7 @@ import hibernate.UAFunctionality;
 import model.DeliveryGuy;
 import model.FranchiseOwner;
 import model.UserAccount;
+import org.hsqldb.rights.User;
 import org.junit.After;
 import org.junit.Test;
 
@@ -23,6 +24,8 @@ public class TestUA {
         stmt.executeUpdate("DELETE FROM DELIVERYGUY WHERE EMAIL='TEST' OR EMAIL='TEST1'");
         stmt.executeUpdate("DELETE FROM FRANCHISEOWNER WHERE EMAIL='TEST' OR EMAIL='TEST1'");
         stmt.executeUpdate("DELETE FROM USERACCOUNT WHERE EMAIL='TEST' OR EMAIL='TEST1'");
+
+        DGFunctionality.addModel(new FranchiseOwner("TEST", "B", "C",1, "D", 2, 3));
     }
 
     @Test
@@ -34,6 +37,12 @@ public class TestUA {
                 1562240533, ".jpg", 1);
         DGFunctionality.addModel(userAccount1);
 
+    }
+
+    @Test
+    public void getUA(){
+        UserAccount userAccount = UAFunctionality.getUserAccount("TEST");
+        System.out.println(userAccount.getRole());
     }
 
 }

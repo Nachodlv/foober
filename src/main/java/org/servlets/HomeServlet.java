@@ -22,7 +22,7 @@ public class HomeServlet extends HttpServlet {
             throws ServletException, IOException {
 
         RequestDispatcher dispatcher //
-                = this.getServletContext().getRequestDispatcher("/WEB-INF/views/homeView.jsp");
+                = this.getServletContext().getRequestDispatcher("/homeView.jsp");
 
         dispatcher.forward(request, response);
     }
