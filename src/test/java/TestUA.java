@@ -25,9 +25,7 @@ public class TestUA {
         stmt.executeUpdate("DELETE FROM FRANCHISEOWNER WHERE EMAIL='TEST' OR EMAIL='TEST1'");
         stmt.executeUpdate("DELETE FROM USERACCOUNT WHERE EMAIL='TEST' OR EMAIL='TEST1'");
 
-        DGFunctionality.addModel(new FranchiseOwner("TEST", "B", "C",1, "D", 2, 3));
-        DGFunctionality.addModel(new DeliveryGuy("TEST2", "El puestito de Alberto", "alberto123",
-                1562240533, ".jpg", 1));
+        UAFunctionality.deleteUserAccount("TEST2");
     }
 
     @Test

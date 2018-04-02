@@ -17,6 +17,10 @@
 <a href="${pageContext.request.contextPath}/logout">
     Logout
 </a>
+||
+<a href="${pageContext.request.contextPath}/foRegister">
+    Register
+</a>
 
 &nbsp;
 <span style="color:red">[ ${loginedUser.email} ]</span>
