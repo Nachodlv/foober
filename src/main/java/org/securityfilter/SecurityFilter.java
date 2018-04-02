@@ -1,4 +1,4 @@
-package org.securityfilter.example.webapp;
+package org.securityfilter;
 import model.UserAccount;
 
 import java.io.IOException;
@@ -36,8 +36,7 @@ public class SecurityFilter implements Filter {
 
         // User information stored in the Session.
         // (After successful login).
-        //UserAccount loginedUser = AppUtils.getLoginedUser(request.getSession());
-        UserAccount loginedUser = null;
+        UserAccount loginedUser = AppUtils.getLoginedUser(request.getSession());
 
         if (servletPath.equals("/login")) {
             chain.doFilter(request, response);
@@ -66,8 +65,7 @@ public class SecurityFilter implements Filter {
                 String requestUri = request.getRequestURI();
 
                 // Store the current page to redirect to after successful login.
-                //int redirectId = AppUtils.storeRedirectAfterLoginUrl(request.getSession(), requestUri);
-                int redirectId = 0;
+                int redirectId = AppUtils.storeRedirectAfterLoginUrl(request.getSession(), requestUri);
 
                 response.sendRedirect(wrapRequest.getContextPath() + "/login?redirectId=" + redirectId);
                 return;

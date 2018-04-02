@@ -1,4 +1,4 @@
-package org.securityfilter.example.webapp;
+package org.securityfilter;
 
 import java.util.List;
 import java.util.Set;

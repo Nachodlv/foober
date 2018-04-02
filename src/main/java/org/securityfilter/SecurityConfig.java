@@ -1,4 +1,4 @@
-package org.securityfilter.example.webapp;
+package org.securityfilter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
