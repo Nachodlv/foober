@@ -18,7 +18,7 @@
         <tr>
             <td>User Name</td>
             <td><label>
-                <input type="text" name="userName" value="${user.userName}"/>
+                <input type="text" name="email" value="${user.email}"/>
             </label></td>
         </tr>
         <tr>
@@ -39,8 +39,8 @@
 
 <p style="color:blue;">Login with:</p>
 
-employee1/123 <br>
-manager1/123
+TEST/C (FO) <br>
+TEST2/alberto123
 
 
 

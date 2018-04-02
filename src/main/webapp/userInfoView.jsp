@@ -8,11 +8,13 @@
 
 <jsp:include page="_menu.jsp"></jsp:include>
 
-<h3>Hello: ${loginedUser.userName}</h3>
+<h3>Hello: ${loginedUser.email}</h3>
 
-User Name: <b>${loginedUser.userName}</b>
+User Name: <b>${loginedUser.email}</b>
 <br />
-Gender: ${loginedUser.gender } <br />
+Role: ${loginedUser.role } <br />
+<br/>
+Password: ${loginedUser.password}
 
 
 </body>

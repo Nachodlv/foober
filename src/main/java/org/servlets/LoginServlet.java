@@ -1,6 +1,8 @@
 package org.servlets;
 
 import hibernate.UAFunctionality;
+import model.DeliveryGuy;
+import model.FranchiseOwner;
 import model.UserAccount;
 import org.securityfilter.AppUtils;
 
@@ -38,10 +40,9 @@ public class LoginServlet extends HttpServlet {
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        System.out.println("Received" + email + password);
 
         UserAccount userAccount = UAFunctionality.getUserAccount(email);
-        System.out.println("User got!");
+
         if (userAccount == null || !userAccount.getPassword().equals(password)) {
             String errorMessage = "Invalid email or Password";
 
@@ -53,6 +54,7 @@ public class LoginServlet extends HttpServlet {
             dispatcher.forward(request, response);
             return;
         }
+        userAccount = userAccount.getRole().equals("FO")? (FranchiseOwner)userAccount:(DeliveryGuy)userAccount;
 
         AppUtils.storeLoginedUser(request.getSession(), userAccount);
 
@@ -68,7 +70,12 @@ public class LoginServlet extends HttpServlet {
         } else {
             // Default after successful login
             // redirect to /userInfo page
-            response.sendRedirect(request.getContextPath() + "/userInfo");
+            if(userAccount.getRole().equals("FO")){
+                response.sendRedirect(request.getContextPath() + "/foMenu");
+            }else{
+                response.sendRedirect(request.getContextPath() + "/dgMenu");
+            }
+
         }
 
     }

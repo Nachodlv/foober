@@ -1,9 +1,9 @@
-<a href="${pageContext.request.contextPath}/employeeTask">
-    Employee Task
+<a href="${pageContext.request.contextPath}/dgMenu">
+    DG Menu
 </a>
 ||
-<a href="${pageContext.request.contextPath}/managerTask">
-    Manager Task
+<a href="${pageContext.request.contextPath}/foMenu">
+    FO Menu
 </a>
 ||
 <a href="${pageContext.request.contextPath}/userInfo">
@@ -19,4 +19,4 @@
 </a>
 
 &nbsp;
-<span style="color:red">[ ${loginedUser.userName} ]</span>
+<span style="color:red">[ ${loginedUser.email} ]</span>
