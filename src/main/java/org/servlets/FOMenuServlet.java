@@ -23,7 +23,7 @@ public class FOMenuServlet extends HttpServlet {
 
         RequestDispatcher dispatcher //
                 = this.getServletContext()//
-                .getRequestDispatcher("/foMenuView.jsp");
+                .getRequestDispatcher("/WEB-INF/views/foMenuView.jsp");
 
         dispatcher.forward(request, response);
     }

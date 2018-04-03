@@ -23,7 +23,7 @@ public class DGMenuServlet extends HttpServlet {
 
         RequestDispatcher dispatcher //
                 = this.getServletContext()//
-                .getRequestDispatcher("/dgMenuView.jsp");
+                .getRequestDispatcher("/WEB-INF/views/dgMenuView.jsp");
 
         dispatcher.forward(request, response);
     }

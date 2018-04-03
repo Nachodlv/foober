@@ -9,7 +9,7 @@
 <jsp:include page="_menu.jsp"></jsp:include>
 <br>
 <div class="d-inline-flex ml-3">
-    <form>
+    <form method="post">
         <div class="form-row">
             <div class="col-md-6 mb-3">
                 <label>Franchise name</label>
@@ -21,18 +21,18 @@
             </div>
         </div>
         <div class="form-row">
-            <div class="col-md-6 mb-3">
+            <div class="col-md-6 mb-4">
                 <label>Password</label>
                 <input type="password" class="form-control" placeholder="Password" name="password" value="${user.password}" required>
             </div>
-            <div class="col-md-6 mb-3">
+            <div class="col-md-6 mb-4">
                 <label>Re-enter Password</label>
                 <input type="password" class="form-control" placeholder="Re-enter password" name="passwordRepeated" value="${user.passwordRepeated}" required>
-                <p class="text-danger ml-3">${errorPassword}</p>
+                <p class="text-danger" style="margin-bottom: -3rem;">${errorPassword}</p>
             </div>
         </div>
         <div class="form-row">
-            <div class="col-md-6 mb-3">
+            <div class="col-md-6 mb-4">
                 <label>Phone</label>
                 <input type="text"  class="form-control" placeholder="Phone" name="phone" value="${user.phone}" required>
             </div>

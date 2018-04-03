@@ -10,13 +10,18 @@ import java.io.IOException;
 
 @WebServlet("/foRegister")
 public class RegisterServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    public RegisterServlet() {
+        super();
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         RequestDispatcher dispatcher //
-                = this.getServletContext().getRequestDispatcher("/foRegisterView.jsp");
+                = this.getServletContext().getRequestDispatcher("/WEB-INF/views/foRegisterView.jsp");
 
         dispatcher.forward(request, response);
     }
@@ -32,7 +37,7 @@ public class RegisterServlet extends HttpServlet {
             request.setAttribute("errorPassword", "Passwords do not match");
 
             RequestDispatcher dispatcher //
-                    = this.getServletContext().getRequestDispatcher("/foRegisterView.jsp");
+                    = this.getServletContext().getRequestDispatcher("/WEB-INF/views/foRegisterView.jsp");
 
             dispatcher.forward(request, response);
             return;
