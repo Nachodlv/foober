@@ -18,6 +18,7 @@
             <div class="col-md-6 mb-3">
                 <label>Email</label>
                 <input type="email" class="form-control" placeholder="Mail" name="email" value="${user.email}" required>
+                <p class="text-danger" style="margin-bottom: -3rem;">${errorEmail}</p>
             </div>
         </div>
         <div class="form-row">
@@ -34,7 +35,7 @@
         <div class="form-row">
             <div class="col-md-6 mb-4">
                 <label>Phone</label>
-                <input type="text"  class="form-control" placeholder="Phone" name="phone" value="${user.phone}" required>
+                <input type="text" pattern="[0-9]+" class="form-control" placeholder="Phone" name="phone" value="${user.phone}" required>
             </div>
             <div class="col-md-6 mb-3">
                 <label>Address</label>

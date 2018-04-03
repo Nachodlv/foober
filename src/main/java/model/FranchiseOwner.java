@@ -36,7 +36,16 @@ public class FranchiseOwner extends UserAccount{
         this.menuId = menuId;
         this.tippingPercentage = tippingPercentage;
     }
-
+    public FranchiseOwner(String email, String name, String password, int phone, String address) {
+        super(email,password, "FO");
+        this.name = name;
+        //this.password = password;
+        this.phone = phone;
+        this.address = address;
+        this.menuId = menuId;
+        this.tippingPercentage = 10;
+        menuId = 1;
+    }
     //public String getEmail() {
     //    return Email;
     //}
