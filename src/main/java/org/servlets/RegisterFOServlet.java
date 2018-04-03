@@ -36,7 +36,6 @@ public class RegisterFOServlet extends HttpServlet {
             throws ServletException, IOException {
         String password = request.getParameter("password");
         String passwordRepeated = request.getParameter("passwordRepeated");
-        System.out.println(password + " " + passwordRepeated);
         if (!password.equals(passwordRepeated)) {
             request.setAttribute("errorPassword", "Passwords do not match");
 

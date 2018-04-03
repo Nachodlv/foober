@@ -15,8 +15,7 @@ public abstract class UserAccount {
     private String role;
 
 
-    UserAccount() {
-
+    public UserAccount() {
     }
 
     UserAccount(String email, String password, String role) {

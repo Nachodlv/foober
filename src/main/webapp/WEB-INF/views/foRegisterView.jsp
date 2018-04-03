@@ -14,37 +14,35 @@
         <div class="form-row">
             <div class="col-md-6 mb-3">
                 <label>Franchise name</label>
-                <input type="text" class="form-control" placeholder="Franchise name" name="name" value="${user.name}"
+                <input type="text" class="form-control" placeholder="Franchise name" name="name"
                        required>
             </div>
             <div class="col-md-6 mb-3">
                 <label>Email</label>
-                <input type="email" class="form-control" placeholder="Mail" name="email" value="${user.email}" required>
-                <p class="text-danger" style="margin-bottom: -3rem;">${errorEmail}</p>
+                <input type="email" class="form-control" placeholder="Mail" name="email" required>
+                <p class="text-danger" style="margin-bottom: -3rem;"></p>
             </div>
         </div>
         <div class="form-row">
             <div class="col-md-6 mb-4">
                 <label>Password</label>
-                <input type="password" class="form-control" placeholder="Password" name="password"
-                       value="${user.password}" required>
+                <input type="password" class="form-control" placeholder="Password" name="password" required>
             </div>
             <div class="col-md-6 mb-4">
                 <label>Confirm Password</label>
-                <input type="password" class="form-control" placeholder="Confirm password" name="passwordRepeated"
-                       value="${user.passwordRepeated}" required>
-                <p class="text-danger" style="margin-bottom: -3rem;">${errorPassword}</p>
+                <input type="password" class="form-control" placeholder="Confirm password" name="passwordRepeated" required>
+                <p class="text-danger" style="margin-bottom: -3rem;"></p>
             </div>
         </div>
         <div class="form-row">
             <div class="col-md-6 mb-4">
                 <label>Phone</label>
                 <input type="text" pattern="[0-9]+" class="form-control" placeholder="Phone" name="phone"
-                       value="${user.phone}" required>
+                       value="" required>
             </div>
             <div class="col-md-6 mb-3">
                 <label>Address</label>
-                <input type="text" class="form-control" placeholder="Address" name="address" value="${user.address}"
+                <input type="text" class="form-control" placeholder="Address" name="address" value=""
                        required>
             </div>
         </div>

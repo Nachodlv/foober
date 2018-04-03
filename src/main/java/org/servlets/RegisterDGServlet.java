@@ -59,11 +59,11 @@ public class RegisterDGServlet extends HttpServlet {
         String mail = request.getParameter("mail");
         String name = request.getParameter("name");
         String phone = request.getParameter("phone");
-        Part filePart = request.getPart("id");
-        InputStream fileContent = filePart.getInputStream();
+//        Part filePart = request.getPart("id");
+//        InputStream fileContent = filePart.getInputStream();
         String meansOfTransport = request.getParameter("meansOfTransport");
 
-        DeliveryGuy deliveryGuy = new DeliveryGuy(mail, name, password, Integer.parseInt(phone), convertStreamToString(fileContent), Integer.parseInt(meansOfTransport));
+        DeliveryGuy deliveryGuy = new DeliveryGuy(mail, name, password, Integer.parseInt(phone), ".url", Integer.parseInt(meansOfTransport));
 
 
         try {
@@ -82,9 +82,9 @@ public class RegisterDGServlet extends HttpServlet {
         response.sendRedirect(request.getContextPath() + "/dgMenu");
     }
 
-    private static String convertStreamToString(java.io.InputStream is) {
-        java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
-        return s.hasNext() ? s.next() : "";
-    }
+//    private static String convertStreamToString(java.io.InputStream is) {
+//        java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
+//        return s.hasNext() ? s.next() : "";
+//    }
 
 }
