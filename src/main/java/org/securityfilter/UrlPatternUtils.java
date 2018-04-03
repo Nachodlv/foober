@@ -1,13 +1,12 @@
 package org.securityfilter;
 
-import java.util.Collection;
-import java.util.Map;
-
 import javax.servlet.ServletContext;
 import javax.servlet.ServletRegistration;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Collection;
+import java.util.Map;
 
-public class UrlPatternUtils {
+class UrlPatternUtils {
 
     private static boolean hasUrlPattern(ServletContext servletContext, String urlPattern) {
 
@@ -30,7 +29,7 @@ public class UrlPatternUtils {
     // ==> /spath/*
     // ==> *.ext
     // ==> /
-    public static String getUrlPattern(HttpServletRequest request) {
+    static String getUrlPattern(HttpServletRequest request) {
         ServletContext servletContext = request.getServletContext();
         String servletPath = request.getServletPath();
         String pathInfo = request.getPathInfo();

@@ -1,25 +1,24 @@
 package model;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.ArrayList;
 
 @Entity
-@Table(name="franchiseOwner")
-public class FranchiseOwner extends UserAccount{
+@Table(name = "franchiseOwner")
+public class FranchiseOwner extends UserAccount {
     //@Id
     //@Column(name="email")
     //private String Email;
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
     //@Column(name = "password")
     //private String password;
     @Column(name = "phone")
     private int phone;
-    @Column(name="address")
+    @Column(name = "address")
     private String address;
-    @Column(name="menuId")
+    @Column(name = "menuId")
     private int menuId;
     @Column(name = "tippingPercentage")
     private int tippingPercentage;
@@ -28,7 +27,7 @@ public class FranchiseOwner extends UserAccount{
     }
 
     public FranchiseOwner(String email, String name, String password, int phone, String address, int menuId, int tippingPercentage) {
-        super(email,password, "FO");
+        super(email, password, "FO");
         this.name = name;
         //this.password = password;
         this.phone = phone;
@@ -36,8 +35,9 @@ public class FranchiseOwner extends UserAccount{
         this.menuId = menuId;
         this.tippingPercentage = tippingPercentage;
     }
+
     public FranchiseOwner(String email, String name, String password, int phone, String address) {
-        super(email,password, "FO");
+        super(email, password, "FO");
         this.name = name;
         //this.password = password;
         this.phone = phone;

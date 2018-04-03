@@ -6,14 +6,13 @@ import model.FranchiseOwner;
 import model.UserAccount;
 import org.securityfilter.AppUtils;
 
-import java.io.IOException;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 
 @WebServlet("/login")
@@ -54,7 +53,7 @@ public class LoginServlet extends HttpServlet {
             dispatcher.forward(request, response);
             return;
         }
-        userAccount = userAccount.getRole().equals("FO")? (FranchiseOwner)userAccount:(DeliveryGuy)userAccount;
+        userAccount = userAccount.getRole().equals("FO") ? (FranchiseOwner) userAccount : (DeliveryGuy) userAccount;
 
         AppUtils.storeLoginedUser(request.getSession(), userAccount);
 
@@ -70,9 +69,9 @@ public class LoginServlet extends HttpServlet {
         } else {
             // Default after successful login
             // redirect to /userInfo page
-            if(userAccount.getRole().equals("FO")){
+            if (userAccount.getRole().equals("FO")) {
                 response.sendRedirect(request.getContextPath() + "/foMenu");
-            }else{
+            } else {
                 response.sendRedirect(request.getContextPath() + "/dgMenu");
             }
 

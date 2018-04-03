@@ -1,14 +1,15 @@
 package hibernate;
+
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-//java -classpath lib/hsqldb.jar org.hsqldb.server.Server --database.0 file:hsqldb/hemrajdb --dbname.0 testdb
+
 class HibernateUtil {
     private static SessionFactory sessionFactory = null;
 
     static synchronized SessionFactory getSessionFactory() {
-        if ( sessionFactory == null ) {
+        if (sessionFactory == null) {
 
             // exception handling omitted for brevity
 
@@ -16,7 +17,7 @@ class HibernateUtil {
                     .configure("hibernate.cfg.xml")
                     .build();
 
-            sessionFactory = new Configuration().buildSessionFactory( serviceRegistry );
+            sessionFactory = new Configuration().buildSessionFactory(serviceRegistry);
         }
         return sessionFactory;
 

@@ -1,15 +1,14 @@
 package org.securityfilter;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Set;
 
-import javax.servlet.http.HttpServletRequest;
 
-
-public class SecurityUtils {
+class SecurityUtils {
 
     // Check whether this 'request' is required to login or not.
-    public static boolean isSecurityPage(HttpServletRequest request) {
+    static boolean isSecurityPage(HttpServletRequest request) {
         String urlPattern = UrlPatternUtils.getUrlPattern(request);
 
         Set<String> roles = SecurityConfig.getAllAppRoles();
@@ -24,7 +23,7 @@ public class SecurityUtils {
     }
 
     // Check if this 'request' has a 'valid role'?
-    public static boolean hasPermission(HttpServletRequest request) {
+    static boolean hasPermission(HttpServletRequest request) {
         String urlPattern = UrlPatternUtils.getUrlPattern(request);
 
         Set<String> allRoles = SecurityConfig.getAllAppRoles();

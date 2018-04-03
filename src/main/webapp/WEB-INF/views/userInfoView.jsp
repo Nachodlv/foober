@@ -11,8 +11,8 @@
 <h3>Hello: ${loginedUser.email}</h3>
 
 User Name: <b>${loginedUser.email}</b>
-<br />
-Role: ${loginedUser.role } <br />
+<br/>
+Role: ${loginedUser.role } <br/>
 <br/>
 Password: ${loginedUser.password}
 

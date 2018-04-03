@@ -37,7 +37,7 @@ public class RegisterFOServlet extends HttpServlet {
         String password = request.getParameter("password");
         String passwordRepeated = request.getParameter("passwordRepeated");
         System.out.println(password + " " + passwordRepeated);
-        if(!password.equals(passwordRepeated)){
+        if (!password.equals(passwordRepeated)) {
             request.setAttribute("errorPassword", "Passwords do not match");
 
             RequestDispatcher dispatcher //
@@ -52,9 +52,9 @@ public class RegisterFOServlet extends HttpServlet {
         String address = request.getParameter("address");
         String name = request.getParameter("name");
         FranchiseOwner franchiseOwner = new FranchiseOwner(email, name, password, Integer.parseInt(phone), address);
-        try{
+        try {
             FOFunctionality.addModel(franchiseOwner);
-        }catch (PersistenceException e){
+        } catch (PersistenceException e) {
             request.setAttribute("errorEmail", "Email not available");
 
             RequestDispatcher dispatcher //

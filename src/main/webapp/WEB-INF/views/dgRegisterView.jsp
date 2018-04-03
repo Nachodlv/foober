@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <title>FO Register View</title>
+    <title>DG Register</title>
 </head>
 <body>
 <jsp:include page="_menu.jsp"></jsp:include>
 <br>
 <div class="d-inline-flex ml-3">
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         <div class="form-row">
             <div class="col-md-6 mb-3">
-                <label>Franchise name</label>
-                <input type="text" class="form-control" placeholder="Franchise name" name="name" value="${user.name}"
+                <label>Name</label>
+                <input type="text" class="form-control" placeholder="Name" name="name" value="${user.name}"
                        required>
             </div>
             <div class="col-md-6 mb-3">
@@ -42,12 +42,28 @@
                 <input type="text" pattern="[0-9]+" class="form-control" placeholder="Phone" name="phone"
                        value="${user.phone}" required>
             </div>
-            <div class="col-md-6 mb-3">
-                <label>Address</label>
-                <input type="text" class="form-control" placeholder="Address" name="address" value="${user.address}"
-                       required>
+            <div class="col-md-6 mb-4 btn-group btn-group-toggle" data-toggle="buttons">
+                <label>Means of Transport</label>
+                <label class="btn btn-secondary active">
+                    <input type="radio" name="meansOfTransport" id="option1" value ="1" autocomplete="off" checked> Bike
+                </label>
+                <label class="btn btn-secondary">
+                    <input type="radio" name="meansOfTransport" id="option2" value ="2" autocomplete="off"> Bus
+                </label>
+                <label class="btn btn-secondary">
+                    <input type="radio" name="meansOfTransport" id="option3" value ="3" autocomplete="off"> Car
+                </label>
             </div>
         </div>
+
+        <div>
+            <label for="id">Scan ID</label>
+            <br>
+            <input type="file" id="id" name="id"
+                   accept=".jpg, .jpeg, .png">
+        </div>
+
+
         <div class="form-group">
             <div class="form-check">
                 <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" required>

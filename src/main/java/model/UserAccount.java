@@ -1,20 +1,17 @@
 package model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@Table(name="userAccount")
+@Table(name = "userAccount")
 public abstract class UserAccount {
     @Id
-    @Column(name="email")
+    @Column(name = "email")
     private String email;
-    @Column(name="password")
+    @Column(name = "password")
     private String password;
-    @Column(name="role")
+    @Column(name = "role")
     private String role;
 
 

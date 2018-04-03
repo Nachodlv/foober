@@ -1,19 +1,12 @@
 package org.securityfilter;
+
 import model.UserAccount;
 
-import java.io.IOException;
-import java.util.List;
-
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 
 @WebFilter("/*")
@@ -49,7 +42,7 @@ public class SecurityFilter implements Filter {
             String userName = loginedUser.getEmail();
 
             // Roles
-            String role= loginedUser.getRole();
+            String role = loginedUser.getRole();
 
             // Wrap old request by a new Request with userName and Roles information.
             wrapRequest = new UserRoleRequestWrapper(userName, role, request);

@@ -19,8 +19,11 @@
 </a>
 ||
 <a href="${pageContext.request.contextPath}/foRegister">
-    Register
+    Register Franchise Owner
 </a>
-
+||
+<a href="${pageContext.request.contextPath}/dgRegister">
+    Register Delivery Guy
+</a>
 &nbsp;
 <span style="color:red">[ ${loginedUser.email} ]</span>

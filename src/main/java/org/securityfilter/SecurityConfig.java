@@ -1,15 +1,11 @@
 package org.securityfilter;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
-public class SecurityConfig {
+class SecurityConfig {
 
-    public static final String ROLE_FO = "FO";
-    public static final String ROLE_DG = "DG";
+    private static final String ROLE_FO = "FO";
+    private static final String ROLE_DG = "DG";
 
     // String: Role
     // List<String>: urlPatterns.
@@ -38,11 +34,11 @@ public class SecurityConfig {
         mapConfig.put(ROLE_DG, urlPatterns2);
     }
 
-    public static Set<String> getAllAppRoles() {
+    static Set<String> getAllAppRoles() {
         return mapConfig.keySet();
     }
 
-    public static List<String> getUrlPatternsForRole(String role) {
+    static List<String> getUrlPatternsForRole(String role) {
         return mapConfig.get(role);
     }
 

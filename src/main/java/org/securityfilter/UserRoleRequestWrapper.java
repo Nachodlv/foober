@@ -1,10 +1,8 @@
 package org.securityfilter;
 
-import java.security.Principal;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
+import java.security.Principal;
 
 /**
  * An extension for the HTTPServletRequest that overrides the getUserPrincipal()
@@ -17,7 +15,6 @@ import javax.servlet.http.HttpServletRequestWrapper;
  * be created and used by the UserRoleFilter.
  *
  * @author thein
- *
  */
 public class UserRoleRequestWrapper extends HttpServletRequestWrapper {
 
@@ -25,7 +22,7 @@ public class UserRoleRequestWrapper extends HttpServletRequestWrapper {
     private String role = null;
     private HttpServletRequest realRequest;
 
-    public UserRoleRequestWrapper(String user, String role, HttpServletRequest request) {
+    UserRoleRequestWrapper(String user, String role, HttpServletRequest request) {
         super(request);
         this.user = user;
         this.role = role;
@@ -47,11 +44,6 @@ public class UserRoleRequestWrapper extends HttpServletRequestWrapper {
         }
 
         // Make an anonymous implementation to just return our user
-        return new Principal() {
-            @Override
-            public String getName() {
-                return user;
-            }
-        };
+        return () -> user;
     }
 }

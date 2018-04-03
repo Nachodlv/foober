@@ -1,4 +1,3 @@
-import hibernate.AbstractFunctionality;
 import hibernate.DGFunctionality;
 import model.DeliveryGuy;
 import org.junit.After;
@@ -16,7 +15,7 @@ import static org.junit.Assert.assertEquals;
  * @author Gonzalo de Achaval
  */
 public class TestDG {
-    
+
     @After
     public void clearDB() throws SQLException, ClassNotFoundException {
         Connection con;
@@ -28,7 +27,7 @@ public class TestDG {
     }
 
     @Test
-    public void testAddingGetting(){
+    public void testAddingGetting() {
         DGFunctionality.addModel(new DeliveryGuy("TEST", "El puestito de Alberto", "alberto123",
                 1562240533, ".jpg", 1));
 
@@ -37,13 +36,13 @@ public class TestDG {
     }
 
     @Test
-    public void testFailedGet(){
+    public void testFailedGet() {
         DeliveryGuy deliveryGuy = DGFunctionality.getDeliveryGuy("123");
         assertEquals(deliveryGuy, null);
     }
 
     @Test
-    public void testDelete(){
+    public void testDelete() {
         DGFunctionality.addModel(new DeliveryGuy("TEST", "El puestito de Alberto", "alberto123",
                 1562240533, ".jpg", 1));
         DGFunctionality.deleteDeliveryGuy("TEST");
@@ -52,26 +51,26 @@ public class TestDG {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testFailedDelete(){
+    public void testFailedDelete() {
         DeliveryGuy deliveryGuy = DGFunctionality.deleteDeliveryGuy("123");
         assertEquals(deliveryGuy, null);
     }
 
     @Test(expected = PersistenceException.class)
-    public void testRepeatedKey(){
-        DGFunctionality.addModel(new DeliveryGuy("TEST", "B", "C",1, ".jpg", 2));
-        DGFunctionality.addModel(new DeliveryGuy("TEST", "C", "D",2, ".jpg", 3));
+    public void testRepeatedKey() {
+        DGFunctionality.addModel(new DeliveryGuy("TEST", "B", "C", 1, ".jpg", 2));
+        DGFunctionality.addModel(new DeliveryGuy("TEST", "C", "D", 2, ".jpg", 3));
     }
 
     @Test
-    public void testRepeatedFieldsButKey(){
-        DGFunctionality.addModel(new DeliveryGuy("TEST", "B", "C",1, ".jpg", 2));
-        DGFunctionality.addModel(new DeliveryGuy("TEST2", "B", "C",1, ".jpg", 2));
+    public void testRepeatedFieldsButKey() {
+        DGFunctionality.addModel(new DeliveryGuy("TEST", "B", "C", 1, ".jpg", 2));
+        DGFunctionality.addModel(new DeliveryGuy("TEST2", "B", "C", 1, ".jpg", 2));
     }
 
     @Test
-    public void testModify(){
-        DeliveryGuy deliveryGuy = new DeliveryGuy("TEST", "A", "B",1, ".jpg", 1);
+    public void testModify() {
+        DeliveryGuy deliveryGuy = new DeliveryGuy("TEST", "A", "B", 1, ".jpg", 1);
         DGFunctionality.addModel(deliveryGuy);
         deliveryGuy.setName("new Name");
         DGFunctionality.modifyModel(deliveryGuy);

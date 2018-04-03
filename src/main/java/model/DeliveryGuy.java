@@ -2,9 +2,7 @@ package model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.ArrayList;
 
 /**
  * @author Gonzalo de Achaval
@@ -12,24 +10,24 @@ import java.util.ArrayList;
  */
 
 @Entity
-@Table(name="deliveryGuy")
-public class DeliveryGuy extends UserAccount{
+@Table(name = "deliveryGuy")
+public class DeliveryGuy extends UserAccount {
     //@Id
     //@Column(name="email")
     //private String Email;
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
     //@Column(name = "password")
     //private String password;
     @Column(name = "phone")
     private int phone;
-    @Column(name="id")
+    @Column(name = "id")
     private String id;
-    @Column(name="meansOfTransport")
+    @Column(name = "meansOfTransport")
     private int meansOfTransport;
 
     public DeliveryGuy(String email, String name, String password, int phone, String id, int meansOfTransport) {
-        super(email,password,"DG");
+        super(email, password, "DG");
         //Email = email;
         this.name = name;
         //this.password = password;

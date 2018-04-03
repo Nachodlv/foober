@@ -5,7 +5,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-public class UAFunctionality extends AbstractFunctionality{
+public class UAFunctionality extends AbstractFunctionality {
 
     public static UserAccount getUserAccount(String email) {
         Session session = HibernateUtil.getSessionFactory().openSession();
