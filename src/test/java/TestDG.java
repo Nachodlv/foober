@@ -16,6 +16,8 @@ import static org.junit.Assert.assertEquals;
  */
 public class TestDG {
 
+    private final byte[] bytes = new byte[0];
+
     @After
     public void clearDB() throws SQLException, ClassNotFoundException {
         Connection con;
@@ -29,7 +31,7 @@ public class TestDG {
     @Test
     public void testAddingGetting() {
         DGFunctionality.addModel(new DeliveryGuy("TEST", "El puestito de Alberto", "alberto123",
-                1562240533, ".jpg", 1));
+                1562240533, bytes, 1));
 
         DeliveryGuy deliveryGuy = DGFunctionality.getDeliveryGuy("TEST");
         assertEquals(deliveryGuy.getPhone(), 1562240533);
@@ -44,7 +46,7 @@ public class TestDG {
     @Test
     public void testDelete() {
         DGFunctionality.addModel(new DeliveryGuy("TEST", "El puestito de Alberto", "alberto123",
-                1562240533, ".jpg", 1));
+                1562240533, bytes, 1));
         DGFunctionality.deleteDeliveryGuy("TEST");
         DeliveryGuy deliveryGuy = DGFunctionality.getDeliveryGuy("TEST");
         assertEquals(deliveryGuy, null);
@@ -58,19 +60,19 @@ public class TestDG {
 
     @Test(expected = PersistenceException.class)
     public void testRepeatedKey() {
-        DGFunctionality.addModel(new DeliveryGuy("TEST", "B", "C", 1, ".jpg", 2));
-        DGFunctionality.addModel(new DeliveryGuy("TEST", "C", "D", 2, ".jpg", 3));
+        DGFunctionality.addModel(new DeliveryGuy("TEST", "B", "C", 1, bytes, 2));
+        DGFunctionality.addModel(new DeliveryGuy("TEST", "C", "D", 2, bytes, 3));
     }
 
     @Test
     public void testRepeatedFieldsButKey() {
-        DGFunctionality.addModel(new DeliveryGuy("TEST", "B", "C", 1, ".jpg", 2));
-        DGFunctionality.addModel(new DeliveryGuy("TEST2", "B", "C", 1, ".jpg", 2));
+        DGFunctionality.addModel(new DeliveryGuy("TEST", "B", "C", 1, bytes, 2));
+        DGFunctionality.addModel(new DeliveryGuy("TEST2", "B", "C", 1, bytes, 2));
     }
 
     @Test
     public void testModify() {
-        DeliveryGuy deliveryGuy = new DeliveryGuy("TEST", "A", "B", 1, ".jpg", 1);
+        DeliveryGuy deliveryGuy = new DeliveryGuy("TEST", "A", "B", 1, bytes, 1);
         DGFunctionality.addModel(deliveryGuy);
         deliveryGuy.setName("new Name");
         DGFunctionality.modifyModel(deliveryGuy);
