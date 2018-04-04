@@ -13,8 +13,8 @@
 
 <img src="../../images/FooberLogo.png">
 
-<div class="container d-flex justify-content-center align-items-center flex-column alert-primary
-                                        rounded login">
+<div style="width: 30%;" class="container d-flex justify-content-center align-items-center flex-column alert-primary
+                                        rounded login mt-5">
 
     <h3 class="mt-2">Foober</h3>
 
