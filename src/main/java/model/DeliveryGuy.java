@@ -1,7 +1,10 @@
 package model;
 
+import org.hibernate.type.descriptor.sql.LobTypeMappings;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 /**
@@ -12,41 +15,26 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "deliveryGuy")
 public class DeliveryGuy extends UserAccount {
-    //@Id
-    //@Column(name="email")
-    //private String Email;
     @Column(name = "name")
     private String name;
-    //@Column(name = "password")
-    //private String password;
     @Column(name = "phone")
     private int phone;
     @Column(name = "id")
-    private String id;
+    @Lob
+    private byte[] id;
     @Column(name = "meansOfTransport")
     private int meansOfTransport;
 
-    public DeliveryGuy(String email, String name, String password, int phone, String id, int meansOfTransport) {
+    public DeliveryGuy(String email, String name, String password, int phone, byte[] id, int meansOfTransport) {
         super(email, password, "DG");
-        //Email = email;
         this.name = name;
-        //this.password = password;
         this.phone = phone;
         this.id = id;
         this.meansOfTransport = meansOfTransport;
-
     }
 
     public DeliveryGuy() {
     }
-
-    //public String getEmail() {
-    //    return Email;
-    //}
-
-    //public void setEmail(String email) {
-    //    Email = email;
-    //}
 
     public String getName() {
         return name;
@@ -56,14 +44,6 @@ public class DeliveryGuy extends UserAccount {
         this.name = name;
     }
 
-    //public String getPassword() {
-    //    return password;
-    //}
-
-    //public void setPassword(String password) {
-    //    this.password = password;
-    //}
-
     public int getPhone() {
         return phone;
     }
@@ -72,11 +52,11 @@ public class DeliveryGuy extends UserAccount {
         this.phone = phone;
     }
 
-    public String getId() {
+    public byte[] getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(byte[] id) {
         this.id = id;
     }
 
