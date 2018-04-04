@@ -4,19 +4,23 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../css/logIn.css" type="text/css">
     <title>Login</title>
 </head>
 <body>
 
 <jsp:include page="_menu.jsp"></jsp:include>
 
-<h3 class="ml-3">Login Page</h3>
+<img src="../../images/FooberLogo.png">
 
-<p style="color: red;" class="ml-3">${errorMessage}</p>
+<div class="container d-flex justify-content-center align-items-center flex-column alert-primary
+                                        rounded login">
 
+    <h3 class="mt-2">Foober</h3>
 
-<div class="d-inline-flex ml-3">
-    <form method="POST" action="${pageContext.request.contextPath}/login" class="text-left">
+    <p style="color: red;" class="text-danger">${errorMessage}</p>
+
+    <form method="POST" action="${pageContext.request.contextPath}/login" class="text-left mb-3">
         <input type="hidden" name="redirectId" value="${param.redirectId}"/>
         <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
