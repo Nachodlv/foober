@@ -6,6 +6,10 @@
     FO Menu
 </a>
 ||
+<a href="${pageContext.request.contextPath}/editMenu">
+    Edit Menu
+</a>
+||
 <a href="${pageContext.request.contextPath}/userInfo">
     User Info
 </a>
@@ -25,5 +29,6 @@
 <a href="${pageContext.request.contextPath}/dgRegister">
     Register Delivery Guy
 </a>
+
 &nbsp;
 <span style="color:red">[ ${loginedUser.email} ]</span>

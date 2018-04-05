@@ -1,7 +1,10 @@
+<%--suppress ALL --%>
+<%--suppress CheckTagEmptyBody --%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
+    <jsp:include page="bootstrapImportHeader.jsp"></jsp:include>
     <title>User Info</title>
 </head>
 <body>

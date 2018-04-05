@@ -1,8 +1,15 @@
 package model;
 
+import org.hibernate.mapping.List;
+import org.hibernate.mapping.Map;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "franchiseOwner")
@@ -22,8 +29,10 @@ public class FranchiseOwner extends UserAccount {
     private int menuId;
     @Column(name = "tippingPercentage")
     private int tippingPercentage;
-
+    @OneToMany(mappedBy = "franchiseOwner")
+    private Set<Product> products;
     public FranchiseOwner() {
+        products = new HashSet<>();
     }
 
     public FranchiseOwner(String email, String name, String password, int phone, String address, int menuId, int tippingPercentage) {
@@ -34,6 +43,7 @@ public class FranchiseOwner extends UserAccount {
         this.address = address;
         this.menuId = menuId;
         this.tippingPercentage = tippingPercentage;
+        products = new HashSet<>();
     }
 
     public FranchiseOwner(String email, String name, String password, int phone, String address) {
@@ -45,6 +55,7 @@ public class FranchiseOwner extends UserAccount {
         this.menuId = menuId;
         this.tippingPercentage = 10;
         menuId = 1;
+        products = new HashSet<>();
     }
     //public String getEmail() {
     //    return Email;
@@ -100,5 +111,17 @@ public class FranchiseOwner extends UserAccount {
 
     public void setTippingPercentage(int tippingPercentage) {
         this.tippingPercentage = tippingPercentage;
+    }
+
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
+    }
+
+    public void addProduct(Product product){
+        products.add(product);
     }
 }

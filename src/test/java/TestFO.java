@@ -1,5 +1,7 @@
 import hibernate.FOFunctionality;
+import hibernate.ProductFunctionality;
 import model.FranchiseOwner;
+import model.Product;
 import org.junit.After;
 import org.junit.Test;
 
