@@ -29,6 +29,10 @@
 <a href="${pageContext.request.contextPath}/dgRegister">
     Register Delivery Guy
 </a>
+||
+<a href="${pageContext.request.contextPath}/imgDGuy">
+    Image (Delivery Guy)
+</a>
 
 &nbsp;
 <span style="color:red">[ ${loginedUser.email} ]</span>

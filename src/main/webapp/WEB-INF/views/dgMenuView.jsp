@@ -13,6 +13,7 @@
 Waiting for orders...
 Means of transport: ${loginedUser.meansOfTransport}
 Name: ${loginedUser.name}
+<img src="http://localhost:8080/imgDGuy">
 
 
 </body>

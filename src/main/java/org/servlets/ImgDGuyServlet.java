@@ -1,7 +1,10 @@
 package org.servlets;
 
 import model.UserAccount;
+import org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl;
 
+import javax.persistence.EntityManager;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
@@ -11,8 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
-
 import static org.securityfilter.AppUtils.getLoginedUser;
+import static org.utils.Utils.getHSQLConnection;
 
 /**
  * @author Gonzalo de Achaval
@@ -24,7 +27,7 @@ public class ImgDGuyServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException,
             ServletException {
         Blob photo;
-        Connection conn;
+        Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
         UserAccount ua = getLoginedUser(request.getSession());
@@ -36,59 +39,36 @@ public class ImgDGuyServlet extends HttpServlet {
 
         try {
             conn = getHSQLConnection();
-        } catch (Exception e) {
-            response.setContentType("text/html");
-            out.println("<html><head><title>Person Photo</title></head>");
-            out.println("<body><h1>Database Connection Problem.</h1></body></html>");
-            return;
-        }
-
-        try {
             stmt = conn.createStatement();
             rs = stmt.executeQuery(finalQuery);
             if (rs.next()) {
                 photo = rs.getBlob(1);
             } else {
-                response.setContentType("text/html");
-                out.println("<html><head><title>Person Photo</title></head>");
-                out.println("<body><h1>No photo found for id= 001 </h1></body></html>");
-                return;
+                throw new RuntimeException("Img was not found");
             }
-
             response.setContentType("image/gif");
             InputStream in = photo.getBinaryStream();
             int length;
-
             int bufferSize = 1024;
             byte[] buffer = new byte[bufferSize];
 
             while ((length = in.read(buffer)) != -1) {
-                System.out.println("writing " + length + " bytes");
                 out.write(buffer, 0, length);
             }
-
             in.close();
             out.flush();
-        } catch (SQLException e) {
-            response.setContentType("text/html");
-            out.println("<html><head><title>Error: Person Photo</title></head>");
-            out.println("<body><h1>Error=" + e.getMessage() + "</h1></body></html>");
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
         } finally {
             try {
-                assert rs != null;
-                rs.close();
-                stmt.close();
-                conn.close();
+                if (rs != null) {
+                    rs.close();
+                    stmt.close();
+                    conn.close();
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
-    }
-
-    private static Connection getHSQLConnection() throws Exception {
-        Class.forName("org.hsqldb.jdbc.JDBCDriver");
-        System.out.println("Driver Loaded.");
-        String url = "jdbc:hsqldb:hsql://localhost/testdb";
-        return DriverManager.getConnection(url, "SA", "");
     }
 }

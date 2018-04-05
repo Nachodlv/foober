@@ -3,6 +3,9 @@ package org.utils;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 /**
  * @author Gonzalo de Achaval
@@ -22,5 +25,11 @@ public class Utils {
         buffer.flush();
 
         return buffer.toByteArray();
+    }
+
+    public static Connection getHSQLConnection() throws ClassNotFoundException, SQLException {
+        Class.forName("org.hsqldb.jdbc.JDBCDriver");
+        String url = "jdbc:hsqldb:hsql://localhost/testdb";
+        return DriverManager.getConnection(url, "SA", "");
     }
 }
