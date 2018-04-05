@@ -12,10 +12,11 @@
 <jsp:include page="_menu.jsp"></jsp:include>
 
 
-<div style="width: 30%;" class="container d-flex justify-content-center align-items-center flex-column alert-primary
+<div style="width: 30%;" class="container d-flex justify-content-center align-items-center flex-column alert-secondary
                                         rounded mt-5">
-    <img src="../../images/FooberLogo.png" class="img-fluid mt-3" style="width: 50%">
-    <h3 class="mt-2">Foober</h3>
+    <img src="../../images/FooberLogo.png" class="img-fluid mt-3" style="width: 70%">
+    <h3 class="mt-2">Welcome to Foober!</h3>
+
 
     <p style="color: red;" class="text-danger">${errorMessage}</p>
 
@@ -32,16 +33,15 @@
             <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
                    name="password" value="${user.password}">
         </div>
-        <button type="submit" class="btn btn-primary" value="Submit">Submit</button>
+        <div class="form-group">
+            <button type="submit" class="btn btn-dark" value="Submit">Submit</button>
+            <a href="${pageContext.request.contextPath}/dgRegister">Register Delivery Guy</a>
+            <a href="${pageContext.request.contextPath}/foRegister">Register Franchise</a>
+        </div>
     </form>
 </div>
 
 <br>
-<p style="color:blue;">Login with:</p>
-
-TEST@A/123 (FO) <br>
-TEST2@A/123 (DG)
-
 <jsp:include page="bootstrapImportBody.jsp"></jsp:include>
 
 </body>
