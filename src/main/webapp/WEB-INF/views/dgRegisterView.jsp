@@ -3,13 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <jsp:include page="bootstrapImportHeader.jsp"></jsp:include>
+    <link rel="stylesheet" href="../../css/registerView.css" type="text/css">
     <title>DG Register</title>
 </head>
 <body>
 <jsp:include page="_menu.jsp"></jsp:include>
 <br>
-<div class="d-inline-flex ml-3">
+<div class="container h-100 d-flex justify-content-center">
+    <div class="jumbotron vertical-center ">
     <form method="post" enctype="multipart/form-data">
+        <div id="legend">
+            <h3 class="">Register Delivery Guy</h3>
+        </div>
         <div class="form-row">
             <div class="col-md-6 mb-3">
                 <label>Name</label>
@@ -37,25 +42,36 @@
                 <label>Phone</label>
                 <input type="text" pattern="[0-9]+" class="form-control" placeholder="Phone" name="phone" required>
             </div>
-            <div class="col-md-6 mb-4 btn-group btn-group-toggle" data-toggle="buttons">
-                <label>Means of Transport</label>
-                <label class="btn btn-secondary active">
-                    <input type="radio" name="meansOfTransport" id="option1" value ="1" autocomplete="off" checked> Bike
-                </label>
-                <label class="btn btn-secondary">
-                    <input type="radio" name="meansOfTransport" id="option2" value ="2" autocomplete="off"> Bus
-                </label>
-                <label class="btn btn-secondary">
-                    <input type="radio" name="meansOfTransport" id="option3" value ="3" autocomplete="off"> Car
-                </label>
+            <div class="col-md-6 mb-4">
+                <div class="row">
+                    <div class = "col">
+                        <label>Transport</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="meansOfTransport" id="option1" value ="1" autocomplete="off"> Bike
+                        </label>
+                    </div>
+                    <div class="col">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="meansOfTransport" id="option2" value ="2" autocomplete="off"> Walking
+                        </label>
+                    </div>
+                    <div class="col">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="meansOfTransport" id="option3" value ="3" autocomplete="off"> Car
+                        </label>
+                    </div>
+                </div>
             </div>
         </div>
 
         <div>
             <label for="id">Scan ID</label>
             <br>
-            <input type="file" id="id" name="id"
-                   accept=".jpg, .jpeg, .png">
+            <input type="file" id="id" name="id" accept=".jpg, .jpeg, .png" class="file">
         </div>
 
 
@@ -69,6 +85,7 @@
         </div>
         <button type="submit" class="btn btn-primary" value="Submit">Submit</button>
     </form>
+</div>
 </div>
 
 <jsp:include page="bootstrapImportBody.jsp"></jsp:include>

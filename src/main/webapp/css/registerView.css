@@ -1,0 +1,33 @@
+.btn-secondary {
+    background-color: darkslategray; /* Green */
+    border: none;
+    color: white;
+    padding: 1% 3%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 11px;
+    margin: 2% 2% 2% 2%;
+    width: 100%;
+    height: 70%;
+}
+
+.btn-secondary:hover {
+    background-color: dimgray; /* Green */
+    border: none;
+    color: white;
+    padding: 2% 5%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 11px;
+    margin: 2% 2% 2% 2%;
+    width: 100%;
+    height: 70%;
+}
+
+.jumbotron {
+    padding-top: 2%;
+    padding-bottom: 3%;
+}
+

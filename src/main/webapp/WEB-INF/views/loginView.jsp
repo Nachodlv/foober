@@ -33,10 +33,12 @@
             <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
                    name="password" value="${user.password}">
         </div>
-        <div class="form-group">
-            <button type="submit" class="btn btn-dark" value="Submit">Submit</button>
-            <a href="${pageContext.request.contextPath}/dgRegister">Register Delivery Guy</a>
-            <a href="${pageContext.request.contextPath}/foRegister">Register Franchise</a>
+        <div class="row">
+            <div class="col-md-4" align="center"><button type="submit" class="btn btn-dark" value="Submit">Submit</button></div>
+            <div class="col-md-4" align="center">
+                <a style= "font-size: 11px" href="${pageContext.request.contextPath}/dgRegister">Register<br> Delivery Guy</a>
+            </div>
+            <div class="col-md-4" align="center"><a style= "font-size: 11px" href="${pageContext.request.contextPath}/foRegister">Register Franchise</a></div>
         </div>
     </form>
 </div>
