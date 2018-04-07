@@ -29,23 +29,6 @@ public class EditMenuServlet extends HttpServlet{
             throws ServletException, IOException {
 
         FranchiseOwner franchiseOwner = FOFunctionality.getFranchiseOwner(AppUtils.getLoginedUser(request.getSession()).getEmail());
-
-        // Eliminates the product by Id
-        String requestURL = request.getRequestURL().toString();
-        String[] strings = requestURL.split("/");
-        try{
-            int productId = Integer.valueOf(strings[strings.length-1]);
-
-            Product product = ProductFunctionality.getProduct(productId);
-            if(contains(franchiseOwner, product)){
-                ProductFunctionality.deleteProduct(productId);
-                franchiseOwner.getProducts().remove(product);
-                FOFunctionality.modifyModel(franchiseOwner);
-            }
-            response.sendRedirect(request.getContextPath() + "/editMenu");
-            return;
-        }catch (NumberFormatException ignored){}
-
         List<Product> products = ProductFunctionality.getPorductsByFO(franchiseOwner.getEmail());
         request.setAttribute("products", products);
 
@@ -61,15 +44,22 @@ public class EditMenuServlet extends HttpServlet{
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        Enumeration<String> parameterNames = request.getParameterNames();
-        String queryString = request.getQueryString();
+        UserAccount userAccount = AppUtils.getLoginedUser(request.getSession());
+        FranchiseOwner franchiseOwner = FOFunctionality.getFranchiseOwner(userAccount.getEmail());
+
+        String productDelete = request.getParameter("delete");
+        if(productDelete != null){
+            deleteProduct(Integer.valueOf(productDelete), franchiseOwner);
+            response.sendRedirect(request.getContextPath() + "/editMenu");
+            return;
+        }
+
         String name = request.getParameter("productName");
-        String user = request.getParameter("user");
         String priceString = request.getParameter("productPrice");
         double price;
         try{
             price = Double.valueOf(priceString);
-        }catch (NullPointerException e){
+        }catch (NumberFormatException e){
             request.setAttribute("errorPrice", "Please enter a number");
 
             RequestDispatcher dispatcher //
@@ -77,9 +67,7 @@ public class EditMenuServlet extends HttpServlet{
             dispatcher.forward(request, response);
             return;
         }
-        UserAccount userAccount = AppUtils.getLoginedUser(request.getSession());
-        FranchiseOwner franchiseOwner = FOFunctionality.getFranchiseOwner(userAccount.getEmail());
-        //FranchiseOwner franchiseOwner = FOFunctionality.getFranchiseOwner(AppUtils.getLoginedUser(request.getSession()).getEmail());
+
         Product product = new Product(name, price, new byte[]{}, franchiseOwner);
 
         Hibernate.initialize(franchiseOwner.getProducts());
@@ -96,6 +84,15 @@ public class EditMenuServlet extends HttpServlet{
             if(product.getId() == currentProduct.getId()) return true;
         }
         return false;
+    }
+
+    private void deleteProduct(int productId, FranchiseOwner franchiseOwner){
+        Product product = ProductFunctionality.getProduct(productId);
+        if(contains(franchiseOwner, product)){
+            ProductFunctionality.deleteProduct(productId);
+            franchiseOwner.getProducts().remove(product);
+            FOFunctionality.modifyModel(franchiseOwner);
+        }
     }
 
 }

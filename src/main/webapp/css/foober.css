@@ -7,3 +7,7 @@
     line-height: 1px;
 }
 
+.buttonWithFunction {
+    background: transparent;
+    border: none !important;
+}

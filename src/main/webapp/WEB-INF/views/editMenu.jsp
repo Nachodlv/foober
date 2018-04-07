@@ -4,7 +4,7 @@
 <head>
     <jsp:include page="bootstrapImportHeader.jsp"></jsp:include>
     <title>Title</title>
-    <link rel="stylesheet" href="../../css/addProduct.css" type="text/css">
+    <link rel="stylesheet" href="../../css/foober.css" type="text/css">
 </head>
 <body>
 <jsp:include page="_menu.jsp"></jsp:include>
@@ -50,18 +50,28 @@
 
 
 <%--List Products--%>
-<div class="container">
-    <c:forEach items="${products}"  var="product">
-        <div class="row">
-            <p class="col-3">${product.name}</p>
-            <p class="col-3">${product.price}</p>
-            <a href="${pageContext.request.contextPath}/editMenu/${product.id}" class="col-6"><i class="fas fa-times"></i></a>
-        </div>
-    </c:forEach>
+<form method="post" action="${pageContext.request.contextPath}/editMenu" >
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <c:forEach items="${products}"  var="product">
+                <tr>
+                    <td>${product.name}</td>
+                    <td>${product.price}</td>
+                    <td><button class="buttonWithFunction" type="submit" name="delete" value=${product.id}><i class="fas fa-times"></i></button></td>
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
+</form>
 
-    <jsp:include page="bootstrapImportBody.jsp"></jsp:include>
-</div>
-
+<jsp:include page="bootstrapImportBody.jsp"></jsp:include>
 <script>
     $('#myModal').on('shown.bs.modal', function () {
         $('#myInput').trigger('focus')
