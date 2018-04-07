@@ -15,7 +15,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Add a product</h5>
@@ -24,24 +24,24 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form method="post" enctype="multipart/form-data" action="${pageContext.request.contextPath}/editMenu" >
                     <div class="align-items-center">
                         <div class="">
                             <label for="inlineFormInput">Product name</label>
-                            <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Product name">
+                            <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Product name" name="productName" required>
                         </div>
                         <div class="">
                             <label for="inlinePriceInput">Price</label>
-                            <input type="text" class="form-control mb-2" id="inlinePriceInput" placeholder="Price">
+                            <input type="text" class="form-control mb-2" id="inlinePriceInput" placeholder="Price" name="productPrice" required>
                         </div>
                         <div class="mt-3">
-                            <button type="submit" class="btn btn-primary mb-2">Submit</button>
+                            <button type="submit" class="btn btn-primary mb-2" value="submit" name="submit">Submit</button>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" value="Submit">Close</button>
             </div>
         </div>
     </div>
@@ -50,13 +50,17 @@
 
 
 <%--List Products--%>
-<ul>
+<div class="container">
     <c:forEach items="${products}"  var="product">
-        <li>${product.name}     ${product.price}</li>
+        <div class="row">
+            <p class="col-3">${product.name}</p>
+            <p class="col-3">${product.price}</p>
+            <a href="${pageContext.request.contextPath}/editMenu/${product.id}" class="col-6"><i class="fas fa-times"></i></a>
+        </div>
     </c:forEach>
 
     <jsp:include page="bootstrapImportBody.jsp"></jsp:include>
-</ul>
+</div>
 
 <script>
     $('#myModal').on('shown.bs.modal', function () {

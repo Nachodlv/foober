@@ -3,10 +3,7 @@ package model;
 import org.hibernate.mapping.List;
 import org.hibernate.mapping.Map;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -29,7 +26,7 @@ public class FranchiseOwner extends UserAccount {
     private int menuId;
     @Column(name = "tippingPercentage")
     private int tippingPercentage;
-    @OneToMany(mappedBy = "franchiseOwner")
+    @OneToMany(mappedBy = "franchiseOwner", fetch = FetchType.EAGER)
     private Set<Product> products;
     public FranchiseOwner() {
         products = new HashSet<>();

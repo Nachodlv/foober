@@ -36,9 +36,9 @@
         <div class="row">
             <div class="col-md-4" align="center"><button type="submit" class="btn btn-dark" value="Submit">Submit</button></div>
             <div class="col-md-4" align="center">
-                <a style= "font-size: 11px" href="${pageContext.request.contextPath}/dgRegister">Register<br> Delivery Guy</a>
+                <a style= "font-size: 11px" class="registerLink" href="${pageContext.request.contextPath}/dgRegister">Register<br> Delivery Guy</a>
             </div>
-            <div class="col-md-4" align="center"><a style= "font-size: 11px" href="${pageContext.request.contextPath}/foRegister">Register Franchise</a></div>
+            <div class="col-md-4" align="center"><a class="registerLink" style= "font-size: 11px" href="${pageContext.request.contextPath}/foRegister">Register Franchise</a></div>
         </div>
     </form>
 </div>
