@@ -15,10 +15,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+
+import static org.utils.Utils.convertStreamToByteArray;
 
 @WebServlet({"/editMenu/*", "/editMenu"})
 @MultipartConfig
@@ -67,8 +71,10 @@ public class EditMenuServlet extends HttpServlet{
             dispatcher.forward(request, response);
             return;
         }
+        Part filePart = request.getPart("productPic");
+        InputStream fileContent = filePart.getInputStream();
 
-        Product product = new Product(name, price, new byte[]{}, franchiseOwner);
+        Product product = new Product(name, price, convertStreamToByteArray(fileContent), franchiseOwner);
 
         Hibernate.initialize(franchiseOwner.getProducts());
         franchiseOwner.getProducts().add(product);

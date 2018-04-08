@@ -34,6 +34,11 @@
                             <label for="inlinePriceInput">Price</label>
                             <input type="text" class="form-control mb-2" id="inlinePriceInput" placeholder="Price" name="productPrice" required>
                         </div>
+                        <div class ="">
+                            <label for="productPic">Add product photo</label>
+                            <br>
+                            <input type="file" id="productPic" name="productPic" accept=".jpg, .jpeg, .png" class="file">
+                        </div>
                         <div class="mt-3">
                             <button type="submit" class="btn btn-primary mb-2" value="submit" name="submit">Submit</button>
                         </div>
@@ -54,6 +59,7 @@
     <table class="table table-striped">
         <thead>
             <tr>
+                <th scope="col"></th>
                 <th scope="col">Name</th>
                 <th scope="col">Price</th>
                 <th scope="col"></th>
@@ -62,8 +68,9 @@
         <tbody>
             <c:forEach items="${products}"  var="product">
                 <tr>
+                    <td><img width="100" height="100" src="http://localhost:8080/productPic?id=${product.id}"></td>
                     <td>${product.name}</td>
-                    <td>${product.price}</td>
+                    <td>${product.price} $</td>
                     <td><button class="buttonWithFunction" type="submit" name="delete" value=${product.id}><i class="fas fa-times"></i></button></td>
                 </tr>
             </c:forEach>
