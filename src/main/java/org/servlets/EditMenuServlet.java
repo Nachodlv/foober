@@ -52,8 +52,22 @@ public class EditMenuServlet extends HttpServlet{
         FranchiseOwner franchiseOwner = FOFunctionality.getFranchiseOwner(userAccount.getEmail());
 
         String productDelete = request.getParameter("delete");
+        String productModify = request.getParameter("modify");
         if(productDelete != null){
             deleteProduct(Integer.valueOf(productDelete), franchiseOwner);
+            response.sendRedirect(request.getContextPath() + "/editMenu");
+            return;
+        }
+
+        if(productModify != null){
+            String name = request.getParameter("productNameEdit");
+            double price = Double.valueOf(request.getParameter("productPriceEdit"));
+            try{
+                Part image = request.getPart("productPicEdit");
+                modifyProduct(name, price, image, Integer.valueOf(productModify));
+            }catch (ServletException a){
+                modifyProduct(name, price, null, Integer.valueOf(productModify));
+            }
             response.sendRedirect(request.getContextPath() + "/editMenu");
             return;
         }
@@ -99,6 +113,17 @@ public class EditMenuServlet extends HttpServlet{
             franchiseOwner.getProducts().remove(product);
             FOFunctionality.modifyModel(franchiseOwner);
         }
+    }
+
+    private void modifyProduct(String name, double price, Part image, int productId) throws IOException {
+        Product product = ProductFunctionality.getProduct(productId);
+        product.setName(name);
+        product.setPrice(price);
+        if(image!=null){
+            InputStream fileContent = image.getInputStream();
+            product.setImage(convertStreamToByteArray(fileContent));
+        }
+        ProductFunctionality.modifyModel(product);
     }
 
 }
