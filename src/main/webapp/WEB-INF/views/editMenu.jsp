@@ -63,6 +63,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">Price</th>
                 <th scope="col"></th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
@@ -71,8 +72,8 @@
                     <td><img width="100" height="100" src="http://localhost:8080/productPic?id=${product.id}"></td>
                     <td>${product.name}</td>
                     <td>${product.price} $</td>
-                    <td><button class="buttonWithFunction" type="button" data-toggle="modal" data-target="#exampleModalEdit${product.id}"><i class="fas fa-angle-right"></i></button></td>
-                    <td><button class="buttonWithFunction" type="submit" name="delete" value=${product.id}><i class="fas fa-times"></i></button></td>
+                    <td><button class="buttonWithFunction" type="button" data-toggle="modal" data-target="#exampleModalEdit${product.id}"><i class="fas fa-edit fa-sm"></i></button></td>
+                    <td><button class="buttonWithFunction" type="submit" name="delete" value=${product.id}><i class="fas fa-times" style="color:Tomato"></i></button></td>
                 </tr>
                 <%--Modal for editing--%>
                 <div class="modal fade" id="exampleModalEdit${product.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -95,11 +96,12 @@
                                             <label for="inlinePriceInputEdit${product.id}">Price</label>
                                             <input type="text" class="form-control mb-2" id="inlinePriceInputEdit${product.id}" placeholder="Price" name="productPriceEdit" value="${product.price}" required>
                                         </div>
-                                        <div class ="row">
-                                            <img width="100" height="100" src="http://localhost:8080/productPic?id=${product.id}">
-                                            <label class="col-6" for="productPicEdit${product.id}">Add product photo</label>
-                                            <input type="file" id="productPicEdit${product.id}" name="productPicEdit" accept=".jpg, .jpeg, .png" class="file">
-                                        </div>
+
+                                        <label>Edit product photo</label>
+                                        <br>
+                                        <img width="100" height="100" src="http://localhost:8080/productPic?id=${product.id}">
+                                        <input type="file" id="productPicEdit${product.id}" name="productPicEdit" accept=".jpg, .jpeg, .png" class="file">
+
                                         <div class="mt-3">
                                             <button type="submit" class="btn btn-primary mb-2" value="${product.id}" name="modify">Update Product</button>
                                         </div>
