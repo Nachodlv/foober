@@ -1,5 +1,7 @@
 package org.servlets;
 
+import org.utils.Utils;
+
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
@@ -56,15 +58,7 @@ public class ProductPicServlet extends HttpServlet {
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                    stmt.close();
-                    conn.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            Utils.close(conn, stmt, rs);
         }
     }
 }

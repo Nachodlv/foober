@@ -64,9 +64,11 @@ public class EditMenuServlet extends HttpServlet{
             double price = Double.valueOf(request.getParameter("productPriceEdit"));
             try{
                 Part image = request.getPart("productPicEdit");
-                modifyProduct(name, price, image, Integer.valueOf(productModify));
-            }catch (ServletException a){
-                modifyProduct(name, price, null, Integer.valueOf(productModify));
+                InputStream fileContent = image.getInputStream();
+                final byte[] imgBytes = convertStreamToByteArray(fileContent);
+                modifyProduct(name, price, imgBytes, Integer.valueOf(productModify), franchiseOwner);
+            } catch (ServletException a){
+                modifyProduct(name, price, null, Integer.valueOf(productModify), franchiseOwner);
             }
             response.sendRedirect(request.getContextPath() + "/editMenu");
             return;
@@ -115,15 +117,12 @@ public class EditMenuServlet extends HttpServlet{
         }
     }
 
-    private void modifyProduct(String name, double price, Part image, int productId) throws IOException {
-        Product product = ProductFunctionality.getProduct(productId);
-        product.setName(name);
-        product.setPrice(price);
-        if(image!=null){
-            InputStream fileContent = image.getInputStream();
-            product.setImage(convertStreamToByteArray(fileContent));
-        }
-        ProductFunctionality.modifyModel(product);
+    private void modifyProduct(String name, double price, byte[] img, int productId, FranchiseOwner fo) throws IOException {
+        ProductFunctionality.deleteProduct(productId);
+        ProductFunctionality.addModel(new Product(name, price, img, fo));
+//        product.setName(name);
+//        product.setPrice(price);
+//        product.setImage(img);
+//        ProductFunctionality.modifyModel(product);
     }
-
 }

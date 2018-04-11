@@ -3,9 +3,7 @@ package org.utils;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 /**
  * @author Gonzalo de Achaval
@@ -31,5 +29,17 @@ public class Utils {
         Class.forName("org.hsqldb.jdbc.JDBCDriver");
         String url = "jdbc:hsqldb:hsql://localhost/testdb";
         return DriverManager.getConnection(url, "SA", "");
+    }
+
+    public static void close(Connection conn, Statement stmt, ResultSet rs) {
+        try {
+            if (rs != null) {
+                rs.close();
+                stmt.close();
+                conn.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

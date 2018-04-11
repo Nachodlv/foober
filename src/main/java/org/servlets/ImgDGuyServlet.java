@@ -2,6 +2,7 @@ package org.servlets;
 
 import model.UserAccount;
 import org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl;
+import org.utils.Utils;
 
 import javax.persistence.EntityManager;
 import javax.servlet.RequestDispatcher;
@@ -60,15 +61,7 @@ public class ImgDGuyServlet extends HttpServlet {
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                    stmt.close();
-                    conn.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            Utils.close(conn, stmt, rs);
         }
     }
 }
