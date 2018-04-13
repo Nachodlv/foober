@@ -1,0 +1,21 @@
+.inner {
+    background-color: #E6E6E6;
+    border-radius:10px;
+    padding:10px;
+    /*border:1px solid black;*/
+}
+
+.col-md-6 {
+    padding:10px;
+}
+
+table.table-bordered{
+    border:1px solid black;
+    margin-top:20px;
+}
+table.table-bordered > thead > tr > th{
+    border:1px solid black;
+}
+table.table-bordered > tbody > tr > td{
+    border:1px solid black;
+}
