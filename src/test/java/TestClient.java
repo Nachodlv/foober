@@ -28,11 +28,12 @@ public class TestClient {
         con = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/testdb", "SA", "");
         stmt = con.createStatement();
         stmt.executeUpdate("DELETE FROM CLIENT WHERE EMAIL='TEST' OR EMAIL='TEST2'");
-        //stmt.executeUpdate("DELETE FROM USERACCOUNT WHERE EMAIL='TEST'");
-        //stmt.executeUpdate("DELETE FROM FRANCHISEOWNER WHERE EMAIL='TEST'");
+        stmt.executeUpdate("DELETE FROM FRANCHISEOWNER WHERE EMAIL='TEST'");
+        stmt.executeUpdate("DELETE FROM USERACCOUNT WHERE EMAIL='TEST'");
+
     }
 
-    public Client getClient(String email){
+    private Client getClient(String email){
         List<Client> clients = ClientFunctionality.getAllClients();
         if(clients == null) return null;
         for(Client client:clients){

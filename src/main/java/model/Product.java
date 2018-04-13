@@ -16,7 +16,8 @@ public class Product {
     @Column(name = "image")
     @Lob
     private byte[] image;
-
+    @Column(name = "active")
+    private boolean active = true;
     @ManyToOne
     @JoinColumn(name = "FO_email", nullable = false)
     private FranchiseOwner franchiseOwner;
@@ -68,5 +69,13 @@ public class Product {
 
     public void setImage(byte[] image) {
         this.image = image;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

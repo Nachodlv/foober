@@ -56,12 +56,12 @@ public class ProductFunctionality extends AbstractFunctionality {
         return products;
     }
 
-    public static List<Product> getPorductsByFO(String email){
+    public static List<Product> getProductsByFO(String email){
         List<Product> products = getAllProducts();
         List<Product> foProducts = new ArrayList<>();
         if(products==null) return null;
         for(Product product:products){
-            if(product.getFranchiseOwner().getEmail().equals(email)){
+            if(product.getFranchiseOwner().getEmail().equals(email) ){
                 foProducts.add(product);
             }
         }

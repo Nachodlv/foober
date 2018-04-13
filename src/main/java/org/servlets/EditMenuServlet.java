@@ -19,7 +19,6 @@ import javax.servlet.http.Part;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 
 import static org.utils.Utils.convertStreamToByteArray;
@@ -33,7 +32,9 @@ public class EditMenuServlet extends HttpServlet{
             throws ServletException, IOException {
 
         FranchiseOwner franchiseOwner = FOFunctionality.getFranchiseOwner(AppUtils.getLoginedUser(request.getSession()).getEmail());
-        List<Product> products = ProductFunctionality.getPorductsByFO(franchiseOwner.getEmail());
+        List<Product> products = new ArrayList<>(franchiseOwner.getProducts());
+        products = filterActiveProducts(products);
+
         request.setAttribute("products", products);
 
         RequestDispatcher dispatcher //
@@ -101,9 +102,8 @@ public class EditMenuServlet extends HttpServlet{
     private void deleteProduct(int productId, FranchiseOwner franchiseOwner){
         Product product = ProductFunctionality.getProduct(productId);
         if(contains(franchiseOwner, product)){
-            ProductFunctionality.deleteProduct(productId);
-            franchiseOwner.getProducts().remove(product);
-            FOFunctionality.modifyModel(franchiseOwner);
+            product.setActive(false);
+            ProductFunctionality.modifyModel(product);
         }
     }
 
@@ -137,5 +137,15 @@ public class EditMenuServlet extends HttpServlet{
         RequestDispatcher dispatcher
                 = this.getServletContext().getRequestDispatcher("/WEB-INF/views/editMenu.jsp");
         dispatcher.forward(request, response);
+    }
+
+    private List<Product> filterActiveProducts(List<Product> products){
+        List<Product> activeProducts = new ArrayList<>();
+        for(Product product: products){
+            if(product.isActive()){
+                activeProducts.add(product);
+            }
+        }
+        return activeProducts;
     }
 }

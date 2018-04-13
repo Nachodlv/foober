@@ -33,6 +33,7 @@
                         <div class="">
                             <label for="inlinePriceInput">Price</label>
                             <input type="text" class="form-control mb-2" id="inlinePriceInput" placeholder="Price" name="productPrice"  required>
+                            <p style="color: red;" class="text-danger">${errorPrice}</p>
                         </div>
                         <div class ="">
                             <label for="productPic">Add product photo</label>
@@ -95,6 +96,7 @@
                                         <div class="">
                                             <label for="inlinePriceInputEdit${product.id}">Price</label>
                                             <input type="text" class="form-control mb-2" id="inlinePriceInputEdit${product.id}" placeholder="Price" name="productPriceEdit" value="${product.price}" required>
+                                            <p style="color: red;" class="text-danger">${errorPrice}</p>
                                         </div>
 
                                         <label>Edit product photo</label>

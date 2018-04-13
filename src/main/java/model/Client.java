@@ -5,13 +5,15 @@ import javax.persistence.*;
 @Entity
 @Table (name = "client")
 public class Client {
+    @Id @GeneratedValue
+    @Column(name = "id")
+    private int id;
     @Column(name = "name")
     private String name;
     @Column(name = "phone")
     private int phone;
     @Column(name = "address")
     private String address;
-    @Id
     @Column(name = "email")
     private String email;
     @ManyToOne
@@ -68,5 +70,13 @@ public class Client {
 
     public void setFranchiseOwner(FranchiseOwner franchiseOwner) {
         this.franchiseOwner = franchiseOwner;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
