@@ -14,6 +14,7 @@
         <property name="dialect">org.hibernate.dialect.HSQLDialect</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
         <mapping class="model.Product"/>
+        <mapping class="model.Client"/>
         <mapping class="model.FranchiseOwner"/>
         <mapping class="model.DeliveryGuy"/>
         <mapping class="model.UserAccount"/>

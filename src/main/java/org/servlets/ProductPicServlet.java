@@ -28,7 +28,6 @@ public class ProductPicServlet extends HttpServlet {
         Statement stmt = null;
         ResultSet rs = null;
         final String idProduct = request.getParameter("id");
-        System.out.println(idProduct);
 
         String query = "SELECT IMAGE FROM PRODUCT WHERE ID=";
         String finalQuery = query + idProduct;
