@@ -36,7 +36,9 @@ public class EditMenuServlet extends HttpServlet{
         products = filterActiveProducts(products);
 
         request.setAttribute("products", products);
-
+        String[] url = request.getRequestURL().toString().split("/");
+        String error = url[url.length-1];
+        if(error.equals("error")) request.setAttribute("errorPrice", "Error while creating the product");
         RequestDispatcher dispatcher //
                 = this.getServletContext()//
                 .getRequestDispatcher("/WEB-INF/views/editMenu.jsp");
@@ -56,15 +58,13 @@ public class EditMenuServlet extends HttpServlet{
 
         if(productDelete != null){
             deleteProduct(Integer.valueOf(productDelete), franchiseOwner);
+            response.sendRedirect(request.getContextPath() + "/editMenu");
         }
         else if(productModify != null){
             modifyProduct(request, response,franchiseOwner, Integer.valueOf(productModify));
         }else{
             addProduct(request, response, franchiseOwner);
         }
-
-
-        response.sendRedirect(request.getContextPath() + "/editMenu");
     }
 
 
@@ -83,10 +83,9 @@ public class EditMenuServlet extends HttpServlet{
         try{
             price = Double.valueOf(priceString);
         }catch (NumberFormatException e){
-            sendError(response, request);
+            response.sendRedirect(request.getContextPath() + "/editMenu/error");
             return;
         }
-
 
         Part filePart = request.getPart("productPic");
         InputStream fileContent = filePart.getInputStream();
@@ -97,6 +96,8 @@ public class EditMenuServlet extends HttpServlet{
         franchiseOwner.getProducts().add(product);
         ProductFunctionality.addModel(product);
         FOFunctionality.modifyModel(franchiseOwner);
+
+        response.sendRedirect(request.getContextPath() + "/editMenu");
     }
 
     private void deleteProduct(int productId, FranchiseOwner franchiseOwner){
@@ -105,6 +106,7 @@ public class EditMenuServlet extends HttpServlet{
             product.setActive(false);
             ProductFunctionality.modifyModel(product);
         }
+
     }
 
     private void modifyProduct(HttpServletRequest request, HttpServletResponse response,FranchiseOwner fo, int productId) throws IOException, ServletException {
@@ -115,29 +117,25 @@ public class EditMenuServlet extends HttpServlet{
         try{
             price = Double.valueOf(priceString);
         }catch (NumberFormatException e){
-            sendError(response, request);
+            response.sendRedirect(request.getContextPath() + "/editMenu/error");
             return;
         }
 
         Part image = request.getPart("productPicEdit");
         InputStream fileContent = image.getInputStream();
         byte[] imgBytes = convertStreamToByteArray(fileContent);
-
+        if(imgBytes.length == 0){
+            imgBytes = ProductFunctionality.getProduct(productId).getImage();
+        }
         ProductFunctionality.deleteProduct(productId);
         ProductFunctionality.addModel(new Product(name, price, imgBytes, fo));
+        response.sendRedirect(request.getContextPath() + "/editMenu");
 //        product.setName(name);
 //        product.setPrice(price);
 //        product.setImage(img);
 //        ProductFunctionality.modifyModel(product);
     }
 
-    private void sendError(HttpServletResponse response, HttpServletRequest request) throws ServletException, IOException {
-        request.setAttribute("errorPrice", "Please enter a number");
-
-        RequestDispatcher dispatcher
-                = this.getServletContext().getRequestDispatcher("/WEB-INF/views/editMenu.jsp");
-        dispatcher.forward(request, response);
-    }
 
     private List<Product> filterActiveProducts(List<Product> products){
         List<Product> activeProducts = new ArrayList<>();

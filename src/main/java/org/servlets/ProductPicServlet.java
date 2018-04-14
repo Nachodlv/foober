@@ -4,6 +4,7 @@ import org.utils.Utils;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +19,7 @@ import static org.utils.Utils.getHSQLConnection;
  * @author Gonzalo de Achaval
  */
 @WebServlet("/productPic")
+@MultipartConfig
 public class ProductPicServlet extends HttpServlet {
 
     @Override

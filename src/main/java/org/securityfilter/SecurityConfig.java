@@ -23,6 +23,7 @@ class SecurityConfig {
         urlPatterns1.add("/userInfo");
         urlPatterns1.add("/foMenu");
         urlPatterns1.add("/editMenu");
+        urlPatterns1.add("/makingOrder");
 
         mapConfig.put(ROLE_FO, urlPatterns1);
 
