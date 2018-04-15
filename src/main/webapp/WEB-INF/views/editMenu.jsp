@@ -8,16 +8,18 @@
 </head>
 <body>
 <jsp:include page="_menu.jsp"></jsp:include>
-<h1 class="col-4">Products: </h1>
-<form class="form-inline row">
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary ml-4 mr-5" data-toggle="modal" data-target="#exampleModal">Add product</button>
 
-    <input type="text" class="form-control ml-2" placeholder="Search by name" name="searchProduct" value="${pageContext.request.getParameter("searchProduct")}">
-    <a class="ml-2" href="${pageContext.request.contextPath}/editMenu"><i class="fas fa-times icon"></i></a>
-    <button type="submit" class="btn btn-info ml-4">Search</button>
-    <h4 style="color: red;" class="text-danger">${pageContext.request.getParameter("error")}</h4>
-</form>
+<div class="outer container">
+    <h1 class="col-4">Products: </h1>
+    <form class="form-inline row" enctype="multipart/form-data">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary ml-4 mr-5" data-toggle="modal" data-target="#exampleModal">Add product</button>
+
+        <input type="text" class="form-control ml-2" placeholder="Search by name" name="searchProduct" value="${pageContext.request.getParameter("searchProduct")}">
+        <a class="ml-2" href="${pageContext.request.contextPath}/editMenu"><i class="fas fa-times icon"></i></a>
+        <button type="submit" class="btn btn-info ml-4">Search</button>
+        <h4 style="color: red;" class="text-danger">${pageContext.request.getParameter("error")}</h4>
+    </form>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -58,7 +60,7 @@
 </div>
 
 <%--List Products--%>
-<form method="post" action="${pageContext.request.contextPath}/editMenu" >
+<form method="post" enctype="multipart/form-data" action="${pageContext.request.contextPath}/editMenu" >
     <table class="table table-striped">
         <thead>
             <tr>
@@ -103,6 +105,7 @@
                                         <label>Edit product photo</label>
                                         <br>
                                         <img width="100" height="100" src="http://localhost:8080/productPic?id=${product.id}">
+
                                         <input type="file" id="productPicEdit${product.id}" name="productPicEdit" accept=".jpg, .jpeg, .png" class="file">
 
                                         <div class="mt-3">
@@ -121,10 +124,7 @@
         </tbody>
     </table>
 </form>
-
-
-
-
+</div>
 
 <jsp:include page="bootstrapImportBody.jsp"></jsp:include>
 

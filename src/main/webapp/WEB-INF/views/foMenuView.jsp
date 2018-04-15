@@ -12,7 +12,7 @@
 <body>
 
 <jsp:include page="_menu.jsp"></jsp:include>
-
+<div class = "container outer">
 <h3 class="ml-2">Franchise Owner Menu</h3>
 
 
@@ -93,6 +93,7 @@
 </div>
 <%--Currnet orders--%>
 <div class="container col-6"></div>
+</div>
 </div>
 
 <jsp:include page="bootstrapImportBody.jsp"></jsp:include>

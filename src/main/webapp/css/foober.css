@@ -12,6 +12,12 @@
     border: none !important;
 }
 
+.outer{
+    padding-top: 2%;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
 .icon {
     color: #109db8;
 }
