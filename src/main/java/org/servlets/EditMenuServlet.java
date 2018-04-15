@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import static org.utils.Utils.convertStreamToByteArray;
 
@@ -33,12 +34,9 @@ public class EditMenuServlet extends HttpServlet{
 
         FranchiseOwner franchiseOwner = FOFunctionality.getFranchiseOwner(AppUtils.getLoginedUser(request.getSession()).getEmail());
         List<Product> products = new ArrayList<>(franchiseOwner.getProducts());
-        products = filterActiveProducts(products);
+        products = filterProducts(products, request);
 
         request.setAttribute("products", products);
-        String[] url = request.getRequestURL().toString().split("/");
-        String error = url[url.length-1];
-        if(error.equals("error")) request.setAttribute("errorPrice", "Error while creating the product");
         RequestDispatcher dispatcher //
                 = this.getServletContext()//
                 .getRequestDispatcher("/WEB-INF/views/editMenu.jsp");
@@ -55,13 +53,16 @@ public class EditMenuServlet extends HttpServlet{
         FranchiseOwner franchiseOwner = FOFunctionality.getFranchiseOwner(userAccount.getEmail());
         String productDelete = request.getParameter("delete");
         String productModify = request.getParameter("modify");
+        String searchProduct = request.getParameter("searchProduct");
 
         if(productDelete != null){
             deleteProduct(Integer.valueOf(productDelete), franchiseOwner);
             response.sendRedirect(request.getContextPath() + "/editMenu");
         }
-        else if(productModify != null){
-            modifyProduct(request, response,franchiseOwner, Integer.valueOf(productModify));
+        else if(productModify != null) {
+            modifyProduct(request, response, franchiseOwner, Integer.valueOf(productModify));
+        }else if(searchProduct != null){
+            searchProduct(searchProduct, request, response);
         }else{
             addProduct(request, response, franchiseOwner);
         }
@@ -83,7 +84,7 @@ public class EditMenuServlet extends HttpServlet{
         try{
             price = Double.valueOf(priceString);
         }catch (NumberFormatException e){
-            response.sendRedirect(request.getContextPath() + "/editMenu/error");
+            response.sendRedirect(request.getContextPath() + "/editMenu?error=Invalid price");
             return;
         }
 
@@ -117,7 +118,7 @@ public class EditMenuServlet extends HttpServlet{
         try{
             price = Double.valueOf(priceString);
         }catch (NumberFormatException e){
-            response.sendRedirect(request.getContextPath() + "/editMenu/error");
+            response.sendRedirect(request.getContextPath() + "/editMenu?error=Invalid price");
             return;
         }
 
@@ -136,11 +137,19 @@ public class EditMenuServlet extends HttpServlet{
 //        ProductFunctionality.modifyModel(product);
     }
 
+    private void searchProduct(String searchBy, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.sendRedirect(request.getContextPath() + "/editMenu?searchProduct=" + searchBy);
+    }
 
-    private List<Product> filterActiveProducts(List<Product> products){
+    private List<Product> filterProducts(List<Product> products, HttpServletRequest request){
+        String searchBy = request.getParameter("searchProduct");
+        Pattern pattern;
+        if(searchBy != null) pattern = Pattern.compile(".*" + searchBy.toLowerCase() + ".*");
+        else pattern = Pattern.compile(".*");
+
         List<Product> activeProducts = new ArrayList<>();
         for(Product product: products){
-            if(product.isActive()){
+            if(product.isActive() && pattern.matcher(product.getName().toLowerCase()).matches()){
                 activeProducts.add(product);
             }
         }

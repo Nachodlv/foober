@@ -63,11 +63,11 @@
 <div class="container col-6">
     <form method="post" action="${pageContext.request.contextPath}/foMenu" >
         <div class="form-inline row mb-2">
-            <input type="text" class="form-control col-4 ml-2" placeholder="Search by name" name="searchClient" value="${searchClient}">
+            <input type="text" class="form-control col-4 ml-2" placeholder="Search by name" name="searchClient" value="${pageContext.request.getParameter("searchClient")}">
             <a class="col-1" href="${pageContext.request.contextPath}/foMenu"><i class="fas fa-times icon"></i></a>
             <button type="submit" class="btn btn-info col-3">Search</button>
             <button type="button" class="btn btn-primary col-3 ml-2" data-toggle="modal" data-target="#exampleModal">New client</button>
-            <h4 style="color: red;" class="text-danger">${errorPhone}</h4>
+            <h4 style="color: red;" class="text-danger">${pageContext.request.getParameter("error")}</h4>
         </div>
         <table class="table table-striped table-hover table-bordered">
             <thead>

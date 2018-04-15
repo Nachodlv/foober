@@ -35,10 +35,6 @@ public class FOMenuServlet extends HttpServlet {
         clients = filterClients(clients, request);
         request.setAttribute("clients", clients);
 
-        String[] url = request.getRequestURL().toString().split("/");
-        String error = url[url.length-1];
-        if(error.equals("error")) request.setAttribute("errorPhone", "Error while creating the client");
-
         RequestDispatcher dispatcher //
                 = this.getServletContext()//
                 .getRequestDispatcher("/WEB-INF/views/foMenuView.jsp");
@@ -71,7 +67,7 @@ public class FOMenuServlet extends HttpServlet {
         try {
             phone = Integer.valueOf(phoneString);
         }catch (NumberFormatException e){
-            response.sendRedirect(request.getContextPath() + "/foMenu/error");
+            response.sendRedirect(request.getContextPath() + "/foMenu?error=Error while creating the client, invalid phone number");
             return;
         }
 
@@ -91,10 +87,10 @@ public class FOMenuServlet extends HttpServlet {
     private List<Client> filterClients(List<Client> clients, HttpServletRequest request){
         String searchBy = request.getParameter("searchClient");
         if(searchBy == null) return clients;
-        Pattern pattern = Pattern.compile(".*" + searchBy + ".*");
+        Pattern pattern = Pattern.compile(".*" + searchBy.toLowerCase() + ".*");
         List<Client> filteredClients = new ArrayList<>();
         for(Client client: clients){
-            if(pattern.matcher(client.getName()).matches()){
+            if(pattern.matcher(client.getName().toLowerCase()).matches()){
                 filteredClients.add(client);
             }
         }

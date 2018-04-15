@@ -8,11 +8,16 @@
 </head>
 <body>
 <jsp:include page="_menu.jsp"></jsp:include>
+<h1 class="col-4">Products: </h1>
+<form class="form-inline row">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary ml-4 mr-5" data-toggle="modal" data-target="#exampleModal">Add product</button>
 
-<h1>Products: </h1>
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add product</button>
-<h4 style="color: red;" class="text-danger">${errorPrice}</h4>
+    <input type="text" class="form-control ml-2" placeholder="Search by name" name="searchProduct" value="${pageContext.request.getParameter("searchProduct")}">
+    <a class="ml-2" href="${pageContext.request.contextPath}/editMenu"><i class="fas fa-times icon"></i></a>
+    <button type="submit" class="btn btn-info ml-4">Search</button>
+    <h4 style="color: red;" class="text-danger">${pageContext.request.getParameter("error")}</h4>
+</form>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -51,8 +56,6 @@
         </div>
     </div>
 </div>
-
-
 
 <%--List Products--%>
 <form method="post" action="${pageContext.request.contextPath}/editMenu" >
@@ -95,7 +98,6 @@
                                         <div class="">
                                             <label for="inlinePriceInputEdit${product.id}">Price</label>
                                             <input type="text" class="form-control mb-2" id="inlinePriceInputEdit${product.id}" placeholder="Price" name="productPriceEdit" value="${product.price}" required>
-                                            <p style="color: red;" class="text-danger">${errorPrice}</p>
                                         </div>
 
                                         <label>Edit product photo</label>
