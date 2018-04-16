@@ -3,14 +3,14 @@
 <html>
 <head>
     <jsp:include page="bootstrapImportHeader.jsp"></jsp:include>
-    <title>Title</title>
+    <title>Edit Menu</title>
     <link rel="stylesheet" href="../../css/foober.css" type="text/css">
 </head>
 <body>
-<jsp:include page="_menu.jsp"></jsp:include>
 
 <div class="outer container">
-    <h1 class="col-4">Products: </h1>
+    <jsp:include page="_header.jsp"></jsp:include>
+    <h1 align="left">Products: </h1>
     <form class="form-inline row" enctype="multipart/form-data">
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary ml-4 mr-5" data-toggle="modal" data-target="#exampleModal">Add product</button>
@@ -125,6 +125,8 @@
     </table>
 </form>
 </div>
+<a href="${pageContext.request.contextPath}/foMenu" class="btn btn-outline-secondary bottom"><i class="fas fa-undo" style="color:black"></i> Return to Main Menu</a>
+
 
 <jsp:include page="bootstrapImportBody.jsp"></jsp:include>
 

@@ -11,8 +11,8 @@
 
 <body>
 
-<jsp:include page="_menu.jsp"></jsp:include>
 <div class = "container outer">
+    <jsp:include page="_header.jsp"></jsp:include>
 <h3 class="ml-2">Franchise Owner Menu</h3>
 
 
@@ -79,7 +79,7 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${clients}"  var="client">
+            <c:forEach items="${clients}" var="client">
                 <tr onclick="window.location = '${pageContext.request.contextPath}/makingOrder?clientId=${client.id}';">
                     <td>${client.name}</td>
                     <td>${client.phone}</td>
@@ -95,6 +95,7 @@
 <div class="container col-6"></div>
 </div>
 </div>
+<a href="${pageContext.request.contextPath}/editMenu" class="btn btn-outline-secondary bottom"><i class="fas fa-cogs" style="color:black"></i> Edit menu</a>
 
 <jsp:include page="bootstrapImportBody.jsp"></jsp:include>
 </body>

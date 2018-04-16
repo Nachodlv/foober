@@ -56,7 +56,7 @@
                     </div>
                     <div class="col">
                         <label class="btn btn-secondary">
-                            <input type="radio" name="meansOfTransport" id="option2" value ="2" autocomplete="off"> Walking
+                            <input type="radio" name="meansOfTransport" id="option2" value ="2" autocomplete="off"> Walk
                         </label>
                     </div>
                     <div class="col">
