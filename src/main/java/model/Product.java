@@ -1,6 +1,8 @@
 package model;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table (name = "product")
@@ -8,7 +10,6 @@ public class Product {
     @Id @GeneratedValue
     @Column(name = "id")
     private int id;
-
     @Column(name = "name")
     private String name;
     @Column(name = "price")
@@ -21,6 +22,9 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "FO_email", nullable = false)
     private FranchiseOwner franchiseOwner;
+    @ManyToMany(mappedBy = "products")
+    private Set<Order> orders = new HashSet<>();
+
 
     public Product(){}
 

@@ -26,7 +26,7 @@ public class TestProduct {
         stmt.executeUpdate("DELETE FROM USERACCOUNT WHERE EMAIL='TEST' OR EMAIL='TEST2'");
     }
 
-    public Product getProduct(String name){
+    private Product getProduct(String name){
         List<Product> products = ProductFunctionality.getAllProducts();
         if(products == null) return null;
         for(Product product:products){
@@ -45,9 +45,8 @@ public class TestProduct {
         FOFunctionality.addModel(franchiseOwner);
         franchiseOwner.addProduct(product);
         ProductFunctionality.addModel(product);
-        List<Product> products = ProductFunctionality.getAllProducts();
+        //List<Product> products = ProductFunctionality.getAllProducts();
         product = getProduct("TEST");
-        System.out.println(product);
         assertEquals(product.getPrice(), 35, 0);
     }
 

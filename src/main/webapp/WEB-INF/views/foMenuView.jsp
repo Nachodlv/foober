@@ -28,8 +28,8 @@
             </div>
             <div class="modal-body">
                 <form method="post" enctype="multipart/form-data" >
-                    <div class="align-items-center">
-                        <div class="">
+                    <div class="">
+                        <div class="align-items-center">
                             <label for="inlineFormInput">Name</label>
                             <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Name" name="clientName" required>
                         </div>
@@ -72,10 +72,10 @@
         <table class="table table-striped table-hover table-bordered">
             <thead>
             <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Phone</th>
-                <th scope="col">Address</th>
-                <th scope="col">Email</th>
+                <th class="text-center" scope="col">Name</th>
+                <th class="text-center" scope="col">Phone</th>
+                <th class="text-center" scope="col">Address</th>
+                <th class="text-center" scope="col">Email</th>
             </tr>
             </thead>
             <tbody>

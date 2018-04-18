@@ -21,11 +21,14 @@ public class FranchiseOwner extends UserAccount {
     private Set<Client> clients;
     @OneToMany(mappedBy = "franchiseOwner", fetch = FetchType.EAGER)
     private Set<Product> products;
+    @OneToMany(mappedBy = "franchiseOwner", fetch = FetchType.EAGER)
+    private Set<Order> orders;
 
 
     public FranchiseOwner() {
         products = new HashSet<>();
         clients = new HashSet<>();
+        orders = new HashSet<>();
     }
 
     public FranchiseOwner(String email, String name, String password, int phone, String address, int menuId, int tippingPercentage) {
@@ -37,6 +40,7 @@ public class FranchiseOwner extends UserAccount {
         this.tippingPercentage = tippingPercentage;
         products = new HashSet<>();
         clients = new HashSet<>();
+        orders = new HashSet<>();
     }
 
     public FranchiseOwner(String email, String name, String password, int phone, String address) {
@@ -44,11 +48,11 @@ public class FranchiseOwner extends UserAccount {
         this.name = name;
         this.phone = phone;
         this.address = address;
-        this.menuId = menuId;
         this.tippingPercentage = 10;
         menuId = 1;
         products = new HashSet<>();
         clients = new HashSet<>();
+        orders = new HashSet<>();
     }
 
 
@@ -114,5 +118,13 @@ public class FranchiseOwner extends UserAccount {
 
     public void addClient(Client client){
         clients.add(client);
+    }
+
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
     }
 }

@@ -1,6 +1,8 @@
 package model;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table (name = "client")
@@ -19,6 +21,8 @@ public class Client {
     @ManyToOne
     @JoinColumn(name = "FO_email", nullable = false)
     private FranchiseOwner franchiseOwner;
+    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
+    private Set<Order> orders;
 
     public Client(String name, int phone, String address, String email, FranchiseOwner franchiseOwner) {
         this.name = name;
@@ -26,6 +30,7 @@ public class Client {
         this.address = address;
         this.email = email;
         this.franchiseOwner = franchiseOwner;
+        orders = new HashSet<>();
     }
 
     public Client() {
@@ -78,5 +83,13 @@ public class Client {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
     }
 }

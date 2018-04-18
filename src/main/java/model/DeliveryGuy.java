@@ -2,10 +2,9 @@ package model;
 
 import org.hibernate.type.descriptor.sql.LobTypeMappings;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Lob;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Gonzalo de Achaval
@@ -24,6 +23,8 @@ public class DeliveryGuy extends UserAccount {
     private byte[] id;
     @Column(name = "meansOfTransport")
     private int meansOfTransport;
+    @OneToMany(mappedBy = "deliveryGuy", fetch = FetchType.EAGER)
+    private Set<Order> orders;
 
     public DeliveryGuy(String email, String name, String password, int phone, byte[] id, int meansOfTransport) {
         super(email, password, "DG");
@@ -31,6 +32,7 @@ public class DeliveryGuy extends UserAccount {
         this.phone = phone;
         this.id = id;
         this.meansOfTransport = meansOfTransport;
+        orders = new HashSet<>();
     }
 
     public DeliveryGuy() {
@@ -66,6 +68,14 @@ public class DeliveryGuy extends UserAccount {
 
     public void setMeansOfTransport(int meansOfTransport) {
         this.meansOfTransport = meansOfTransport;
+    }
+
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
     }
 }
 
