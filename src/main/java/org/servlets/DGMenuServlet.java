@@ -1,5 +1,9 @@
 package org.servlets;
 
+import hibernate.DGFunctionality;
+import model.UserAccount;
+import org.securityfilter.AppUtils;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,6 +23,8 @@ public class DGMenuServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        UserAccount loginedUser = AppUtils.getLoginedUser(request.getSession());
+        AppUtils.storeLoginedUser(request.getSession(), DGFunctionality.getDeliveryGuy(loginedUser.getEmail()));
 
         RequestDispatcher dispatcher //
                 = this.getServletContext()//

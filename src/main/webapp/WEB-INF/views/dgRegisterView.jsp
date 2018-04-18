@@ -48,22 +48,17 @@
                         <label>Transport</label>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="meansOfTransport" id="option1" value ="1" autocomplete="off"> Bike
-                        </label>
-                    </div>
-                    <div class="col">
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="meansOfTransport" id="option2" value ="2" autocomplete="off"> Walk
-                        </label>
-                    </div>
-                    <div class="col">
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="meansOfTransport" id="option3" value ="3" autocomplete="off"> Car
-                        </label>
-                    </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline1" name="meansOfTransport" class="custom-control-input" value="1">
+                    <label class="custom-control-label" for="customRadioInline1">Bike</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline2" name="meansOfTransport" class="custom-control-input" value="2">
+                    <label class="custom-control-label" for="customRadioInline2">Walk</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline3" name="meansOfTransport" class="custom-control-input" value="3">
+                    <label class="custom-control-label" for="customRadioInline3">Car</label>
                 </div>
             </div>
         </div>
