@@ -9,9 +9,9 @@
     <title>FO Menu</title>
 </head>
 
-<body>
+<body class="outer">
 
-<div class = "container outer">
+<div>
     <jsp:include page="_header.jsp"></jsp:include>
 <h3 class="ml-2">Franchise Owner Menu</h3>
 
@@ -59,7 +59,7 @@
 </div>
 
 <%--Orders container--%>
-<div class="row container mt-3">
+<div class="row mt-3">
 <div class="container col-6">
     <form method="post" action="${pageContext.request.contextPath}/foMenu" >
         <div class="form-inline row mb-2">
@@ -95,7 +95,12 @@
 <div class="container col-6"></div>
 </div>
 </div>
-<a href="${pageContext.request.contextPath}/editMenu" class="btn btn-outline-secondary bottom"><i class="fas fa-cogs" style="color:black"></i> Edit menu</a>
+<footer class="footer">
+    <div class="container">
+        <span class="text-muted d-flex justify-content-end"><a href="${pageContext.request.contextPath}/editMenu" class="btn btn-outline-secondary "><i class="fas fa-cogs" style="color:black"></i> Edit menu</a></span>
+    </div>
+</footer>
+
 
 <jsp:include page="bootstrapImportBody.jsp"></jsp:include>
 </body>

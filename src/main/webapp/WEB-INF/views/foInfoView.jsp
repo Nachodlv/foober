@@ -6,11 +6,10 @@
     <meta charset="UTF-8">
     <jsp:include page="bootstrapImportHeader.jsp"></jsp:include>
     <link rel="stylesheet" href="../../css/foInfoView.css" type="text/css">
+    <link rel="stylesheet" href="../../css/foober.css" type="text/css">
     <title>User Info</title>
 </head>
-<body>
-
-<jsp:include page="_menu.jsp"></jsp:include>
+<body class="outer">
 
 <h3 class="ml-3">Profile information</h3>
 <p class="text-danger">
