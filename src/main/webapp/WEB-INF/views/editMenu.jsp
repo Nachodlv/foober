@@ -74,7 +74,7 @@
         <tbody>
             <c:forEach items="${products}"  var="product">
                 <tr>
-                    <td><img width="100" height="100" src="http://localhost:8080/productPic?id=${product.id}"></td>
+                    <td><img width="100" height="100" src="http://localhost:8080/images/${product.id}.png"></td>
                     <td>${product.name}</td>
                     <td>${product.price} $</td>
                     <td><button class="buttonWithFunction" type="button" data-toggle="modal" data-target="#exampleModalEdit${product.id}"><i class="fas fa-edit fa-sm"></i></button></td>
@@ -104,7 +104,7 @@
 
                                         <label>Edit product photo</label>
                                         <br>
-                                        <img width="100" height="100" src="http://localhost:8080/productPic?id=${product.id}">
+                                        <img width="100" height="100" src="http://localhost:8080/images/${product.id}.png">
 
                                         <input type="file" id="productPicEdit${product.id}" name="productPicEdit" accept=".jpg, .jpeg, .png" class="file">
 

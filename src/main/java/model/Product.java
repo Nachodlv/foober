@@ -14,9 +14,6 @@ public class Product {
     private String name;
     @Column(name = "price")
     private double price;
-    @Column(name = "image")
-    @Lob
-    private byte[] image;
     @Column(name = "active")
     private boolean active = true;
     @ManyToOne
@@ -28,10 +25,9 @@ public class Product {
 
     public Product(){}
 
-    public Product(String name, double price, byte[] image, FranchiseOwner franchiseOwner) {
+    public Product(String name, double price, FranchiseOwner franchiseOwner) {
         this.name = name;
         this.price = price;
-        this.image = image;
         this.franchiseOwner = franchiseOwner;
     }
 
@@ -65,14 +61,6 @@ public class Product {
 
     public void setFranchiseOwner(FranchiseOwner franchiseOwner) {
         this.franchiseOwner = franchiseOwner;
-    }
-
-    public byte[] getImage() {
-        return image;
-    }
-
-    public void setImage(byte[] image) {
-        this.image = image;
     }
 
     public boolean isActive() {

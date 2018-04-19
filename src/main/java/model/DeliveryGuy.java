@@ -18,19 +18,15 @@ public class DeliveryGuy extends UserAccount {
     private String name;
     @Column(name = "phone")
     private int phone;
-    @Column(name = "id")
-    @Lob
-    private byte[] id;
     @Column(name = "meansOfTransport")
     private int meansOfTransport;
     @OneToMany(mappedBy = "deliveryGuy", fetch = FetchType.EAGER)
     private Set<Order> orders;
 
-    public DeliveryGuy(String email, String name, String password, int phone, byte[] id, int meansOfTransport) {
+    public DeliveryGuy(String email, String name, String password, int phone, int meansOfTransport) {
         super(email, password, "DG");
         this.name = name;
         this.phone = phone;
-        this.id = id;
         this.meansOfTransport = meansOfTransport;
         orders = new HashSet<>();
     }
@@ -52,14 +48,6 @@ public class DeliveryGuy extends UserAccount {
 
     public void setPhone(int phone) {
         this.phone = phone;
-    }
-
-    public byte[] getId() {
-        return id;
-    }
-
-    public void setId(byte[] id) {
-        this.id = id;
     }
 
     public int getMeansOfTransport() {

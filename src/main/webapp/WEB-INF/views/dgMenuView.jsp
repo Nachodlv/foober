@@ -14,7 +14,8 @@
 Waiting for orders...
 Means of transport: ${loginedUser.meansOfTransport}
 Name: ${loginedUser.name}
-<img src="http://localhost:8080/imgDGuy" width="100" height="100">
+
+<img src="http://localhost:8080/images/${loginedUser.email}.png" width="100" height="100">
 </div>
 
 <jsp:include page="bootstrapImportBody.jsp"></jsp:include>

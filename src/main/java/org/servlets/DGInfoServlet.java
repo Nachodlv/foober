@@ -67,7 +67,6 @@ public class DGInfoServlet extends HttpServlet {
         if(password != null){
             deliveryGuy.setPassword(password);
         }
-        deliveryGuy.setId(new byte[]{});
         DGFunctionality.modifyModel(deliveryGuy);
     }
 

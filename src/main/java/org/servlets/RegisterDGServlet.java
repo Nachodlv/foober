@@ -5,7 +5,9 @@ import hibernate.FOFunctionality;
 import model.DeliveryGuy;
 import org.securityfilter.AppUtils;
 import sun.misc.IOUtils;
+import sun.security.tools.policytool.Resources_zh_HK;
 
+import javax.imageio.ImageIO;
 import javax.persistence.PersistenceException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,11 +17,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import static org.utils.Utils.convertStreamToByteArray;
@@ -65,11 +68,20 @@ public class RegisterDGServlet extends HttpServlet {
         String mail = request.getParameter("mail");
         String name = request.getParameter("name");
         String phone = request.getParameter("phone");
+        String meansOfTransport = request.getParameter("meansOfTransport");
+
+
         Part filePart = request.getPart("id");
         InputStream fileContent = filePart.getInputStream();
-        String meansOfTransport = request.getParameter("meansOfTransport");
-        DeliveryGuy deliveryGuy = new DeliveryGuy(mail, name, password, Integer.parseInt(phone), convertStreamToByteArray(fileContent), Integer.parseInt(meansOfTransport));
+        final byte[] bytes = convertStreamToByteArray(fileContent);
+        BufferedImage img = ImageIO.read(new ByteArrayInputStream(bytes));
 
+        final String path = getServletContext().getRealPath("/");
+        String finalPath = path + "images/" + mail + ".png";
+        final File file = new File(finalPath);
+        ImageIO.write(img, "png", file);
+
+        DeliveryGuy deliveryGuy = new DeliveryGuy(mail, name, password, Integer.parseInt(phone), Integer.parseInt(meansOfTransport));
 
         try {
             DGFunctionality.addModel(deliveryGuy);
