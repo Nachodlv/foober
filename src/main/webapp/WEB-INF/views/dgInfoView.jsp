@@ -15,8 +15,8 @@
 <p class="text-danger">
     ${pageContext.request.getParameter("error")}
 </p>
-<form method="POST" class="mt-5">
-    <div class="container-fluid d-flex flex-column">
+<form method="POST" enctype="multipart/form-data" class="mt-5">
+    <tr class="container-fluid d-flex flex-column">
         <table class="table">
             <thead>
             </thead>
@@ -54,13 +54,19 @@
                     </div></td>
                 <td> </td>
             </tr>
+            <tr>
+                <td>Edit product photo</td>
+                <td><img width="100" height="100" src="http://localhost:8080/images/${loginedUser.email}.png"></td>
+                <td><input type="file" id="editDGpic${loginedUser.email}" name="productPicEdit" accept=".jpg, .jpeg, .png" class="file"></td>
+                <td> </td>
+            </tr>
             </tbody>
         </table>
         <div class="row ml-auto">
             <button type="submit" class="btn btn-danger mr-2" name="change" value="cancel">Cancel changes</button>
             <button type="submit" class="btn btn-info mr-2" name="change" value="save">Save changes</button>
         </div>
-    </div>
+    </tr>
 
 
 </form>

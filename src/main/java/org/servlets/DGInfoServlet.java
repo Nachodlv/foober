@@ -1,19 +1,25 @@
 package org.servlets;
 
 import hibernate.DGFunctionality;
-import hibernate.FOFunctionality;
 import model.DeliveryGuy;
 import model.UserAccount;
 import org.securityfilter.AppUtils;
+import org.utils.Utils;
 
+import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
+@MultipartConfig
 @WebServlet("/dgInfo")
 public class DGInfoServlet extends HttpServlet {
 
@@ -43,7 +49,7 @@ public class DGInfoServlet extends HttpServlet {
             changePassword(request, response, deliveryGuy);
         }
         else if(change.equals("save")){
-            saveChanges(request, response, deliveryGuy);
+            saveChanges(request, deliveryGuy);
             response.sendRedirect(request.getContextPath() + "/dgMenu");
         }else if(change.equals("cancel")){
             request.getSession().removeAttribute("password");
@@ -51,7 +57,7 @@ public class DGInfoServlet extends HttpServlet {
         }
     }
 
-    private void saveChanges(HttpServletRequest request, HttpServletResponse response,DeliveryGuy deliveryGuy) throws ServletException, IOException {
+    private void saveChanges(HttpServletRequest request, DeliveryGuy deliveryGuy) throws ServletException, IOException {
         String name = request.getParameter("name");
         String password = (String) request.getSession().getAttribute("password");
         String phoneString = request.getParameter("phone");
@@ -67,6 +73,14 @@ public class DGInfoServlet extends HttpServlet {
         if(password != null){
             deliveryGuy.setPassword(password);
         }
+
+        Part part = request.getPart("productPicEdit");
+        BufferedImage img = Utils.getImageFromPart(part);
+        final String path = getServletContext().getRealPath("/");
+        String finalPath = path + "images/" + deliveryGuy.getEmail() + ".png";
+        final File file = new File(finalPath);
+        ImageIO.write(img, "png", file);
+
         DGFunctionality.modifyModel(deliveryGuy);
     }
 

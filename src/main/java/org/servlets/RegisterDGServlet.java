@@ -4,6 +4,7 @@ import hibernate.DGFunctionality;
 import hibernate.FOFunctionality;
 import model.DeliveryGuy;
 import org.securityfilter.AppUtils;
+import org.utils.Utils;
 import sun.misc.IOUtils;
 import sun.security.tools.policytool.Resources_zh_HK;
 
@@ -72,9 +73,7 @@ public class RegisterDGServlet extends HttpServlet {
 
 
         Part filePart = request.getPart("id");
-        InputStream fileContent = filePart.getInputStream();
-        final byte[] bytes = convertStreamToByteArray(fileContent);
-        BufferedImage img = ImageIO.read(new ByteArrayInputStream(bytes));
+        BufferedImage img = Utils.getImageFromPart(filePart);
 
         final String path = getServletContext().getRealPath("/");
         String finalPath = path + "images/" + mail + ".png";

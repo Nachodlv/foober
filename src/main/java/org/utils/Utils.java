@@ -1,5 +1,9 @@
 package org.utils;
 
+import javax.imageio.ImageIO;
+import javax.servlet.http.Part;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -41,5 +45,11 @@ public class Utils {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static BufferedImage getImageFromPart(Part image) throws IOException {
+        InputStream fileContent = image.getInputStream();
+        byte[] imgBytes = convertStreamToByteArray(fileContent);
+        return ImageIO.read(new ByteArrayInputStream(imgBytes));
     }
 }

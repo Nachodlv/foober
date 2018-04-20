@@ -7,6 +7,7 @@ import model.Product;
 import model.UserAccount;
 import org.hibernate.Hibernate;
 import org.securityfilter.AppUtils;
+import org.utils.Utils;
 
 import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
@@ -99,7 +100,7 @@ public class EditMenuServlet extends HttpServlet {
         FOFunctionality.modifyModel(franchiseOwner);
 
         Part filePart = request.getPart("productPic");
-        BufferedImage img = getImageFromPart(filePart);
+        BufferedImage img = Utils.getImageFromPart(filePart);
         final String path = getServletContext().getRealPath("/");
         String finalPath = path + "images/" + product.getId() + ".png";
         final File file = new File(finalPath);
@@ -130,7 +131,7 @@ public class EditMenuServlet extends HttpServlet {
         }
 
         Part image = request.getPart("productPicEdit");
-        BufferedImage img = getImageFromPart(image);
+        BufferedImage img = Utils.getImageFromPart(image);
         final String path = getServletContext().getRealPath("/");
         String finalPath = path + "images/" + productId + ".png";
         final File file = new File(finalPath);
@@ -160,11 +161,5 @@ public class EditMenuServlet extends HttpServlet {
             }
         }
         return activeProducts;
-    }
-
-    private BufferedImage getImageFromPart(Part image) throws IOException {
-        InputStream fileContent = image.getInputStream();
-        byte[] imgBytes = convertStreamToByteArray(fileContent);
-        return ImageIO.read(new ByteArrayInputStream(imgBytes));
     }
 }
