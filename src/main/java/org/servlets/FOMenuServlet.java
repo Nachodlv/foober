@@ -93,11 +93,15 @@ public class FOMenuServlet extends HttpServlet {
 
     private List<Client> filterClients(List<Client> clients, HttpServletRequest request){
         String searchBy = request.getParameter("searchClient");
-        if(searchBy == null) return clients;
-        Pattern pattern = Pattern.compile(".*" + searchBy.toLowerCase() + ".*");
+        Pattern pattern;
+        if(searchBy == null) {
+            pattern = Pattern.compile(".*");
+        }else{
+            pattern = Pattern.compile(".*" + searchBy.toLowerCase() + ".*");
+        }
         List<Client> filteredClients = new ArrayList<>();
         for(Client client: clients){
-            if(pattern.matcher(client.getName().toLowerCase()).matches()){
+            if(pattern.matcher(client.getName().toLowerCase()).matches() && client.isActive()){
                 filteredClients.add(client);
             }
         }
@@ -130,7 +134,9 @@ public class FOMenuServlet extends HttpServlet {
     }
 
     private void deleteClient(String idClient, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        ClientFunctionality.deleteClient(Integer.valueOf(idClient));
+        Client client = ClientFunctionality.getClient(Integer.valueOf(idClient));
+        client.setActive(false);
+        ClientFunctionality.modifyModel(client);
 
         response.sendRedirect(request.getContextPath() + "/foMenu");
     }
