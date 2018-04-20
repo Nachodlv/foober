@@ -46,19 +46,26 @@ public class FOMenuServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String clientName = request.getParameter("clientName");
+        String newClient = request.getParameter("newClient");
         String searchClient = request.getParameter("searchClient");
+        String editClient = request.getParameter("editClient");
+        String deleteClient = request.getParameter("deleteClient");
         UserAccount loginedUser = AppUtils.getLoginedUser(request.getSession());
         FranchiseOwner franchiseOwner = FOFunctionality.getFranchiseOwner(loginedUser.getEmail());
 
-        if(clientName != null){
-            newClient(franchiseOwner, request, response, clientName);
-        }else{
+        if(newClient != null){
+            newClient(franchiseOwner, request, response);
+        } else if(editClient != null){
+            editClient(editClient, request, response);
+        } else if(deleteClient != null){
+            deleteClient(deleteClient, request, response);
+        } else{
             searchClient(searchClient, request, response);
         }
     }
 
-    private void newClient(FranchiseOwner franchiseOwner, HttpServletRequest request, HttpServletResponse response, String clientName) throws IOException {
+    private void newClient(FranchiseOwner franchiseOwner, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String clientName = request.getParameter("clientName");
         String phoneString = request.getParameter("clientPhone");
         String email = request.getParameter("clientEmail");
         String address = request.getParameter("clientAddress");
@@ -86,14 +93,51 @@ public class FOMenuServlet extends HttpServlet {
 
     private List<Client> filterClients(List<Client> clients, HttpServletRequest request){
         String searchBy = request.getParameter("searchClient");
-        if(searchBy == null) return clients;
-        Pattern pattern = Pattern.compile(".*" + searchBy.toLowerCase() + ".*");
+        Pattern pattern;
+        if(searchBy == null) {
+            pattern = Pattern.compile(".*");
+        }else{
+            pattern = Pattern.compile(".*" + searchBy.toLowerCase() + ".*");
+        }
         List<Client> filteredClients = new ArrayList<>();
         for(Client client: clients){
-            if(pattern.matcher(client.getName().toLowerCase()).matches()){
+            if(pattern.matcher(client.getName().toLowerCase()).matches() && client.isActive()){
                 filteredClients.add(client);
             }
         }
         return filteredClients;
+    }
+
+    private void editClient(String idClient, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Client client = ClientFunctionality.getClient(Integer.valueOf(idClient));
+        String address = request.getParameter("clientAddress");
+        String email = request.getParameter("clientEmail");
+        String name = request.getParameter("clientName");
+        String phoneString = request.getParameter("clientPhone");
+
+        int phone;
+        try {
+            phone = Integer.valueOf(phoneString);
+        }catch (NumberFormatException e){
+            response.sendRedirect(request.getContextPath() + "/foMenu?error=Error while updating the client, invalid phone number");
+            return;
+        }
+
+        client.setAddress(address);
+        client.setEmail(email);
+        client.setName(name);
+        client.setPhone(phone);
+
+        ClientFunctionality.modifyModel(client);
+
+        response.sendRedirect(request.getContextPath() + "/foMenu");
+    }
+
+    private void deleteClient(String idClient, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Client client = ClientFunctionality.getClient(Integer.valueOf(idClient));
+        client.setActive(false);
+        ClientFunctionality.modifyModel(client);
+
+        response.sendRedirect(request.getContextPath() + "/foMenu");
     }
 }

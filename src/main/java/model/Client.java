@@ -18,6 +18,8 @@ public class Client {
     private String address;
     @Column(name = "email")
     private String email;
+    @Column(name = "active")
+    private boolean active = true;
     @ManyToOne
     @JoinColumn(name = "FO_email", nullable = false)
     private FranchiseOwner franchiseOwner;
@@ -91,5 +93,13 @@ public class Client {
 
     public void setOrders(Set<Order> orders) {
         this.orders = orders;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

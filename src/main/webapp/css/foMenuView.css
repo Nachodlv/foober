@@ -25,3 +25,8 @@ table.table-bordered > tbody > tr > td{
     padding-left: 2%;
     padding-right: 2%;
 }
+
+.clientEdit{
+    padding-left: 0;
+    padding-right: 0;
+}
