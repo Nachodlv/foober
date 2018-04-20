@@ -9,7 +9,6 @@ import org.hibernate.Hibernate;
 import org.securityfilter.AppUtils;
 import org.utils.Utils;
 
-import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -18,16 +17,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
-
-import static org.utils.Utils.convertStreamToByteArray;
 
 @WebServlet({"/editMenu/*", "/editMenu"})
 @MultipartConfig
@@ -100,11 +93,7 @@ public class EditMenuServlet extends HttpServlet {
         FOFunctionality.modifyModel(franchiseOwner);
 
         Part filePart = request.getPart("productPic");
-        BufferedImage img = Utils.getImageFromPart(filePart);
-        final String path = getServletContext().getRealPath("/");
-        String finalPath = path + "images/" + product.getId() + ".png";
-        final File file = new File(finalPath);
-        ImageIO.write(img, "png", file);
+        Utils.writeImage(String.valueOf(product.getId()), filePart, getServletContext());
 
         response.sendRedirect(request.getContextPath() + "/editMenu");
     }
@@ -131,11 +120,7 @@ public class EditMenuServlet extends HttpServlet {
         }
 
         Part image = request.getPart("productPicEdit");
-        BufferedImage img = Utils.getImageFromPart(image);
-        final String path = getServletContext().getRealPath("/");
-        String finalPath = path + "images/" + productId + ".png";
-        final File file = new File(finalPath);
-        ImageIO.write(img, "png", file);
+        Utils.writeImage(String.valueOf(productId), image, getServletContext());
 
         final Product product = ProductFunctionality.getProduct(productId);
         product.setName(name);

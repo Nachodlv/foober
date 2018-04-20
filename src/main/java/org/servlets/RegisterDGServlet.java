@@ -72,13 +72,8 @@ public class RegisterDGServlet extends HttpServlet {
         String meansOfTransport = request.getParameter("meansOfTransport");
 
 
-        Part filePart = request.getPart("id");
-        BufferedImage img = Utils.getImageFromPart(filePart);
-
-        final String path = getServletContext().getRealPath("/");
-        String finalPath = path + "images/" + mail + ".png";
-        final File file = new File(finalPath);
-        ImageIO.write(img, "png", file);
+        Part part = request.getPart("id");
+        Utils.writeImage(mail, part, getServletContext());
 
         DeliveryGuy deliveryGuy = new DeliveryGuy(mail, name, password, Integer.parseInt(phone), Integer.parseInt(meansOfTransport));
 

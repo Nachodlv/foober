@@ -1,12 +1,10 @@
 package org.utils;
 
 import javax.imageio.ImageIO;
+import javax.servlet.ServletContext;
 import javax.servlet.http.Part;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.sql.*;
 
 /**
@@ -47,9 +45,19 @@ public class Utils {
         }
     }
 
-    public static BufferedImage getImageFromPart(Part image) throws IOException {
+    public static void writeImage(String picName, Part part, ServletContext servletContext) throws IOException {
+        final BufferedImage img = getImageFromPart(part);
+        final String path = servletContext.getRealPath("/");
+        String finalPath = path + "images/" + picName + ".png";
+        final File file = new File(finalPath);
+        ImageIO.write(img, "png", file);
+    }
+
+    private static BufferedImage getImageFromPart(Part image) throws IOException {
         InputStream fileContent = image.getInputStream();
         byte[] imgBytes = convertStreamToByteArray(fileContent);
         return ImageIO.read(new ByteArrayInputStream(imgBytes));
     }
+
+
 }

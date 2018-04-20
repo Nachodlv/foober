@@ -8,6 +8,7 @@ import org.utils.Utils;
 
 import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -75,11 +76,8 @@ public class DGInfoServlet extends HttpServlet {
         }
 
         Part part = request.getPart("productPicEdit");
-        BufferedImage img = Utils.getImageFromPart(part);
-        final String path = getServletContext().getRealPath("/");
-        String finalPath = path + "images/" + deliveryGuy.getEmail() + ".png";
-        final File file = new File(finalPath);
-        ImageIO.write(img, "png", file);
+        String email = deliveryGuy.getEmail();
+        Utils.writeImage(email, part, getServletContext());
 
         DGFunctionality.modifyModel(deliveryGuy);
     }
