@@ -126,7 +126,7 @@
 </form>
 <footer class="footer mb-3">
     <div class="container">
-        <span class="text-muted d-flex justify-content-end"><a href="${pageContext.request.contextPath}/foMenu" class="btn btn-outline-secondary"><i class="fas fa-undo" style="color:black"></i> Return to Main Menu</a></span>
+        <span class="text-muted d-flex justify-content-end"><a href="${pageContext.request.contextPath}/foMenu" class="btn btn-outline-dark"><i class="fas fa-undo" style="color:black"></i> Return to Main Menu</a></span>
     </div>
 </footer>
 </div>

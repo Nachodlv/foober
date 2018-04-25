@@ -15,9 +15,10 @@
     <link rel="stylesheet" href="../../css/makingOrderView.css" type="text/css">
 </head>
 <body class="outer">
+<jsp:include page="bootstrapImportBody.jsp"></jsp:include>
 <div class="row">
-    <h1>HI ${pageContext.request.getParameter("clientId")}</h1>
-    <span class="text-muted d-flex justify-content-start"><a href="${pageContext.request.contextPath}/foMenu" class="btn btn-outline-secondary"><i class="fas fa-undo" style="color:black"></i> Return to Main Menu</a></span>
+    <h1>Menu</h1>
+    <span class="text-muted return-to-menu"><a href="${pageContext.request.contextPath}/foMenu" class="btn btn-outline-dark"><i class="fas fa-undo" style="color:black"></i> Return to Main Menu</a></span>
 </div>
 <form method="post" enctype="multipart/form-data" action="${pageContext.request.contextPath}/editMenu" >
     <div class="row">
@@ -27,30 +28,26 @@
                 <th scope="col"></th>
                 <th scope="col">Name</th>
                 <th scope="col">Price</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total Price</th>
+                <th scope="col">Comment</th>
             </tr>
             </thead>
             <tbody>
             <c:forEach items="${products}"  var="product">
-                <tr>
+                <tr class="product-row">
                     <td><img width="100" height="100" src="http://localhost:8080/images/${product.id}.png"></td>
                     <td>${product.name}</td>
-                    <td>${product.price} $</td>
-                    <td><button class="buttonWithFunction" type="button" data-toggle="modal" data-target="#exampleModalEdit${product.id}"><i class="fas fa-edit fa-sm"></i></button></td>
-                    <td><button class="buttonWithFunction" type="submit" name="delete" value=${product.id}><i class="fas fa-times" style="color:Tomato"></i></button></td>
+                    <td  price="${product.price}" class="productPrice">${product.price} $</td>
+                    <td><input id = "quantityProduct${product.id}" class="quantityInput" type="number" name="quantity" min="0"></td>
+                    <td id="totalPriceProduct${product.id}">0 $</td>
+                    <td><input type="text" name="comment" placeholder="Add comment..."></td>
                 </tr>
             </c:forEach>
             </tbody>
         </table>
     </div>
-
-    <footer class="footer mb-3">
-        <div class="container">
-            <span class="text-muted d-flex justify-content-start"><a href="${pageContext.request.contextPath}/foMenu" class="btn btn-outline-secondary"><i class="fas fa-undo" style="color:black"></i> Return to Main Menu</a></span>
-        </div>
-    </footer>
-
-    <jsp:include page="bootstrapImportBody.jsp"></jsp:include>
+</form>
+<script src="../../js/makingOrder.js"></script>
 </body>
 </html>
