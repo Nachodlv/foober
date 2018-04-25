@@ -41,7 +41,7 @@ public class TestProduct {
     public void testGetter(){
         FranchiseOwner franchiseOwner = new FranchiseOwner("TEST", "El puestito de Alberto", "alberto123",
                 1562240533, "Rawson4060", 123, 10);
-        Product product = new Product("TEST", 35, new byte[]{},franchiseOwner);
+        Product product = new Product("TEST", 35, franchiseOwner);
         FOFunctionality.addModel(franchiseOwner);
         franchiseOwner.addProduct(product);
         ProductFunctionality.addModel(product);
@@ -61,8 +61,8 @@ public class TestProduct {
         FranchiseOwner franchiseOwner = new FranchiseOwner("TEST", "El puestito de Alberto", "alberto123",
                 1562240533, "Rawson4060", 123, 10);
         FOFunctionality.addModel(franchiseOwner);
-        Product product = new Product("TEST", 35, new byte[]{}, franchiseOwner);
-        Product product2 = new Product("TEST2", 35, new byte[]{}, franchiseOwner);
+        Product product = new Product("TEST", 35, franchiseOwner);
+        Product product2 = new Product("TEST2", 35, franchiseOwner);
         ProductFunctionality.addModel(product);
         ProductFunctionality.addModel(product2);
         product = getProduct("TEST");
@@ -80,8 +80,8 @@ public class TestProduct {
     @Test
     public void testRepeatedFieldsButKey() {
         FranchiseOwner franchiseOwner = new FranchiseOwner("TEST", "B", "C", 1, "D", 2, 3);
-        Product product = new Product("TEST", 35, new byte[]{}, franchiseOwner);
-        Product product2 = new Product("TEST", 35, new byte[]{}, franchiseOwner);
+        Product product = new Product("TEST", 35, franchiseOwner);
+        Product product2 = new Product("TEST", 35, franchiseOwner);
         FOFunctionality.addModel(franchiseOwner);
         ProductFunctionality.addModel(product);
         ProductFunctionality.addModel(product2);
@@ -90,7 +90,7 @@ public class TestProduct {
     @Test
     public void testModify() {
         FranchiseOwner franchiseOwner = new FranchiseOwner("TEST", "B", "C", 1, "D", 2, 3);
-        Product product = new Product("TEST", 35, new byte[]{}, franchiseOwner);
+        Product product = new Product("TEST", 35, franchiseOwner);
         FOFunctionality.addModel(franchiseOwner);
         ProductFunctionality.addModel(product);
         product.setName("TEST2");

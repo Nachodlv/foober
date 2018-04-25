@@ -1,7 +1,9 @@
 package model;
 
 import javax.persistence.*;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -27,24 +29,17 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "client_email", nullable = false)
     private Client client;
-    @ManyToMany(cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-    })
-    @JoinTable(name = "order_product",
-            joinColumns = @JoinColumn(name = "order_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id")
-    )
-    private Set<Product> products = new HashSet<>();
+    @OneToMany(mappedBy = "order")
+    private Set<OrderedProducts> orderedProducts = new HashSet<>();
 
-    public Order(boolean status, int elaborationTime, FranchiseOwner franchiseOwner, DeliveryGuy deliveryGuy, Client client, Set<Product> products) {
+    public Order(boolean status, int elaborationTime, FranchiseOwner franchiseOwner, DeliveryGuy deliveryGuy, Client client, Set<OrderedProducts> products) {
         this.status = status;
         this.elaborationTime = elaborationTime;
         this.issuedTime = System.currentTimeMillis();
         this.franchiseOwner = franchiseOwner;
         this.deliveryGuy = deliveryGuy;
         this.client = client;
-        this.products = products;
+        this.orderedProducts = products;
     }
 
     public Order() {
@@ -102,18 +97,18 @@ public class Order {
         this.client = client;
     }
 
-    public Set<Product> getProducts() {
-        return products;
+    public Set<OrderedProducts> getOrderedProducts() {
+        return orderedProducts;
     }
 
-    public void setProducts(Set<Product> products) {
-        this.products = products;
+    public void setOrderedProducts(Set<OrderedProducts> orderedProducts) {
+        this.orderedProducts = orderedProducts;
     }
 
     public int getTotalCost(){
         int totalCost = 0;
-        for (Product product : products) {
-            totalCost += product.getPrice();
+        for (OrderedProducts product : orderedProducts) {
+            totalCost += product.getProduct().getPrice();
         }
         return totalCost;
     }

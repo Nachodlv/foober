@@ -19,8 +19,8 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "FO_email", nullable = false)
     private FranchiseOwner franchiseOwner;
-    @ManyToMany(mappedBy = "products")
-    private Set<Order> orders = new HashSet<>();
+    @OneToMany(mappedBy = "product")
+    private Set<OrderedProducts> orders = new HashSet<>();
 
 
     public Product(){}

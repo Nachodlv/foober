@@ -32,7 +32,7 @@ public class TestUA {
 
     @Test
     public void testGetting() {
-        UAFunctionality.addModel(new DeliveryGuy("TEST", "A", "a",3, bytes, 1));
+        UAFunctionality.addModel(new DeliveryGuy("TEST", "A", "a",3,  1));
         UAFunctionality.addModel(new FranchiseOwner("TEST1", "A", "a", 3, ".jpg"));
         UserAccount userAccount = UAFunctionality.getUserAccount("TEST");
         assertEquals(userAccount.getRole(), "DG");
@@ -48,7 +48,7 @@ public class TestUA {
 
     @Test
     public void testDelete() {
-        UAFunctionality.addModel(new DeliveryGuy("TEST", "A", "a",3, bytes, 1));
+        UAFunctionality.addModel(new DeliveryGuy("TEST", "A", "a",3, 1));
         UAFunctionality.deleteUserAccount("TEST");
         UserAccount userAccount = UAFunctionality.getUserAccount("TEST");
         assertEquals(userAccount, null);
@@ -62,7 +62,7 @@ public class TestUA {
 
     @Test(expected = PersistenceException.class)
     public void testRepeatedKey() {
-        UAFunctionality.addModel(new DeliveryGuy("TEST", "A", "a",3, bytes, 1));
+        UAFunctionality.addModel(new DeliveryGuy("TEST", "A", "a",3, 1));
         UAFunctionality.addModel(new FranchiseOwner("TEST", "A", "a", 3, ".jpg"));
     }
 }

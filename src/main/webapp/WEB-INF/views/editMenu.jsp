@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<div class="outer container">
+<div class="outer container-fluid">
     <jsp:include page="_header.jsp"></jsp:include>
     <h1 align="left">Products: </h1>
     <form class="form-inline row" enctype="multipart/form-data">
@@ -124,13 +124,12 @@
         </tbody>
     </table>
 </form>
-</div>
 <footer class="footer mb-3">
     <div class="container">
         <span class="text-muted d-flex justify-content-end"><a href="${pageContext.request.contextPath}/foMenu" class="btn btn-outline-secondary"><i class="fas fa-undo" style="color:black"></i> Return to Main Menu</a></span>
     </div>
 </footer>
-
+</div>
 
 
 <jsp:include page="bootstrapImportBody.jsp"></jsp:include>

@@ -2,9 +2,7 @@ import hibernate.*;
 import model.*;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 
@@ -21,11 +19,12 @@ public class TestOrder {
     @Test
     public void testA() {
         FranchiseOwner fo = new FranchiseOwner("TEST", "B", "C", 1, "D", 2, 3);
-        Product p1 = new Product("TEST", 35, new byte[]{}, fo);
-        Product p2 = new Product("TEST1", 40, new byte[]{}, fo);
-        Product p3 = new Product("TEST2", 45, new byte[]{}, fo);
-        Set<Product> products = new HashSet<>(Arrays.asList(p1, p2, p3));
-        DeliveryGuy dg = new DeliveryGuy("TEST2", "A", "B", 1, new byte[0], 1);
+        OrderedProducts p1 = new OrderedProducts(new Product("TEST", 35, fo), new Order(),"Hello");
+        OrderedProducts p2 = new OrderedProducts(new Product("TEST1", 40, fo), new Order(),"Hello");
+        OrderedProducts p3 = new OrderedProducts(new Product("TEST2", 45, fo), new Order(),"Hello");
+
+        Set<OrderedProducts> products = new HashSet<>(Arrays.asList(p1, p2, p3));
+        DeliveryGuy dg = new DeliveryGuy("TEST2", "A", "B", 1, 1);
         Client client = new Client("TEST", 1, "a", "a@gmail", fo);
 
         Order order = new Order(true, 30, fo, dg, client, products);
