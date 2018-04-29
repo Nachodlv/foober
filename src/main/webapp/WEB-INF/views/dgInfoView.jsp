@@ -55,9 +55,9 @@
                 <td> </td>
             </tr>
             <tr>
-                <td>Edit product photo</td>
+                <td>Edit profile photo</td>
                 <td><img width="100" height="100" src="http://localhost:8080/images/${loginedUser.email}.png"></td>
-                <td><input type="file" id="editDGpic${loginedUser.email}" name="productPicEdit" accept=".jpg, .jpeg, .png" class="file"></td>
+                <td><input type="file" id="editDGpic${loginedUser.email}" name="dgPicEdit" accept=".jpg, .jpeg, .png" class="file"></td>
                 <td> </td>
             </tr>
             </tbody>

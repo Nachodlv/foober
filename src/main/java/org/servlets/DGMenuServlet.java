@@ -1,6 +1,8 @@
 package org.servlets;
 
 import hibernate.DGFunctionality;
+import model.DeliveryGuy;
+import model.StateDG;
 import model.UserAccount;
 import org.securityfilter.AppUtils;
 
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Objects;
 
 @WebServlet("/dgMenu")
 public class DGMenuServlet extends HttpServlet {
@@ -37,6 +40,15 @@ public class DGMenuServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        doGet(request, response);
+        DeliveryGuy deliveryGuy = (DeliveryGuy)AppUtils.getLoginedUser(request.getSession());
+        final String state = request.getParameter("state");
+        if(state.equals("offline")) {
+            deliveryGuy.setState(StateDG.OFFLINE);
+        } else {
+            if(state.equals("online")) {
+                deliveryGuy.setState(StateDG.ONLINE_WAITING);
+            }
+        }
+        response.sendRedirect(request.getContextPath() + "/dgMenu");
     }
 }

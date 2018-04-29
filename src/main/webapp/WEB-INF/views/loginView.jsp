@@ -1,4 +1,3 @@
-<%--suppress ALL --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,9 +7,6 @@
     <title>Login</title>
 </head>
 <body>
-
-<jsp:include page="_menu.jsp"></jsp:include>
-
 
 <div style="width: 30%;" class="container d-flex justify-content-center align-items-center flex-column alert-secondary
                                         rounded mt-5">

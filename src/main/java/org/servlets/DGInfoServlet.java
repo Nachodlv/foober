@@ -75,7 +75,7 @@ public class DGInfoServlet extends HttpServlet {
             deliveryGuy.setPassword(password);
         }
 
-        Part part = request.getPart("productPicEdit");
+        Part part = request.getPart("dgPicEdit");
         String email = deliveryGuy.getEmail();
         Utils.writeImage(email, part, getServletContext());
 

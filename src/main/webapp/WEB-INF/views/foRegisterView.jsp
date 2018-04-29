@@ -5,11 +5,12 @@
     <meta charset="UTF-8">
     <jsp:include page="bootstrapImportHeader.jsp"></jsp:include>
     <link rel="stylesheet" href="../../css/registerView.css" type="text/css">
+    <link rel="stylesheet" href="../../css/foober.css" type="text/css">
     <title>FO Register View</title>
 </head>
 <body>
-<jsp:include page="_menu.jsp"></jsp:include>
 <br>
+<div class="outer">
 <div class="container h-100 d-flex justify-content-center">
     <div class="jumbotron vertical-center">
         <form method="post">
@@ -53,15 +54,17 @@
             </div>
             <div class="form-group">
                 <div class="form-check">
-                    <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" required>
+                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck3" required>
                     <label class="form-check-label" for="invalidCheck3">
-                        Agree to terms and conditions
+                        <b>Agree to terms and conditions</b>
                     </label>
                 </div>
             </div>
+            <p class="text-danger">${errorEmail}</p>
             <button type="submit" class="btn btn-primary" value="Submit">Submit</button>
         </form>
     </div>
+</div>
 </div>
 
 <jsp:include page="bootstrapImportBody.jsp"></jsp:include>

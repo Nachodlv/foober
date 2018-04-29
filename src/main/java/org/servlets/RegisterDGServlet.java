@@ -73,7 +73,17 @@ public class RegisterDGServlet extends HttpServlet {
 
 
         Part part = request.getPart("id");
-        Utils.writeImage(mail, part, getServletContext());
+        try {
+            Utils.writeImage(mail, part, getServletContext());
+        } catch (IllegalArgumentException e2) {
+            request.setAttribute("nullImg", "Please choose an image");
+
+            RequestDispatcher dispatcher
+                    = this.getServletContext().getRequestDispatcher("/WEB-INF/views/dgRegisterView.jsp");
+
+            dispatcher.forward(request, response);
+            return;
+        }
 
         DeliveryGuy deliveryGuy = new DeliveryGuy(mail, name, password, Integer.parseInt(phone), Integer.parseInt(meansOfTransport));
 
@@ -88,7 +98,6 @@ public class RegisterDGServlet extends HttpServlet {
             dispatcher.forward(request, response);
             return;
         }
-
         AppUtils.storeLoginedUser(request.getSession(), deliveryGuy);
         response.sendRedirect(request.getContextPath() + "/dgMenu");
     }

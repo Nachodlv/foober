@@ -30,3 +30,13 @@ table.table-bordered > tbody > tr > td{
     padding-left: 0;
     padding-right: 0;
 }
+
+.fixed-panel {
+    max-height: 450px;
+    overflow-y: auto
+}
+
+.title{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

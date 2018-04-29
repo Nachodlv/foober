@@ -22,6 +22,9 @@ public class DeliveryGuy extends UserAccount {
     private int meansOfTransport;
     @OneToMany(mappedBy = "deliveryGuy", fetch = FetchType.EAGER)
     private Set<Order> orders;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "state")
+    private StateDG state;
 
     public DeliveryGuy(String email, String name, String password, int phone, int meansOfTransport) {
         super(email, password, "DG");
@@ -29,6 +32,7 @@ public class DeliveryGuy extends UserAccount {
         this.phone = phone;
         this.meansOfTransport = meansOfTransport;
         orders = new HashSet<>();
+        state = StateDG.OFFLINE;
     }
 
     public DeliveryGuy() {
@@ -64,6 +68,14 @@ public class DeliveryGuy extends UserAccount {
 
     public void setOrders(Set<Order> orders) {
         this.orders = orders;
+    }
+
+    public StateDG getState() {
+        return state;
+    }
+
+    public void setState(StateDG state) {
+        this.state = state;
     }
 }
 

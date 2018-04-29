@@ -7,7 +7,6 @@
     <title>DG Register</title>
 </head>
 <body>
-<jsp:include page="_menu.jsp"></jsp:include>
 <br>
 <div class="container h-100 d-flex justify-content-center">
     <div class="jumbotron vertical-center ">
@@ -72,12 +71,14 @@
 
         <div class="form-group">
             <div class="form-check">
-                <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" required>
+                <input class="form-check-input" type="checkbox" value="" id="invalidCheck3" required>
                 <label class="form-check-label" for="invalidCheck3">
-                    Agree to terms and conditions
+                    <b>Agree to terms and conditions</b>
                 </label>
             </div>
         </div>
+        <p style="color: red;" class="text-danger">${errorEmail}</p>
+        <p style="color: red;" class="text-danger">${nullImg}</p>
         <button type="submit" class="btn btn-primary" value="Submit">Submit</button>
     </form>
 </div>
