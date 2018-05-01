@@ -19,7 +19,7 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "FO_email", nullable = false)
     private FranchiseOwner franchiseOwner;
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
     private Set<OrderedProducts> orders = new HashSet<>();
 
 
@@ -69,5 +69,13 @@ public class Product {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public Set<OrderedProducts> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<OrderedProducts> orders) {
+        this.orders = orders;
     }
 }

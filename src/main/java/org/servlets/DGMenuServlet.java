@@ -42,6 +42,11 @@ public class DGMenuServlet extends HttpServlet {
 
         DeliveryGuy deliveryGuy = (DeliveryGuy)AppUtils.getLoginedUser(request.getSession());
         final String state = request.getParameter("state");
+
+        if(state != null) changeState(state, deliveryGuy, response, request);
+    }
+
+    private void changeState(String state, DeliveryGuy deliveryGuy, HttpServletResponse response, HttpServletRequest request) throws IOException {
         if(state.equals("offline")) {
             deliveryGuy.setState(StateDG.OFFLINE);
         } else {
@@ -49,6 +54,8 @@ public class DGMenuServlet extends HttpServlet {
                 deliveryGuy.setState(StateDG.ONLINE_WAITING);
             }
         }
+
+        DGFunctionality.modifyModel(deliveryGuy);
         response.sendRedirect(request.getContextPath() + "/dgMenu");
     }
 }

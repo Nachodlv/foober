@@ -21,12 +21,16 @@ public class OrderedProducts {
     @Column(name = "comment")
     private String comment;
 
+    @Column(name = "quantity")
+    private int quantity;
+
     public OrderedProducts(){}
 
-    public OrderedProducts(Product product, Order order, String comment) {
+    public OrderedProducts(Product product, Order order, String comment, int quantity) {
         this.product = product;
         this.order = order;
         this.comment = comment;
+        this.quantity = quantity;
     }
 
     public void setProduct(Product product) {
@@ -52,5 +56,21 @@ public class OrderedProducts {
 
     public String getComment() {
         return comment;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

@@ -19,9 +19,9 @@ public class TestOrder {
     @Test
     public void testA() {
         FranchiseOwner fo = new FranchiseOwner("TEST", "B", "C", 1, "D", 2, 3);
-        OrderedProducts p1 = new OrderedProducts(new Product("TEST", 35, fo), new Order(),"Hello");
-        OrderedProducts p2 = new OrderedProducts(new Product("TEST1", 40, fo), new Order(),"Hello");
-        OrderedProducts p3 = new OrderedProducts(new Product("TEST2", 45, fo), new Order(),"Hello");
+        OrderedProducts p1 = new OrderedProducts(new Product("TEST", 35, fo), new Order(),"Hello", 1);
+        OrderedProducts p2 = new OrderedProducts(new Product("TEST1", 40, fo), new Order(),"Hello", 1);
+        OrderedProducts p3 = new OrderedProducts(new Product("TEST2", 45, fo), new Order(),"Hello", 1);
 
         Set<OrderedProducts> products = new HashSet<>(Arrays.asList(p1, p2, p3));
         DeliveryGuy dg = new DeliveryGuy("TEST2", "A", "B", 1, 1);

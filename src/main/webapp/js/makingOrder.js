@@ -1,18 +1,72 @@
-var htmlElements = document.getElementsByClassName("product-row");
-for(var i=0;i<htmlElements.length ; i++){
-    var elements = htmlElements[i];
-    elements.addEventListener("change", function (elements) {
-        var elementArray = elements.currentTarget.childNodes;
-        var price = parseInt( elementArray[5].getAttribute('price'));
-        var quantity = elementArray[7].childNodes[0].value;
-        elementArray[9].innerHTML = price * quantity + ' $';
-    })
+priceProduct();
+
+function priceProduct() {
+    var htmlElements = document.getElementsByClassName("product-row");
+    for (var i = 0; i < htmlElements.length; i++) {
+        var elements = htmlElements[i];
+        elements.addEventListener("change", function (elements) {
+            var elementArray = elements.currentTarget.childNodes;
+            var price = parseInt(elementArray[5].getAttribute('price'));
+            var quantity = elementArray[7].childNodes[0].value;
+            elementArray[9].innerHTML = price * quantity + ' $';
+
+            //calculate total order
+            var products = document.getElementsByClassName("totalPriceProduct");
+            var totalButton = document.getElementById("totalPrice");
+            var total = 0;
+            for(var i=0; i<products.length; i++){
+                total += parseInt(products[i].innerHTML);
+            }
+            totalButton.childNodes[0].innerHTML = "Make order - " + total + " $";
+            document.getElementById("total").value = total;
+        })
+    }
 }
-// forEach(function (row) {
-//     var elements = row.childNodes;
-//     elements[7].addEventListener("change", function () {
-//         var price = parseInt(elements[0].id);
-//         var quantity = elements[7].childNodes[0].value;
-//         elements[9].innerHtml = price * quantity;
-//     })
-// });
+
+function completeOrder(){
+    var htmlElements = document.getElementsByClassName("product-row");
+    var products = document.getElementById("products");
+
+    erasePreviousOrder(products);
+    completeTotals();
+
+    for(var i=0; i<htmlElements.length; i++){
+        var row = htmlElements[i];
+        var columnsRow = row.childNodes;
+        var quantity = columnsRow[7].childNodes[0].value;
+        if(quantity > 0){
+            var rowCloned = row.cloneNode(true);
+            rowCloned.classList = 'product-row-cloned';
+
+            var rowClonedNodes = rowCloned.childNodes;
+            //transform quantity from input to text
+            rowClonedNodes[7].innerHTML = rowClonedNodes[7].childNodes[0].value;
+
+            //transform comment from input to text
+            var newComment = document.createElement('p');
+            newComment.classList.add('comment-product');
+            newComment.innerHTML = rowClonedNodes[11].childNodes[0].value;
+            rowClonedNodes[11].appendChild(newComment);
+            rowClonedNodes[11].removeChild(rowClonedNodes[11].childNodes[0]);
+            products.appendChild(rowCloned);
+        }
+    }
+}
+
+function erasePreviousOrder(products){
+    //index 0 = text and 1 = tbody
+    //index > 1 product rows
+    while(products.childNodes.length > 2){
+        products.removeChild(products.childNodes[2])
+    }
+}
+
+function completeTotals(){
+    var total = Number(document.getElementById("total").value);
+    var totalCheck = document.getElementById("total-price-check");
+    var tippingPercentage = Number(document.getElementById("tipping-percentage").value);
+    var deliveryManTip = document.getElementById("delivery-man-tip");
+
+    totalCheck.innerHTML = "Total: " + total + " $";
+    deliveryManTip.innerHTML = "Delivery-man tip: " + (total * tippingPercentage)/100 + " $";
+}

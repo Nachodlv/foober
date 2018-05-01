@@ -1,9 +1,26 @@
-.return-to-menu{
-    margin-left: auto;
+.buttons-top{
     padding-right: 20px;
     padding-top: 10px;
 }
 
 .quantityInput{
     width: 15%;
+}
+
+.modal-making-order{
+    max-width: 700px;
+}
+
+.order-table{
+    width: 100%;
+}
+
+.comment-product{
+    max-width: 150px;
+    word-wrap: break-word;
+}
+
+.elaboration-time{
+    height: 2.5%;
+    margin-top: 0.15rem;
 }

@@ -2,11 +2,9 @@ package org.servlets;
 
 import hibernate.ClientFunctionality;
 import hibernate.FOFunctionality;
+import hibernate.OrderFunctiontality;
 import hibernate.ProductFunctionality;
-import model.Client;
-import model.FranchiseOwner;
-import model.Product;
-import model.UserAccount;
+import model.*;
 import org.securityfilter.AppUtils;
 
 import javax.servlet.RequestDispatcher;
@@ -32,8 +30,11 @@ public class FOMenuServlet extends HttpServlet {
 
         FranchiseOwner franchiseOwner = FOFunctionality.getFranchiseOwner(AppUtils.getLoginedUser(request.getSession()).getEmail());
         List<Client> clients = ClientFunctionality.getClientsByFO(franchiseOwner.getEmail());
+        List<Order> orders = OrderFunctiontality.getOrdersByFO(franchiseOwner.getEmail());
+
         clients = filterClients(clients, request);
         request.setAttribute("clients", clients);
+        request.setAttribute("orders", orders);
 
         RequestDispatcher dispatcher //
                 = this.getServletContext()//

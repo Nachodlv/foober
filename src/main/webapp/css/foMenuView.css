@@ -32,7 +32,7 @@ table.table-bordered > tbody > tr > td{
 }
 
 .fixed-panel {
-    max-height: 450px;
+    max-height: calc(100vh - 200px);
     overflow-y: auto
 }
 

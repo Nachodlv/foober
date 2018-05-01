@@ -32,7 +32,7 @@ public class EditMenuServlet extends HttpServlet {
 
         FranchiseOwner franchiseOwner = FOFunctionality.getFranchiseOwner(AppUtils.getLoginedUser(request.getSession()).getEmail());
         List<Product> products = new ArrayList<>(franchiseOwner.getProducts());
-        products = filterProducts(products, request);
+        products = Utils.filterProducts(products, request);
 
         request.setAttribute("products", products);
         RequestDispatcher dispatcher //
@@ -133,18 +133,4 @@ public class EditMenuServlet extends HttpServlet {
         response.sendRedirect(request.getContextPath() + "/editMenu?searchProduct=" + searchBy);
     }
 
-    private List<Product> filterProducts(List<Product> products, HttpServletRequest request) {
-        String searchBy = request.getParameter("searchProduct");
-        Pattern pattern;
-        if (searchBy != null) pattern = Pattern.compile(".*" + searchBy.toLowerCase() + ".*");
-        else pattern = Pattern.compile(".*");
-
-        List<Product> activeProducts = new ArrayList<>();
-        for (Product product : products) {
-            if (product.isActive() && pattern.matcher(product.getName().toLowerCase()).matches()) {
-                activeProducts.add(product);
-            }
-        }
-        return activeProducts;
-    }
 }

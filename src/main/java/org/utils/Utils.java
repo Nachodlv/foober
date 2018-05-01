@@ -1,11 +1,17 @@
 package org.utils;
 
+import model.Product;
+
 import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * @author Gonzalo de Achaval
@@ -59,5 +65,20 @@ public class Utils {
         return ImageIO.read(new ByteArrayInputStream(imgBytes));
     }
 
+
+    public static List<Product> filterProducts(List<Product> products, HttpServletRequest request) {
+        String searchBy = request.getParameter("searchProduct");
+        Pattern pattern;
+        if (searchBy != null) pattern = Pattern.compile(".*" + searchBy.toLowerCase() + ".*");
+        else pattern = Pattern.compile(".*");
+
+        List<Product> activeProducts = new ArrayList<>();
+        for (Product product : products) {
+            if (product.isActive() && pattern.matcher(product.getName().toLowerCase()).matches()) {
+                activeProducts.add(product);
+            }
+        }
+        return activeProducts;
+    }
 
 }

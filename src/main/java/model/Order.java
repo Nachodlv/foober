@@ -29,7 +29,7 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "client_email", nullable = false)
     private Client client;
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
     private Set<OrderedProducts> orderedProducts = new HashSet<>();
 
     public Order(boolean status, int elaborationTime, FranchiseOwner franchiseOwner, DeliveryGuy deliveryGuy, Client client, Set<OrderedProducts> products) {
