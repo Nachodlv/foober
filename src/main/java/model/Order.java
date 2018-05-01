@@ -14,8 +14,9 @@ public class Order {
     @GeneratedValue
     @Column(name = "id")
     private int id;
+    @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private boolean status;
+    private StateOrder stateOrder;
     @Column(name = "elaborationTime")
     private int elaborationTime;
     @Column(name = "issuedTime")
@@ -32,17 +33,18 @@ public class Order {
     @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
     private Set<OrderedProducts> orderedProducts = new HashSet<>();
 
-    public Order(boolean status, int elaborationTime, FranchiseOwner franchiseOwner, DeliveryGuy deliveryGuy, Client client, Set<OrderedProducts> products) {
-        this.status = status;
+    public Order() {
+    }
+
+    public Order(int elaborationTime, long issuedTime, FranchiseOwner franchiseOwner, DeliveryGuy deliveryGuy, Client client, Set<OrderedProducts> orderedProducts) {
+        this.stateOrder = StateOrder.WAITING;
         this.elaborationTime = elaborationTime;
-        this.issuedTime = System.currentTimeMillis();
+        this.issuedTime = issuedTime;
         this.franchiseOwner = franchiseOwner;
         this.deliveryGuy = deliveryGuy;
         this.client = client;
-        this.orderedProducts = products;
-    }
-
-    public Order() {
+        this.orderedProducts = orderedProducts;
+        this.issuedTime = System.nanoTime();
     }
 
     public int getId() {
@@ -53,15 +55,15 @@ public class Order {
         this.id = id;
     }
 
-    public boolean isStatus() {
-        return status;
+    public StateOrder getStateOrder() {
+        return stateOrder;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setStateOrder(StateOrder stateOrder) {
+        this.stateOrder = stateOrder;
     }
 
-    public long getElaborationTime() {
+    public int getElaborationTime() {
         return elaborationTime;
     }
 
@@ -71,6 +73,10 @@ public class Order {
 
     public long getIssuedTime() {
         return issuedTime;
+    }
+
+    public void setIssuedTime(long issuedTime) {
+        this.issuedTime = issuedTime;
     }
 
     public FranchiseOwner getFranchiseOwner() {

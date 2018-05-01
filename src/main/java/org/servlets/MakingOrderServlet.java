@@ -52,7 +52,7 @@ public class MakingOrderServlet extends HttpServlet{
         Client client = (Client)request.getSession().getAttribute("client");
         order.setClient(client);
         order.setElaborationTime(Integer.valueOf(request.getParameter("elaborationTime")));
-        order.setStatus(true);
+//        order.setStatus(true); TODO post seleccion de DG
         order.setDeliveryGuy(null);
         order.setFranchiseOwner(franchiseOwner);
         OrderFunctiontality.addModel(order);

@@ -93,7 +93,9 @@ public class EditMenuServlet extends HttpServlet {
         FOFunctionality.modifyModel(franchiseOwner);
 
         Part filePart = request.getPart("productPic");
-        Utils.writeImage(String.valueOf(product.getId()), filePart, getServletContext());
+        if(filePart.getSize() > 0) {
+            Utils.writeImage(String.valueOf(product.getId()), filePart, getServletContext());
+        }
 
         response.sendRedirect(request.getContextPath() + "/editMenu");
     }
@@ -120,7 +122,9 @@ public class EditMenuServlet extends HttpServlet {
         }
 
         Part image = request.getPart("productPicEdit");
-        Utils.writeImage(String.valueOf(productId), image, getServletContext());
+        if(image.getSize() > 0) {
+            Utils.writeImage(String.valueOf(productId), image, getServletContext());
+        }
 
         final Product product = ProductFunctionality.getProduct(productId);
         product.setName(name);

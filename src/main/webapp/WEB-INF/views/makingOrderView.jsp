@@ -94,6 +94,7 @@
     </div>
 </form>
 <script src="../../js/makingOrder.js"></script>
+<script src="../../js/replaceNoImg.js"></script>
 <script>
     $("#totalPrice").click(function () {
         $("#modal").modal();

@@ -133,6 +133,6 @@
 
 
 <jsp:include page="bootstrapImportBody.jsp"></jsp:include>
-
+<script src="../../js/replaceNoImg.js"></script>
 </body>
 </html>
