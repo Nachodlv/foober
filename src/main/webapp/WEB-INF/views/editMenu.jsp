@@ -6,20 +6,18 @@
     <title>Edit Menu</title>
     <link rel="stylesheet" href="../../css/foober.css" type="text/css">
 </head>
-<body>
+<body class="outer">
+<jsp:include page="_header.jsp"></jsp:include>
+<h1 align="left">Products: </h1>
+<form class="form-inline row" enctype="multipart/form-data">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary ml-4 mr-5" data-toggle="modal" data-target="#exampleModal">Add product</button>
 
-<div class="outer container-fluid">
-    <jsp:include page="_header.jsp"></jsp:include>
-    <h1 align="left">Products: </h1>
-    <form class="form-inline row" enctype="multipart/form-data">
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary ml-4 mr-5" data-toggle="modal" data-target="#exampleModal">Add product</button>
-
-        <input type="text" class="form-control ml-2" placeholder="Search by name" name="searchProduct" value="${pageContext.request.getParameter("searchProduct")}">
-        <a class="ml-2" href="${pageContext.request.contextPath}/editMenu"><i class="fas fa-times icon"></i></a>
-        <button type="submit" class="btn btn-info ml-4">Search</button>
-        <div class="errorCatcher"></div>
-    </form>
+    <input type="text" class="form-control ml-2" placeholder="Search by name" name="searchProduct" value="${pageContext.request.getParameter("searchProduct")}">
+    <a class="ml-2" href="${pageContext.request.contextPath}/editMenu"><i class="fas fa-times icon"></i></a>
+    <button type="submit" class="btn btn-info ml-4">Search</button>
+    <div class="errorCatcher"></div>
+</form>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -126,12 +124,9 @@
         </table>
     </div>
 </form>
-<footer class="footer mb-3 mt-3">
-    <div class="container">
-        <span class="text-muted d-flex justify-content-end"><a href="${pageContext.request.contextPath}/foMenu" class="btn btn-outline-dark"><i class="fas fa-undo" style="color:black"></i> Return to Main Menu</a></span>
-    </div>
+<footer class="footer fixed-bottom mb-3 ml-3">
+    <a href="${pageContext.request.contextPath}/foMenu" class="btn btn-outline-dark"><i class="fas fa-undo" style="color:black"></i> Return to Main Menu</a>
 </footer>
-</div>
 
 
 <jsp:include page="bootstrapImportBody.jsp"></jsp:include>

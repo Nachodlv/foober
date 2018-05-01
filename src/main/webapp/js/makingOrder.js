@@ -26,6 +26,7 @@ function priceProduct() {
 function completeOrder(){
     var htmlElements = document.getElementsByClassName("product-row");
     var products = document.getElementById("products");
+    var added = false;
 
     erasePreviousOrder(products);
     completeTotals();
@@ -35,6 +36,7 @@ function completeOrder(){
         var columnsRow = row.childNodes;
         var quantity = columnsRow[7].childNodes[0].value;
         if(quantity > 0){
+            added = true;
             var rowCloned = row.cloneNode(true);
             rowCloned.classList = 'product-row-cloned';
 
@@ -51,6 +53,9 @@ function completeOrder(){
             products.appendChild(rowCloned);
         }
     }
+
+    var submitButton = document.getElementById('make-order-submit');
+    submitButton.disabled = !added;
 }
 
 function erasePreviousOrder(products){

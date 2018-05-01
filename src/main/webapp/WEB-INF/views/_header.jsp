@@ -1,4 +1,4 @@
-<div style="margin-bottom: -3rem">
+<div class="fixed-top mt-3 mr-3">
     <div class="dropdown" align="right">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-bars"></i>

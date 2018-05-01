@@ -16,7 +16,7 @@
 
 <%--Current orders--%>
 <br>
-<container class="form-row">
+<container class="form-row" style="margin-top: -0.5rem">
 <div class="container col-6">
     <div class="col-md-12"> <%--adds spacing between cols--%>
     <h3 align="center" class="title">Current Orders</h3>
@@ -211,10 +211,8 @@
     </div>
 </div>
     <br>
-<footer class="footer">
-    <div class="container form-row">
-        <span class="text-muted d-flex justify-content-end"><a href="${pageContext.request.contextPath}/editMenu" class="btn btn-outline-secondary "><i class="fas fa-cogs" style="color:black"></i> Edit menu</a></span>
-    </div>
+<footer class="footer fixed-bottom mb-3 ml-3">
+    <a href="${pageContext.request.contextPath}/editMenu" class="btn btn-outline-secondary "><i class="fas fa-cogs" style="color:black"></i> Edit menu</a>
 </footer>
 
 <script src="../../js/errorCatcher.js"></script>

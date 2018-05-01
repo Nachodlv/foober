@@ -16,6 +16,7 @@
 </head>
 <body class="outer">
 <jsp:include page="bootstrapImportBody.jsp"></jsp:include>
+<jsp:include page="_header.jsp"></jsp:include>
 <h1>Menu</h1>
 <form method="post" action="${pageContext.request.contextPath}/makingOrder">
     <div class="row form-inline mb-3">
@@ -23,7 +24,6 @@
         <a class="ml-2" href="${pageContext.request.contextPath}/makingOrder"><i class="fas fa-times icon"></i></a>
         <button type="submit" class="btn btn-info ml-4">Search</button>
         <span id="totalPrice" class="ml-auto mr-3"><a class="btn btn-outline-success" >Make order - 0 $</a></span>
-        <span class="text-muted"><a href="${pageContext.request.contextPath}/foMenu" class="btn btn-outline-dark"><i class="fas fa-undo" style="color:black"></i> Return to Main Menu</a></span>
     </div>
 </form>
 <form method="post" action="${pageContext.request.contextPath}/makingOrder" >
@@ -80,19 +80,22 @@
                         <h5 id="delivery-man-tip"></h5>
                         <div class="row" style="margin-left: 0">
                             <h5 class="mr-2">Estimated elaboration time: </h5>
-                            <input class="elaboration-time" type="number" placeholder="elaboration time" name="elaborationTime" required>
+                            <input class="elaboration-time" type="number" placeholder="elaboration time" name="elaborationTime" min="0" required>
                             <h5 class="ml-2">minutes</h5>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" name="MakeOrder" value="Order made">Make order</button>
+                    <button id="make-order-submit" type="submit" class="btn btn-primary" name="MakeOrder" value="Order made">Make order</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
 </form>
+<footer class="footer fixed-bottom mb-3 ml-3">
+    <a href="${pageContext.request.contextPath}/foMenu" class="btn btn-outline-dark"><i class="fas fa-undo" style="color:black"></i> Return to Main Menu</a>
+</footer>
 <script src="../../js/makingOrder.js"></script>
 <script src="../../js/replaceNoImg.js"></script>
 <script>
