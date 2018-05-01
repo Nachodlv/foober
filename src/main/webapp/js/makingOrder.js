@@ -4,7 +4,7 @@ function priceProduct() {
     var htmlElements = document.getElementsByClassName("product-row");
     for (var i = 0; i < htmlElements.length; i++) {
         var elements = htmlElements[i];
-        elements.addEventListener("change", function (elements) {
+        elements.addEventListener("input", function (elements) {
             var elementArray = elements.currentTarget.childNodes;
             var price = parseInt(elementArray[5].getAttribute('price'));
             var quantity = elementArray[7].childNodes[0].value;
