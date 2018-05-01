@@ -16,7 +16,6 @@
     <input type="text" class="form-control ml-2" placeholder="Search by name" name="searchProduct" value="${pageContext.request.getParameter("searchProduct")}">
     <a class="ml-2" href="${pageContext.request.contextPath}/editMenu"><i class="fas fa-times icon"></i></a>
     <button type="submit" class="btn btn-info ml-4">Search</button>
-    <div class="errorCatcher"></div>
 </form>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -60,6 +59,7 @@
 <%--List Products--%>
 <form method="post" enctype="multipart/form-data" action="${pageContext.request.contextPath}/editMenu" >
     <div class="fixed-panel">
+        <div class="errorCatcher"></div>
         <table class="table table-striped">
             <thead>
             <tr>
