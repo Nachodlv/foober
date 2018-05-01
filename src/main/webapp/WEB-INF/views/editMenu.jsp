@@ -18,7 +18,7 @@
         <input type="text" class="form-control ml-2" placeholder="Search by name" name="searchProduct" value="${pageContext.request.getParameter("searchProduct")}">
         <a class="ml-2" href="${pageContext.request.contextPath}/editMenu"><i class="fas fa-times icon"></i></a>
         <button type="submit" class="btn btn-info ml-4">Search</button>
-        <h4 style="color: red;" class="text-danger">${pageContext.request.getParameter("error")}</h4>
+        <div class="errorCatcher"></div>
     </form>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -61,8 +61,9 @@
 
 <%--List Products--%>
 <form method="post" enctype="multipart/form-data" action="${pageContext.request.contextPath}/editMenu" >
-    <table class="table table-striped">
-        <thead>
+    <div class="fixed-panel">
+        <table class="table table-striped">
+            <thead>
             <tr>
                 <th scope="col"></th>
                 <th scope="col">Name</th>
@@ -70,8 +71,8 @@
                 <th scope="col"></th>
                 <th scope="col"></th>
             </tr>
-        </thead>
-        <tbody>
+            </thead>
+            <tbody>
             <c:forEach items="${products}"  var="product">
                 <tr>
                     <td><img width="100" height="100" src="http://localhost:8080/images/${product.id}.png"></td>
@@ -121,10 +122,11 @@
                     </div>
                 </div>
             </c:forEach>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
 </form>
-<footer class="footer mb-3">
+<footer class="footer mb-3 mt-3">
     <div class="container">
         <span class="text-muted d-flex justify-content-end"><a href="${pageContext.request.contextPath}/foMenu" class="btn btn-outline-dark"><i class="fas fa-undo" style="color:black"></i> Return to Main Menu</a></span>
     </div>
@@ -134,5 +136,6 @@
 
 <jsp:include page="bootstrapImportBody.jsp"></jsp:include>
 <script src="../../js/replaceNoImg.js"></script>
+<script src="../../js/errorCatcher.js"></script>
 </body>
 </html>

@@ -92,3 +92,12 @@
       }
 }
 
+.fixed-panel {
+    max-height: calc(100vh - 200px);
+    overflow-y: auto
+}
+
+.fixed-panel-big{
+    max-height: calc(100vh - 155px);
+    overflow-y: auto
+}

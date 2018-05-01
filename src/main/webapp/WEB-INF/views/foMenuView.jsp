@@ -11,14 +11,13 @@
 
 <body class="outer">
 
-<div>
 <jsp:include page="_header.jsp"></jsp:include>
 <%--<h3 class="ml-2">Franchise Owner Menu</h3>--%>
 
 <%--Current orders--%>
 <br>
 <container class="form-row">
-<div class="container col-6" style="margin-top:20px;">
+<div class="container col-6">
     <div class="col-md-12"> <%--adds spacing between cols--%>
     <h3 align="center" class="title">Current Orders</h3>
         <div class="fixed-panel">
@@ -67,7 +66,7 @@
 </div>
 
 <%--Clients container--%>
-<div class="container col-6" style="margin-top:20px;">
+<div class="container col-6">
     <h3 align="center" class="title">Clients</h3>
 
     <div class="col-md-12">
@@ -77,8 +76,8 @@
             <a class="col-1" href="${pageContext.request.contextPath}/foMenu"><i class="fas fa-times icon"></i></a>
             <button type="submit" class="btn btn-info col-3">Search</button>
             <button type="button" class="btn btn-primary col-3 ml-2" data-toggle="modal" data-target="#exampleModal">New client</button>
-            <h4 style="color: red;" class="text-danger">${pageContext.request.getParameter("error")}</h4>
         </div>
+        <div class="errorCatcher"></div>
     </form>
         <div class="fixed-panel">
     <table class="table table-striped table-hover table-bordered">
@@ -218,8 +217,9 @@
     </div>
 </footer>
 
-
+<script src="../../js/errorCatcher.js"></script>
 <jsp:include page="bootstrapImportBody.jsp"></jsp:include>
+
 </body>
 </html>
 

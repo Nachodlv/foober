@@ -22,7 +22,7 @@
             <div class="col-md-6 mb-3">
                 <label>Email</label>
                 <input type="email" class="form-control" placeholder="Mail" name="mail" required>
-                <p class="text-danger" style="margin-bottom: -3rem;"></p>
+                <p class="text-danger" style="margin-bottom: -3rem;">${errorEmail}</p>
             </div>
         </div>
         <div class="form-row">
@@ -33,7 +33,7 @@
             <div class="col-md-6 mb-4">
                 <label>Confirm Password</label>
                 <input type="password" class="form-control" placeholder="Confirm password" name="passwordRepeated" required>
-                <p class="text-danger" style="margin-bottom: -3rem;"></p>
+                <p class="text-danger" style="margin-bottom: -3rem;">${errorPassword}</p>
             </div>
         </div>
         <div class="form-row">
@@ -77,7 +77,6 @@
                 </label>
             </div>
         </div>
-        <p style="color: red;" class="text-danger">${errorEmail}</p>
         <p style="color: red;" class="text-danger">${nullImg}</p>
         <button type="submit" class="btn btn-primary" value="Submit">Submit</button>
     </form>

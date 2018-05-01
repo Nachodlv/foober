@@ -27,7 +27,7 @@
     </div>
 </form>
 <form method="post" action="${pageContext.request.contextPath}/makingOrder" >
-    <div class="row">
+    <div class="row fixed-panel">
         <table class="table table-striped">
             <thead>
             <tr>

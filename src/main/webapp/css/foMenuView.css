@@ -31,11 +31,6 @@ table.table-bordered > tbody > tr > td{
     padding-right: 0;
 }
 
-.fixed-panel {
-    max-height: calc(100vh - 200px);
-    overflow-y: auto
-}
-
 .title{
     margin-top: 10px;
     margin-bottom: 10px;
