@@ -77,7 +77,9 @@ public class DGInfoServlet extends HttpServlet {
 
         Part part = request.getPart("dgPicEdit");
         String email = deliveryGuy.getEmail();
-        Utils.writeImage(email, part, getServletContext());
+        if(part.getSize() > 0) {
+            Utils.writeImage(email, part, getServletContext());
+        }
 
         DGFunctionality.modifyModel(deliveryGuy);
     }

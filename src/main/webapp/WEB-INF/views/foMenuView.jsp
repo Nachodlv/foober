@@ -16,51 +16,22 @@
 
 <%--Current orders--%>
 <br>
-<container class="form-row" style="margin-top: -0.5rem">
-<div class="container col-6">
-    <div class="col-md-12"> <%--adds spacing between cols--%>
-    <h3 align="center" class="title">Current Orders</h3>
-        <div class="fixed-panel">
-    <div class="card-group">
-        <div class="card bg-light" style="width: 10rem;" align="center">
-            <img class="card-img-top" style="width: 8rem;" src="../../images/FooberLogo.png" align="center">
-            <div class="card-body">
-                <h5 class="card-title">DG: foober</h5>
-                <p class="card-text">Gonzalo cliente</p>
-                <p class="card-text">20 minutes ago$</p>
-                <p class="card-text">60$</p>
-            </div>
-        </div>
-        <div class="card bg-light" style="width: 10rem;" align="center">
-            <img class="card-img-top" style="width: 8rem;" src="../../images/FooberLogo.png" align="center">
-            <div class="card-body">
-                <h5 class="card-title">DG: foober2</h5>
-                <p class="card-text">Nacho cliente</p>
-                <p class="card-text">10 minutes ago$</p>
-                <p class="card-text">70$</p>
-            </div>
-        </div>
-    </div>
-        <div class="card-group" style="margin-top:1%;">
-            <div class="card bg-light" style="width: 10rem;" align="center">
-                <img class="card-img-top" style="width: 8rem;" src="../../images/FooberLogo.png" align="center">
-                <div class="card-body">
-                    <h5 class="card-title">DG: foober</h5>
-                    <p class="card-text">Gonzalo cliente</p>
-                    <p class="card-text">20 minutes ago$</p>
-                    <p class="card-text">60$</p>
+<div class="form-row">
+    <div class="container col-6">
+        <div class="col-md-12"> <%--adds spacing between cols--%>
+            <h3 align="center" class="title">Current Orders</h3>
+            <div class="fixed-panel form-row" style="margin-top:2rem">
+            <c:forEach items="${orders}" var="order">
+                <div class="col-md-4 text-center">
+                    <img class="card-img-top" style="height: 8rem; width:8rem;" src="http://localhost:8080/images/${order.deliveryGuy.email}.png" align="center"><br>
+                    <div class="card-body">
+                        <h5 class="card-title">DG: fafa</h5>
+                        <input name="initial-time" id="initialTime" hidden value="${order.issuedTime}">
+                        <i class="far fa-clock"></i><p class="card-text" id="elapsedTime"></p>
+                        <i class="far fa-user"></i><p class="card-text"> ${order.client.email}</p>
+                    </div>
                 </div>
-            </div>
-            <div class="card bg-light" style="width: 10rem;" align="center">
-                <img class="card-img-top" style="width: 8rem;" src="../../images/FooberLogo.png" align="center">
-                <div class="card-body">
-                    <h5 class="card-title">DG: foober2</h5>
-                    <p class="card-text">Nacho cliente</p>
-                    <p class="card-text">10 minutes ago$</p>
-                    <p class="card-text">70$</p>
-                </div>
-            </div>
-        </div>
+            </c:forEach>
         </div>
     </div>
 </div>
@@ -69,7 +40,7 @@
 <div class="container col-6">
     <h3 align="center" class="title">Clients</h3>
 
-    <div class="col-md-12">
+    <div class="col-md-12" style="margin-top:2rem">
     <form method="post" action="${pageContext.request.contextPath}/foMenu" >
         <div class="form-inline row mb-2">
             <input type="text" class="form-control col-4 ml-2" placeholder="Search by name" name="searchClient" value="${pageContext.request.getParameter("searchClient")}">
@@ -168,7 +139,6 @@
     </div>
     </div>
 </div>
-</container>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -216,9 +186,11 @@
     <a href="${pageContext.request.contextPath}/editMenu" class="btn btn-outline-secondary "><i class="fas fa-cogs" style="color:black"></i> Edit menu</a>
 </footer>
 
-<script src="../../js/errorCatcher.js"></script>
 <jsp:include page="bootstrapImportBody.jsp"></jsp:include>
 
+<script src="../../js/foMenuView.js"></script>
+<script src="../../js/errorCatcher.js"></script>
+<script src="../../js/anonymusDG.js"></script>
 </body>
 </html>
 

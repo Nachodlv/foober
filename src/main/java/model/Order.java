@@ -36,15 +36,14 @@ public class Order {
     public Order() {
     }
 
-    public Order(int elaborationTime, long issuedTime, FranchiseOwner franchiseOwner, DeliveryGuy deliveryGuy, Client client, Set<OrderedProducts> orderedProducts) {
+    public Order(int elaborationTime, FranchiseOwner franchiseOwner, DeliveryGuy deliveryGuy, Client client, Set<OrderedProducts> orderedProducts) {
         this.stateOrder = StateOrder.WAITING;
         this.elaborationTime = elaborationTime;
-        this.issuedTime = issuedTime;
         this.franchiseOwner = franchiseOwner;
         this.deliveryGuy = deliveryGuy;
         this.client = client;
         this.orderedProducts = orderedProducts;
-        this.issuedTime = System.nanoTime();
+        this.issuedTime = System.currentTimeMillis();
     }
 
     public int getId() {

@@ -55,6 +55,7 @@ public class MakingOrderServlet extends HttpServlet{
 //        order.setStatus(true); TODO post seleccion de DG
         order.setDeliveryGuy(null);
         order.setFranchiseOwner(franchiseOwner);
+        order.setIssuedTime(System.currentTimeMillis());
         OrderFunctiontality.addModel(order);
 
         for(Product product: franchiseOwner.getProducts()){
