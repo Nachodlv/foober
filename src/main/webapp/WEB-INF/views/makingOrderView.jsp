@@ -28,7 +28,7 @@
 </form>
 <form method="post" action="${pageContext.request.contextPath}/makingOrder" >
     <div class="row fixed-panel">
-        <table class="table table-striped">
+        <table class="table table-striped" style="margin-right:1%;">
             <thead>
             <tr>
                 <th scope="col"></th>
@@ -44,10 +44,10 @@
                 <tr class="product-row">
                     <td><img width="100" height="100" src="http://localhost:8080/images/${product.id}.png"></td>
                     <td>${product.name}</td>
-                    <td  price="${product.price}" class="productPrice">${product.price} $</td>
-                    <td><input name = "${product.id}" class="quantityInput" type="number" min="0"></td>
+                    <td price="${product.price}" class="productPrice">${product.price} $</td>
+                    <td style="width: 12%;"><input name = "${product.id}" class="quantityInput" type="number" min="0"></td>
                     <td id="totalPriceProduct" class="totalPriceProduct">0 $</td>
-                    <td><input type="text" name="comment${product.id}" placeholder="Add comment..."></td>
+                    <td><input type="text" class="form-control ml-2" name="comment${product.id}" placeholder="Add comment..."></td>
                 </tr>
             </c:forEach>
             </tbody>
@@ -64,7 +64,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <table id="products" class="order-table">
+                    <table id="products" class="order-table" style="margin-bottom:2%;">
                         <tr>
                             <th scope="col"></th>
                             <th scope="col">Name</th>
@@ -80,7 +80,7 @@
                         <h5 id="delivery-man-tip"></h5>
                         <div class="row" style="margin-left: 0">
                             <h5 class="mr-2">Estimated elaboration time: </h5>
-                            <input class="elaboration-time" type="number" placeholder="elaboration time" name="elaborationTime" min="0" required>
+                            <input class="elaboration-time form-control-sm" type="number" placeholder="elaboration time" name="elaborationTime" min="0" required>
                             <h5 class="ml-2">minutes</h5>
                         </div>
                     </div>

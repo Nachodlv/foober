@@ -4,7 +4,7 @@
 }
 
 .quantityInput{
-    width: 15%;
+    width: 50%;
 }
 
 .modal-making-order{
@@ -21,6 +21,6 @@
 }
 
 .elaboration-time{
-    height: 2.5%;
+    height: 3.5%;
     margin-top: 0.15rem;
 }

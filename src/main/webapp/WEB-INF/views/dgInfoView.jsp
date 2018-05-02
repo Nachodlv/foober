@@ -108,7 +108,7 @@
         </div>
     </form>
 </div>
-<script src="../../js/dgInfoView.js"></script>
+<script src="../../js/dgInfo.js"></script>
 <jsp:include page="bootstrapImportBody.jsp"></jsp:include>
 </body>
 </html>
