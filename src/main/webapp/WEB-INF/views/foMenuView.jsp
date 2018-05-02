@@ -26,8 +26,9 @@
                     <img class="card-img-top" style="height: 8rem; width:8rem;" src="http://localhost:8080/images/${order.deliveryGuy.email}.png" align="center"><br>
                     <div class="card-body">
                         <h5 class="card-title">DG: fafa</h5>
-                        <input name="initial-time" id="initialTime" hidden value="${order.issuedTime}">
-                        <i class="far fa-clock"></i><p class="card-text" id="elapsedTime"></p>
+                        <%--<input name="initial-time" id="initialTime" hidden value="${order.issuedTime}">--%>
+                        <%--<input name="id" hidden value="elapsedTime_${order.id}">--%>
+                        <i class="far fa-clock"></i><p class="card-text" id="elapsedTime_${order.id}" onclick="end(${order.id}, ${order.issuedTime})">Click me</p>
                         <i class="far fa-user"></i><p class="card-text"> ${order.client.email}</p>
                     </div>
                 </div>
