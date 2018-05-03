@@ -1,4 +1,4 @@
-package org.servlets;
+package org.servlets.dg;
 
 import hibernate.DGFunctionality;
 import hibernate.FOFunctionality;
@@ -46,7 +46,7 @@ public class RegisterDGServlet extends HttpServlet {
             throws ServletException, IOException {
 
         RequestDispatcher dispatcher //
-                = this.getServletContext().getRequestDispatcher("/WEB-INF/views/dgRegisterView.jsp");
+                = this.getServletContext().getRequestDispatcher("/WEB-INF/views/dg/dgRegisterView.jsp");
 
         dispatcher.forward(request, response);
     }
@@ -60,7 +60,7 @@ public class RegisterDGServlet extends HttpServlet {
             request.setAttribute("errorPassword", "Passwords do not match");
 
             RequestDispatcher dispatcher
-                    = this.getServletContext().getRequestDispatcher("/WEB-INF/views/dgRegisterView.jsp");
+                    = this.getServletContext().getRequestDispatcher("/WEB-INF/views/dg/dgRegisterView.jsp");
 
             dispatcher.forward(request, response);
             return;
@@ -79,7 +79,7 @@ public class RegisterDGServlet extends HttpServlet {
             request.setAttribute("nullImg", "Please choose an image");
 
             RequestDispatcher dispatcher
-                    = this.getServletContext().getRequestDispatcher("/WEB-INF/views/dgRegisterView.jsp");
+                    = this.getServletContext().getRequestDispatcher("/WEB-INF/views/dg/dgRegisterView.jsp");
 
             dispatcher.forward(request, response);
             return;
@@ -93,7 +93,7 @@ public class RegisterDGServlet extends HttpServlet {
             request.setAttribute("errorEmail", "Email not available");
 
             RequestDispatcher dispatcher
-                    = this.getServletContext().getRequestDispatcher("/WEB-INF/views/dgRegisterView.jsp");
+                    = this.getServletContext().getRequestDispatcher("/WEB-INF/views/dg/dgRegisterView.jsp");
 
             dispatcher.forward(request, response);
             return;

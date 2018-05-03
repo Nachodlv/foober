@@ -2,8 +2,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <jsp:include page="bootstrapImportHeader.jsp"></jsp:include>
-    <link rel="stylesheet" href="../../css/registerView.css" type="text/css">
+    <jsp:include page="../bootstrapImportHeader.jsp"></jsp:include>
+    <link rel="stylesheet" href="../../../css/registerView.css" type="text/css">
     <title>DG Register</title>
 </head>
 <body>
@@ -83,7 +83,7 @@
 </div>
 </div>
 
-<jsp:include page="bootstrapImportBody.jsp"></jsp:include>
+<jsp:include page="../bootstrapImportBody.jsp"></jsp:include>
 
 </body>
 </html>

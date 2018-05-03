@@ -1,12 +1,11 @@
-<%--suppress ALL --%>
 <%--suppress CheckTagEmptyBody --%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <jsp:include page="bootstrapImportHeader.jsp"></jsp:include>
-    <link rel="stylesheet" href="../../css/foInfoView.css" type="text/css">
-    <link rel="stylesheet" href="../../css/foober.css" type="text/css">
+    <jsp:include page="../bootstrapImportHeader.jsp"></jsp:include>
+    <link rel="stylesheet" href="../../../css/dg/foInfoView.css" type="text/css">
+    <link rel="stylesheet" href="../../../css/foober.css" type="text/css">
     <title>User Info</title>
 </head>
 <body class="outer">
@@ -15,15 +14,15 @@
 <p class="text-danger">
     ${pageContext.request.getParameter("error")}
 </p>
-<form method="POST" class="mt-5">
-    <div class="container-fluid d-flex flex-column">
+<form method="POST" enctype="multipart/form-data" class="mt-5">
+    <tr class="container-fluid d-flex flex-column">
         <table class="table">
             <thead>
             </thead>
             <tbody>
             <tr>
-                <td>Franchise name</td>
-                <td><input value="${loginedUser.name}" placeholder="Franchise owner" name="name" required></td>
+                <td>Name</td>
+                <td><input value="${loginedUser.name}" placeholder="Name" name="name" required></td>
                 <td> </td>
             </tr>
             <tr>
@@ -33,18 +32,31 @@
                 <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModal">Edit</button></td>
             </tr>
             <tr>
-                <td>Address</td>
-                <td><input value="${loginedUser.address}" placeholder="Address" name="address" required></td>
-                <td> </td>
-            </tr>
-            <tr>
-                <td>Tipping percentage</td>
-                <td><input value="${loginedUser.tippingPercentage}" pattern="[0-9]+" placeholder="Tipping percentage" name="tippingPercentage" required> </td>
-                <td> </td>
-            </tr>
-            <tr>
                 <td>Phone</td>
                 <td><input value="${loginedUser.phone}" pattern="[0-9]+" placeholder="Phone" name="phone" required> </td>
+                <td> </td>
+            </tr>
+            <tr>
+                <td>Means of transport</td>
+                <td> <input type="hidden" id="meansOfTransport" value="${loginedUser.meansOfTransport}"/>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="1" name="newMeansOfTransport" class="custom-control-input" value="1">
+                        <label class="custom-control-label" for="1">Bike</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="2" name="newMeansOfTransport" class="custom-control-input" value="2">
+                        <label class="custom-control-label" for="2">Walk</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="3" name="newMeansOfTransport" class="custom-control-input" value="3">
+                        <label class="custom-control-label" for="3">Car</label>
+                    </div></td>
+                <td> </td>
+            </tr>
+            <tr>
+                <td>Edit profile photo</td>
+                <td><img width="100" height="100" src="http://localhost:8080/images/${loginedUser.email}.png"></td>
+                <td><input type="file" id="editDGpic${loginedUser.email}" name="dgPicEdit" accept=".jpg, .jpeg, .png" class="file"></td>
                 <td> </td>
             </tr>
             </tbody>
@@ -53,7 +65,7 @@
             <button type="submit" class="btn btn-danger mr-2" name="change" value="cancel">Cancel changes</button>
             <button type="submit" class="btn btn-info mr-2" name="change" value="save">Save changes</button>
         </div>
-    </div>
+    </tr>
 
 
 </form>
@@ -95,7 +107,7 @@
         </div>
     </form>
 </div>
-
-<jsp:include page="bootstrapImportBody.jsp"></jsp:include>
+<script src="../../../js/dg/dgInfoView.js"></script>
+<jsp:include page="../bootstrapImportBody.jsp"></jsp:include>
 </body>
 </html>

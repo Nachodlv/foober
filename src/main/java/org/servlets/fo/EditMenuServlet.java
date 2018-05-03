@@ -1,4 +1,4 @@
-package org.servlets;
+package org.servlets.fo;
 
 import hibernate.FOFunctionality;
 import hibernate.ProductFunctionality;
@@ -37,7 +37,7 @@ public class EditMenuServlet extends HttpServlet {
         request.setAttribute("products", products);
         RequestDispatcher dispatcher //
                 = this.getServletContext()//
-                .getRequestDispatcher("/WEB-INF/views/editMenu.jsp");
+                .getRequestDispatcher("/WEB-INF/views/fo/editMenu.jsp");
 
 
         dispatcher.forward(request, response);

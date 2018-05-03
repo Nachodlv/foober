@@ -1,4 +1,4 @@
-package org.servlets;
+package org.servlets.fo;
 
 import hibernate.ClientFunctionality;
 import hibernate.FOFunctionality;
@@ -38,7 +38,7 @@ public class FOMenuServlet extends HttpServlet {
 
         RequestDispatcher dispatcher //
                 = this.getServletContext()//
-                .getRequestDispatcher("/WEB-INF/views/foMenuView.jsp");
+                .getRequestDispatcher("/WEB-INF/views/fo/foMenuView.jsp");
 
         dispatcher.forward(request, response);
     }

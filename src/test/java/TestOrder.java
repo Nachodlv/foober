@@ -27,7 +27,7 @@ public class TestOrder {
         DeliveryGuy dg = new DeliveryGuy("TEST2", "A", "B", 1, 1);
         Client client = new Client("TEST", 1, "a", "a@gmail", fo);
 
-        Order order = new Order(30, fo, dg, client, products);
+        Order order = new Order(10, fo, dg, client, products);
         FOFunctionality.addModel(fo);
         ClientFunctionality.addModel(client);
         DGFunctionality.addModel(dg);

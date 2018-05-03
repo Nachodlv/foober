@@ -9,14 +9,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <jsp:include page="bootstrapImportHeader.jsp"></jsp:include>
+    <jsp:include page="../bootstrapImportHeader.jsp"></jsp:include>
     <title>Title</title>
-    <link rel="stylesheet" href="../../css/foober.css" type="text/css">
-    <link rel="stylesheet" href="../../css/makingOrderView.css" type="text/css">
+    <link rel="stylesheet" href="../../../css/foober.css" type="text/css">
+    <link rel="stylesheet" href="../../../css/dg/makingOrderView.css" type="text/css">
 </head>
 <body class="outer">
-<jsp:include page="bootstrapImportBody.jsp"></jsp:include>
-<jsp:include page="_header.jsp"></jsp:include>
+<jsp:include page="../bootstrapImportBody.jsp"></jsp:include>
+<jsp:include page="../_header.jsp"></jsp:include>
 <h1>Menu</h1>
 <form method="post" action="${pageContext.request.contextPath}/makingOrder">
     <div class="row form-inline mb-3">
@@ -96,8 +96,8 @@
 <footer class="footer fixed-bottom mb-3 ml-3">
     <a href="${pageContext.request.contextPath}/foMenu" class="btn btn-outline-dark"><i class="fas fa-undo" style="color:black"></i> Return to Main Menu</a>
 </footer>
-<script src="../../js/makingOrder.js"></script>
-<script src="../../js/replaceNoImg.js"></script>
+<script src="../../../js/fo/makingOrder.js"></script>
+<script src="../../../js/replaceNoImg.js"></script>
 <script>
     $("#totalPrice").click(function () {
         $("#modal").modal();

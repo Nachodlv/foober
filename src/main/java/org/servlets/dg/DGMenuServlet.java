@@ -1,4 +1,4 @@
-package org.servlets;
+package org.servlets.dg;
 
 import hibernate.DGFunctionality;
 import model.DeliveryGuy;
@@ -31,7 +31,7 @@ public class DGMenuServlet extends HttpServlet {
 
         RequestDispatcher dispatcher //
                 = this.getServletContext()//
-                .getRequestDispatcher("/WEB-INF/views/dgMenuView.jsp");
+                .getRequestDispatcher("/WEB-INF/views/dg/dgMenuView.jsp");
 
         dispatcher.forward(request, response);
     }

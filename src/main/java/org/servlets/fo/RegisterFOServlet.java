@@ -1,4 +1,4 @@
-package org.servlets;
+package org.servlets.fo;
 
 import hibernate.FOFunctionality;
 import model.FranchiseOwner;
@@ -26,7 +26,7 @@ public class RegisterFOServlet extends HttpServlet {
             throws ServletException, IOException {
 
         RequestDispatcher dispatcher //
-                = this.getServletContext().getRequestDispatcher("/WEB-INF/views/foRegisterView.jsp");
+                = this.getServletContext().getRequestDispatcher("/WEB-INF/views/fo/foRegisterView.jsp");
 
         dispatcher.forward(request, response);
     }
@@ -40,7 +40,7 @@ public class RegisterFOServlet extends HttpServlet {
             request.setAttribute("errorPassword", "Passwords do not match");
 
             RequestDispatcher dispatcher //
-                    = this.getServletContext().getRequestDispatcher("/WEB-INF/views/foRegisterView.jsp");
+                    = this.getServletContext().getRequestDispatcher("/WEB-INF/views/fo/foRegisterView.jsp");
 
             dispatcher.forward(request, response);
             return;
@@ -57,7 +57,7 @@ public class RegisterFOServlet extends HttpServlet {
             request.setAttribute("errorEmail", "Email not available");
 
             RequestDispatcher dispatcher //
-                    = this.getServletContext().getRequestDispatcher("/WEB-INF/views/foRegisterView.jsp");
+                    = this.getServletContext().getRequestDispatcher("/WEB-INF/views/fo/foRegisterView.jsp");
 
             dispatcher.forward(request, response);
             return;

@@ -6,7 +6,7 @@ function replaceSrc() {
     {
         var img = images[i];
 
-        if(!img.complete || typeof img.naturalWidth != "undefined" && img.naturalWidth == 0)
+        if(!img.complete || typeof img.naturalWidth !== "undefined" && img.naturalWidth === 0)
         {
             img.src = '../images/anonymus.png';
         }

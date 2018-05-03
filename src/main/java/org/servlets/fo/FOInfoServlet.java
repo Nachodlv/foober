@@ -1,4 +1,4 @@
-package org.servlets;
+package org.servlets.fo;
 
 import hibernate.FOFunctionality;
 import model.FranchiseOwner;
@@ -30,7 +30,7 @@ public class FOInfoServlet extends HttpServlet {
         AppUtils.storeLoginedUser(request.getSession(), franchiseOwner);
 
         RequestDispatcher dispatcher //
-                = this.getServletContext().getRequestDispatcher("/WEB-INF/views/foInfoView.jsp");
+                = this.getServletContext().getRequestDispatcher("/WEB-INF/views/fo/foInfoView.jsp");
 
         dispatcher.forward(request, response);
     }

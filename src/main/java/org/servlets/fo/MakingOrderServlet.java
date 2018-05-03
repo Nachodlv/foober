@@ -1,4 +1,4 @@
-package org.servlets;
+package org.servlets.fo;
 
 import com.sun.xml.internal.ws.api.ha.StickyFeature;
 import hibernate.*;
@@ -31,7 +31,7 @@ public class MakingOrderServlet extends HttpServlet{
         request.setAttribute("products", products);
 
         RequestDispatcher dispatcher
-                = this.getServletContext().getRequestDispatcher("/WEB-INF/views/makingOrderView.jsp");
+                = this.getServletContext().getRequestDispatcher("/WEB-INF/views/fo/makingOrderView.jsp");
 
         dispatcher.forward(request, response);
 
