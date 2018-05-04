@@ -24,7 +24,8 @@ public class OrderedProducts {
     @Column(name = "quantity")
     private int quantity;
 
-    public OrderedProducts(){}
+    public OrderedProducts() {
+    }
 
     public OrderedProducts(Product product, Order order, String comment, int quantity) {
         this.product = product;

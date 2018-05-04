@@ -1,22 +1,15 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Ignacio
-  Date: 4/14/2018
-  Time: 15:09
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <jsp:include page="../bootstrapImportHeader.jsp"></jsp:include>
+    <jsp:include page="../bootstrapImportHeader.jsp"/>
     <title>Title</title>
     <link rel="stylesheet" href="../../../css/foober.css" type="text/css">
-    <link rel="stylesheet" href="../../../css/dg/makingOrderView.css" type="text/css">
+    <link rel="stylesheet" href="../../../css/fo/makingOrderView.css" type="text/css">
 </head>
 <body class="outer">
-<jsp:include page="../bootstrapImportBody.jsp"></jsp:include>
-<jsp:include page="../_header.jsp"></jsp:include>
+<jsp:include page="../bootstrapImportBody.jsp"/>
+<jsp:include page="../_header.jsp"/>
 <h1>Menu</h1>
 <form method="post" action="${pageContext.request.contextPath}/makingOrder">
     <div class="row form-inline mb-3">
@@ -45,7 +38,7 @@
                     <td><img width="100" height="100" src="http://localhost:8080/images/${product.id}.png"></td>
                     <td>${product.name}</td>
                     <td price="${product.price}" class="productPrice">${product.price} $</td>
-                    <td style="width: 12%;"><input name = "${product.id}" class="quantityInput" type="number" min="0"></td>
+                    <td style="width: 12%;"><input name = "${product.id}" class="quantityInput" type="number" min="0" style="width: 40%;"></td>
                     <td id="totalPriceProduct" class="totalPriceProduct">0 $</td>
                     <td><input type="text" class="form-control ml-2" name="comment${product.id}" placeholder="Add comment..."></td>
                 </tr>

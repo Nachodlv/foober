@@ -19,8 +19,8 @@ public class ProductFunctionality extends AbstractFunctionality {
         return product;
     }
 
-    public static Product deleteProduct(int id) {
-        Product product = null;
+    public static void deleteProduct(int id) {
+        Product product;
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
@@ -33,35 +33,34 @@ public class ProductFunctionality extends AbstractFunctionality {
             }
             ex.printStackTrace();
         }
-        return product;
     }
 
-    public static List<Product> getAllProducts(){
+    public static List<Product> getAllProducts() {
         List list = null;
         Transaction transaction = null;
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
             list = session.createQuery("FROM Product").list();
-        }catch (HibernateException ex){
-            if(transaction!=null){
+        } catch (HibernateException ex) {
+            if (transaction != null) {
                 transaction.rollback();
             }
             ex.printStackTrace();
         }
-        if(list == null) return null;
+        if (list == null) return null;
         List<Product> products = new ArrayList<>();
-        for(Object object:list){
-            products.add((Product)object);
+        for (Object object : list) {
+            products.add((Product) object);
         }
         return products;
     }
 
-    public static List<Product> getProductsByFO(String email){
+    public static List<Product> getProductsByFO(String email) {
         List<Product> products = getAllProducts();
         List<Product> foProducts = new ArrayList<>();
-        if(products==null) return null;
-        for(Product product:products){
-            if(product.getFranchiseOwner().getEmail().equals(email) ){
+        if (products == null) return null;
+        for (Product product : products) {
+            if (product.getFranchiseOwner().getEmail().equals(email)) {
                 foProducts.add(product);
             }
         }

@@ -9,7 +9,7 @@ class SecurityConfig {
 
     // String: Role
     // List<String>: urlPatterns.
-    private static final Map<String, List<String>> mapConfig = new HashMap<String, List<String>>();
+    private static final Map<String, List<String>> mapConfig = new HashMap<>();
 
     static {
         init();
@@ -18,7 +18,7 @@ class SecurityConfig {
     private static void init() {
 
         // Configure For "FO" Role.
-        List<String> urlPatterns1 = new ArrayList<String>();
+        List<String> urlPatterns1 = new ArrayList<>();
 
         urlPatterns1.add("/userInfo");
         urlPatterns1.add("/foMenu");
@@ -30,7 +30,7 @@ class SecurityConfig {
         mapConfig.put(ROLE_FO, urlPatterns1);
 
         // Configure For "DG" Role.
-        List<String> urlPatterns2 = new ArrayList<String>();
+        List<String> urlPatterns2 = new ArrayList<>();
 
         urlPatterns2.add("/userInfo");
         urlPatterns2.add("/dgMenu");

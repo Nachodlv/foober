@@ -108,7 +108,7 @@ public class FranchiseOwner extends UserAccount {
         this.products = products;
     }
 
-    public void addProduct(Product product){
+    public void addProduct(Product product) {
         products.add(product);
     }
 
@@ -116,7 +116,7 @@ public class FranchiseOwner extends UserAccount {
         this.clients = clients;
     }
 
-    public void addClient(Client client){
+    public void addClient(Client client) {
         clients.add(client);
     }
 

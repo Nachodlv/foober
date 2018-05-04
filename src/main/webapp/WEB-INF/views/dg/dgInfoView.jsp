@@ -1,10 +1,9 @@
-<%--suppress CheckTagEmptyBody --%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <jsp:include page="../bootstrapImportHeader.jsp"></jsp:include>
-    <link rel="stylesheet" href="../../../css/dg/foInfoView.css" type="text/css">
+    <jsp:include page="../bootstrapImportHeader.jsp"/>
+    <link rel="stylesheet" href="../../../css/fo/foInfoView.css" type="text/css">
     <link rel="stylesheet" href="../../../css/foober.css" type="text/css">
     <title>User Info</title>
 </head>
@@ -15,14 +14,13 @@
     ${pageContext.request.getParameter("error")}
 </p>
 <form method="POST" enctype="multipart/form-data" class="mt-5">
-    <tr class="container-fluid d-flex flex-column">
         <table class="table">
             <thead>
             </thead>
             <tbody>
             <tr>
                 <td>Name</td>
-                <td><input value="${loginedUser.name}" placeholder="Name" name="name" required></td>
+                <td><input value="${loginedUser.name}" class="form-control" placeholder="Name" name="name" required></td>
                 <td> </td>
             </tr>
             <tr>
@@ -33,7 +31,7 @@
             </tr>
             <tr>
                 <td>Phone</td>
-                <td><input value="${loginedUser.phone}" pattern="[0-9]+" placeholder="Phone" name="phone" required> </td>
+                <td><input value="${loginedUser.phone}" class="form-control" pattern="[0-9]+" placeholder="Phone" name="phone" required> </td>
                 <td> </td>
             </tr>
             <tr>
@@ -65,9 +63,6 @@
             <button type="submit" class="btn btn-danger mr-2" name="change" value="cancel">Cancel changes</button>
             <button type="submit" class="btn btn-info mr-2" name="change" value="save">Save changes</button>
         </div>
-    </tr>
-
-
 </form>
 
 <%--Modal--%>
@@ -108,6 +103,6 @@
     </form>
 </div>
 <script src="../../../js/dg/dgInfoView.js"></script>
-<jsp:include page="../bootstrapImportBody.jsp"></jsp:include>
+<jsp:include page="../bootstrapImportBody.jsp"/>
 </body>
 </html>

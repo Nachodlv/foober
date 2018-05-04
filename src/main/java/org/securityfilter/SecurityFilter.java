@@ -58,7 +58,7 @@ public class SecurityFilter implements Filter {
                 String requestUri = request.getRequestURI();
 
                 // Store the current page to redirect to after successful login.
-                int redirectId = AppUtils.storeRedirectAfterLoginUrl(request.getSession(), requestUri);
+                int redirectId = AppUtils.storeRedirectAfterLoginUrl(requestUri);
 
                 response.sendRedirect(wrapRequest.getContextPath() + "/login?redirectId=" + redirectId);
                 return;

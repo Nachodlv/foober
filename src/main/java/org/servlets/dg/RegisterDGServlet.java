@@ -1,14 +1,10 @@
 package org.servlets.dg;
 
 import hibernate.DGFunctionality;
-import hibernate.FOFunctionality;
 import model.DeliveryGuy;
 import org.securityfilter.AppUtils;
 import org.utils.Utils;
-import sun.misc.IOUtils;
-import sun.security.tools.policytool.Resources_zh_HK;
 
-import javax.imageio.ImageIO;
 import javax.persistence.PersistenceException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,19 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import java.awt.image.BufferedImage;
-import java.io.*;
-import java.net.URL;
-import java.net.URLClassLoader;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
-import static org.utils.Utils.convertStreamToByteArray;
-
-/**
- * @author Gonzalo de Achaval
- */
+import java.io.IOException;
 
 @MultipartConfig
 @WebServlet("/dgRegister")

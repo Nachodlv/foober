@@ -1,7 +1,6 @@
 package webSocket;
 
 import com.google.gson.Gson;
-import model.DeliveryGuy;
 
 import javax.websocket.EncodeException;
 import javax.websocket.Encoder;

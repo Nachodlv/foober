@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Objects;
 
 @WebServlet("/dgMenu")
 public class DGMenuServlet extends HttpServlet {
@@ -40,17 +39,17 @@ public class DGMenuServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        DeliveryGuy deliveryGuy = (DeliveryGuy)AppUtils.getLoginedUser(request.getSession());
+        DeliveryGuy deliveryGuy = (DeliveryGuy) AppUtils.getLoginedUser(request.getSession());
         final String state = request.getParameter("state");
 
-        if(state != null) changeState(state, deliveryGuy, response, request);
+        if (state != null) changeState(state, deliveryGuy, response, request);
     }
 
     private void changeState(String state, DeliveryGuy deliveryGuy, HttpServletResponse response, HttpServletRequest request) throws IOException {
-        if(state.equals("offline")) {
+        if (state.equals("offline")) {
             deliveryGuy.setState(StateDG.OFFLINE);
         } else {
-            if(state.equals("online")) {
+            if (state.equals("online")) {
                 deliveryGuy.setState(StateDG.ONLINE_WAITING);
             }
         }

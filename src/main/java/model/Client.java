@@ -5,9 +5,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table (name = "client")
+@Table(name = "client")
 public class Client {
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "id")
     private int id;
     @Column(name = "name")

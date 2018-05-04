@@ -3,8 +3,10 @@ package org.servlets.fo;
 import hibernate.ClientFunctionality;
 import hibernate.FOFunctionality;
 import hibernate.OrderFunctiontality;
-import hibernate.ProductFunctionality;
-import model.*;
+import model.Client;
+import model.FranchiseOwner;
+import model.Order;
+import model.UserAccount;
 import org.securityfilter.AppUtils;
 
 import javax.servlet.RequestDispatcher;
@@ -54,13 +56,13 @@ public class FOMenuServlet extends HttpServlet {
         UserAccount loginedUser = AppUtils.getLoginedUser(request.getSession());
         FranchiseOwner franchiseOwner = FOFunctionality.getFranchiseOwner(loginedUser.getEmail());
 
-        if(newClient != null){
+        if (newClient != null) {
             newClient(franchiseOwner, request, response);
-        } else if(editClient != null){
+        } else if (editClient != null) {
             editClient(editClient, request, response);
-        } else if(deleteClient != null){
+        } else if (deleteClient != null) {
             deleteClient(deleteClient, request, response);
-        } else{
+        } else {
             searchClient(searchClient, request, response);
         }
     }
@@ -74,7 +76,7 @@ public class FOMenuServlet extends HttpServlet {
         int phone;
         try {
             phone = Integer.valueOf(phoneString);
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             response.sendRedirect(request.getContextPath() + "/foMenu?error=Error while creating the client, invalid phone number");
             return;
         }
@@ -92,17 +94,17 @@ public class FOMenuServlet extends HttpServlet {
         response.sendRedirect(request.getContextPath() + "/foMenu?searchClient=" + searchClient);
     }
 
-    private List<Client> filterClients(List<Client> clients, HttpServletRequest request){
+    private List<Client> filterClients(List<Client> clients, HttpServletRequest request) {
         String searchBy = request.getParameter("searchClient");
         Pattern pattern;
-        if(searchBy == null) {
+        if (searchBy == null) {
             pattern = Pattern.compile(".*");
-        }else{
+        } else {
             pattern = Pattern.compile(".*" + searchBy.toLowerCase() + ".*");
         }
         List<Client> filteredClients = new ArrayList<>();
-        for(Client client: clients){
-            if(pattern.matcher(client.getName().toLowerCase()).matches() && client.isActive()){
+        for (Client client : clients) {
+            if (pattern.matcher(client.getName().toLowerCase()).matches() && client.isActive()) {
                 filteredClients.add(client);
             }
         }
@@ -119,7 +121,7 @@ public class FOMenuServlet extends HttpServlet {
         int phone;
         try {
             phone = Integer.valueOf(phoneString);
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             response.sendRedirect(request.getContextPath() + "/foMenu?error=Error while updating the client, invalid phone number");
             return;
         }

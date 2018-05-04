@@ -8,7 +8,7 @@ import java.util.Set;
 
 @ServerEndpoint(value = "/dgOnline",
         decoders = DgDecoder.class,
-        encoders = DgEncoder.class )
+        encoders = DgEncoder.class)
 public class DgEndPoint {
 
     private Set<Session> sessions = new HashSet<>();
@@ -16,7 +16,7 @@ public class DgEndPoint {
     @OnMessage
     public void handleMessage(DgMessage message) {
         System.out.println("Message sent ==>" + message.getName());
-        for(Session session: sessions){
+        for (Session session : sessions) {
             try {
                 session.getBasicRemote().sendObject(message);
             } catch (IOException | EncodeException e) {

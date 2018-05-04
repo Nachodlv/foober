@@ -63,7 +63,7 @@ public class LoginServlet extends HttpServlet {
             redirectId = Integer.parseInt(request.getParameter("redirectId"));
         } catch (Exception ignored) {
         }
-        String requestUri = AppUtils.getRedirectAfterLoginUrl(request.getSession(), redirectId);
+        String requestUri = AppUtils.getRedirectAfterLoginUrl(redirectId);
         if (requestUri != null) {
             response.sendRedirect(requestUri);
         } else {

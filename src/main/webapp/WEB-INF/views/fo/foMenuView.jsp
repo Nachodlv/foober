@@ -2,16 +2,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <jsp:include page="../bootstrapImportHeader.jsp"></jsp:include>
+    <jsp:include page="../bootstrapImportHeader.jsp"/>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../../../css/dg/foMenuView.css" type="text/css">
+    <link rel="stylesheet" href="../../../css/fo/foMenuView.css" type="text/css">
     <link rel="stylesheet" href="../../../css/foober.css" type="text/css">
     <title>FO Menu</title>
 </head>
 
 <body class="outer">
 
-<jsp:include page="../_header.jsp"></jsp:include>
+<jsp:include page="../_header.jsp"/>
 <%--<h3 class="ml-2">Franchise Owner Menu</h3>--%>
 
 <%--Current orders--%>
@@ -186,7 +186,7 @@
     <a href="${pageContext.request.contextPath}/editMenu" class="btn btn-outline-secondary "><i class="fas fa-cogs" style="color:black"></i> Edit menu</a>
 </footer>
 
-<jsp:include page="../bootstrapImportBody.jsp"></jsp:include>
+<jsp:include page="../bootstrapImportBody.jsp"/>
 
 <script src="../../../js/fo/foMenuView.js"></script>
 <script src="../../../js/errorCatcher.js"></script>

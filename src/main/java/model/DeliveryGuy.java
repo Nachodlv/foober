@@ -1,7 +1,5 @@
 package model;
 
-import org.hibernate.type.descriptor.sql.LobTypeMappings;
-
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;

@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <jsp:include page="../bootstrapImportHeader.jsp"></jsp:include>
+    <jsp:include page="../bootstrapImportHeader.jsp"/>
     <title>DG Menu</title>
     <link rel="stylesheet" href="../../../css/foober.css" type="text/css">
 </head>
 <body>
 
 <div class="outer container-fluid">
-    <jsp:include page="../_header.jsp"></jsp:include>
+    <jsp:include page="../_header.jsp"/>
 <h3>Welcome, ${loginedUser.name}!</h3><br>
 <div class="container-fluid bg-light rounded">
     <form method="post" action="${pageContext.request.contextPath}/dgMenu">
@@ -43,6 +43,6 @@
 </div>
 
 <script src="../../../js/dg/dgMenu.js"></script>
-<jsp:include page="../bootstrapImportBody.jsp"></jsp:include>
+<jsp:include page="../bootstrapImportBody.jsp"/>
 </body>
 </html>

@@ -34,7 +34,7 @@ class UrlPatternUtils {
         String servletPath = request.getServletPath();
         String pathInfo = request.getPathInfo();
 
-        String urlPattern = null;
+        String urlPattern;
         if (pathInfo != null) {
             urlPattern = servletPath + "/*";
             return urlPattern;

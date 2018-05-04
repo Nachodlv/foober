@@ -1,9 +1,8 @@
-<%--suppress CheckTagEmptyBody --%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <jsp:include page="../bootstrapImportHeader.jsp"></jsp:include>
+    <jsp:include page="../bootstrapImportHeader.jsp"/>
     <link rel="stylesheet" href="../../../css/registerView.css" type="text/css">
     <link rel="stylesheet" href="../../../css/foober.css" type="text/css">
     <title>FO Register View</title>
@@ -66,7 +65,7 @@
 </div>
 </div>
 
-<jsp:include page="../bootstrapImportBody.jsp"></jsp:include>
+<jsp:include page="../bootstrapImportBody.jsp"/>
 
 </body>
 </html>

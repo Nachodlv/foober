@@ -5,9 +5,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table (name = "product")
+@Table(name = "product")
 public class Product {
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "id")
     private int id;
     @Column(name = "name")
@@ -23,7 +24,8 @@ public class Product {
     private Set<OrderedProducts> orders = new HashSet<>();
 
 
-    public Product(){}
+    public Product() {
+    }
 
     public Product(String name, double price, FranchiseOwner franchiseOwner) {
         this.name = name;

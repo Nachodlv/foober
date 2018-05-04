@@ -6,9 +6,7 @@ import model.UserAccount;
 import org.securityfilter.AppUtils;
 import org.utils.Utils;
 
-import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -16,8 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 @MultipartConfig
@@ -46,13 +42,12 @@ public class DGInfoServlet extends HttpServlet {
         DeliveryGuy deliveryGuy = DGFunctionality.getDeliveryGuy(userAccount.getEmail());
         String change = request.getParameter("change");
         String password = request.getParameter("changePassword");
-        if(password != null){
+        if (password != null) {
             changePassword(request, response, deliveryGuy);
-        }
-        else if(change.equals("save")){
+        } else if (change.equals("save")) {
             saveChanges(request, deliveryGuy);
             response.sendRedirect(request.getContextPath() + "/dgMenu");
-        }else if(change.equals("cancel")){
+        } else if (change.equals("cancel")) {
             request.getSession().removeAttribute("password");
             response.sendRedirect(request.getContextPath() + "/dgMenu");
         }
@@ -71,13 +66,13 @@ public class DGInfoServlet extends HttpServlet {
         deliveryGuy.setPhone(phone);
         deliveryGuy.setMeansOfTransport(meansOfTransport);
 
-        if(password != null){
+        if (password != null) {
             deliveryGuy.setPassword(password);
         }
 
         Part part = request.getPart("dgPicEdit");
         String email = deliveryGuy.getEmail();
-        if(part.getSize() > 0) {
+        if (part.getSize() > 0) {
             Utils.writeImage(email, part, getServletContext());
         }
 
@@ -90,11 +85,11 @@ public class DGInfoServlet extends HttpServlet {
         String newPassword = request.getParameter("newPassword");
         String repeatPassword = request.getParameter("repeatPassword");
 
-        if(!oldPassword.equals(deliveryGuy.getPassword())){
+        if (!oldPassword.equals(deliveryGuy.getPassword())) {
             response.sendRedirect(request.getContextPath() + "/dgInfo?error=Invalid password!");
-        }else if(!newPassword.equals(repeatPassword)){
+        } else if (!newPassword.equals(repeatPassword)) {
             response.sendRedirect(request.getContextPath() + "/dgInfo?error=Passwords don't match");
-        }else{
+        } else {
             request.getSession().setAttribute("password", newPassword);
             response.sendRedirect(request.getContextPath() + "/dgInfo");
         }

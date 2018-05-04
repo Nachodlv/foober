@@ -43,20 +43,19 @@ public class FOInfoServlet extends HttpServlet {
         FranchiseOwner franchiseOwner = FOFunctionality.getFranchiseOwner(userAccount.getEmail());
         String change = request.getParameter("change");
         String password = request.getParameter("changePassword");
-        if(password != null){
+        if (password != null) {
             changePassword(request, response, franchiseOwner);
-        }
-        else if(change.equals("save")){
+        } else if (change.equals("save")) {
             saveChanges(request, response, franchiseOwner);
             response.sendRedirect(request.getContextPath() + "/foMenu");
-        }else if(change.equals("cancel")){
+        } else if (change.equals("cancel")) {
             request.getSession().removeAttribute("password");
             response.sendRedirect(request.getContextPath() + "/foMenu");
         }
 
     }
 
-    private void saveChanges(HttpServletRequest request, HttpServletResponse response,FranchiseOwner franchiseOwner) throws ServletException, IOException {
+    private void saveChanges(HttpServletRequest request, HttpServletResponse response, FranchiseOwner franchiseOwner) throws ServletException, IOException {
         String name = request.getParameter("name");
         String password = (String) request.getSession().getAttribute("password");
         String address = request.getParameter("address");
@@ -65,7 +64,7 @@ public class FOInfoServlet extends HttpServlet {
 
         int phone = Integer.parseInt(phoneString);
         int tippingPercentage = Integer.parseInt(tippingPercentageString);
-        if(tippingPercentage > 100 || tippingPercentage < 5){
+        if (tippingPercentage > 100 || tippingPercentage < 5) {
             request.setAttribute("errorTipping", "Percentage not valid");
             RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/foInfoView.jsp");
             dispatcher.forward(request, response);
@@ -77,7 +76,7 @@ public class FOInfoServlet extends HttpServlet {
         franchiseOwner.setPhone(phone);
         franchiseOwner.setTippingPercentage(tippingPercentage);
 
-        if(password != null){
+        if (password != null) {
             franchiseOwner.setPassword(password);
         }
 
@@ -89,11 +88,11 @@ public class FOInfoServlet extends HttpServlet {
         String newPassword = request.getParameter("newPassword");
         String repeatPassword = request.getParameter("repeatPassword");
 
-        if(!oldPassword.equals(franchiseOwner.getPassword())){
+        if (!oldPassword.equals(franchiseOwner.getPassword())) {
             response.sendRedirect(request.getContextPath() + "/foInfo?error=Invalid password!");
-        }else if(!newPassword.equals(repeatPassword)){
+        } else if (!newPassword.equals(repeatPassword)) {
             response.sendRedirect(request.getContextPath() + "/foInfo?error=Passwords don't match");
-        }else{
+        } else {
             request.getSession().setAttribute("password", newPassword);
             response.sendRedirect(request.getContextPath() + "/foInfo");
         }

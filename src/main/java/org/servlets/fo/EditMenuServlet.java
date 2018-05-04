@@ -20,7 +20,6 @@ import javax.servlet.http.Part;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 @WebServlet({"/editMenu/*", "/editMenu"})
 @MultipartConfig
@@ -57,7 +56,7 @@ public class EditMenuServlet extends HttpServlet {
             deleteProduct(Integer.valueOf(productDelete), franchiseOwner);
             response.sendRedirect(request.getContextPath() + "/editMenu");
         } else if (productModify != null) {
-            modifyProduct(request, response, franchiseOwner, Integer.valueOf(productModify));
+            modifyProduct(request, response, Integer.valueOf(productModify));
         } else if (searchProduct != null) {
             searchProduct(searchProduct, request, response);
         } else {
@@ -93,7 +92,7 @@ public class EditMenuServlet extends HttpServlet {
         FOFunctionality.modifyModel(franchiseOwner);
 
         Part filePart = request.getPart("productPic");
-        if(filePart.getSize() > 0) {
+        if (filePart.getSize() > 0) {
             Utils.writeImage(String.valueOf(product.getId()), filePart, getServletContext());
         }
 
@@ -109,7 +108,7 @@ public class EditMenuServlet extends HttpServlet {
 
     }
 
-    private void modifyProduct(HttpServletRequest request, HttpServletResponse response, FranchiseOwner fo, int productId) throws IOException, ServletException {
+    private void modifyProduct(HttpServletRequest request, HttpServletResponse response, int productId) throws IOException, ServletException {
         String name = request.getParameter("productNameEdit");
         String priceString = request.getParameter("productPriceEdit");
 
@@ -122,7 +121,7 @@ public class EditMenuServlet extends HttpServlet {
         }
 
         Part image = request.getPart("productPicEdit");
-        if(image.getSize() > 0) {
+        if (image.getSize() > 0) {
             Utils.writeImage(String.valueOf(productId), image, getServletContext());
         }
 

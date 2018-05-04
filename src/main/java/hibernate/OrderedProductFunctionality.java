@@ -5,7 +5,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-public class OrderedProductFunctionality extends AbstractFunctionality{
+public class OrderedProductFunctionality extends AbstractFunctionality {
     public static OrderedProducts getOrderedProduct(int id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();

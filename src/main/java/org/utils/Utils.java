@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
  */
 public class Utils {
 
-    public static byte[] convertStreamToByteArray(InputStream is) throws IOException {
+    private static byte[] convertStreamToByteArray(InputStream is) throws IOException {
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 
         int nRead;
@@ -31,12 +31,6 @@ public class Utils {
         buffer.flush();
 
         return buffer.toByteArray();
-    }
-
-    public static Connection getHSQLConnection() throws ClassNotFoundException, SQLException {
-        Class.forName("org.hsqldb.jdbc.JDBCDriver");
-        String url = "jdbc:hsqldb:hsql://localhost/testdb";
-        return DriverManager.getConnection(url, "SA", "");
     }
 
     public static void close(Connection conn, Statement stmt, ResultSet rs) {

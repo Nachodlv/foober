@@ -2,12 +2,13 @@
 
 <html>
 <head>
-    <jsp:include page="../bootstrapImportHeader.jsp"></jsp:include>
+    <jsp:include page="../bootstrapImportHeader.jsp"/>
     <title>Edit Menu</title>
     <link rel="stylesheet" href="../../../css/foober.css" type="text/css">
 </head>
+
 <body class="outer">
-<jsp:include page="../_header.jsp"></jsp:include>
+<jsp:include page="../_header.jsp"/>
 <h1 align="left">Products: </h1>
 <form class="form-inline row" enctype="multipart/form-data">
     <!-- Button trigger modal -->
@@ -129,7 +130,7 @@
 </footer>
 
 
-<jsp:include page="../bootstrapImportBody.jsp"></jsp:include>
+<jsp:include page="../bootstrapImportBody.jsp"/>
 <script src="../../../js/replaceNoImg.js"></script>
 <script src="../../../js/errorCatcher.js"></script>
 </body>

@@ -1,9 +1,7 @@
 package model;
 
 import javax.persistence.*;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -110,7 +108,7 @@ public class Order {
         this.orderedProducts = orderedProducts;
     }
 
-    public int getTotalCost(){
+    public int getTotalCost() {
         int totalCost = 0;
         for (OrderedProducts product : orderedProducts) {
             totalCost += product.getProduct().getPrice();
@@ -118,9 +116,9 @@ public class Order {
         return totalCost;
     }
 
-    public int getMinutesSinceIssued(){
+    public int getMinutesSinceIssued() {
         final long currentTime = System.currentTimeMillis();
         final long secondsFromIssued = TimeUnit.MILLISECONDS.toSeconds(currentTime - issuedTime);
-        return (int)secondsFromIssued/60;
+        return (int) secondsFromIssued / 60;
     }
 }

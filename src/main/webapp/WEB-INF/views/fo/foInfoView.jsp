@@ -1,11 +1,9 @@
-<%--suppress ALL --%>
-<%--suppress CheckTagEmptyBody --%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <jsp:include page="../bootstrapImportHeader.jsp"></jsp:include>
-    <link rel="stylesheet" href="../../../css/dg/foInfoView.css" type="text/css">
+    <jsp:include page="../bootstrapImportHeader.jsp"/>
+    <link rel="stylesheet" href="../../../css/fo/foInfoView.css" type="text/css">
     <link rel="stylesheet" href="../../../css/foober.css" type="text/css">
     <title>User Info</title>
 </head>
@@ -23,7 +21,7 @@
             <tbody>
             <tr>
                 <td>Franchise name</td>
-                <td><input value="${loginedUser.name}" placeholder="Franchise owner" name="name" required></td>
+                <td><input value="${loginedUser.name}" class="form-control" placeholder="Franchise owner" name="name" required></td>
                 <td> </td>
             </tr>
             <tr>
@@ -34,17 +32,17 @@
             </tr>
             <tr>
                 <td>Address</td>
-                <td><input value="${loginedUser.address}" placeholder="Address" name="address" required></td>
+                <td><input value="${loginedUser.address}" class="form-control" placeholder="Address" name="address" required></td>
                 <td> </td>
             </tr>
             <tr>
                 <td>Tipping percentage</td>
-                <td><input value="${loginedUser.tippingPercentage}" pattern="[0-9]+" placeholder="Tipping percentage" name="tippingPercentage" required> </td>
+                <td><input value="${loginedUser.tippingPercentage}" class="form-control" pattern="[0-9]+" placeholder="Tipping percentage" name="tippingPercentage" required> </td>
                 <td> </td>
             </tr>
             <tr>
                 <td>Phone</td>
-                <td><input value="${loginedUser.phone}" pattern="[0-9]+" placeholder="Phone" name="phone" required> </td>
+                <td><input value="${loginedUser.phone}" class="form-control" pattern="[0-9]+" placeholder="Phone" name="phone" required> </td>
                 <td> </td>
             </tr>
             </tbody>
@@ -54,8 +52,6 @@
             <button type="submit" class="btn btn-info mr-2" name="change" value="save">Save changes</button>
         </div>
     </div>
-
-
 </form>
 
 <%--Modal--%>
@@ -96,6 +92,6 @@
     </form>
 </div>
 
-<jsp:include page="../bootstrapImportBody.jsp"></jsp:include>
+<jsp:include page="../bootstrapImportBody.jsp"/>
 </body>
 </html>

@@ -6,7 +6,6 @@ import model.DeliveryGuy;
 import model.FranchiseOwner;
 import model.StateDG;
 import org.securityfilter.AppUtils;
-import org.utils.Utils;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,7 +17,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet ("/chooseDG")
+@WebServlet("/chooseDG")
 public class ChooseDGServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -26,7 +25,7 @@ public class ChooseDGServlet extends HttpServlet {
 
         FranchiseOwner franchiseOwner = FOFunctionality.getFranchiseOwner(AppUtils.getLoginedUser(request.getSession()).getEmail());
         List<DeliveryGuy> deliveryGuys = DGFunctionality.getAllDeliveryGuys();
-        if(deliveryGuys != null) deliveryGuys = filterDeliveryGuys(deliveryGuys);
+        if (deliveryGuys != null) deliveryGuys = filterDeliveryGuys(deliveryGuys);
 
         request.setAttribute("deliveryGuys", deliveryGuys);
         RequestDispatcher dispatcher //
@@ -37,10 +36,10 @@ public class ChooseDGServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-    private List<DeliveryGuy> filterDeliveryGuys(List<DeliveryGuy> deliveryGuys){
+    private List<DeliveryGuy> filterDeliveryGuys(List<DeliveryGuy> deliveryGuys) {
         ArrayList<DeliveryGuy> onlineDGs = new ArrayList<>();
-        for(DeliveryGuy deliveryGuy: deliveryGuys){
-            if(deliveryGuy.getState().equals(StateDG.ONLINE_WAITING)){
+        for (DeliveryGuy deliveryGuy : deliveryGuys) {
+            if (deliveryGuy.getState().equals(StateDG.ONLINE_WAITING)) {
                 onlineDGs.add(deliveryGuy);
             }
         }
