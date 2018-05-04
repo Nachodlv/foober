@@ -2,13 +2,8 @@ package org.utils;
 
 import com.sun.mail.smtp.SMTPTransport;
 
-import java.io.File;
 import java.security.Security;
-import java.util.Date;
 import java.util.Properties;
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
 import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -91,23 +86,11 @@ public class GoogleMail {
 
         // first part (the html)
         BodyPart messageBodyPart = new MimeBodyPart();
-        String htmlText = "<H1>Hello</H1><img src=\"cid:image\">";
-        messageBodyPart.setContent(htmlText, "text/html");
+        String htmlText = "<h1>Hello</h1>";
+        final String htmlFinal = addSignature(htmlText);
+        messageBodyPart.setContent(htmlFinal, "text/html");
         // add it
         multipart.addBodyPart(messageBodyPart);
-
-        // second part (the image)
-        messageBodyPart = new MimeBodyPart();
-        DataSource fds = new FileDataSource(
-                "/Users/GonzaOK/Desktop/FooberLogoMini.png"); //TODO
-
-        messageBodyPart.setDataHandler(new DataHandler(fds));
-        messageBodyPart.setHeader("Content-ID", "<image>");
-
-        // add image to the multipart
-        multipart.addBodyPart(messageBodyPart);
-
-        // put everything together
         msg.setContent(multipart);
 
 
@@ -116,5 +99,11 @@ public class GoogleMail {
         t.connect("smtp.gmail.com", username, password);
         t.sendMessage(msg, msg.getAllRecipients());
         t.close();
+    }
+
+    private static String addSignature(String currentText) throws MessagingException {
+        final String img = "\n\n<img src=\"https://image.ibb.co/bNqb67/Foober_Logo_Mini.png\" alt=\"Logo\" title=\"Logo\" style=\"display:block\" width=\"100\" height=\"100\">";
+        final String sig = "\n<h5><i>Sincerely,\nThe Foober Team </i>©</h5>";
+        return currentText + img + sig;
     }
 }

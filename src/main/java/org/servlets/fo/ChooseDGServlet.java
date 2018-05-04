@@ -57,7 +57,7 @@ public class ChooseDGServlet extends HttpServlet {
 
         if(clientMail != null) {
             try {
-                GoogleMail.send("iFoober", "fooberlab1", "gonzalo.deachaval@ing.austral.edu.ar", "TEST", "msg");
+                GoogleMail.send("iFoober", "fooberlab1", "ignacio.delavega@ing.austral.edu.ar", "TEST", "msg");
             } catch (MessagingException e) {
                 e.printStackTrace();
             }
