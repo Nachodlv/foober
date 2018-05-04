@@ -6,13 +6,17 @@ import model.DeliveryGuy;
 import model.FranchiseOwner;
 import model.StateDG;
 import org.securityfilter.AppUtils;
+import org.utils.GoogleMail;
+import org.utils.Utils;
 
+import javax.mail.MessagingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,5 +48,20 @@ public class ChooseDGServlet extends HttpServlet {
             }
         }
         return onlineDGs;
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String clientMail = request.getParameter("mail");
+
+        if(clientMail != null) {
+            try {
+                GoogleMail.send("iFoober", "fooberlab1", "gonzalo.deachaval@ing.austral.edu.ar", "TEST", "msg");
+            } catch (MessagingException e) {
+                e.printStackTrace();
+            }
+        }
+        response.sendRedirect(request.getContextPath() + "/chooseDG");
     }
 }

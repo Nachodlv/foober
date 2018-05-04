@@ -5,6 +5,9 @@
     <title>Title</title>
 </head>
 <body>
+<form method="post">
+    <button class="buttonWithFunction" type="submit" name="mail" value="mail">MAIL</button>
+</form>
 <table>
     <thead>
     <tr>
