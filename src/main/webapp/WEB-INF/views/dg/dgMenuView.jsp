@@ -17,12 +17,17 @@
             <img style="margin: 5%;" width="120" height="120" class="rounded-circle" src="http://localhost:8080/images/${loginedUser.email}.png">
         </div>
         <div class="col-md-auto offset-md-7">
-            <input type="hidden" id="dgStatus" value="${loginedUser.state}">
-            <div class="row">
-                <button type="submit" id="offline" value="offline" name="state" class="btn btn-outline-dark spaced-top"><i class="fas fa-power-off"></i> Go offline</button>
+            <div id="deliveryGuy">
+                <input type="hidden" value="${loginedUser.name}">
+                <input type="hidden" value="${loginedUser.phone}">
+                <input type="hidden" value="${loginedUser.meansOfTransport}">
+                <input type="hidden" id="dgStatus" value="${loginedUser.state}">
             </div>
             <div class="row">
-                <button type="submit" id="online" value="online" name="state" class="btn btn-outline-dark spaced"><i class="fas fa-power-off"></i> Go online </button>
+                <button type="submit" id="offline" value="offline" name="state" class="btn btn-outline-dark spaced-top" onclick="login_logout()"><i class="fas fa-power-off"></i> Go offline</button>
+            </div>
+            <div class="row">
+                <button type="submit" id="online" value="online" name="state" class="btn btn-outline-dark spaced" onclick="login_logout()"><i class="fas fa-power-off"></i> Go online </button>
             </div>
         </div>
     </div>

@@ -20,6 +20,7 @@
             </tr>
         </c:forEach>
     </tbody>
+    <script src="../../../js/fo/chooseDG.js"></script>
 </table>
 </body>
 </html>
