@@ -2,9 +2,11 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>Title</title>
+    <jsp:include page="../bootstrapImportHeader.jsp"></jsp:include>
+    <title>Choose delivery-guy</title>
+    <link rel="stylesheet" href="../../../css/foober.css" type="text/css">
 </head>
-<body>
+<body class="outer">
 <form method="post">
     <button class="buttonWithFunction" type="submit" name="mail" value="mail">MAIL</button>
 </form>
@@ -15,15 +17,16 @@
         <th class="text-center" scope="col">Status</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody id="dgTable">
         <c:forEach items="${deliveryGuys}"  var="deliveryGuy">
-            <tr>
+            <tr id="${deliveryGuy.email}" onclick="chooseDg('${deliveryGuy.email}')">
                 <td>${deliveryGuy.name}</td>
                 <td>${deliveryGuy.state}</td>
             </tr>
         </c:forEach>
     </tbody>
-    <script src="../../../js/fo/chooseDG.js"></script>
 </table>
+<script src="../../../js/fo/chooseDG.js"></script>
+<jsp:include page="../bootstrapImportBody.jsp"></jsp:include>
 </body>
 </html>

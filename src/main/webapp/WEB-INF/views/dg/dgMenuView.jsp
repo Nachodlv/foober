@@ -21,6 +21,7 @@
                 <input type="hidden" value="${loginedUser.name}">
                 <input type="hidden" value="${loginedUser.phone}">
                 <input type="hidden" value="${loginedUser.meansOfTransport}">
+                <input type="hidden" value="${loginedUser.email}">
                 <input type="hidden" id="dgStatus" value="${loginedUser.state}">
             </div>
             <div class="row">
@@ -42,6 +43,8 @@
     </div>
 </div>
 
+<script src="../../../js/dg/sw.js"></script>
+<script src="../../../js/dg/notificationDG.js"></script>
 <script src="../../../js/dg/dgMenu.js"></script>
 <jsp:include page="../bootstrapImportBody.jsp"/>
 </body>

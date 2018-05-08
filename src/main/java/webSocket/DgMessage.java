@@ -5,12 +5,22 @@ public class DgMessage {
     private int meansOfTransport;
     private int phone;
     private String state;
+    private String email;
 
-    public DgMessage(String name, int meansOfTransport, int phone, String state) {
+    public DgMessage(String name, int meansOfTransport, int phone, String state, String email) {
         this.name = name;
         this.meansOfTransport = meansOfTransport;
         this.phone = phone;
         this.state = state;
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setName(String name) {
