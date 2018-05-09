@@ -6,7 +6,7 @@
     <title>Choose delivery-guy</title>
     <link rel="stylesheet" href="../../../css/foober.css" type="text/css">
 </head>
-<body class="outer">
+<body class="outer" onbeforeunload="closeSocket()">
 <form method="post">
     <button class="buttonWithFunction" type="submit" name="mail" value="mail">MAIL</button>
 </form>

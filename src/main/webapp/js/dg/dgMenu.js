@@ -1,15 +1,29 @@
-var online = document.getElementById("online");
-var offline = document.getElementById("offline");
 var orderSocket = new WebSocket(getUrl('/orderSender'));
+var order;
+login_logout(true);
 
 orderSocket.onopen = function (ev) {
     orderSocket.onmessage = function (ev2) {
-        console.log(ev2);
-        showNotification(ev2);
+        console.log(ev2.data);
+        order = JSON.parse(ev2.data);
+        if(order.fromFO){
+            document.getElementById('spinner').hidden = true;
+            document.getElementById('options').hidden = false;
+            showNotification(ev2);
+        }
     }
 };
 
+window.onbeforeunload = closeSocket;
+
+function closeSocket(event) {
+    orderSocket.close();
+    return null;
+}
+
 function login_logout(first) {
+    var online = document.getElementById("online");
+    var offline = document.getElementById("offline");
     var state = document.getElementById("dgStatus").value;
     switch (state) {
         case 'ONLINE_WAITING':
@@ -23,9 +37,6 @@ function login_logout(first) {
     }
     if(!first) changeStatus(state);
 }
-
-login_logout(true);
-
 
 function changeStatus(oldState){
     var stateSocket = new WebSocket(getUrl('/dgOnline'));

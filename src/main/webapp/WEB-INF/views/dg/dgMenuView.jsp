@@ -35,12 +35,18 @@
     </form>
 </div>
     <%--Spinner--%>
-    <div class="spinner">
+    <div class="spinner" id="spinner">
         <h3 align="center">Waiting for orders...</h3>
         <div class="bounce1"></div>
         <div class="bounce2"></div>
         <div class="bounce3"></div>
     </div>
+
+    <div class="row" id="options" hidden>
+        <button type="button" value="accept" name="accept" class="btn btn-outline-dark spaced-top" onclick="acceptOrder()"><i class="fas fa-power-off"></i> Accept</button>
+        <button type="button" value="refuse" name="refuse" class="btn btn-outline-dark spaced" onclick="refuseOrder()"><i class="fas fa-power-off"></i> Refuse </button>
+    </div>
+
 </div>
 
 <script src="../../../js/dg/sw.js"></script>

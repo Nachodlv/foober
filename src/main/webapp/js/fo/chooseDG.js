@@ -10,6 +10,10 @@ dgSocket.onopen = function (ev) {
     };
 };
 
+window.addEventListener("beforeunload", function(e){
+    dgSocket.close();
+}, false);
+
 function newDeliveryGuy(deliveryGuy){
     var dgTable = document.getElementById('dgTable');
     var row = document.createElement('tr');
@@ -24,7 +28,10 @@ function newDeliveryGuy(deliveryGuy){
     row.appendChild(state);
 
     row.id = deliveryGuy.email;
-    row.onmousedown = chooseDg(deliveryGuy.email);
+
+    row.addEventListener('mousedown', function () {
+        chooseDg(deliveryGuy.email);
+    });
     dgTable.appendChild(row);
 }
 

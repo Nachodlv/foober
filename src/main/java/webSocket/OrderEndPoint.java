@@ -1,5 +1,9 @@
 package webSocket;
 
+import org.utils.GoogleMail;
+import org.utils.Utils;
+
+import javax.mail.MessagingException;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
@@ -15,7 +19,9 @@ public class OrderEndPoint {
 
     @OnMessage
     public void handleMessage(OrderMessage message){
-        System.out.println("Message sent ==>" + message);
+        if(message.isFromFO()){
+            //sendEmail(message);
+        }
         for(Session session: sessions){
             try {
                 session.getBasicRemote().sendObject(message);
@@ -27,12 +33,17 @@ public class OrderEndPoint {
 
     @OnOpen
     public void onOpen(Session session){
-        System.out.println("Session opened ==>");
         sessions.add(session);
     }
 
     @OnClose
-    public void onClose(){
-        System.out.println("Session closed =>");
+    public void onClose(Session session){
+        sessions.remove(session);
+    }
+
+    private void sendEmail(OrderMessage message) throws MessagingException {
+        String titleEmail = "Order received";
+        String messageEmail = "You have received an order";
+        GoogleMail.send("iFoober", "fooberlab1", message.getDgEmail(), titleEmail, messageEmail);
     }
 }
