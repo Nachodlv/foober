@@ -31,7 +31,6 @@ public class OrderMessage {
     }
 
     public boolean isFromFO() {
-
         return fromFO;
     }
 

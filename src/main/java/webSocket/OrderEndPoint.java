@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
+import static org.utils.Utils.sendEmail;
+
 @ServerEndpoint(value = "/orderSender",
                 decoders = OrderDecoder.class,
                 encoders = OrderEncoder.class )
@@ -18,9 +20,9 @@ public class OrderEndPoint {
     private static Set<Session> sessions = new HashSet<>();
 
     @OnMessage
-    public void handleMessage(OrderMessage message){
+    public void handleMessage(OrderMessage message) throws MessagingException {
         if(message.isFromFO()){
-            //sendEmail(message);
+            Utils.sendEmail(message);
         }
         for(Session session: sessions){
             try {
@@ -41,9 +43,4 @@ public class OrderEndPoint {
         sessions.remove(session);
     }
 
-    private void sendEmail(OrderMessage message) throws MessagingException {
-        String titleEmail = "Order received";
-        String messageEmail = "You have received an order";
-        GoogleMail.send("iFoober", "fooberlab1", message.getDgEmail(), titleEmail, messageEmail);
-    }
 }

@@ -1,8 +1,10 @@
 package org.utils;
 
 import model.Product;
+import webSocket.OrderMessage;
 
 import javax.imageio.ImageIO;
+import javax.mail.MessagingException;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
@@ -75,4 +77,9 @@ public class Utils {
         return activeProducts;
     }
 
+    public static void sendEmail(OrderMessage message) throws MessagingException {
+        String titleEmail = "Order received";
+        String messageEmail = "You have received an order!";
+        GoogleMail.send(message.getDgEmail(), titleEmail, messageEmail);
+    }
 }

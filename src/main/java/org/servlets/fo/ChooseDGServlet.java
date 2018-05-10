@@ -49,19 +49,4 @@ public class ChooseDGServlet extends HttpServlet {
         }
         return onlineDGs;
     }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String clientMail = request.getParameter("mail");
-
-        if(clientMail != null) {
-            try {
-                GoogleMail.send("iFoober", "fooberlab1", "ignacio.delavega@ing.austral.edu.ar", "TEST", "msg");
-            } catch (MessagingException e) {
-                e.printStackTrace();
-            }
-        }
-        response.sendRedirect(request.getContextPath() + "/chooseDG");
-    }
 }

@@ -59,7 +59,6 @@ function getDeliveryGuy(state){
     };
 
     return JSON.stringify(dg);
-
 }
 
 function getUrl(url){
@@ -74,4 +73,5 @@ function getUrl(url){
 
     return new_uri;
 }
+
 

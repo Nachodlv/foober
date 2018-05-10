@@ -1,6 +1,7 @@
 package org.utils;
 
 import com.sun.mail.smtp.SMTPTransport;
+import webSocket.OrderMessage;
 
 import java.security.Security;
 import java.util.Properties;
@@ -13,37 +14,22 @@ import javax.mail.internet.*;
 
 public class GoogleMail {
 
+    private final static String USERNAME = "iFoober";
+    private final static String PASSWORD = "fooberLab1";
+
     private GoogleMail() {
     }
 
     /**
      * Send email using GMail SMTP server.
      *
-     * @param username GMail username
-     * @param password GMail password
      * @param recipientEmail TO recipient
      * @param title title of the message
      * @param message message to be sent
      * @throws AddressException if the email address parse failed
      * @throws MessagingException if the connection is dead or not in the connected state or if the message is not a MimeMessage
      */
-    public static void send(final String username, final String password, String recipientEmail, String title, String message) throws AddressException, MessagingException {
-        GoogleMail.send(username, password, recipientEmail, "", title, message);
-    }
-
-    /**
-     * Send email using GMail SMTP server.
-     *
-     * @param username GMail username
-     * @param password GMail password
-     * @param recipientEmail TO recipient
-     * @param ccEmail CC recipient. Can be empty if there is no CC recipient
-     * @param title title of the message
-     * @param message message to be sent
-     * @throws AddressException if the email address parse failed
-     * @throws MessagingException if the connection is dead or not in the connected state or if the message is not a MimeMessage
-     */
-    public static void send(final String username, final String password, String recipientEmail, String ccEmail, String title, String message) throws AddressException, MessagingException {
+    static void send(String recipientEmail, String title, String message) throws MessagingException {
         Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
         final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
 
@@ -71,12 +57,8 @@ public class GoogleMail {
         // Create a default MimeMessage object.
         Message msg = new MimeMessage(session);
 
-        msg.setFrom(new InternetAddress(username + "@gmail.com"));
+        msg.setFrom(new InternetAddress(USERNAME + "@gmail.com"));
         msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail, false));
-
-        if (ccEmail.length() > 0) {
-            msg.setRecipients(Message.RecipientType.CC, InternetAddress.parse(ccEmail, false));
-        }
 
         // Set Subject: header field
         msg.setSubject(title);
@@ -86,8 +68,7 @@ public class GoogleMail {
 
         // first part (the html)
         BodyPart messageBodyPart = new MimeBodyPart();
-        String htmlText = "<h1>Hello</h1>";
-        final String htmlFinal = addSignature(htmlText);
+        final String htmlFinal = addSignature(message);
         messageBodyPart.setContent(htmlFinal, "text/html");
         // add it
         multipart.addBodyPart(messageBodyPart);
@@ -96,7 +77,7 @@ public class GoogleMail {
 
         SMTPTransport t = (SMTPTransport)session.getTransport("smtps");
 
-        t.connect("smtp.gmail.com", username, password);
+        t.connect("smtp.gmail.com", USERNAME, PASSWORD);
         t.sendMessage(msg, msg.getAllRecipients());
         t.close();
     }
