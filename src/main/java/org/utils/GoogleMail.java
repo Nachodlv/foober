@@ -15,7 +15,7 @@ import javax.mail.internet.*;
 public class GoogleMail {
 
     private final static String USERNAME = "iFoober";
-    private final static String PASSWORD = "fooberLab1";
+    private final static String PASSWORD = "fooberlab1";
 
     private GoogleMail() {
     }

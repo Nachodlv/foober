@@ -77,9 +77,13 @@ public class Utils {
         return activeProducts;
     }
 
-    public static void sendEmail(OrderMessage message) throws MessagingException {
+    public static void sendEmail(OrderMessage message) {
         String titleEmail = "Order received";
         String messageEmail = "You have received an order!";
-        GoogleMail.send(message.getDgEmail(), titleEmail, messageEmail);
+        try {
+            GoogleMail.send(message.getDgEmail(), titleEmail, messageEmail);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -12,11 +12,21 @@ dgSocket.onopen = function (ev) {
     };
 };
 
-window.addEventListener("beforeunload", function(e){
+//When the window is closed, the socket closes
+window.onbeforeunload = closeSocket;
+window.onunload = closeSocket;
+
+function closeSocket(event) {
     dgSocket.close();
-}, false);
+    //so the method doesn't execute twice
+    window.onbeforeunload = undefined;
+    window.onunload = undefined;
+}
 
 function newDeliveryGuy(deliveryGuy){
+    //check if it is already on the list
+    if(document.getElementById(deliveryGuy.email)) return;
+
     var dgTable = document.getElementById('dgTable');
     var row = document.createElement('tr');
     row.classList.add('dgs', 'text-center');
@@ -54,31 +64,54 @@ function newDeliveryGuy(deliveryGuy){
 
 function deleteDeliveryGuy(deliveryGuy) {
     var dgRow = document.getElementById(deliveryGuy.email);
-    dgRow.parentNode.removeChild(dgRow);
+    //check if it is the list before removing
+    if(dgRow) dgRow.parentNode.removeChild(dgRow);
 }
 
 function chooseDg(){
-    var orderSocket = new WebSocket(getUrl('/orderSender'));
+    var order = getOrder();
+    var orderSocket = new WebSocket(getUrl('/orderSender/' + order.dgEmail));
     orderSocket.onopen = function (ev) {
-        orderSocket.send(getOrder());
-        orderSocket.close();
+        orderSocket.send(JSON.stringify(order));
+        $("#modalConfirmDG").modal('hide');
+        onWindowClose(orderSocket);
+        waitingForResponse(orderSocket);
     };
-    $("#modalConfirmDG").modal('hide');
 }
 
 function getOrder() {
-    //var div = document.getElementById('order').childNodes;
-    //console.log(order);
-
-    //TODO sacar hardcode
-    var order =  {
-        elaborationTime: '10',
-        status: 'WAITING',
+    return {
+        elaborationTime: document.getElementById('elaborationTime').value,
+        stateOrder: 'WAITING',
         fromFO: true,
-        dgEmail: 'gonzalo.deachaval@ing.austral.edu.ar'
+        dgEmail: email,
+        totalPrice: document.getElementById('totalPrice').value,
+        tippingPercentage: document.getElementById('tippingPercentage').value,
+        clientEmail: document.getElementById('clientEmail').value
     };
+}
 
-    return JSON.stringify(order);
+function onWindowClose(orderSocket){
+    //Close previous socket
+    dgSocket.close();
+    //Close order socket when window is closed
+    window.onunload = window.onbeforeunload = orderSocketClose;
+    function orderSocketClose(){
+        orderSocket.close();
+        window.onunload = window.onbeforeunload = undefined;
+    }
+}
+
+function waitingForResponse(orderSocket){
+    document.getElementById('dgTable').hidden = true;
+    document.getElementById('waitingForResponse').hidden = false;
+
+    orderSocket.onmessage = function (message) {
+        console.log(message);
+        //check if it is accepted or refused
+        //add timeout
+    }
+
 }
 
 function getUrl(url){

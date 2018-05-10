@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../../../css/foober.css" type="text/css">
 </head>
 <body class="outer" onbeforeunload="closeSocket()">
-<table class="table table-striped table-hover table-bordered">
+<table class="table table-striped table-hover table-bordered" id="dgTable">
     <thead>
     <tr>
         <th class="text-center" scope="col">Name</th>
@@ -52,6 +52,25 @@
             </form>
         </div>
     </div>
+</div>
+
+<%--Waiting for response--%>
+<div id="waitingForResponse" hidden>
+    <div class="spinner" id="spinner">
+        <h3 align="center">Waiting for response...</h3>
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
+
+
+<%--Order Info (Hidden)--%>
+<div id="order" hidden>
+    <input id="elaborationTime" value="${order.elaborationTime}">
+    <input id="clientEmail" value="${order.client.email}">
+    <input id="tippingPercentage" value="${order.franchiseOwner.tippingPercentage}">
+    <input id="totalPrice" value="${order.getTotalCost()}">
 </div>
 
 <script src="../../../js/fo/chooseDG.js"></script>

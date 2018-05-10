@@ -1,4 +1,5 @@
-var orderSocket = new WebSocket(getUrl('/orderSender'));
+var email = document.getElementById('deliveryGuy').childNodes[7].value;
+var orderSocket = new WebSocket(getUrl('/orderSender/' + email));
 var order;
 login_logout(true);
 
@@ -7,18 +8,48 @@ orderSocket.onopen = function (ev) {
         console.log(ev2.data);
         order = JSON.parse(ev2.data);
         if(order.fromFO){
-            document.getElementById('spinner').hidden = true;
-            document.getElementById('options').hidden = false;
             showNotification(ev2);
+            showOrder();
         }
     }
 };
 
 window.onbeforeunload = closeSocket;
+window.onunload = closeSocket;
 
 function closeSocket(event) {
     orderSocket.close();
-    return null;
+
+    var request = new XMLHttpRequest();
+    request.open("POST",window.location.href,false);
+    request.setRequestHeader("content-type","application/x-www-form-urlencoded");
+    request.send("state=offline");
+
+    window.onbeforeunload = undefined;
+    window.onunload = undefined;
+
+    //changeStatus('ONLINE_WAITING');
+}
+
+function showOrder(){
+    //show order info
+    document.getElementById('spinner').hidden = true;
+    document.getElementById('options').hidden = false;
+}
+
+function hideOrder(){
+    //hideOrder
+}
+
+function acceptOrder(){
+    order.stateOrder = 'DELIVERING';
+    orderSocket.send(order);
+    hideOrder();
+}
+
+function refuseOrder(){
+    orderSocket.send(order);
+    hideOrder();
 }
 
 function login_logout(first) {
@@ -54,7 +85,7 @@ function getDeliveryGuy(state){
         name: div[1].value,
         phone: div[3].value,
         meansOfTransport: div[5].value,
-        email: div[7].value,
+        email: email,
         state: state
     };
 

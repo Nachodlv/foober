@@ -76,7 +76,9 @@ public class MakingOrderServlet extends HttpServlet {
         order.setOrderedProducts(orderedProductsList);
         OrderFunctiontality.modifyModel(order);
 
-        response.sendRedirect(request.getContextPath() + "/foMenu");
+        request.getSession().setAttribute("order", order);
+
+        response.sendRedirect(request.getContextPath() + "/chooseDG");
     }
 
     private void searchProduct(String searchBy, HttpServletRequest request, HttpServletResponse response) throws IOException {

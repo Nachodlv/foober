@@ -44,7 +44,7 @@
 
     <div class="row" id="options" hidden>
         <button type="button" value="accept" name="accept" class="btn btn-outline-dark spaced-top" onclick="acceptOrder()"><i class="fas fa-power-off"></i> Accept</button>
-        <button type="button" value="refuse" name="refuse" class="btn btn-outline-dark spaced" onclick="refuseOrder()"><i class="fas fa-power-off"></i> Refuse </button>
+        <button type="button" value="accept" name="accept" class="btn btn-outline-dark spaced-top" onclick="refuseOrder()"><i class="fas fa-power-off"></i> Refuse</button>
     </div>
 
 </div>
