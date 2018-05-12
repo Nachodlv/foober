@@ -7,23 +7,23 @@
     <link rel="stylesheet" href="../../../css/foober.css" type="text/css">
 </head>
 <body class="outer" onbeforeunload="closeSocket()">
-<table class="table table-striped table-hover table-bordered" id="dgTable">
+<table class="table table-striped table-hover table-bordered" <%--id="dgTable"--%>>
     <thead>
     <tr>
         <th class="text-center" scope="col">Name</th>
         <th class="text-center" scope="col">Status</th>
-        <th class="text-center" scope="col">Means Of Transport</th>
+        <th class="text-center" scope="col" style="width: 20%;">Means Of Transport</th>
         <th class="text-center" scope="col">Phone</th>
         <th class="text-center" scope="col">Rating</th>
     </tr>
     </thead>
     <tbody id="dgTable">
         <c:forEach items="${deliveryGuys}"  var="deliveryGuy">
+            <input class="meansOfTransport" hidden value="${deliveryGuy.meansOfTransport}">
             <tr class="text-center dgs" id="${deliveryGuy.email}">
                 <td>${deliveryGuy.name}</td>
                 <td><i class="fa fa-circle" aria-hidden="true" style="color:green;"></i></td>
-                <input id="meansOfTransport" hidden value="${deliveryGuy.meansOfTransport}">
-                <td id="setMeansOfTransport"></td>
+                <td class="setMeansOfTransport">${deliveryGuy.meansOfTransport}</td>
                 <td>${deliveryGuy.phone}</td>
                 <td><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></td>
             </tr>

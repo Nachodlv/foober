@@ -1,15 +1,14 @@
 package org.utils;
 
 import com.sun.mail.smtp.SMTPTransport;
-import webSocket.OrderMessage;
 
-import java.security.Security;
-import java.util.Properties;
 import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.internet.*;
+import java.security.Security;
+import java.util.Properties;
 
 
 public class GoogleMail {
@@ -24,9 +23,9 @@ public class GoogleMail {
      * Send email using GMail SMTP server.
      *
      * @param recipientEmail TO recipient
-     * @param title title of the message
-     * @param message message to be sent
-     * @throws AddressException if the email address parse failed
+     * @param title          title of the message
+     * @param message        message to be sent
+     * @throws AddressException   if the email address parse failed
      * @throws MessagingException if the connection is dead or not in the connected state or if the message is not a MimeMessage
      */
     static void send(String recipientEmail, String title, String message) throws MessagingException {
@@ -75,7 +74,7 @@ public class GoogleMail {
         msg.setContent(multipart);
 
 
-        SMTPTransport t = (SMTPTransport)session.getTransport("smtps");
+        SMTPTransport t = (SMTPTransport) session.getTransport("smtps");
 
         t.connect("smtp.gmail.com", USERNAME, PASSWORD);
         t.sendMessage(msg, msg.getAllRecipients());

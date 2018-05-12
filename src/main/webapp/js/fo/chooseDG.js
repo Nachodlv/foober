@@ -34,16 +34,17 @@ function newDeliveryGuy(deliveryGuy){
 
     var name = document.createElement('td');
     var state = document.createElement('td');
-    var meansOfTransport = document.createElement('td');
+    //var meansOfTransport = document.createElement('td');
     var setMeansOfTransport = document.createElement('td');
     var phone = document.createElement('td');
     var rating = document.createElement('td');
 
     name.innerHTML = deliveryGuy.name;
     state.innerHTML = "<td><i class=\"fa fa-circle\" aria-hidden=\"true\" style=\"color:green;\"></i></td>";
-    meansOfTransport.hidden = true;
-    meansOfTransport.value = deliveryGuy.meansOfTransport;
-    setMeansOfTransport.id = "setMeansOfTransport";
+    // meansOfTransport.hidden = true;
+    // meansOfTransport.value = deliveryGuy.meansOfTransport;
+    setMeansOfTransport.className = "setMeansOfTransport";
+    setMeansOfTransport.innerHTML = deliveryGuy.meansOfTransport;
     phone.innerHTML = deliveryGuy.phone;
 
     row.appendChild(name);
@@ -128,18 +129,19 @@ function getUrl(url){
 }
 
 function replaceMeansOfTransport() {
-    var meansOfTransport = document.getElementById("meansOfTransport").value;
-    var setTransport = document.getElementById("setMeansOfTransport");
-    switch(meansOfTransport) {
-        case '1':
-            setTransport.innerHTML = '<i class=\"fa fa-bicycle\" aria-hidden=\"true\"></i>';
-            break;
-        case '2':
-            setTransport.innerHTML = '<i class="fa fa-child" aria-hidden="true"></i>';
-            break;
-        case '3':
-            setTransport.innerHTML = '<i class="fa fa-car" aria-hidden="true"></i>';
-            break;
+    var setTransport = document.getElementsByClassName("setMeansOfTransport");
+    for(var i = 0; i < setTransport.length; i++) {
+        switch(setTransport[i].innerHTML) {
+            case '1':
+                setTransport[i].innerHTML = '<i class=\"fa fa-bicycle\" aria-hidden=\"true\"></i>';
+                break;
+            case '2':
+                setTransport[i].innerHTML = '<i class="fa fa-child" aria-hidden=\"true\"></i>';
+                break;
+            case '3':
+                setTransport[i].innerHTML = '<i class="fa fa-car" aria-hidden=\"true\"></i>';
+                break;
+        }
     }
 }
 
