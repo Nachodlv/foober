@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../../../css/foober.css" type="text/css">
 </head>
 <body class="outer" onbeforeunload="closeSocket()">
-<table class="table table-striped table-hover table-bordered" <%--id="dgTable"--%>>
+<table class="table table-striped table-hover table-bordered" id="table">
     <thead>
     <tr>
         <th class="text-center" scope="col">Name</th>
@@ -77,7 +77,6 @@
 <jsp:include page="../bootstrapImportBody.jsp"/>
 <script>
     $(".dgs").click(function (event) {
-        console.log(event);
         var email = event.currentTarget.id;
         saveEmail(email);
         $("#modalConfirmDG").modal();

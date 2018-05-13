@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet("/dgMenu")
 public class DGMenuServlet extends HttpServlet {
@@ -55,6 +56,10 @@ public class DGMenuServlet extends HttpServlet {
         }
 
         DGFunctionality.modifyModel(deliveryGuy);
-        response.sendRedirect(request.getContextPath() + "/dgMenu");
+
+//        response.setContentType("text/plain");
+//        response.setCharacterEncoding("UTF-8");
+//        response.getWriter().write(state);
+        //response.sendRedirect(request.getContextPath() + "/dgMenu");
     }
 }

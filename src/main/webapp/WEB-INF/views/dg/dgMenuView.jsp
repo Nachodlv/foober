@@ -25,10 +25,10 @@
                 <input type="hidden" id="dgStatus" value="${loginedUser.state}">
             </div>
             <div class="row">
-                <button type="submit" id="offline" value="offline" name="state" class="btn btn-outline-dark spaced-top" onclick="login_logout()"><i class="fas fa-power-off"></i> Go offline</button>
+                <button type="button" id="offline" value="offline" name="state" class="btn btn-outline-dark spaced-top" onclick="login_logout('OFFLINE')" disabled><i class="fas fa-power-off"></i> Go offline</button>
             </div>
             <div class="row">
-                <button type="submit" id="online" value="online" name="state" class="btn btn-outline-dark spaced" onclick="login_logout()"><i class="fas fa-power-off"></i> Go online </button>
+                <button type="button" id="online" value="online" name="state" class="btn btn-outline-dark spaced" onclick="login_logout('ONLINE_WAITING')"><i class="fas fa-power-off"></i> Go online </button>
             </div>
         </div>
     </div>

@@ -1,7 +1,6 @@
 var email = document.getElementById('deliveryGuy').childNodes[7].value;
 var orderSocket = new WebSocket(getUrl('/orderSender/' + email));
 var order;
-login_logout(true);
 
 orderSocket.onopen = function (ev) {
     orderSocket.onmessage = function (ev2) {
@@ -20,15 +19,10 @@ window.onunload = closeSocket;
 function closeSocket(event) {
     orderSocket.close();
 
-    var request = new XMLHttpRequest();
-    request.open("POST",window.location.href,false);
-    request.setRequestHeader("content-type","application/x-www-form-urlencoded");
-    request.send("state=offline");
-
     window.onbeforeunload = undefined;
     window.onunload = undefined;
 
-    //changeStatus('ONLINE_WAITING');
+    changeStatus('OFFLINE');
 }
 
 function showOrder(){
@@ -52,10 +46,10 @@ function refuseOrder(){
     hideOrder();
 }
 
-function login_logout(first) {
+function login_logout(state) {
     var online = document.getElementById("online");
     var offline = document.getElementById("offline");
-    var state = document.getElementById("dgStatus").value;
+    //var state = document.getElementById("dgStatus").value;
     switch (state) {
         case 'ONLINE_WAITING':
             online.disabled = true;
@@ -66,14 +60,14 @@ function login_logout(first) {
             online.disabled = false;
             break;
     }
-    if(!first) changeStatus(state);
+    //var newState = state==='OFFLINE'? 'ONLINE_WAITING': 'OFFLINE';
+    changeStatus(state);
 }
 
-function changeStatus(oldState){
+function sendState(state){
     var stateSocket = new WebSocket(getUrl('/dgOnline'));
-    oldState = oldState==='OFFLINE'? 'ONLINE_WAITING': 'OFFLINE';
     stateSocket.onopen = function () {
-        stateSocket.send(getDeliveryGuy(oldState));
+        stateSocket.send(getDeliveryGuy(state));
         stateSocket.close();
     };
 }
@@ -105,4 +99,11 @@ function getUrl(url){
     return new_uri;
 }
 
+function changeStatus(state) {
+    var xhttp = new XMLHttpRequest();
+    document.getElementById("dgStatus").value = state;
+    xhttp.open("POST", window.location.href, true);
+    xhttp.send("state=" + state);
+    sendState(state);
+}
 

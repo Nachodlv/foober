@@ -104,7 +104,7 @@ function onWindowClose(orderSocket){
 }
 
 function waitingForResponse(orderSocket){
-    document.getElementById('dgTable').hidden = true;
+    document.getElementById('table').hidden = true;
     document.getElementById('waitingForResponse').hidden = false;
 
     orderSocket.onmessage = function (message) {
