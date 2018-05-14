@@ -101,3 +101,7 @@
     max-height: calc(100vh - 155px);
     overflow-y: auto
 }
+
+.rem1 {
+    font-size: 1rem;
+}

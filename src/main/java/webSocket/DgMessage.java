@@ -40,7 +40,6 @@ public class DgMessage {
     }
 
     public String getName() {
-
         return name;
     }
 

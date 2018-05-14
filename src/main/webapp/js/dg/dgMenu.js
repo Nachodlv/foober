@@ -8,7 +8,7 @@ orderSocket.onopen = function (ev) {
         order = JSON.parse(ev2.data);
         if(order.fromFO){
             showNotification(ev2);
-            showOrder();
+            showOrder(order);
         }
     }
 };
@@ -25,10 +25,15 @@ function closeSocket(event) {
     changeStatus('OFFLINE');
 }
 
-function showOrder(){
+function showOrder(order){
     //show order info
     document.getElementById('spinner').hidden = true;
     document.getElementById('options').hidden = false;
+    $('#elaborationTime').html(order.elaborationTime + ' minutes');
+    $('#clientEmail').html(order.clientEmail);
+    $('#totalPrice').html(order.totalPrice + '$');
+    $('#tip').html(getTip(order.tippingPercentage, order.totalPrice) + '$');
+    $("#options").modal();
 }
 
 function hideOrder(){
@@ -105,5 +110,9 @@ function changeStatus(state) {
     xhttp.open("POST", window.location.href, true);
     xhttp.send("state=" + state);
     sendState(state);
+}
+
+function getTip(tippingPercentage, totalCost) {
+    return (totalCost * tippingPercentage)/100;
 }
 

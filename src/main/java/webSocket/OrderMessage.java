@@ -64,7 +64,6 @@ public class OrderMessage {
     }
 
     public double getTotalPrice() {
-
         return totalPrice;
     }
 

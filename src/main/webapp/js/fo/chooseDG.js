@@ -34,15 +34,12 @@ function newDeliveryGuy(deliveryGuy){
 
     var name = document.createElement('td');
     var state = document.createElement('td');
-    //var meansOfTransport = document.createElement('td');
     var setMeansOfTransport = document.createElement('td');
     var phone = document.createElement('td');
     var rating = document.createElement('td');
 
     name.innerHTML = deliveryGuy.name;
     state.innerHTML = "<td><i class=\"fa fa-circle\" aria-hidden=\"true\" style=\"color:green;\"></i></td>";
-    // meansOfTransport.hidden = true;
-    // meansOfTransport.value = deliveryGuy.meansOfTransport;
     setMeansOfTransport.className = "setMeansOfTransport";
     setMeansOfTransport.innerHTML = deliveryGuy.meansOfTransport;
     phone.innerHTML = deliveryGuy.phone;
