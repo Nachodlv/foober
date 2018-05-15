@@ -12,7 +12,6 @@
 <body class="outer">
 
 <jsp:include page="../_header.jsp"/>
-<%--<h3 class="ml-2">Franchise Owner Menu</h3>--%>
 
 <%--Current orders--%>
 <br>
@@ -25,7 +24,7 @@
                 <div class="col-md-4 text-center">
                     <img class="card-img-top" style="height: 8rem; width:8rem;" src="http://localhost:8080/images/${order.deliveryGuy.email}.png" align="center"><br>
                     <div class="card-body">
-                        <h5 class="card-title">DG: fafa</h5>
+                        <h5 class="card-title">DG: ${order.deliveryGuy.name}</h5>
                         <input class="issuedTime" hidden value="${order.issuedTime}">
                         <i class="far fa-clock"></i><p class="card-text timeElapsed"></p>
                         <i class="far fa-user"></i><p class="card-text"> ${order.client.email}</p>
@@ -188,7 +187,7 @@
 
 <jsp:include page="../bootstrapImportBody.jsp"/>
 
-<script src="../../../js/fo/foMenuView.js"></script>
+<script src="../../../js/fo/foMenu.js"></script>
 <script src="../../../js/errorCatcher.js"></script>
 <script src="../../../js/dg/anonymusDG.js"></script>
 </body>

@@ -8,9 +8,8 @@
 </head>
 <body>
 
-<div style="width: 30%;" class="container d-flex justify-content-center align-items-center flex-column alert-secondary
-                                        rounded mt-5">
-    <img src="../../images/FooberLogo.png" class="img-fluid mt-3" style="width: 70%">
+<div style="padding:0 1rem 0.1rem 1rem;" class="container align-self-center col-lg-3 col-md-4 col-sm-6 col-12 alert-secondary rounded text-center">
+    <img src="../../images/FooberLogo.png" class="img-fluid" style="padding: 1.5rem;margin-bottom: -1rem;">
     <h3 class="mt-2">Welcome to Foober!</h3>
 
 
@@ -30,11 +29,11 @@
                    name="password" value="${user.password}">
         </div>
         <div class="row">
-            <div class="col-md-4" align="center"><button type="submit" class="btn btn-dark" value="Submit">Submit</button></div>
-            <div class="col-md-4" align="center">
-                <a style= "font-size: 11px" class="registerLink" href="${pageContext.request.contextPath}/dgRegister">Register<br> Delivery Guy</a>
+            <div class="col-md-4 col-4" align="center"><button type="submit" class="btn btn-dark btn-responsive" value="Submit">Submit</button></div>
+            <div class="col-md-4 col-4" align="center" style="line-height: normal;">
+                <a style= "font-size: 0.7rem" class="registerLink" href="${pageContext.request.contextPath}/dgRegister">Register<br>Delivery Guy</a>
             </div>
-            <div class="col-md-4" align="center"><a class="registerLink" style= "font-size: 11px" href="${pageContext.request.contextPath}/foRegister">Register Franchise</a></div>
+            <div class="col-md-4 col-4" align="center" style="line-height: normal;"><a class="registerLink" style= "font-size: 0.7rem" href="${pageContext.request.contextPath}/foRegister">Register<br>Franchise</a></div>
         </div>
     </form>
 </div>
