@@ -1,11 +1,14 @@
 package model;
 
+import com.google.gson.annotations.Expose;
+
 import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "userAccount")
 public abstract class UserAccount {
+    @Expose
     @Id
     @Column(name = "email")
     private String email;

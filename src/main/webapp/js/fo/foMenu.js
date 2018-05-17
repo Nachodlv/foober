@@ -95,7 +95,6 @@ function getFoUrl() {
 
 
 function showOrderAcceptedModal(){
-    debugger;
     var orderAccepted = document.getElementById('orderAccepted').value;
     if(orderAccepted !== '') $('#orderAcceptedModal').modal();
 }
