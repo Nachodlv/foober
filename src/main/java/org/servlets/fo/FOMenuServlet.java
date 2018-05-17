@@ -73,9 +73,9 @@ public class FOMenuServlet extends HttpServlet {
         String email = request.getParameter("clientEmail");
         String address = request.getParameter("clientAddress");
 
-        int phone;
+        long phone;
         try {
-            phone = Integer.valueOf(phoneString);
+            phone = Long.valueOf(phoneString);
         } catch (NumberFormatException e) {
             response.sendRedirect(request.getContextPath() + "/foMenu?error=Error while creating the client, invalid phone number");
             return;

@@ -45,7 +45,7 @@ public class RegisterFOServlet extends HttpServlet {
         String email = request.getParameter("email");
         String address = request.getParameter("address");
         String name = request.getParameter("name");
-        FranchiseOwner franchiseOwner = new FranchiseOwner(email, name, password, Integer.parseInt(phone), address);
+        FranchiseOwner franchiseOwner = new FranchiseOwner(email, name, password, Long.parseLong(phone), address);
         try {
             FOFunctionality.addModel(franchiseOwner);
         } catch (PersistenceException e) {

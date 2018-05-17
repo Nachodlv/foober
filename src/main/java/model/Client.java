@@ -16,7 +16,7 @@ public class Client {
     @Column(name = "name")
     private String name;
     @Column(name = "phone")
-    private int phone;
+    private long phone;
     @Column(name = "address")
     private String address;
     @Expose
@@ -30,7 +30,7 @@ public class Client {
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
     private Set<Order> orders;
 
-    public Client(String name, int phone, String address, String email, FranchiseOwner franchiseOwner) {
+    public Client(String name, long phone, String address, String email, FranchiseOwner franchiseOwner) {
         this.name = name;
         this.phone = phone;
         this.address = address;
@@ -51,7 +51,7 @@ public class Client {
         this.name = name;
     }
 
-    public int getPhone() {
+    public long getPhone() {
         return phone;
     }
 

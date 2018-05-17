@@ -13,7 +13,7 @@ public class DeliveryGuy extends UserAccount {
     @Column(name = "name")
     private String name;
     @Column(name = "phone")
-    private int phone;
+    private long phone;
     @Column(name = "meansOfTransport")
     private int meansOfTransport;
     @OneToMany(mappedBy = "deliveryGuy", fetch = FetchType.EAGER)
@@ -22,7 +22,7 @@ public class DeliveryGuy extends UserAccount {
     @Column(name = "state")
     private StateDG state;
 
-    public DeliveryGuy(String email, String name, String password, int phone, int meansOfTransport) {
+    public DeliveryGuy(String email, String name, String password, long phone, int meansOfTransport) {
         super(email, password, "DG");
         this.name = name;
         this.phone = phone;
@@ -42,7 +42,7 @@ public class DeliveryGuy extends UserAccount {
         this.name = name;
     }
 
-    public int getPhone() {
+    public long getPhone() {
         return phone;
     }
 

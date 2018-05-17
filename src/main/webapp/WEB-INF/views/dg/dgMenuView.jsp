@@ -22,7 +22,7 @@
                 <input type="hidden" value="${loginedUser.phone}">
                 <input type="hidden" value="${loginedUser.meansOfTransport}">
                 <input type="hidden" value="${loginedUser.email}">
-                <input type="hidden" id="dgStatus" value="${loginedUser.state}">
+                <input type="hidden" id="dgState" value="${loginedUser.state}">
             </div>
             <div class="row">
                 <button type="button" id="offline" value="offline" name="state" class="btn btn-outline-dark spaced-top" onclick="login_logout('OFFLINE')" disabled><i class="fas fa-power-off"></i> Go offline</button>
@@ -42,6 +42,9 @@
         <div class="bounce3"></div>
     </div>
 
+    <%--Button to finish deliverying--%>
+    <button type="button" id="finishDelivering" class="btn btn-outline-dark spaced" onclick="finishDelivering()" hidden>Order delivered</button>
+
     <%--modal for confirming--%>
     <div class="modal fade bd-example-modal-sm" id="options" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-sm">
@@ -57,12 +60,16 @@
                         <p class="rem1">Do you want to take this order?</p>
                         <table class="table table-striped">
                             <tr>
+                                <td><p class="rem1"><b>Franchise</b></p></td>
+                                <td id="foName"></td>
+                            </tr>
+                            <tr>
                                 <td><p class="rem1"><b>Elaboration Time</b></p></td>
                                 <td id="elaborationTime"></td>
                             </tr>
                             <tr>
-                                <td><p class="rem1"><b>Client email</b></p></td>
-                                <td id="clientEmail"></td>
+                                <td><p class="rem1"><b>Client phone</b></p></td>
+                                <td id="clientPhone"></td>
                             </tr>
                             <tr>
                                 <td><p class="rem1"><b>Total Price</b></p></td>
@@ -77,7 +84,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" onclick="refuseOrder()" class="btn btn btn-danger" data-dismiss="modal">Refuse</button>
-                        <button type="button" onclick="acceptOrder()" class="btn btn-success">Confirm</button>
+                        <button type="button" onclick="acceptOrder()" class="btn btn-success">Accept</button>
                     </div>
                 </form>
             </div>

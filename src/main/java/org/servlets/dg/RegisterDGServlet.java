@@ -59,7 +59,7 @@ public class RegisterDGServlet extends HttpServlet {
             return;
         }
 
-        DeliveryGuy deliveryGuy = new DeliveryGuy(mail, name, password, Integer.parseInt(phone), Integer.parseInt(meansOfTransport));
+        DeliveryGuy deliveryGuy = new DeliveryGuy(mail, name, password, Long.parseLong(phone), Integer.parseInt(meansOfTransport));
 
         try {
             DGFunctionality.addModel(deliveryGuy);

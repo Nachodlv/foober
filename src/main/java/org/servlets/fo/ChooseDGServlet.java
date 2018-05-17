@@ -2,9 +2,8 @@ package org.servlets.fo;
 
 import hibernate.DGFunctionality;
 import hibernate.FOFunctionality;
-import model.DeliveryGuy;
-import model.FranchiseOwner;
-import model.StateDG;
+import hibernate.OrderFunctiontality;
+import model.*;
 import org.securityfilter.AppUtils;
 import org.utils.GoogleMail;
 import org.utils.Utils;
@@ -38,6 +37,20 @@ public class ChooseDGServlet extends HttpServlet {
 
 
         dispatcher.forward(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response){
+        String dgEmail = request.getParameter("dgEmail");
+        if(dgEmail != null) {
+            Order order = (Order)request.getSession().getAttribute("order");
+            DeliveryGuy deliveryGuy = DGFunctionality.getDeliveryGuy(dgEmail);
+            order.setStateOrder(StateOrder.DELIVERING);
+            order.setDeliveryGuy(deliveryGuy);
+            deliveryGuy.getOrders().add(order);
+            OrderFunctiontality.modifyModel(order);
+            DGFunctionality.modifyModel(deliveryGuy);
+        }
     }
 
     private List<DeliveryGuy> filterDeliveryGuys(List<DeliveryGuy> deliveryGuys) {

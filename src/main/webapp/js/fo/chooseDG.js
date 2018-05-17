@@ -1,5 +1,6 @@
 var dgSocket = new WebSocket(getUrl('/dgOnline'));
 var email;
+replaceMeansOfTransport();
 
 dgSocket.onopen = function (ev) {
     dgSocket.onmessage = function (ev) {
@@ -79,13 +80,14 @@ function chooseDg(){
 
 function getOrder() {
     return {
+        foName: document.getElementById('foName').value,
         elaborationTime: document.getElementById('elaborationTime').value,
         stateOrder: 'WAITING',
         fromFO: true,
         dgEmail: email,
         totalPrice: document.getElementById('totalPrice').value,
         tippingPercentage: document.getElementById('tippingPercentage').value,
-        clientEmail: document.getElementById('clientEmail').value
+        clientPhone: document.getElementById('clientPhone').value
     };
 }
 
@@ -105,9 +107,22 @@ function waitingForResponse(orderSocket){
     document.getElementById('waitingForResponse').hidden = false;
 
     orderSocket.onmessage = function (message) {
-        console.log(message);
-        //check if it is accepted or refused
+        var order = JSON.parse(message.data);
+        if(order.fromFO) return;
+        if(order.stateOrder === 'DELIVERING'){
+            //order accepted
+            saveOrder(order.dgEmail);
+            var newHref = window.location.href.split('/');
+            newHref[3] = 'foMenu?orderAccepted=true';
+            window.location.href = newHref.join('/');
+        }else{
+            //order rejected
+            document.getElementById('table').hidden = false;
+            document.getElementById('waitingForResponse').hidden = true;
+            document.getElementById('orderRejected').hidden = false;
+        }
         //add timeout
+        orderSocket.close();
     }
 
 }
@@ -146,4 +161,9 @@ function saveEmail(email) {
     this.email = email;
 }
 
-replaceMeansOfTransport();
+function saveOrder(dgEmail){
+    var xhttp = new XMLHttpRequest();
+    var url = window.location.href += '?dgEmail=' + dgEmail;
+    xhttp.open("POST", url, true);
+    xhttp.send("dgEmail=" + dgEmail);
+}

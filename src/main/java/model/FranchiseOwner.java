@@ -14,7 +14,7 @@ public class FranchiseOwner extends UserAccount {
     @Column(name = "name")
     private String name;
     @Column(name = "phone")
-    private int phone;
+    private long phone;
     @Column(name = "address")
     private String address;
     @Column(name = "menuId")
@@ -35,7 +35,7 @@ public class FranchiseOwner extends UserAccount {
         orders = new HashSet<>();
     }
 
-    public FranchiseOwner(String email, String name, String password, int phone, String address, int menuId, int tippingPercentage) {
+    public FranchiseOwner(String email, String name, String password, long phone, String address, int menuId, int tippingPercentage) {
         super(email, password, "FO");
         this.name = name;
         this.phone = phone;
@@ -47,7 +47,7 @@ public class FranchiseOwner extends UserAccount {
         orders = new HashSet<>();
     }
 
-    public FranchiseOwner(String email, String name, String password, int phone, String address) {
+    public FranchiseOwner(String email, String name, String password, long phone, String address) {
         super(email, password, "FO");
         this.name = name;
         this.phone = phone;
@@ -64,7 +64,7 @@ public class FranchiseOwner extends UserAccount {
         return name;
     }
 
-    public int getPhone() {
+    public long getPhone() {
         return phone;
     }
 

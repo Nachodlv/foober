@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="../../../css/foober.css" type="text/css">
 </head>
 <body class="outer" onbeforeunload="closeSocket()">
+<div id="orderRejected" class="alert alert-danger alert-dismissible fade show" role="alert" hidden>
+    The delivery-guy rejected the order.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 <table class="table table-striped table-hover table-bordered" id="table">
     <thead>
     <tr>
@@ -67,8 +73,9 @@
 
 <%--Order Info (Hidden)--%>
 <div id="order" hidden>
+    <input id="foName" value="${order.franchiseOwner.name}">
     <input id="elaborationTime" value="${order.elaborationTime}">
-    <input id="clientEmail" value="${order.client.email}">
+    <input id="clientPhone" value="${order.client.phone}">
     <input id="tippingPercentage" value="${order.franchiseOwner.tippingPercentage}">
     <input id="totalPrice" value="${order.getTotalCost()}">
 </div>

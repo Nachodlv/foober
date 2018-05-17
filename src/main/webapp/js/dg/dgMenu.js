@@ -1,6 +1,9 @@
 var email = document.getElementById('deliveryGuy').childNodes[7].value;
 var orderSocket = new WebSocket(getUrl('/orderSender/' + email));
 var order;
+var waitingResponse = false;
+var delivering = false;
+onlineWorking();
 
 orderSocket.onopen = function (ev) {
     orderSocket.onmessage = function (ev2) {
@@ -17,37 +20,49 @@ window.onbeforeunload = closeSocket;
 window.onunload = closeSocket;
 
 function closeSocket(event) {
+    if(waitingResponse) refuseOrder();
+
     orderSocket.close();
+
+    if(!delivering) changeState('OFFLINE');
 
     window.onbeforeunload = undefined;
     window.onunload = undefined;
-
-    changeStatus('OFFLINE');
 }
 
 function showOrder(order){
     //show order info
+    waitingResponse = true;
     document.getElementById('spinner').hidden = true;
     document.getElementById('options').hidden = false;
+    $('#foName').html(order.foName);
     $('#elaborationTime').html(order.elaborationTime + ' minutes');
-    $('#clientEmail').html(order.clientEmail);
+    $('#clientPhone').html(order.clientPhone);
     $('#totalPrice').html(order.totalPrice + '$');
     $('#tip').html(getTip(order.tippingPercentage, order.totalPrice) + '$');
-    $("#options").modal();
+    $("#options").modal({
+        backdrop: false
+    });
 }
 
 function hideOrder(){
-    //hideOrder
+    $("#options").modal('hide');
+    waitingResponse = false;
 }
 
 function acceptOrder(){
     order.stateOrder = 'DELIVERING';
-    orderSocket.send(order);
+    order.fromFO = false;
+    orderSocket.send(JSON.stringify(order));
+    delivering = true;
+    changeState('ONLINE_WORKING');
+    onlineWorking(true);
     hideOrder();
 }
 
 function refuseOrder(){
-    orderSocket.send(order);
+    order.fromFO = false;
+    orderSocket.send(JSON.stringify(order));
     hideOrder();
 }
 
@@ -64,7 +79,7 @@ function login_logout(state) {
             online.disabled = false;
             break;
     }
-    changeStatus(state);
+    changeState(state);
 }
 
 function sendState(state){
@@ -102,15 +117,40 @@ function getUrl(url){
     return new_uri;
 }
 
-function changeStatus(state) {
+function changeState(state) {
     var xhttp = new XMLHttpRequest();
-    document.getElementById("dgStatus").value = state;
-    xhttp.open("POST", window.location.href, true);
+    document.getElementById("dgState").value = state;
+    var newHref = window.location.href.split('/');
+    newHref[3] = 'dgMenu?state=' + state;
+    xhttp.open("POST", newHref.join('/'), true);
     xhttp.send("state=" + state);
     sendState(state);
 }
 
 function getTip(tippingPercentage, totalCost) {
     return (totalCost * tippingPercentage)/100;
+}
+
+function finishDelivering(){
+    document.getElementById('finishDelivering').hidden = true;
+    document.getElementById('offline').disabled = false;
+    document.getElementById('spinner').hidden = false;
+
+    changeState('ONLINE_WAITING');
+}
+
+function onlineWorking(startWorking){
+    var state = document.getElementById('dgState').value;
+    if(state === 'ONLINE_WORKING' || startWorking) {
+        //if order is undefined, getOrder (if the page reloads)
+        if(!order) getOrder();
+
+        document.getElementById('finishDelivering').hidden = false;
+        document.getElementById('offline').disabled = true;
+    }
+}
+
+function getOrder(){
+    //get order AJAX
 }
 

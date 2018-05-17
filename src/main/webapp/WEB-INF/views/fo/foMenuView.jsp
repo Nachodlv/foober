@@ -15,7 +15,6 @@
 
 <%--Current orders--%>
 <input id="foID" hidden value=${loginedUser.email}>
-<br>
 <div class="form-row">
     <div class="container col-6">
         <div class="col-md-12"> <%--adds spacing between cols--%>
@@ -181,7 +180,26 @@
         </div>
     </div>
 </div>
-    <br>
+<%--Modal order accepted--%>
+<div class="modal fade bd-example-modal-sm" id="orderAcceptedModal" tabindex="-1" role="dialog" aria-labelledby="orderAcceptedLabel" aria-hidden="true">
+    <input id="orderAccepted" value="${pageContext.request.getParameter("orderAccepted")}" hidden>
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="orderAcceptedLabel">Success</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Order accepted!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 <footer class="footer fixed-bottom mb-3 ml-3">
     <a href="${pageContext.request.contextPath}/editMenu" class="btn btn-outline-secondary "><i class="fas fa-cogs" style="color:black"></i> Edit menu</a>
 </footer>

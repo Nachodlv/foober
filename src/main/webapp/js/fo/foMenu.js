@@ -1,6 +1,6 @@
 var orders;
 getOrders();
-
+showOrderAcceptedModal();
 
 function minutesAgo() {
     var timeElapsed = document.getElementsByClassName("timeElapsed");
@@ -91,4 +91,11 @@ function setOrders(orders) {
 
 function getFoUrl() {
 
+}
+
+
+function showOrderAcceptedModal(){
+    debugger;
+    var orderAccepted = document.getElementById('orderAccepted').value;
+    if(orderAccepted !== '') $('#orderAcceptedModal').modal();
 }

@@ -1,7 +1,9 @@
 package org.servlets.dg;
 
+import com.google.gson.Gson;
 import hibernate.DGFunctionality;
 import model.DeliveryGuy;
+import model.Order;
 import model.StateDG;
 import model.UserAccount;
 import org.securityfilter.AppUtils;
@@ -14,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Set;
 
 @WebServlet("/dgMenu")
 public class DGMenuServlet extends HttpServlet {
@@ -27,7 +30,8 @@ public class DGMenuServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         UserAccount loginedUser = AppUtils.getLoginedUser(request.getSession());
-        AppUtils.storeLoginedUser(request.getSession(), DGFunctionality.getDeliveryGuy(loginedUser.getEmail()));
+        DeliveryGuy deliveryGuy = DGFunctionality.getDeliveryGuy(loginedUser.getEmail());
+        AppUtils.storeLoginedUser(request.getSession(), deliveryGuy);
 
         RequestDispatcher dispatcher //
                 = this.getServletContext()//
@@ -47,14 +51,19 @@ public class DGMenuServlet extends HttpServlet {
     }
 
     private void changeState(String state, DeliveryGuy deliveryGuy, HttpServletResponse response, HttpServletRequest request) throws IOException {
-        if (state.equals("offline")) {
-            deliveryGuy.setState(StateDG.OFFLINE);
-        } else {
-            if (state.equals("online")) {
-                deliveryGuy.setState(StateDG.ONLINE_WAITING);
-            }
+        StateDG stateDG;
+        switch (state){
+            case "ONLINE_WAITING":
+                stateDG = StateDG.ONLINE_WAITING;
+                break;
+            case "ONLINE_WORKING":
+                stateDG = StateDG.ONLINE_WORKING;
+                break;
+            default:
+                stateDG = StateDG.OFFLINE;
+                break;
         }
-
+        deliveryGuy.setState(stateDG);
         DGFunctionality.modifyModel(deliveryGuy);
 
 //        response.setContentType("text/plain");

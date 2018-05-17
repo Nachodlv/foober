@@ -7,16 +7,18 @@ public class OrderMessage {
     private String dgEmail;
     private double totalPrice;
     private int tippingPercentage;
-    private String clientEmail;
+    private String clientPhone;
+    private String foName;
 
-    public OrderMessage(boolean fromFO, int elaborationTime, String status, String dgEmail, double totalPrice, int tippingPercentage, String clientEmail) {
+    public OrderMessage(boolean fromFO, int elaborationTime, String stateOrder, String dgEmail, double totalPrice, int tippingPercentage, String clientPhone, String foName) {
         this.fromFO = fromFO;
         this.elaborationTime = elaborationTime;
-        this.stateOrder = status;
+        this.stateOrder = stateOrder;
         this.dgEmail = dgEmail;
         this.totalPrice = totalPrice;
         this.tippingPercentage = tippingPercentage;
-        this.clientEmail = clientEmail;
+        this.clientPhone = clientPhone;
+        this.foName = foName;
     }
 
     public void setFromFO(boolean fromFO) {
@@ -59,8 +61,8 @@ public class OrderMessage {
         this.tippingPercentage = tippingPercentage;
     }
 
-    public void setClientEmail(String clientEmail) {
-        this.clientEmail = clientEmail;
+    public void setClientPhone(String clientPhone) {
+        this.clientPhone = clientPhone;
     }
 
     public double getTotalPrice() {
@@ -71,7 +73,15 @@ public class OrderMessage {
         return tippingPercentage;
     }
 
-    public String getClientEmail() {
-        return clientEmail;
+    public String getClientPhone() {
+        return clientPhone;
+    }
+
+    public String getFoName() {
+        return foName;
+    }
+
+    public void setFoName(String foName) {
+        this.foName = foName;
     }
 }
