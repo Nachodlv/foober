@@ -80,6 +80,7 @@ function chooseDg(){
 
 function getOrder() {
     return {
+        id: document.getElementById('id').value,
         foName: document.getElementById('foName').value,
         elaborationTime: document.getElementById('elaborationTime').value,
         stateOrder: 'WAITING',

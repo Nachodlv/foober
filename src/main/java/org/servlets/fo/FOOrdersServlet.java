@@ -20,7 +20,8 @@ public class FOOrdersServlet extends HttpServlet{
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
-        final List<Order> orders = OrderFunctiontality.getOrdersByFO(request.getParameter("foID"));
+        String foEmail = request.getParameter("foID");
+        final List<Order> orders = OrderFunctiontality.getOrdersByFO(foEmail);
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         String json = gson.toJson(orders);
         PrintWriter out = response.getWriter();

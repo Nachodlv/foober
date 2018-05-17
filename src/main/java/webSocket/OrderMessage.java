@@ -2,6 +2,7 @@ package webSocket;
 
 public class OrderMessage {
     private boolean fromFO;
+    private int id;
     private int elaborationTime;
     private String stateOrder;
     private String dgEmail;
@@ -10,8 +11,9 @@ public class OrderMessage {
     private String clientPhone;
     private String foName;
 
-    public OrderMessage(boolean fromFO, int elaborationTime, String stateOrder, String dgEmail, double totalPrice, int tippingPercentage, String clientPhone, String foName) {
+    public OrderMessage(boolean fromFO, int id, int elaborationTime, String stateOrder, String dgEmail, double totalPrice, int tippingPercentage, String clientPhone, String foName) {
         this.fromFO = fromFO;
+        this.id = id;
         this.elaborationTime = elaborationTime;
         this.stateOrder = stateOrder;
         this.dgEmail = dgEmail;
@@ -83,5 +85,14 @@ public class OrderMessage {
 
     public void setFoName(String foName) {
         this.foName = foName;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+
+        return id;
     }
 }

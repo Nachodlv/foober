@@ -27,7 +27,7 @@ public class OrderFunctiontality extends AbstractFunctionality {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            list = session.createQuery("FROM Order o where o.stateOrder != 'DELIVERED'").list();
+            list = session.createQuery("FROM Order o where o.stateOrder != 'REVIEWED'").list();
         } catch (HibernateException ex) {
             if (transaction != null) {
                 transaction.rollback();

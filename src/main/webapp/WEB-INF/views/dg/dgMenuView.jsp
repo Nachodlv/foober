@@ -14,7 +14,7 @@
     <form method="post" action="${pageContext.request.contextPath}/dgMenu">
     <div class="row">
         <div class="col-3">
-            <img style="margin: 5%;" width="120" height="120" class="rounded-circle" src="http://localhost:8080/images/${loginedUser.email}.png">
+            <img style="margin: 5%;" width="120" height="120" class="rounded-circle" src="${pageContext.request.contextPath}/images/${loginedUser.email}.png">
         </div>
         <div class="col-md-auto offset-md-7">
             <div id="deliveryGuy">

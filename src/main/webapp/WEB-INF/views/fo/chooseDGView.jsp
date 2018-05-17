@@ -73,6 +73,7 @@
 
 <%--Order Info (Hidden)--%>
 <div id="order" hidden>
+    <input id="id" value="${order.id}">
     <input id="foName" value="${order.franchiseOwner.name}">
     <input id="elaborationTime" value="${order.elaborationTime}">
     <input id="clientPhone" value="${order.client.phone}">

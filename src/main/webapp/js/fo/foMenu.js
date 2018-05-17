@@ -30,8 +30,9 @@ function getOrders() {
             minutesAgo();
         }
     };
-    var url = "http://localhost:8080/orders?foID=" + document.getElementById("foID").value;
-    xhttp.open("GET", url , true); //todo corregir url con window.etc
+    var url = window.location.href.split('/');
+    url[3] = 'orders?foID=' + document.getElementById('foID').value;
+    xhttp.open("GET", url.join('/') , true);
     xhttp.send();
 }
 
@@ -41,6 +42,7 @@ function setOrders(orders) {
         var column = document.createElement('div');
         column.className = 'col-md-4 text-center';
         column.style = 'margin-bottom: 1rem;';
+        column.id = orders[i].id;
 
         var img = document.createElement('img');
         img.className = 'card-img-top rounded-circle';
@@ -55,7 +57,9 @@ function setOrders(orders) {
             img.src = '../../images/anonymus.png';
             title.innerHTML = 'undefined';
         } else {
-            img.src = 'http://localhost:8080/images/' + order.deliveryGuy.email + '.png';
+            var url = window.location.href.split('/');
+            url[3] = 'images/' + order.deliveryGuy.email + '.png';
+            img.src = url.join('/'); //TODO cambiar url imagen
             title.innerHTML = order.deliveryGuy.name;
         }
 

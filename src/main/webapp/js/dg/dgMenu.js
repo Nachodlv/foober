@@ -137,20 +137,46 @@ function finishDelivering(){
     document.getElementById('spinner').hidden = false;
 
     changeState('ONLINE_WAITING');
+    changeOrderState('DELIVERED');
 }
 
 function onlineWorking(startWorking){
     var state = document.getElementById('dgState').value;
     if(state === 'ONLINE_WORKING' || startWorking) {
         //if order is undefined, getOrder (if the page reloads)
-        if(!order) getOrder();
+        delivering = true;
+        if(!order) getActiveOrder();
 
         document.getElementById('finishDelivering').hidden = false;
+        document.getElementById('spinner').hidden = true;
         document.getElementById('offline').disabled = true;
+        document.getElementById('online').disabled = true;
     }
 }
 
-function getOrder(){
-    //get order AJAX
+function getActiveOrder() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+            order = JSON.parse(this.responseText);
+        }
+    };
+    var url = window.location.href.split('/');
+    url[3] = 'order';
+    url = url.join('/');
+    url += '?dgEmail=' + email;
+    xhttp.open("GET", url , true);
+    xhttp.send();
+}
+
+function changeOrderState(state){
+    var xhttp = new XMLHttpRequest();
+    var url = window.location.href.split('/');
+    url[3] = 'order';
+    url = url.join('/');
+    url += '?orderId=' + order.id;
+    url += '&state=' + state;
+    xhttp.open("POST", url , true);
+    xhttp.send();
 }
 
