@@ -3,9 +3,9 @@ var orderSocket = new WebSocket(getUrl('/orderSender/' + email));
 var order;
 var waitingResponse = false;
 var delivering = false;
-onlineWorking();
 
 orderSocket.onopen = function (ev) {
+    onlineWorking();
     orderSocket.onmessage = function (ev2) {
         console.log(ev2.data);
         order = JSON.parse(ev2.data);
@@ -135,6 +135,9 @@ function finishDelivering(){
     document.getElementById('finishDelivering').hidden = true;
     document.getElementById('offline').disabled = false;
     document.getElementById('spinner').hidden = false;
+
+    order.stateOrder = 'DELIVERED';
+    orderSocket.send(JSON.stringify(order));
 
     changeState('ONLINE_WAITING');
     changeOrderState('DELIVERED');

@@ -1,6 +1,10 @@
 var orders;
+var openWS = [];
 getOrders();
 showOrderAcceptedModal();
+
+window.onbeforeunload = closeSockets;
+window.onunload = closeSockets;
 
 function minutesAgo() {
     var timeElapsed = document.getElementsByClassName("timeElapsed");
@@ -36,6 +40,16 @@ function getOrders() {
     xhttp.send();
 }
 
+function openWebSocket(dgEmail) {
+    var orderSocket = new WebSocket(getUrl('/orderSender/' + dgEmail));
+    openWS.push(orderSocket);
+    orderSocket.onmessage = function (ev) {
+        var order = JSON.parse(ev.data);
+        var column = document.getElementById(order.id);
+        column.replaceChild(getOrderStatus(order.stateOrder), column.childNodes[9])
+    };
+}
+
 function setOrders(orders) {
     var panel = document.getElementById("panel1");
     for (var i = 0; i < orders.length; i++) {
@@ -59,7 +73,7 @@ function setOrders(orders) {
         } else {
             var url = window.location.href.split('/');
             url[3] = 'images/' + order.deliveryGuy.email + '.png';
-            img.src = url.join('/'); //TODO cambiar url imagen
+            img.src = url.join('/');
             title.innerHTML = order.deliveryGuy.name;
         }
 
@@ -81,6 +95,9 @@ function setOrders(orders) {
         client.className = 'card-text';
         client.innerHTML = order.client.email;
 
+        var status = getOrderStatus(order.stateOrder); //TODO change color
+        if(order.stateOrder === 'DELIVERING') openWebSocket(order.deliveryGuy.email);
+
         column.appendChild(img);
         column.appendChild(title);
         column.appendChild(issuedTime);
@@ -88,6 +105,7 @@ function setOrders(orders) {
         column.appendChild(time);
         column.appendChild(clientIcon);
         column.appendChild(client);
+        column.appendChild(status);
 
         panel.appendChild(column);
     }
@@ -101,4 +119,33 @@ function getFoUrl() {
 function showOrderAcceptedModal(){
     var orderAccepted = document.getElementById('orderAccepted').value;
     if(orderAccepted !== '') $('#orderAcceptedModal').modal();
+}
+
+//change color depending on the status
+function getOrderStatus(status) {
+    var statusElement =  document.createElement('p')
+    statusElement.innerHTML = status;
+    return statusElement;
+}
+
+function getUrl(url){
+    var loc = window.location, new_uri;
+    if (loc.protocol === "https:") {
+        new_uri = "wss:";
+    } else {
+        new_uri = "ws:";
+    }
+    new_uri += "//" + loc.host;
+    new_uri += url;
+
+    return new_uri;
+}
+
+function closeSockets(){
+    for(var i=0; i<openWS.length; i++){
+        openWS[i].close();
+    }
+
+    window.onbeforeunload = undefined;
+    window.onunload = undefined;
 }
