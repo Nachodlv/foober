@@ -46,14 +46,9 @@ public class MakingOrderServlet extends HttpServlet {
 
     private void makeOrder(HttpServletRequest request, HttpServletResponse response, FranchiseOwner franchiseOwner) throws IOException {
         Set<OrderedProducts> orderedProductsList = new LinkedHashSet<>();
-        Order order = new Order();
         Client client = (Client) request.getSession().getAttribute("client");
-        order.setClient(client);
-        order.setElaborationTime(Integer.valueOf(request.getParameter("elaborationTime")));
-//        order.setStatus(true); TODO post seleccion de DG
-        order.setDeliveryGuy(null);
-        order.setFranchiseOwner(franchiseOwner);
-        order.setIssuedTime(System.currentTimeMillis());
+        final Integer elaborationTime = Integer.valueOf(request.getParameter("elaborationTime"));
+        Order order = new Order(elaborationTime, franchiseOwner, null, client);
         OrderFunctiontality.addModel(order);
 
         for (Product product : franchiseOwner.getProducts()) {

@@ -17,7 +17,7 @@ import javax.servlet.http.Part;
 import java.io.IOException;
 
 @MultipartConfig
-@WebServlet("/dgRegister")
+@WebServlet({"/dgRegister/*", "/dgRegister"})
 public class RegisterDGServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -41,12 +41,7 @@ public class RegisterDGServlet extends HttpServlet {
         String password = request.getParameter("password");
         String passwordRepeated = request.getParameter("passwordRepeated");
         if (!password.equals(passwordRepeated)) {
-            request.setAttribute("errorPassword", "Passwords do not match");
-
-            RequestDispatcher dispatcher
-                    = this.getServletContext().getRequestDispatcher("/WEB-INF/views/dg/dgRegisterView.jsp");
-
-            dispatcher.forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/dgRegister?error=Passwords do not match");
             return;
         }
 
@@ -60,12 +55,7 @@ public class RegisterDGServlet extends HttpServlet {
         try {
             Utils.writeImage(mail, part, getServletContext());
         } catch (IllegalArgumentException e2) {
-            request.setAttribute("nullImg", "Please choose an image");
-
-            RequestDispatcher dispatcher
-                    = this.getServletContext().getRequestDispatcher("/WEB-INF/views/dg/dgRegisterView.jsp");
-
-            dispatcher.forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/dgRegister?error=Please choose an image");
             return;
         }
 
@@ -74,12 +64,7 @@ public class RegisterDGServlet extends HttpServlet {
         try {
             DGFunctionality.addModel(deliveryGuy);
         } catch (PersistenceException e) {
-            request.setAttribute("errorEmail", "Email not available");
-
-            RequestDispatcher dispatcher
-                    = this.getServletContext().getRequestDispatcher("/WEB-INF/views/dg/dgRegisterView.jsp");
-
-            dispatcher.forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/dgRegister?error=Email not available");
             return;
         }
         AppUtils.storeLoginedUser(request.getSession(), deliveryGuy);

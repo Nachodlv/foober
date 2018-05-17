@@ -1,17 +1,15 @@
 package model;
 
+import com.google.gson.annotations.Expose;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * @author Gonzalo de Achaval
- * @author Ignatius de la Vega
- */
-
 @Entity
 @Table(name = "deliveryGuy")
 public class DeliveryGuy extends UserAccount {
+    @Expose
     @Column(name = "name")
     private String name;
     @Column(name = "phone")

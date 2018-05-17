@@ -37,12 +37,7 @@ public class RegisterFOServlet extends HttpServlet {
         String password = request.getParameter("password");
         String passwordRepeated = request.getParameter("passwordRepeated");
         if (!password.equals(passwordRepeated)) {
-            request.setAttribute("errorPassword", "Passwords do not match");
-
-            RequestDispatcher dispatcher //
-                    = this.getServletContext().getRequestDispatcher("/WEB-INF/views/fo/foRegisterView.jsp");
-
-            dispatcher.forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/foRegister?error=Passwords do not match");
             return;
         }
 
@@ -54,19 +49,11 @@ public class RegisterFOServlet extends HttpServlet {
         try {
             FOFunctionality.addModel(franchiseOwner);
         } catch (PersistenceException e) {
-            request.setAttribute("errorEmail", "Email not available");
-
-            RequestDispatcher dispatcher //
-                    = this.getServletContext().getRequestDispatcher("/WEB-INF/views/fo/foRegisterView.jsp");
-
-            dispatcher.forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/foRegister?error=Email not available");
             return;
         }
 
         AppUtils.storeLoginedUser(request.getSession(), franchiseOwner);
         response.sendRedirect(request.getContextPath() + "/foMenu");
-
     }
-
-
 }

@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../../css/foober.css" type="text/css">
     <title>Login</title>
 </head>
-<body>
+<body class="outer">
 
 <div style="padding:0 1rem 0.1rem 1rem;" class="container align-self-center col-lg-3 col-md-4 col-sm-6 col-12 alert-secondary rounded text-center">
     <img src="../../images/FooberLogo.png" class="img-fluid" style="padding: 1.5rem;margin-bottom: -1rem;">

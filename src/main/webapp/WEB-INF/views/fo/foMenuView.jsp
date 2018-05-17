@@ -14,23 +14,24 @@
 <jsp:include page="../_header.jsp"/>
 
 <%--Current orders--%>
+<input id="foID" hidden value=${loginedUser.email}>
 <br>
 <div class="form-row">
     <div class="container col-6">
         <div class="col-md-12"> <%--adds spacing between cols--%>
             <h3 align="center" class="title">Current Orders</h3>
-            <div class="fixed-panel form-row" style="margin-top:2rem">
-            <c:forEach items="${orders}" var="order">
-                <div class="col-md-4 text-center">
-                    <img class="card-img-top" style="height: 8rem; width:8rem;" src="http://localhost:8080/images/${order.deliveryGuy.email}.png" align="center"><br>
-                    <div class="card-body">
-                        <h5 class="card-title">DG: ${order.deliveryGuy.name}</h5>
-                        <input class="issuedTime" hidden value="${order.issuedTime}">
-                        <i class="far fa-clock"></i><p class="card-text timeElapsed"></p>
-                        <i class="far fa-user"></i><p class="card-text"> ${order.client.email}</p>
-                    </div>
-                </div>
-            </c:forEach>
+            <div id="panel1" class="fixed-panel form-row" style="margin-top:2rem">
+            <%--<c:forEach items="${orders}" var="order">--%>
+                <%--<div class="col-md-4 text-center">--%>
+                    <%--<img class="card-img-top" style="height: 8rem; width:8rem;" src="http://localhost:8080/images/${order.deliveryGuy.email}.png" align="center"><br>--%>
+                    <%--<div class="card-body">--%>
+                        <%--<h5 class="card-title">DG: ${order.deliveryGuy.name}</h5>--%>
+                        <%--<input class="issuedTime" hidden value="${order.issuedTime}">--%>
+                        <%--<i class="far fa-clock"></i><p class="card-text timeElapsed"></p>--%>
+                        <%--<i class="far fa-user"></i><p class="card-text"> ${order.client.email}</p>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+            <%--</c:forEach>--%>
         </div>
     </div>
 </div>
@@ -189,7 +190,7 @@
 
 <script src="../../../js/fo/foMenu.js"></script>
 <script src="../../../js/errorCatcher.js"></script>
-<script src="../../../js/dg/anonymusDG.js"></script>
+<%--<script src="../../../js/dg/anonymusDG.js"></script>--%>
 </body>
 </html>
 

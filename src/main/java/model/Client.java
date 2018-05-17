@@ -1,5 +1,7 @@
 package model;
 
+import com.google.gson.annotations.Expose;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,6 +19,7 @@ public class Client {
     private int phone;
     @Column(name = "address")
     private String address;
+    @Expose
     @Column(name = "email")
     private String email;
     @Column(name = "active")

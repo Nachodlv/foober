@@ -1,12 +1,16 @@
 package model;
 
+import com.google.gson.annotations.Expose;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+
 @Entity
 @Table(name = "franchiseOwner")
 public class FranchiseOwner extends UserAccount {
+    @Expose
     @Column(name = "name")
     private String name;
     @Column(name = "phone")

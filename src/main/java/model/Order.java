@@ -1,5 +1,7 @@
 package model;
 
+import com.google.gson.annotations.Expose;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -8,23 +10,30 @@ import java.util.concurrent.TimeUnit;
 @Entity
 @Table(name = "food_order")
 public class Order {
+    @Expose
     @Id
     @GeneratedValue
     @Column(name = "id")
     private int id;
+    @Expose
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private StateOrder stateOrder;
+    @Expose
     @Column(name = "elaborationTime")
     private int elaborationTime;
+    @Expose
     @Column(name = "issuedTime")
     private long issuedTime;
+    @Expose
     @ManyToOne
     @JoinColumn(name = "FO_email", nullable = false)
     private FranchiseOwner franchiseOwner;
+    @Expose
     @ManyToOne
     @JoinColumn(name = "DG_email")
     private DeliveryGuy deliveryGuy;
+    @Expose
     @ManyToOne
     @JoinColumn(name = "client_email", nullable = false)
     private Client client;
@@ -34,13 +43,12 @@ public class Order {
     public Order() {
     }
 
-    public Order(int elaborationTime, FranchiseOwner franchiseOwner, DeliveryGuy deliveryGuy, Client client, Set<OrderedProducts> orderedProducts) {
+    public Order(int elaborationTime, FranchiseOwner franchiseOwner, DeliveryGuy deliveryGuy, Client client) {
         this.stateOrder = StateOrder.WAITING;
         this.elaborationTime = elaborationTime;
         this.franchiseOwner = franchiseOwner;
         this.deliveryGuy = deliveryGuy;
         this.client = client;
-        this.orderedProducts = orderedProducts;
         this.issuedTime = System.currentTimeMillis();
     }
 

@@ -25,7 +25,6 @@
                 <div class="col-md-6 mb-3">
                     <label>Email</label>
                     <input type="email" class="form-control" placeholder="Mail" name="email" required>
-                    <p class="text-danger" style="margin-bottom: -3rem;">${errorEmail}</p>
                 </div>
             </div>
             <div class="form-row">
@@ -36,7 +35,6 @@
                 <div class="col-md-6 mb-4">
                     <label>Confirm Password</label>
                     <input type="password" class="form-control" placeholder="Confirm password" name="passwordRepeated" required>
-                    <p class="text-danger" style="margin-bottom: -3rem;">${errorPassword}</p>
                 </div>
             </div>
             <div class="form-row">
@@ -60,11 +58,13 @@
                 </div>
             </div>
             <button type="submit" class="btn btn-primary" value="Submit">Submit</button>
+            <div class="errorCatcher mt-2" style="max-width: 26rem;"></div>
         </form>
     </div>
 </div>
 </div>
 
+<script src="../../../js/errorCatcher.js"></script>
 <jsp:include page="../bootstrapImportBody.jsp"/>
 
 </body>
