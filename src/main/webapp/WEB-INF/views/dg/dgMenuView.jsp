@@ -5,18 +5,16 @@
     <title>DG Menu</title>
     <link rel="stylesheet" href="../../../css/foober.css" type="text/css">
 </head>
-<body>
-
-<div class="outer container-fluid">
+<body class="outer">
 <jsp:include page="../_header.jsp"/>
 <h3>Welcome, ${loginedUser.name}!</h3><br>
 <div class="container-fluid bg-light rounded">
     <form method="post" action="${pageContext.request.contextPath}/dgMenu">
-    <div class="row">
-        <div class="col-3">
-            <img style="margin: 5%;" width="120" height="120" class="rounded-circle" src="${pageContext.request.contextPath}/images/${loginedUser.email}.png">
+    <div class="d-flex">
+        <div >
+            <img width="120" height="120" class="rounded-circle" src="${pageContext.request.contextPath}/images/${loginedUser.email}.png">
         </div>
-        <div class="col-md-auto offset-md-7">
+        <div class="ml-auto">
             <div id="deliveryGuy">
                 <input type="hidden" value="${loginedUser.name}">
                 <input type="hidden" value="${loginedUser.phone}">
@@ -34,6 +32,8 @@
     </div>
     </form>
 </div>
+
+<div class="d-flex justify-content-center">
     <%--Spinner--%>
     <div class="spinner" id="spinner">
         <h3 align="center">Waiting for orders...</h3>
@@ -42,61 +42,95 @@
         <div class="bounce3"></div>
     </div>
 
-    <%--Button to finish deliverying--%>
-    <button type="button" id="finishDelivering" class="btn btn-outline-dark spaced" onclick="finishDelivering()" hidden>Order delivered</button>
+    <%--Order when delivering--%>
+        <div id="order" class="mt-5 rounded d-flex flex-column justify-content-center" style="background:#F8F8FA;" hidden>
+            <table id="tableOrder" class="table" hidden>
+                <tr>
+                    <td><p class="rem1"><b>Franchise</b></p></td>
+                    <td id="foNameDeliver"></td>
+                </tr>
+                <tr>
+                    <td><p class="rem1"><b>Franchise phone</b></p></td>
+                    <td id="foPhoneDeliver"></td>
+                </tr>
+                <tr>
+                    <td><p class="rem1"><b>Elaboration Time</b></p></td>
+                    <td id="elaborationTimeDeliver"></td>
+                </tr>
+                <tr>
+                    <td><p class="rem1"><b>Client address</b></p></td>
+                    <td id="clientAddressDeliver"></td>
+                </tr>
+                <tr>
+                    <td><p class="rem1"><b>Client phone</b></p></td>
+                    <td id="clientPhoneDeliver"></td>
+                </tr>
+                <tr>
+                    <td><p class="rem1"><b>Total Price</b></p></td>
+                    <td id="totalPriceDeliver"></td>
+                </tr>
+                <tr>
+                    <td><p class="rem1"><b>Tip</b></p></td>
+                    <td id="tipDeliver"></td>
+                </tr>
+            </table>
+        <button type="button" id="finishDelivering" class="btn btn-outline-dark spaced mr-auto ml-auto" onclick="finishDelivering()" hidden>Order delivered</button>
+    </div>
+</div>
 
-    <%--modal for confirming--%>
-    <div class="modal fade bd-example-modal-sm" id="options" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content" style="width: 120%">
-                <form method="post">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Order recieved!</h5>
-                        <button type="button" onclick="refuseOrder()" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p class="rem1">Do you want to take this order?</p>
-                        <table class="table table-striped">
-                            <tr>
-                                <td><p class="rem1"><b>Franchise</b></p></td>
-                                <td id="foName"></td>
-                            </tr>
-                            <tr>
-                                <td><p class="rem1"><b>Elaboration Time</b></p></td>
-                                <td id="elaborationTime"></td>
-                            </tr>
-                            <tr>
-                                <td><p class="rem1"><b>Client phone</b></p></td>
-                                <td id="clientPhone"></td>
-                            </tr>
-                            <tr>
-                                <td><p class="rem1"><b>Total Price</b></p></td>
-                                <td id="totalPrice"></td>
-                            </tr>
-                            <tr>
-                                <td><p class="rem1"><b>Tip</b></p></td>
-                                <td id="tip"></td>
-                            </tr>
-                        </table>
+<%--modal for confirming--%>
+<div class="modal fade bd-example-modal-sm" id="options" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <form method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title">Order recieved!</h5>
+                    <button type="button" onclick="refuseOrder()" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="rem1">Do you want to take this order?</p>
+                    <table class="table table-striped">
+                        <tr>
+                            <td><p class="rem1"><b>Franchise</b></p></td>
+                            <td id="foName"></td>
+                        </tr>
+                        <tr>
+                            <td><p class="rem1"><b>Elaboration Time</b></p></td>
+                            <td id="elaborationTime"></td>
+                        </tr>
+                        <tr>
+                            <td><p class="rem1"><b>Client Address</b></p></td>
+                            <td id="clientAddress"></td>
+                        </tr>
+                        <tr>
+                            <td><p class="rem1"><b>Client phone</b></p></td>
+                            <td id="clientPhone"></td>
+                        </tr>
+                        <tr>
+                            <td><p class="rem1"><b>Total Price</b></p></td>
+                            <td id="totalPrice"></td>
+                        </tr>
+                        <tr>
+                            <td><p class="rem1"><b>Tip</b></p></td>
+                            <td id="tip"></td>
+                        </tr>
+                    </table>
 
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" onclick="refuseOrder()" class="btn btn btn-danger" data-dismiss="modal">Refuse</button>
-                        <button type="button" onclick="acceptOrder()" class="btn btn-success">Accept</button>
-                    </div>
-                </form>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="refuseOrder()" class="btn btn btn-danger" data-dismiss="modal">Refuse</button>
+                    <button type="button" onclick="acceptOrder()" class="btn btn-success">Accept</button>
+                </div>
+            </form>
         </div>
     </div>
-
+</div>
     <%--<div class="row" id="options" hidden>--%>
         <%--<button type="button" value="accept" name="accept" class="btn btn-outline-dark spaced-top" onclick="acceptOrder()"><i class="fas fa-power-off"></i> Accept</button>--%>
         <%--<button type="button" value="accept" name="accept" class="btn btn-outline-dark spaced-top" onclick="refuseOrder()"><i class="fas fa-power-off"></i> Refuse</button>--%>
     <%--</div>--%>
-
-</div>
 
 <script src="../../../js/dg/sw.js"></script>
 <script src="../../../js/dg/notificationDG.js"></script>

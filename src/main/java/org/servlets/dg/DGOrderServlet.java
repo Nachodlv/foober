@@ -3,8 +3,11 @@ package org.servlets.dg;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import hibernate.OrderFunctiontality;
+import model.Client;
+import model.FranchiseOwner;
 import model.Order;
 import model.StateOrder;
+import webSocket.OrderMessage;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,7 +26,6 @@ public class DGOrderServlet extends HttpServlet{
 
         String dgEmail = request.getParameter("dgEmail");
         final List<Order> orders = OrderFunctiontality.getOrdersByDG(dgEmail);
-        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         if(orders == null) return;
 
         Order activeOrder = new Order();
@@ -34,8 +36,15 @@ public class DGOrderServlet extends HttpServlet{
                 break;
             }
         }
+        FranchiseOwner franchiseOwner = activeOrder.getFranchiseOwner();
+        Client client = activeOrder.getClient();
+        OrderMessage orderMessage = new OrderMessage(false, activeOrder.getId(), activeOrder.getElaborationTime(),
+                activeOrder.getStateOrder().toString(), null, activeOrder.getTotalCost(),
+                franchiseOwner.getTippingPercentage(), client.getPhone(), franchiseOwner.getName(), franchiseOwner.getPhone(),client.getAddress());
 
-        String json = gson.toJson(activeOrder);
+        if(activeOrder.getDeliveryGuy() != null) orderMessage.setDgEmail(activeOrder.getDeliveryGuy().getEmail());
+
+        String json = new Gson().toJson(orderMessage);
         PrintWriter out = response.getWriter();
         out.print(json);
         out.flush();

@@ -88,7 +88,9 @@ function getOrder() {
         dgEmail: email,
         totalPrice: document.getElementById('totalPrice').value,
         tippingPercentage: document.getElementById('tippingPercentage').value,
-        clientPhone: document.getElementById('clientPhone').value
+        clientPhone: document.getElementById('clientPhone').value,
+        clientAddress: document.getElementById('clientAddress').value,
+        foPhone: document.getElementById('foPhone').value
     };
 }
 

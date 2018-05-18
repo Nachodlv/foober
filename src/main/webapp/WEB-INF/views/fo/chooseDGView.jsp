@@ -77,10 +77,12 @@
 <div id="order" hidden>
     <input id="id" value="${order.id}">
     <input id="foName" value="${order.franchiseOwner.name}">
+    <input id="foPhone" value="${order.franchiseOwner.phone}">
     <input id="elaborationTime" value="${order.elaborationTime}">
     <input id="clientPhone" value="${order.client.phone}">
     <input id="tippingPercentage" value="${order.franchiseOwner.tippingPercentage}">
     <input id="totalPrice" value="${order.getTotalCost()}">
+    <input id="clientAddress" value="${order.client.address}">
 </div>
 
 <%--Choose DG later--%>

@@ -37,6 +37,7 @@ function showOrder(order){
     document.getElementById('options').hidden = false;
     $('#foName').html(order.foName);
     $('#elaborationTime').html(order.elaborationTime + ' minutes');
+    $('#clientAddress').html(order.clientAddress);
     $('#clientPhone').html(order.clientPhone);
     $('#totalPrice').html(order.totalPrice + '$');
     $('#tip').html(getTip(order.tippingPercentage, order.totalPrice) + '$');
@@ -132,7 +133,7 @@ function getTip(tippingPercentage, totalCost) {
 }
 
 function finishDelivering(){
-    document.getElementById('finishDelivering').hidden = true;
+    hideOrderToDeliver();
     document.getElementById('offline').disabled = false;
     document.getElementById('spinner').hidden = false;
 
@@ -147,10 +148,10 @@ function onlineWorking(startWorking){
     var state = document.getElementById('dgState').value;
     if(state === 'ONLINE_WORKING' || startWorking) {
         //if order is undefined, getOrder (if the page reloads)
+        if(!startWorking) getActiveOrder();
+        else showOrderToDeliver();
         delivering = true;
-        if(!order) getActiveOrder();
 
-        document.getElementById('finishDelivering').hidden = false;
         document.getElementById('spinner').hidden = true;
         document.getElementById('offline').disabled = true;
         document.getElementById('online').disabled = true;
@@ -162,6 +163,7 @@ function getActiveOrder() {
     xhttp.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
             order = JSON.parse(this.responseText);
+            showOrderToDeliver();
         }
     };
     var url = window.location.href.split('/');
@@ -181,5 +183,24 @@ function changeOrderState(state){
     url += '&state=' + state;
     xhttp.open("POST", url , true);
     xhttp.send();
+}
+
+function showOrderToDeliver(){
+    document.getElementById('order').hidden = false;
+    document.getElementById('tableOrder').hidden = false;
+    document.getElementById('finishDelivering').hidden = false;
+    document.getElementById('foNameDeliver').innerHTML = order.foName;
+    document.getElementById('foPhoneDeliver').innerHTML = order.foPhone;
+    document.getElementById('elaborationTimeDeliver').innerHTML = order.elaborationTime;
+    document.getElementById('clientAddressDeliver').innerHTML = order.clientAddress;
+    document.getElementById('clientPhoneDeliver').innerHTML = order.clientPhone;
+    document.getElementById('totalPriceDeliver').innerHTML = order.totalPrice;
+    document.getElementById('tipDeliver').innerHTML = ((order.tippingPercentage * order.totalPrice) / 100).toString();
+}
+
+function hideOrderToDeliver(){
+    document.getElementById('order').hidden = true;
+    document.getElementById('tableOrder').hidden = true;
+    document.getElementById('finishDelivering').hidden = true;
 }
 
