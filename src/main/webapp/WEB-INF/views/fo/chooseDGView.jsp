@@ -13,29 +13,31 @@
         <span aria-hidden="true">&times;</span>
         </button>
     </div>
-<table class="table table-striped table-hover table-bordered" id="table">
-    <thead>
-    <tr>
-        <th class="text-center" scope="col">Name</th>
-        <th class="text-center" scope="col">Status</th>
-        <th class="text-center" scope="col" style="width: 20%;">Means Of Transport</th>
-        <th class="text-center" scope="col">Phone</th>
-        <th class="text-center" scope="col">Rating</th>
-    </tr>
-    </thead>
-    <tbody id="dgTable">
-        <c:forEach items="${deliveryGuys}"  var="deliveryGuy">
-            <input class="meansOfTransport" hidden value="${deliveryGuy.meansOfTransport}">
-            <tr class="text-center dgs" id="${deliveryGuy.email}">
-                <td>${deliveryGuy.name}</td>
-                <td><i class="fa fa-circle" aria-hidden="true" style="color:green;"></i></td>
-                <td class="setMeansOfTransport">${deliveryGuy.meansOfTransport}</td>
-                <td>${deliveryGuy.phone}</td>
-                <td><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></td>
-            </tr>
-        </c:forEach>
-    </tbody>
-</table>
+<div class="fixed-panel">
+    <table class="table table-striped table-hover table-bordered" id="table">
+        <thead>
+        <tr>
+            <th class="text-center" scope="col">Name</th>
+            <th class="text-center" scope="col">Status</th>
+            <th class="text-center" scope="col" style="width: 20%;">Means Of Transport</th>
+            <th class="text-center" scope="col">Phone</th>
+            <th class="text-center" scope="col">Rating</th>
+        </tr>
+        </thead>
+        <tbody id="dgTable">
+            <c:forEach items="${deliveryGuys}"  var="deliveryGuy">
+                <input class="meansOfTransport" hidden value="${deliveryGuy.meansOfTransport}">
+                <tr class="text-center dgs" id="${deliveryGuy.email}">
+                    <td>${deliveryGuy.name}</td>
+                    <td><i class="fa fa-circle" aria-hidden="true" style="color:green;"></i></td>
+                    <td class="setMeansOfTransport">${deliveryGuy.meansOfTransport}</td>
+                    <td>${deliveryGuy.phone}</td>
+                    <td><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></td>
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
+</div>
 
 <%--modal for confirming--%>
 <div class="modal fade bd-example-modal-sm" id="modalConfirmDG" tabindex="-1" role="dialog" aria-hidden="true">
@@ -80,6 +82,11 @@
     <input id="tippingPercentage" value="${order.franchiseOwner.tippingPercentage}">
     <input id="totalPrice" value="${order.getTotalCost()}">
 </div>
+
+<%--Choose DG later--%>
+<footer class="footer fixed-bottom mb-3 ml-3">
+    <a href="${pageContext.request.contextPath}/foMenu" class="btn btn-outline-dark"><i class="fas fa-user-alt-slash" style="color:black"></i> Choose delivery-guy later</a>
+</footer>
 
 <script src="../../../js/fo/chooseDG.js"></script>
 <jsp:include page="../bootstrapImportBody.jsp"/>
