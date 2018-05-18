@@ -59,9 +59,10 @@ public class OrderFunctiontality extends AbstractFunctionality {
         List<Order> dgOrders = new ArrayList<>();
         if (orders == null) return null;
         for (Order order : orders) {
-            if (order.getDeliveryGuy().getEmail().equals(email)) {
-                dgOrders.add(order);
-            }
+            if(order.getDeliveryGuy() != null)
+                if (order.getDeliveryGuy().getEmail().equals(email))
+                    dgOrders.add(order);
+
         }
         return dgOrders;
     }

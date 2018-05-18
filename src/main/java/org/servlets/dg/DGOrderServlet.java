@@ -21,7 +21,8 @@ public class DGOrderServlet extends HttpServlet{
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
-        final List<Order> orders = OrderFunctiontality.getOrdersByDG(request.getParameter("dgEmail"));
+        String dgEmail = request.getParameter("dgEmail");
+        final List<Order> orders = OrderFunctiontality.getOrdersByDG(dgEmail);
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         if(orders == null) return;
 
