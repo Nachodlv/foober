@@ -191,11 +191,11 @@ function showOrderToDeliver(){
     document.getElementById('finishDelivering').hidden = false;
     document.getElementById('foNameDeliver').innerHTML = order.foName;
     document.getElementById('foPhoneDeliver').innerHTML = order.foPhone;
-    document.getElementById('elaborationTimeDeliver').innerHTML = order.elaborationTime;
+    document.getElementById('elaborationTimeDeliver').innerHTML = order.elaborationTime + ' minutes';
     document.getElementById('clientAddressDeliver').innerHTML = order.clientAddress;
     document.getElementById('clientPhoneDeliver').innerHTML = order.clientPhone;
-    document.getElementById('totalPriceDeliver').innerHTML = order.totalPrice;
-    document.getElementById('tipDeliver').innerHTML = ((order.tippingPercentage * order.totalPrice) / 100).toString();
+    document.getElementById('totalPriceDeliver').innerHTML = order.totalPrice + '$';
+    document.getElementById('tipDeliver').innerHTML = ((order.tippingPercentage * order.totalPrice) / 100).toString() + '$';
 }
 
 function hideOrderToDeliver(){

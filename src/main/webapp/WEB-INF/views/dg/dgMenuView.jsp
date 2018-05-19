@@ -10,26 +10,32 @@
 <h3>Welcome, ${loginedUser.name}!</h3><br>
 <div class="container-fluid bg-light rounded">
     <form method="post" action="${pageContext.request.contextPath}/dgMenu">
-    <div class="d-flex">
-        <div >
-            <img width="120" height="120" class="rounded-circle" src="${pageContext.request.contextPath}/images/${loginedUser.email}.png">
+        <div id="deliveryGuy">
+            <input hidden value="${loginedUser.name}">
+            <input hidden value="${loginedUser.phone}">
+            <input hidden value="${loginedUser.meansOfTransport}">
+            <input hidden value="${loginedUser.email}">
+            <input hidden id="dgState" value="${loginedUser.state}">
         </div>
-        <div class="ml-auto">
-            <div id="deliveryGuy">
-                <input type="hidden" value="${loginedUser.name}">
-                <input type="hidden" value="${loginedUser.phone}">
-                <input type="hidden" value="${loginedUser.meansOfTransport}">
-                <input type="hidden" value="${loginedUser.email}">
-                <input type="hidden" id="dgState" value="${loginedUser.state}">
+        <div class="d-flex">
+            <div>
+                <img width="120" height="120" class="rounded-circle"
+                     src="${pageContext.request.contextPath}/images/${loginedUser.email}.png">
             </div>
-            <div class="row">
-                <button type="button" id="offline" value="offline" name="state" class="btn btn-outline-dark spaced-top" onclick="login_logout('OFFLINE')" disabled><i class="fas fa-power-off"></i> Go offline</button>
-            </div>
-            <div class="row">
-                <button type="button" id="online" value="online" name="state" class="btn btn-outline-dark spaced" onclick="login_logout('ONLINE_WAITING')"><i class="fas fa-power-off"></i> Go online </button>
+            <div class="ml-auto mr-3 mb-1">
+                <div class="row">
+                    <button type="button" id="offline" value="offline" name="state"
+                            class="btn btn-outline-dark spaced-top" onclick="login_logout('OFFLINE')" disabled><i
+                            class="fas fa-power-off"></i> Go offline
+                    </button>
+                </div>
+                <div class="row">
+                    <button type="button" id="online" value="online" name="state" class="btn btn-outline-dark spaced"
+                            onclick="login_logout('ONLINE_WAITING')"><i class="fas fa-power-off"></i> Go online
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
     </form>
 </div>
 
@@ -43,40 +49,33 @@
     </div>
 
     <%--Order when delivering--%>
-        <div id="order" class="mt-5 rounded d-flex flex-column justify-content-center" style="background:#F8F8FA;" hidden>
-            <table id="tableOrder" class="table" hidden>
-                <tr>
-                    <td><p class="rem1"><b>Franchise</b></p></td>
-                    <td id="foNameDeliver"></td>
-                </tr>
-                <tr>
-                    <td><p class="rem1"><b>Franchise phone</b></p></td>
-                    <td id="foPhoneDeliver"></td>
-                </tr>
-                <tr>
-                    <td><p class="rem1"><b>Elaboration Time</b></p></td>
-                    <td id="elaborationTimeDeliver"></td>
-                </tr>
-                <tr>
-                    <td><p class="rem1"><b>Client address</b></p></td>
-                    <td id="clientAddressDeliver"></td>
-                </tr>
-                <tr>
-                    <td><p class="rem1"><b>Client phone</b></p></td>
-                    <td id="clientPhoneDeliver"></td>
-                </tr>
-                <tr>
-                    <td><p class="rem1"><b>Total Price</b></p></td>
-                    <td id="totalPriceDeliver"></td>
-                </tr>
-                <tr>
-                    <td><p class="rem1"><b>Tip</b></p></td>
-                    <td id="tipDeliver"></td>
-                </tr>
-            </table>
-        <button type="button" id="finishDelivering" class="btn btn-outline-dark spaced mr-auto ml-auto" onclick="finishDelivering()" hidden>Order delivered</button>
+    <div id="order" class="form-row" hidden>
+        <table id="tableOrder" class="table-bordered table text-center" style="width: 70%;margin-top: 3rem;" hidden>
+            <tr>
+                <td><p class="rem1"><b>Franchise</b></p></td>
+                <td><p class="rem1"><b>Franchise phone</b></p></td>
+                <td><p class="rem1"><b>Elaboration Time</b></p></td>
+                <td><p class="rem1"><b>Client address</b></p></td>
+                <td><p class="rem1"><b>Client phone</b></p></td>
+                <td><p class="rem1"><b>Total Price</b></p></td>
+                <td><p class="rem1"><b>Tip</b></p></td>
+            </tr>
+            <tr>
+                <td id="foNameDeliver"></td>
+                <td id="foPhoneDeliver"></td>
+                <td id="elaborationTimeDeliver"></td>
+                <td id="clientAddressDeliver"></td>
+                <td id="clientPhoneDeliver"></td>
+                <td id="totalPriceDeliver"></td>
+                <td id="tipDeliver"></td>
+            </tr>
+        </table>
+        <button type="button" id="finishDelivering" style="height: 40%; margin-top: 4.5rem;"
+                class="btn btn-success spaced mr-auto ml-auto" onclick="finishDelivering()">Order<br>delivered
+        </button>
     </div>
 </div>
+
 
 <%--modal for confirming--%>
 <div class="modal fade bd-example-modal-sm" id="options" tabindex="-1" role="dialog" aria-hidden="true">
@@ -120,17 +119,19 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" onclick="refuseOrder()" class="btn btn btn-danger" data-dismiss="modal">Refuse</button>
+                    <button type="button" onclick="refuseOrder()" class="btn btn btn-danger" data-dismiss="modal">
+                        Refuse
+                    </button>
                     <button type="button" onclick="acceptOrder()" class="btn btn-success">Accept</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-    <%--<div class="row" id="options" hidden>--%>
-        <%--<button type="button" value="accept" name="accept" class="btn btn-outline-dark spaced-top" onclick="acceptOrder()"><i class="fas fa-power-off"></i> Accept</button>--%>
-        <%--<button type="button" value="accept" name="accept" class="btn btn-outline-dark spaced-top" onclick="refuseOrder()"><i class="fas fa-power-off"></i> Refuse</button>--%>
-    <%--</div>--%>
+<%--<div class="row" id="options" hidden>--%>
+<%--<button type="button" value="accept" name="accept" class="btn btn-outline-dark spaced-top" onclick="acceptOrder()"><i class="fas fa-power-off"></i> Accept</button>--%>
+<%--<button type="button" value="accept" name="accept" class="btn btn-outline-dark spaced-top" onclick="refuseOrder()"><i class="fas fa-power-off"></i> Refuse</button>--%>
+<%--</div>--%>
 
 <script src="../../../js/dg/sw.js"></script>
 <script src="../../../js/dg/notificationDG.js"></script>

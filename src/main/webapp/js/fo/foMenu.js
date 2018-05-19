@@ -53,10 +53,12 @@ function openWebSocket(dgEmail) {
 function setOrders(orders) {
     var panel = document.getElementById("panel1");
     for (var i = 0; i < orders.length; i++) {
+        var order = orders[i];
         var column = document.createElement('div');
         column.className = 'col-md-4 text-center';
         column.style = 'margin-bottom: 1rem;';
         column.id = orders[i].id;
+        addLink(column, order);
 
         var img = document.createElement('img');
         img.className = 'card-img-top rounded-circle';
@@ -66,10 +68,10 @@ function setOrders(orders) {
         var title = document.createElement('h5');
         title.className = 'card-title';
 
-        var order = orders[i];
+
         if (order.deliveryGuy === undefined) {
             img.src = '../../images/anonymus.png';
-            title.innerHTML = 'undefined';
+            title.innerHTML = 'not assigned';
         } else {
             var url = window.location.href.split('/');
             url[3] = 'images/' + order.deliveryGuy.email + '.png';
@@ -95,7 +97,7 @@ function setOrders(orders) {
         client.className = 'card-text';
         client.innerHTML = order.client.email;
 
-        var status = getOrderStatus(order.stateOrder); //TODO change color
+        var status = getOrderStatus(order.stateOrder);
         if(order.stateOrder === 'DELIVERING') openWebSocket(order.deliveryGuy.email);
 
         column.appendChild(img);
@@ -106,13 +108,8 @@ function setOrders(orders) {
         column.appendChild(clientIcon);
         column.appendChild(client);
         column.appendChild(status);
-
         panel.appendChild(column);
     }
-}
-
-function getFoUrl() {
-
 }
 
 
@@ -123,8 +120,25 @@ function showOrderAcceptedModal(){
 
 //change color depending on the status
 function getOrderStatus(status) {
-    var statusElement =  document.createElement('p')
-    statusElement.innerHTML = status;
+    var stToUpper = status.toUpperCase();
+    var statusElement =  document.createElement('p');
+    statusElement.innerHTML = stToUpper;
+
+    switch (stToUpper) {
+        case 'WAITING':
+            statusElement.style = 'color: red;';
+            break;
+        case 'DELIVERING':
+            statusElement.style = 'color: #D35400;';
+            break;
+        case 'DELIVERED':
+            statusElement.style = 'color: navy;';
+            break;
+        case 'REVIEWED':
+            statusElement.style = 'color: green;';
+            break;
+        default: break;
+    }
     return statusElement;
 }
 
@@ -148,4 +162,10 @@ function closeSockets(){
 
     window.onbeforeunload = undefined;
     window.onunload = undefined;
+}
+
+function addLink(column, order){
+    column.onclick = function() {
+        window.open("http://localhost:8080/orderInfo?orderID=" + order.id, "_self")
+    };
 }

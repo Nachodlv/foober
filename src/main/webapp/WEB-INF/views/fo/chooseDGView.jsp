@@ -87,7 +87,7 @@
 
 <%--Choose DG later--%>
 <footer class="footer fixed-bottom mb-3 ml-3">
-    <a href="${pageContext.request.contextPath}/foMenu" class="btn btn-outline-dark"><i class="fas fa-user-alt-slash" style="color:black"></i> Choose delivery-guy later</a>
+    <a href="${pageContext.request.contextPath}/foMenu" class="btn btn-outline-dark"><i class="fas fa-clock" style="color:black"></i> Choose delivery-guy later</a>
 </footer>
 
 <script src="../../../js/fo/chooseDG.js"></script>
