@@ -4,11 +4,11 @@ replaceMeansOfTransport();
 
 dgSocket.onopen = function (ev) {
     dgSocket.onmessage = function (ev) {
-        var deliveyGuy = JSON.parse(ev.data);
-        if(deliveyGuy.state === 'ONLINE_WAITING'){
-            newDeliveryGuy(deliveyGuy);
+        var deliveryGuy = JSON.parse(ev.data);
+        if(deliveryGuy.state === 'ONLINE_WAITING'){
+            newDeliveryGuy(deliveryGuy);
         }else{
-            deleteDeliveryGuy(deliveyGuy);
+            deleteDeliveryGuy(deliveryGuy);
         }
     };
 };
@@ -73,7 +73,6 @@ function chooseDg(){
     orderSocket.onopen = function (ev) {
         orderSocket.send(JSON.stringify(order));
         $("#modalConfirmDG").modal('hide');
-        onWindowClose(orderSocket);
         waitingForResponse(orderSocket);
     };
 }
@@ -112,6 +111,7 @@ function waitingForResponse(orderSocket){
     orderSocket.onmessage = function (message) {
         var order = JSON.parse(message.data);
         if(order.fromFO) return;
+        orderSocket.close();
         if(order.stateOrder === 'DELIVERING'){
             //order accepted
             saveOrder(order.dgEmail);
@@ -122,10 +122,8 @@ function waitingForResponse(orderSocket){
             //order rejected
             document.getElementById('table').hidden = false;
             document.getElementById('waitingForResponse').hidden = true;
-            document.getElementById('orderRejected').hidden = false;
+            errorCatcher('The delivery-guy rejected the order.');
         }
-        //add timeout
-        orderSocket.close();
     }
 
 }
@@ -169,4 +167,18 @@ function saveOrder(dgEmail){
     var url = window.location.href += '?dgEmail=' + dgEmail;
     xhttp.open("POST", url, true);
     xhttp.send("dgEmail=" + dgEmail);
+}
+
+function errorCatcher(error){
+    var div = document.getElementById('orderRejected');
+    div.innerHTML = '<div class="alert alert-danger alert-dismissible fade show" role="alert">\n' +
+        error + '\n' +
+        '<button type="button" class="close" data-dismiss="alert" aria-label="Close">\n' +
+        '<span aria-hidden="true">&times;</span>\n' +
+        '</button>\n' +
+        '</div>';
+}
+
+function closeDgSocket(dgEmail){
+
 }

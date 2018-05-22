@@ -119,7 +119,7 @@ public class Order {
     public int getTotalCost() {
         int totalCost = 0;
         for (OrderedProducts product : orderedProducts) {
-            totalCost += product.getProduct().getPrice();
+            totalCost += product.getProduct().getPrice() * product.getQuantity();
         }
         return totalCost;
     }

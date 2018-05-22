@@ -7,6 +7,7 @@
     <title>Order Info</title>
 </head>
 <body class="outer">
+
 <div class="container text-center">
     <div class="row">
         <div class="col">
@@ -63,6 +64,18 @@
                         ${order.deliveryGuy != null ? order.deliveryGuy.email : "not assigned"}
                     </td>
                 </tr>
+                <tr>
+                    <td>${order.client.address}</td>
+                    <td style="padding: 1rem;"><i class="fas fa-map-marker"></i></td>
+                    <td>
+                        -
+                    </td>
+                </tr>
+                <tr hidden>
+                    <td></td>
+                    <td></td>
+                    <td><a href="${pageContext.request.contextPath}/chooseDG">Assign Delivery-Guy</a></td>
+                </tr>
                 </tbody>
             </table>
         </div>
@@ -95,6 +108,7 @@
     <a href="${pageContext.request.contextPath}/foMenu" class="btn btn-outline-dark"><i class="fas fa-undo" style="color:black"></i> Return to Main Menu</a>
 </footer>
 
+<script src="../../../js/fo/orderInfo.js"></script>
 <jsp:include page="../bootstrapImportBody.jsp"/>
 </body>
 </html>

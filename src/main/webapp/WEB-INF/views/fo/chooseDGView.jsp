@@ -7,12 +7,9 @@
     <link rel="stylesheet" href="../../../css/foober.css" type="text/css">
 </head>
 <body class="outer" onbeforeunload="closeSocket()">
-<div id="orderRejected" class="alert alert-danger alert-dismissible fade show" role="alert" hidden>
-    The delivery-guy rejected the order.
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
+
+<div id="orderRejected"></div>
+
 <div class="fixed-panel">
     <table class="table table-striped table-hover table-bordered" id="table">
         <thead>

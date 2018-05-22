@@ -21,6 +21,10 @@ public class DeliveryGuy extends UserAccount {
     @Enumerated(EnumType.STRING)
     @Column(name = "state")
     private StateDG state;
+    @Column(name = "ratingQuantity")
+    private int ratingQuantity = 0;
+    @Column(name = "rating")
+    private double rating = 0;
 
     public DeliveryGuy(String email, String name, String password, long phone, int meansOfTransport) {
         super(email, password, "DG");
@@ -72,6 +76,30 @@ public class DeliveryGuy extends UserAccount {
 
     public void setState(StateDG state) {
         this.state = state;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public double getRating() {
+
+        return rating;
+    }
+
+    public void setRatingQuantity(int ratingQuantity) {
+
+        this.ratingQuantity = ratingQuantity;
+    }
+
+    public int getRatingQuantity() {
+
+        return ratingQuantity;
+    }
+
+    public void addRating(double rating){
+        this.rating = (this.rating*ratingQuantity + rating)/(ratingQuantity+1);
+        ratingQuantity++;
     }
 }
 

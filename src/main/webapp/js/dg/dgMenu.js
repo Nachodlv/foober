@@ -2,7 +2,9 @@ var email = document.getElementById('deliveryGuy').childNodes[7].value;
 var orderSocket = new WebSocket(getUrl('/orderSender/' + email));
 var order;
 var waitingResponse = false;
+var timeOutQuantity = 0;
 var delivering = false;
+var timeOut;
 
 orderSocket.onopen = function (ev) {
     onlineWorking();
@@ -44,6 +46,14 @@ function showOrder(order){
     $("#options").modal({
         backdrop: false
     });
+    timeOut = setTimeout(function(){
+        timeOutQuantity ++;
+        refuseOrder();
+        if(timeOutQuantity >= 3){
+            forceLogOut();
+            timeOutQuantity = 0;
+        }
+    }, 60000);
 }
 
 function hideOrder(){
@@ -52,6 +62,7 @@ function hideOrder(){
 }
 
 function acceptOrder(){
+    clearTimeout(timeOut);
     order.stateOrder = 'DELIVERING';
     order.fromFO = false;
     orderSocket.send(JSON.stringify(order));
@@ -62,6 +73,7 @@ function acceptOrder(){
 }
 
 function refuseOrder(){
+    clearTimeout(timeOut);
     order.fromFO = false;
     orderSocket.send(JSON.stringify(order));
     hideOrder();
@@ -204,3 +216,7 @@ function hideOrderToDeliver(){
     document.getElementById('finishDelivering').hidden = true;
 }
 
+function forceLogOut(){
+    login_logout('OFFLINE');
+    $("#timeOutModal").modal();
+}

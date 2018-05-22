@@ -49,30 +49,38 @@
     </div>
 
     <%--Order when delivering--%>
-    <div id="order" class="form-row" hidden>
-        <table id="tableOrder" class="table-bordered table text-center" style="width: 70%;margin-top: 3rem;" hidden>
+        <div id="order" class="mt-5 rounded d-flex flex-column justify-content-center" style="background:#F8F8FA;" hidden>
+        <table id="tableOrder" class="table" hidden>
             <tr>
                 <td><p class="rem1"><b>Franchise</b></p></td>
-                <td><p class="rem1"><b>Franchise phone</b></p></td>
-                <td><p class="rem1"><b>Elaboration Time</b></p></td>
-                <td><p class="rem1"><b>Client address</b></p></td>
-                <td><p class="rem1"><b>Client phone</b></p></td>
-                <td><p class="rem1"><b>Total Price</b></p></td>
-                <td><p class="rem1"><b>Tip</b></p></td>
+                <td id="foNameDeliver"></td>
             </tr>
             <tr>
-                <td id="foNameDeliver"></td>
+                <td><p class="rem1"><b>Franchise phone</b></p></td>
                 <td id="foPhoneDeliver"></td>
+            </tr>
+            <tr>
+                <td><p class="rem1"><b>Elaboration Time</b></p></td>
                 <td id="elaborationTimeDeliver"></td>
+            </tr>
+            <tr>
+                <td><p class="rem1"><b>Client address</b></p></td>
                 <td id="clientAddressDeliver"></td>
+            </tr>
+            <tr>
+                <td><p class="rem1"><b>Client phone</b></p></td>
                 <td id="clientPhoneDeliver"></td>
+            </tr>
+            <tr>
+                <td><p class="rem1"><b>Total Price</b></p></td>
                 <td id="totalPriceDeliver"></td>
+            </tr>
+            <tr>
+                <td><p class="rem1"><b>Tip</b></p></td>
                 <td id="tipDeliver"></td>
             </tr>
         </table>
-        <button type="button" id="finishDelivering" style="height: 40%; margin-top: 4.5rem;"
-                class="btn btn-success spaced mr-auto ml-auto" onclick="finishDelivering()">Order<br>delivered
-        </button>
+        <button type="button" id="finishDelivering" class="btn btn-outline-dark spaced mr-auto ml-auto" onclick="finishDelivering()" hidden>Order delivered</button>
     </div>
 </div>
 
@@ -128,6 +136,28 @@
         </div>
     </div>
 </div>
+
+<%--Time Out LogOut--%>
+<div class="modal fade bd-example-modal-sm" id="timeOutModal" tabindex="-1" role="dialog"
+     aria-labelledby="timeOutModal" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="orderAcceptedLabel">Logged out</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                You were logged out due to inactivity.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <%--<div class="row" id="options" hidden>--%>
 <%--<button type="button" value="accept" name="accept" class="btn btn-outline-dark spaced-top" onclick="acceptOrder()"><i class="fas fa-power-off"></i> Accept</button>--%>
 <%--<button type="button" value="accept" name="accept" class="btn btn-outline-dark spaced-top" onclick="refuseOrder()"><i class="fas fa-power-off"></i> Refuse</button>--%>
