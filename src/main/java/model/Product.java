@@ -1,5 +1,7 @@
 package model;
 
+import com.google.gson.annotations.Expose;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -8,11 +10,14 @@ import java.util.Set;
 @Table(name = "product")
 public class Product {
     @Id
+    @Expose
     @GeneratedValue
     @Column(name = "id")
     private int id;
+    @Expose
     @Column(name = "name")
     private String name;
+    @Expose
     @Column(name = "price")
     private double price;
     @Column(name = "active")

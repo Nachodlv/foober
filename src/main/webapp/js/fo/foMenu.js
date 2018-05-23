@@ -166,6 +166,9 @@ function closeSockets(){
 
 function addLink(column, order){
     column.onclick = function() {
-        window.open("http://localhost:8080/orderInfo?orderID=" + order.id, "_self")
+        var url = window.location.href.split('/');
+        url[3] = 'orderInfo?orderID=' + order.id;
+        var finalUrl = url.join('/');
+        window.open(finalUrl, "_self")
     };
 }

@@ -1,15 +1,19 @@
 package model;
 
+import com.google.gson.annotations.Expose;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "orderedProduct")
 public class OrderedProducts {
     @Id
+    @Expose
     @GeneratedValue
     @Column(name = "id")
     private int id;
 
+    @Expose
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
@@ -18,9 +22,11 @@ public class OrderedProducts {
     @JoinColumn(name = "order_id")
     private Order order;
 
+    @Expose
     @Column(name = "comment")
     private String comment;
 
+    @Expose
     @Column(name = "quantity")
     private int quantity;
 

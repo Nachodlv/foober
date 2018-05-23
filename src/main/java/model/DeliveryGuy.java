@@ -12,6 +12,7 @@ public class DeliveryGuy extends UserAccount {
     @Expose
     @Column(name = "name")
     private String name;
+    @Expose
     @Column(name = "phone")
     private long phone;
     @Column(name = "meansOfTransport")

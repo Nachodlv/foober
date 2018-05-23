@@ -13,10 +13,13 @@ public class Client {
     @GeneratedValue
     @Column(name = "id")
     private int id;
+    @Expose
     @Column(name = "name")
     private String name;
+    @Expose
     @Column(name = "phone")
     private long phone;
+    @Expose
     @Column(name = "address")
     private String address;
     @Expose

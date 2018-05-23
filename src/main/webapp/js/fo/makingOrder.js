@@ -38,7 +38,7 @@ function completeOrder(){
         if(quantity > 0){
             added = true;
             var rowCloned = row.cloneNode(true);
-            rowCloned.classList = 'product-row-cloned';
+            rowCloned.class = 'product-row-cloned';
 
             var rowClonedNodes = rowCloned.childNodes;
             //transform quantity from input to text

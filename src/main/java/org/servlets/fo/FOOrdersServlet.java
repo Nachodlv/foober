@@ -46,14 +46,14 @@ public class FOOrdersServlet extends HttpServlet{
                 waiting ++;
                 delivering ++;
                 delivered ++;
-            }else if (order.getStateOrder() == StateOrder.DELIVERING){
+            } else if (order.getStateOrder() == StateOrder.DELIVERING){
                 reArrangeOrders.add(delivering, order);
                 delivering++;
                 delivered++;
-            }else if(order.getStateOrder() == StateOrder.DELIVERED){
+            } else if (order.getStateOrder() == StateOrder.DELIVERED){
                 reArrangeOrders.add(delivered, order);
                 delivered ++;
-            }else{
+            } else {
                 reArrangeOrders.add(delivered, order);
             }
         }

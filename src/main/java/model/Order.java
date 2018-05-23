@@ -37,6 +37,7 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "client_email", nullable = false)
     private Client client;
+    @Expose
     @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
     private Set<OrderedProducts> orderedProducts = new HashSet<>();
 
