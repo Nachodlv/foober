@@ -34,8 +34,8 @@ public class DeliveryGuy extends UserAccount {
         this.meansOfTransport = meansOfTransport;
         orders = new HashSet<>();
         state = StateDG.OFFLINE;
-        this.rating = 4.5;
-        this.ratingQuantity = 1;
+        this.rating = 0;
+        this.ratingQuantity = 0;
     }
 
     public DeliveryGuy() {
