@@ -22,8 +22,10 @@ public class DeliveryGuy extends UserAccount {
     @Enumerated(EnumType.STRING)
     @Column(name = "state")
     private StateDG state;
+    @Expose
     @Column(name = "ratingQuantity")
     private int ratingQuantity;
+    @Expose
     @Column(name = "rating")
     private double rating;
 

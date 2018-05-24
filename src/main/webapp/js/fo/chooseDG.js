@@ -184,19 +184,3 @@ function closeDgSocket(dgEmail){
 
 }
 
-function setRating(rating, total, div) {
-    var html = '';
-    if(total > 0) {
-        var averageRating = rating / total;
-        var absolutRating = Math.trunc(averageRating);
-        var remaining = averageRating - absolutRating;
-        for (var i = 0; i < absolutRating; i++) {
-            html += '<i class=\"fas fa-star\"></i>';
-        }
-        if (remaining >= 0.75) html += '<i class=\"fas fa-star\"></i>';
-        else if (remaining >= 0.25) html += '<i class=\"fas fa-star-half\"></i>';
-    } else {
-        html = 'no ratings yet'
-    }
-    div.innerHTML = html;
-}

@@ -4,11 +4,13 @@
     <jsp:include page="../bootstrapImportHeader.jsp"/>
     <title>DG Menu</title>
     <link rel="stylesheet" href="../../../css/foober.css" type="text/css">
+    <link rel="stylesheet" href="../../../css/dg/dgMenu.css" type="text/css">
 </head>
 <body class="outer">
 <jsp:include page="../_header.jsp"/>
 <h2>Welcome, ${loginedUser.name}!</h2>
-<h5 class="text-muted" id="ratingTitle"></h5><br>
+<h5 class="text-muted"></h5>
+<div id="ratingTitle"></div>
 
 <div class="container-fluid bg-light rounded">
     <form method="post" action="${pageContext.request.contextPath}/dgMenu">
@@ -162,6 +164,8 @@
     </div>
 </div>
 
+<script src="../../../js/utils.js"></script>
+<script src="../../../js/starRating.js"></script>
 <script src="../../../js/dg/sw.js"></script>
 <script src="../../../js/dg/notificationDG.js"></script>
 <script src="../../../js/dg/dgMenu.js"></script>

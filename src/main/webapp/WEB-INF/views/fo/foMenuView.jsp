@@ -2,8 +2,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <jsp:include page="../bootstrapImportHeader.jsp"/>
     <meta charset="UTF-8">
+    <jsp:include page="../bootstrapImportHeader.jsp"/>
     <link rel="stylesheet" href="../../../css/fo/foMenuView.css" type="text/css">
     <link rel="stylesheet" href="../../../css/foober.css" type="text/css">
     <title>FO Menu</title>

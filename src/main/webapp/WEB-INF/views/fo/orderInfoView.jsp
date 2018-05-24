@@ -4,15 +4,18 @@
 <head>
     <jsp:include page="../bootstrapImportHeader.jsp"/>
     <link rel="stylesheet" href="../../../css/foober.css" type="text/css">
+    <link rel="stylesheet" href="../../../css/ratingStar.css" type="text/css">
+    <link rel="stylesheet" href="../../../css/fo/orderInfo.css" type="text/css">
     <title>Order Info</title>
 </head>
 <body class="outer">
 
 <div class="container text-center">
     <div class="row">
-        <div class="col">
+        <div class="col d-flex flex-column">
             <h5>Useful Information</h5>
             <h4 class="text-muted" id="order"></h4>
+            <div id="stars" class="stars"></div>
             <table class="table-bordered" align="center" style="text-align:center;">
                 <tbody>
                 <tr>
@@ -67,11 +70,45 @@
 </div>
 
 <footer class="footer fixed-bottom mb-3 ml-3">
-    <a href="${pageContext.request.contextPath}/foMenu" class="btn btn-outline-dark"><i class="fas fa-undo"
-                                                                                        style="color:black"></i> Return
+    <a href="${pageContext.request.contextPath}/foMenu" class="btn btn-outline-dark"><i class="fas fa-undo" style="color:black"></i> Return
         to Main Menu</a>
 </footer>
 
+<div class="modal fade bd-example-modal-sm" id="rateModal" tabindex="-1" role="dialog"
+     aria-labelledby="rateModal" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="rateLabel">Rating</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body d-flex flex-column justify-content-center">
+                <span class="titleModal">Please rate the delivery-guy</span>
+                <%--Star rating--%>
+                <div class="wrapper">
+                    <input type="checkbox" id="st5" value="5" onclick="starClick(5)" />
+                    <label id="label5" for="st5"></label>
+                    <input type="checkbox" id="st4" value="4" onclick="starClick(4)"/>
+                    <label id="label4" for="st4"></label>
+                    <input type="checkbox" id="st3" value="3" onclick="starClick(3)"/>
+                    <label id="label3" for="st3"> </label>
+                    <input type="checkbox" id="st2" value="2" onclick="starClick(2)"/>
+                    <label id="label2" for="st2"></label>
+                    <input type="checkbox" id="st1" value="1" onclick="starClick(1)"/>
+                    <label id="label1" for="st1"></label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../../../js/utils.js"></script>
+<script src="../../../js/starRating.js"></script>
 <script src="../../../js/fo/orderInfo.js"></script>
 <jsp:include page="../bootstrapImportBody.jsp"/>
 </body>

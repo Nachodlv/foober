@@ -156,7 +156,7 @@ function finishDelivering(){
     orderSocket.send(JSON.stringify(order));
 
     changeState('ONLINE_WAITING');
-    changeOrderState('DELIVERED');
+    changeOrderState('DELIVERED', order);
 }
 
 function onlineWorking(startWorking){
@@ -189,17 +189,6 @@ function getActiveOrder() {
     xhttp.send();
 }
 
-function changeOrderState(state){
-    var xhttp = new XMLHttpRequest();
-    var url = window.location.href.split('/');
-    url[3] = 'order';
-    url = url.join('/');
-    url += '?orderId=' + order.id;
-    url += '&state=' + state;
-    xhttp.open("POST", url , true);
-    xhttp.send();
-}
-
 function showOrderToDeliver(){
     document.getElementById('order').hidden = false;
     document.getElementById('tableOrder').hidden = false;
@@ -228,23 +217,5 @@ function showRating() {
     var ratingDiv = document.getElementById("ratingTitle");
     var ratingAmt = document.getElementById("ratingQuantity").value;
     var rating = document.getElementById("rating").value;
-    setRating(rating, ratingAmt, ratingDiv);
-}
-
-//repetido en chooseDG.js todo emprolijar
-function setRating(rating, total, div) {
-    var html = 'Your current rating is: ';
-    if(total > 0) {
-        var averageRating = rating / total;
-        var absolutRating = Math.trunc(averageRating);
-        var remaining = averageRating - absolutRating;
-        for (var i = 0; i < absolutRating; i++) {
-            html += '<i class=\"fas fa-star\"></i>';
-        }
-        if (remaining >= 0.75) html += '<i class=\"fas fa-star\"></i>';
-        else if (remaining >= 0.25) html += '<i class=\"fas fa-star-half\"></i>';
-    } else {
-        html = 'no ratings yet'
-    }
-    div.innerHTML = html;
+    setRating(rating, ratingAmt, ratingDiv, 1.5);
 }

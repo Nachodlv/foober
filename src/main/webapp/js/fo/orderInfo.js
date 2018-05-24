@@ -9,6 +9,7 @@ function getOrder() {
             order = JSON.parse(this.responseText);
             setOrder();
             setProducts();
+            if(order.stateOrder === 'DELIVERED') $('#rateModal').modal();
         }
     };
     var url = window.location.href.split('/');
