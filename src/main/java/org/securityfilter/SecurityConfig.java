@@ -26,6 +26,7 @@ class SecurityConfig {
         urlPatterns1.add("/makingOrder");
         urlPatterns1.add("/foInfo");
         urlPatterns1.add("/chooseDG");
+        urlPatterns1.add("/orderInfo");
 
         mapConfig.put(ROLE_FO, urlPatterns1);
 

@@ -129,19 +129,6 @@ function waitingForResponse(orderSocket){
 
 }
 
-function getUrl(url){
-    var loc = window.location, new_uri;
-    if (loc.protocol === "https:") {
-        new_uri = "wss:";
-    } else {
-        new_uri = "ws:";
-    }
-    new_uri += "//" + loc.host;
-    new_uri += url;
-
-    return new_uri;
-}
-
 function replaceMeansOfTransport() {
     var setTransport = document.getElementsByClassName("setMeansOfTransport");
     for(var i = 0; i < setTransport.length; i++) {

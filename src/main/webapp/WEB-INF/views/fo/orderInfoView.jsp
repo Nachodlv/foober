@@ -107,6 +107,27 @@
     </div>
 </div>
 
+<%--Order delivered modal--%>
+<div class="modal fade bd-example-modal-sm" id="deliveredModal" tabindex="-1" role="dialog"
+    aria-labelledby="deliveredModal" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deliveredLabel">Delivered</h5>
+                <button type="button" class="close"onclick="closeDeliveredModal()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body d-flex flex-column justify-content-center">
+                <span id="orderDelivered">Your order was delivered!</span>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeDeliveredModal()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script src="../../../js/utils.js"></script>
 <script src="../../../js/starRating.js"></script>
 <script src="../../../js/fo/orderInfo.js"></script>

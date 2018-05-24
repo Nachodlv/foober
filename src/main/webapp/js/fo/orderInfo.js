@@ -9,7 +9,8 @@ function getOrder() {
             order = JSON.parse(this.responseText);
             setOrder();
             setProducts();
-            if(order.stateOrder === 'DELIVERED') $('#rateModal').modal();
+            if(order.stateOrder === 'DELIVERING') openWebSocket();
+            else if(order.stateOrder === 'DELIVERED') $('#rateModal').modal();
         }
     };
     var url = window.location.href.split('/');
@@ -109,5 +110,22 @@ function addLink(img){
         var finalUrl = url.join('/');
         window.open(finalUrl, "_self")
     };
+}
+
+function openWebSocket(){
+    var orderSocket = new WebSocket(getUrl('/orderSender/' + order.deliveryGuy.email));
+    orderSocket.onmessage = function (ev) {
+        var orderReceived = JSON.parse(ev.data);
+        if(!orderReceived.fromFO && orderReceived.stateOrder === 'DELIVERED') {
+            $('#deliveredModal').modal({
+                backdrop: false
+            });
+        }
+    };
+}
+
+function closeDeliveredModal(){
+    $('#deliveredModal').modal('hide');
+    $('#rateModal').modal();
 }
 
