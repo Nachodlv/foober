@@ -96,7 +96,6 @@ public class OrderMessage {
     }
 
     public int getId() {
-
         return id;
     }
 
@@ -105,7 +104,6 @@ public class OrderMessage {
     }
 
     public String getClientAddress() {
-
         return clientAddress;
     }
 
@@ -114,7 +112,6 @@ public class OrderMessage {
     }
 
     public long getFoPhone() {
-
         return foPhone;
     }
 }

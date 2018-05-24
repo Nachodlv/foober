@@ -5,6 +5,7 @@ var waitingResponse = false;
 var timeOutQuantity = 0;
 var delivering = false;
 var timeOut;
+showRating();
 
 orderSocket.onopen = function (ev) {
     onlineWorking();
@@ -110,6 +111,8 @@ function getDeliveryGuy(state){
         name: div[1].value,
         phone: div[3].value,
         meansOfTransport: div[5].value,
+        rating: document.getElementById("rating").value,
+        ratingQuantity: document.getElementById("ratingQuantity").value,
         email: email,
         state: state
     };
@@ -219,4 +222,29 @@ function hideOrderToDeliver(){
 function forceLogOut(){
     login_logout('OFFLINE');
     $("#timeOutModal").modal();
+}
+
+function showRating() {
+    var ratingDiv = document.getElementById("ratingTitle");
+    var ratingAmt = document.getElementById("ratingQuantity").value;
+    var rating = document.getElementById("rating").value;
+    setRating(rating, ratingAmt, ratingDiv);
+}
+
+//repetido en chooseDG.js todo emprolijar
+function setRating(rating, total, div) {
+    var html = 'Your current rating is: ';
+    if(total > 0) {
+        var averageRating = rating / total;
+        var absolutRating = Math.trunc(averageRating);
+        var remaining = averageRating - absolutRating;
+        for (var i = 0; i < absolutRating; i++) {
+            html += '<i class=\"fas fa-star\"></i>';
+        }
+        if (remaining >= 0.75) html += '<i class=\"fas fa-star\"></i>';
+        else if (remaining >= 0.25) html += '<i class=\"fas fa-star-half\"></i>';
+    } else {
+        html = 'no ratings yet'
+    }
+    div.innerHTML = html;
 }

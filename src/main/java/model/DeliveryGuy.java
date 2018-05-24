@@ -23,9 +23,9 @@ public class DeliveryGuy extends UserAccount {
     @Column(name = "state")
     private StateDG state;
     @Column(name = "ratingQuantity")
-    private int ratingQuantity = 0;
+    private int ratingQuantity;
     @Column(name = "rating")
-    private double rating = 0;
+    private double rating;
 
     public DeliveryGuy(String email, String name, String password, long phone, int meansOfTransport) {
         super(email, password, "DG");
@@ -34,6 +34,8 @@ public class DeliveryGuy extends UserAccount {
         this.meansOfTransport = meansOfTransport;
         orders = new HashSet<>();
         state = StateDG.OFFLINE;
+        this.rating = 4.5;
+        this.ratingQuantity = 1;
     }
 
     public DeliveryGuy() {
@@ -79,28 +81,21 @@ public class DeliveryGuy extends UserAccount {
         this.state = state;
     }
 
-    public void setRating(double rating) {
-        this.rating = rating;
-    }
-
     public double getRating() {
-
         return rating;
     }
 
-    public void setRatingQuantity(int ratingQuantity) {
-
-        this.ratingQuantity = ratingQuantity;
+    public void addRating(double rating){
+        this.rating += rating;
+        ratingQuantity++;
     }
 
     public int getRatingQuantity() {
-
         return ratingQuantity;
     }
 
-    public void addRating(double rating){
-        this.rating = (this.rating*ratingQuantity + rating)/(ratingQuantity+1);
-        ratingQuantity++;
+    public void setRatingQuantity(int ratingQuantity) {
+        this.ratingQuantity = ratingQuantity;
     }
 }
 

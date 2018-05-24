@@ -6,13 +6,17 @@ public class DgMessage {
     private int phone;
     private String state;
     private String email;
+    private int ratingQuantity;
+    private double rating;
 
-    public DgMessage(String name, int meansOfTransport, int phone, String state, String email) {
+    public DgMessage(String name, int meansOfTransport, int phone, String state, String email, int ratingQuantity, double rating) {
         this.name = name;
         this.meansOfTransport = meansOfTransport;
         this.phone = phone;
         this.state = state;
         this.email = email;
+        this.rating = rating;
+        this.ratingQuantity = ratingQuantity;
     }
 
     public String getEmail() {
@@ -53,5 +57,21 @@ public class DgMessage {
 
     public String getState() {
         return state;
+    }
+
+    public int getRatingQuantity() {
+        return ratingQuantity;
+    }
+
+    public void setRatingQuantity(int ratingQuantity) {
+        this.ratingQuantity = ratingQuantity;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
     }
 }

@@ -7,7 +7,9 @@
 </head>
 <body class="outer">
 <jsp:include page="../_header.jsp"/>
-<h3>Welcome, ${loginedUser.name}!</h3><br>
+<h2>Welcome, ${loginedUser.name}!</h2>
+<h5 class="text-muted" id="ratingTitle"></h5><br>
+
 <div class="container-fluid bg-light rounded">
     <form method="post" action="${pageContext.request.contextPath}/dgMenu">
         <div id="deliveryGuy">
@@ -15,6 +17,8 @@
             <input hidden value="${loginedUser.phone}">
             <input hidden value="${loginedUser.meansOfTransport}">
             <input hidden value="${loginedUser.email}">
+            <input hidden id="rating" value="${loginedUser.rating}">
+            <input hidden id="ratingQuantity" value="${loginedUser.ratingQuantity}">
             <input hidden id="dgState" value="${loginedUser.state}">
         </div>
         <div class="d-flex">
@@ -157,11 +161,6 @@
         </div>
     </div>
 </div>
-
-<%--<div class="row" id="options" hidden>--%>
-<%--<button type="button" value="accept" name="accept" class="btn btn-outline-dark spaced-top" onclick="acceptOrder()"><i class="fas fa-power-off"></i> Accept</button>--%>
-<%--<button type="button" value="accept" name="accept" class="btn btn-outline-dark spaced-top" onclick="refuseOrder()"><i class="fas fa-power-off"></i> Refuse</button>--%>
-<%--</div>--%>
 
 <script src="../../../js/dg/sw.js"></script>
 <script src="../../../js/dg/notificationDG.js"></script>

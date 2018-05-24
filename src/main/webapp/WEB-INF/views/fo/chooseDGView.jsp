@@ -29,7 +29,7 @@
                     <td><i class="fa fa-circle" aria-hidden="true" style="color:green;"></i></td>
                     <td class="setMeansOfTransport">${deliveryGuy.meansOfTransport}</td>
                     <td>${deliveryGuy.phone}</td>
-                    <td><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></td>
+                    <td class="setRating"></td>
                 </tr>
             </c:forEach>
         </tbody>
