@@ -54,6 +54,6 @@ public class RegisterFOServlet extends HttpServlet {
         }
 
         AppUtils.storeLoginedUser(request.getSession(), franchiseOwner);
-        response.sendRedirect(request.getContextPath() + "/foMenu");
+        response.sendRedirect(request.getContextPath() + "/editMenu");
     }
 }

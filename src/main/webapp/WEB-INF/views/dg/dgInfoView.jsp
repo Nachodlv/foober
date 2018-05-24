@@ -53,8 +53,10 @@
             </tr>
             <tr>
                 <td>Edit profile photo</td>
-                <td><img width="100" height="100" src="${pageContext.request.contextPath}/images/${loginedUser.email}.png"></td>
-                <td><input type="file" id="editDGpic${loginedUser.email}" name="dgPicEdit" accept=".jpg, .jpeg, .png" class="file"></td>
+                <td>
+                    <img width="100" height="100" src="${pageContext.request.contextPath}/images/${loginedUser.email}.png">
+                    <input type="file" id="editDGpic${loginedUser.email}" name="dgPicEdit" accept=".jpg, .jpeg, .png" class="file mt-2">
+                </td>
                 <td> </td>
             </tr>
             </tbody>

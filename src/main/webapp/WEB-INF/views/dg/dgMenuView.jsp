@@ -12,7 +12,7 @@
 <h5 class="text-muted"></h5>
 <div id="ratingTitle"></div>
 
-<div class="container-fluid bg-light rounded">
+<div class="bg-light rounded">
     <form method="post" action="${pageContext.request.contextPath}/dgMenu">
         <div id="deliveryGuy">
             <input hidden value="${loginedUser.name}">
@@ -47,7 +47,7 @@
 
 <div class="d-flex justify-content-center">
     <%--Spinner--%>
-    <div class="spinner" id="spinner">
+    <div class="spinner" id="spinner" hidden>
         <h3 align="center">Waiting for orders...</h3>
         <div class="bounce1"></div>
         <div class="bounce2"></div>

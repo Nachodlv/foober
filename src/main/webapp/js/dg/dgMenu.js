@@ -83,14 +83,17 @@ function refuseOrder(){
 function login_logout(state) {
     var online = document.getElementById("online");
     var offline = document.getElementById("offline");
+    var spinner = document.getElementById('spinner');
     switch (state) {
         case 'ONLINE_WAITING':
             online.disabled = true;
             offline.disabled = false;
+            spinner.hidden = false;
             break;
         case 'OFFLINE':
             offline.disabled = true;
             online.disabled = false;
+            spinner.hidden = true;
             break;
     }
     changeState(state);
