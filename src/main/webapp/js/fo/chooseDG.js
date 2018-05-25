@@ -1,6 +1,7 @@
 var dgSocket = new WebSocket(getUrl('/dgOnline'));
 var email;
-replaceMeansOfTransport();
+var dgs;
+getAllDGs();
 
 dgSocket.onopen = function (ev) {
     dgSocket.onmessage = function (ev) {
@@ -184,3 +185,41 @@ function closeDgSocket(dgEmail){
 
 }
 
+function setRating(rating, total, div) {
+    var html = '';
+    if(total > 0) {
+        var averageRating = rating / total;
+        var absolutRating = Math.trunc(averageRating);
+        var remaining = averageRating - absolutRating;
+        for (var i = 0; i < absolutRating; i++) {
+            html += '<i class=\"fas fa-star\"></i>';
+        }
+        if (remaining >= 0.75) html += '<i class=\"fas fa-star\"></i>';
+        else if (remaining >= 0.25) html += '<i class=\"fas fa-star-half\"></i>';
+    } else {
+        html = 'no ratings yet'
+    }
+    div.innerHTML = html;
+}
+
+function getAllDGs() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+            dgs = JSON.parse(this.responseText);
+            setDgs();
+            replaceMeansOfTransport();
+        }
+    };
+    var url = window.location.href.split('/');
+    url[3] = 'getDGs';
+    var urlFinal = url.join('/');
+    xhttp.open("GET", urlFinal , true);
+    xhttp.send();
+}
+
+function setDgs() {
+    for (var i = 0; i < dgs.length; i++) {
+        newDeliveryGuy(dgs[i]);
+    }
+}

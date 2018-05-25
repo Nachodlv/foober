@@ -15,12 +15,14 @@ public class DeliveryGuy extends UserAccount {
     @Expose
     @Column(name = "phone")
     private long phone;
+    @Expose
     @Column(name = "meansOfTransport")
     private int meansOfTransport;
     @OneToMany(mappedBy = "deliveryGuy", fetch = FetchType.EAGER)
     private Set<Order> orders;
     @Enumerated(EnumType.STRING)
     @Column(name = "state")
+    @Expose
     private StateDG state;
     @Expose
     @Column(name = "ratingQuantity")

@@ -221,4 +221,6 @@ function showRating() {
     var ratingAmt = document.getElementById("ratingQuantity").value;
     var rating = document.getElementById("rating").value;
     setRating(rating, ratingAmt, ratingDiv, 1.5);
+    var stars = ratingDiv.innerHTML;
+    ratingDiv.innerHTML = 'Your current rating is: ' + stars;
 }

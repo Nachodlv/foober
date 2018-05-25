@@ -133,7 +133,7 @@ function getOrderStatus(status) {
             break;
         case 'DELIVERED':
             statusElement.style = 'color: navy;';
-            statusElement.innerHTML = 'DELIVERED (Pending review)';
+            statusElement.innerHTML = 'DELIVERED (pending review)';
             break;
         case 'REVIEWED':
             statusElement.style = 'color: green;';

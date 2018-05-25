@@ -22,16 +22,16 @@
         </tr>
         </thead>
         <tbody id="dgTable">
-            <c:forEach items="${deliveryGuys}"  var="deliveryGuy">
-                <input class="meansOfTransport" hidden value="${deliveryGuy.meansOfTransport}">
-                <tr class="text-center dgs" id="${deliveryGuy.email}">
-                    <td>${deliveryGuy.name}</td>
-                    <td><i class="fa fa-circle" aria-hidden="true" style="color:green;"></i></td>
-                    <td class="setMeansOfTransport">${deliveryGuy.meansOfTransport}</td>
-                    <td>${deliveryGuy.phone}</td>
-                    <td class="setRating"></td>
-                </tr>
-            </c:forEach>
+            <%--<c:forEach items="${deliveryGuys}"  var="deliveryGuy">--%>
+                <%--<input class="meansOfTransport" hidden value="${deliveryGuy.meansOfTransport}">--%>
+                <%--<tr class="text-center dgs" id="${deliveryGuy.email}">--%>
+                    <%--<td>${deliveryGuy.name}</td>--%>
+                    <%--<td><i class="fa fa-circle" aria-hidden="true" style="color:green;"></i></td>--%>
+                    <%--<td class="setMeansOfTransport">${deliveryGuy.meansOfTransport}</td>--%>
+                    <%--<td>${deliveryGuy.phone}</td>--%>
+                    <%--<td class="setRating"></td>--%>
+                <%--</tr>--%>
+            <%--</c:forEach>--%>
         </tbody>
     </table>
 </div>

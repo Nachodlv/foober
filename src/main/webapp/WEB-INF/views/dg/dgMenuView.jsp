@@ -9,8 +9,7 @@
 <body class="outer">
 <jsp:include page="../_header.jsp"/>
 <h2>Welcome, ${loginedUser.name}!</h2>
-<h5 class="text-muted"></h5>
-<div id="ratingTitle"></div>
+<h6 id="ratingTitle" style="margin-bottom: 2rem;" class="text-muted"></h6>
 
 <div class="bg-light rounded">
     <form method="post" action="${pageContext.request.contextPath}/dgMenu">
@@ -86,7 +85,7 @@
                 <td id="tipDeliver"></td>
             </tr>
         </table>
-        <button type="button" id="finishDelivering" class="btn btn-outline-dark spaced mr-auto ml-auto" onclick="finishDelivering()" hidden>Order delivered</button>
+        <button type="button" id="finishDelivering" class="btn btn-outline-success spaced mr-auto ml-auto" onclick="finishDelivering()" hidden>Order delivered</button>
     </div>
 </div>
 

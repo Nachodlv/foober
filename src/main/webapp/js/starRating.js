@@ -1,9 +1,9 @@
 
 function starClick(starNumber){
     $('#rateModal').modal('hide');
-    var div = document.getElementById('stars');
+    // var div = document.getElementById('stars');
     changeOrderState('REVIEWED', order);
-    setRating(order.deliveryGuy.rating + starNumber, order.deliveryGuy.ratingQuantity + 1, div, 1.5);
+    // setRating(order.deliveryGuy.rating + starNumber, order.deliveryGuy.ratingQuantity + 1, div, 1.5);
     newReview('REVIEWED', starNumber);
 }
 

@@ -29,7 +29,10 @@ function setOrder() {
         document.getElementById("dgName").innerHTML = 'not assigned';
         document.getElementById("dgPhone").innerHTML = 'not assigned';
         document.getElementById("dgEmail").innerHTML = 'not assigned';
-
+        var button = document.getElementById("but");
+        button.innerHTML = 'Choose DG';
+        button.hidden = false;
+        addLink(button);
     } else {
         var url = window.location.href.split('/');
         url[3] = 'images/' + order.deliveryGuy.email + '.png';
@@ -78,7 +81,7 @@ function setProducts() {
         td3.style = 'width:40%;';
         var p3 =  document.createElement('p');
         var comment = orderedProduct.comment;
-        if (comment === null) {
+        if (comment === '') {
             var i3 = document.createElement('i');
             i3.innerHTML = 'no comment';
             p3.appendChild(i3);

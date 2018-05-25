@@ -15,7 +15,7 @@
         <div class="col d-flex flex-column">
             <h5>Useful Information</h5>
             <h4 class="text-muted" id="order"></h4>
-            <div id="stars" class="stars"></div>
+            <%--<div id="stars" class="stars"></div>--%>
             <table class="table-bordered" align="center" style="text-align:center;">
                 <tbody>
                 <tr>
@@ -57,6 +57,7 @@
                 </tr>
                 </tbody>
             </table>
+            <button id="but" hidden style="margin-top: 1rem; margin-left: 18rem; margin-right: 7rem" class="btn btn-info">Button</button>
         </div>
 
         <div class="col fixed-panel-big">
