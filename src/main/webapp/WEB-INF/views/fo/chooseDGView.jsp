@@ -87,6 +87,7 @@
     <a href="${pageContext.request.contextPath}/foMenu" class="btn btn-outline-dark"><i class="fas fa-clock" style="color:black"></i> Choose delivery-guy later</a>
 </footer>
 
+<script src="../../../js/utils.js"></script>
 <script src="../../../js/starRating.js"></script>
 <script src="../../../js/fo/chooseDG.js"></script>
 <jsp:include page="../bootstrapImportBody.jsp"/>

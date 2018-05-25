@@ -5,3 +5,9 @@
 .stars {
     margin: 1rem 4.2rem 1rem auto;
 }
+
+#orderDelivered {
+    text-align: center;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+}

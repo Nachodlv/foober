@@ -236,6 +236,7 @@
 
     <jsp:include page="../bootstrapImportBody.jsp"/>
 
+    <script src="../../../js/utils.js"></script>
     <script src="../../../js/fo/foMenu.js"></script>
     <script src="../../../js/errorCatcher.js"></script>
     <%--<script src="../../../js/dg/anonymusDG.js"></script>--%>
