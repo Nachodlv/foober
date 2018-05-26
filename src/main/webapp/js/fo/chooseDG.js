@@ -91,6 +91,7 @@ function getOrder() {
         tippingPercentage: document.getElementById('tippingPercentage').value,
         clientPhone: document.getElementById('clientPhone').value,
         clientAddress: document.getElementById('clientAddress').value,
+        clientEmail: document.getElementById('clientEmail').value,
         foPhone: document.getElementById('foPhone').value
     };
 }

@@ -95,6 +95,7 @@ function setOrders(orders) {
 
         var client = document.createElement('p');
         client.className = 'card-text';
+        client.style = 'overflow: hidden; text-overflow: ellipsis;';
         client.innerHTML = order.client.email;
 
         var status = getOrderStatus(order.stateOrder);

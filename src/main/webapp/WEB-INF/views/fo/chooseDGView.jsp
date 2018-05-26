@@ -21,18 +21,7 @@
             <th class="text-center" scope="col">Rating</th>
         </tr>
         </thead>
-        <tbody id="dgTable">
-            <%--<c:forEach items="${deliveryGuys}"  var="deliveryGuy">--%>
-                <%--<input class="meansOfTransport" hidden value="${deliveryGuy.meansOfTransport}">--%>
-                <%--<tr class="text-center dgs" id="${deliveryGuy.email}">--%>
-                    <%--<td>${deliveryGuy.name}</td>--%>
-                    <%--<td><i class="fa fa-circle" aria-hidden="true" style="color:green;"></i></td>--%>
-                    <%--<td class="setMeansOfTransport">${deliveryGuy.meansOfTransport}</td>--%>
-                    <%--<td>${deliveryGuy.phone}</td>--%>
-                    <%--<td class="setRating"></td>--%>
-                <%--</tr>--%>
-            <%--</c:forEach>--%>
-        </tbody>
+        <tbody id="dgTable"></tbody>
     </table>
 </div>
 
@@ -80,6 +69,7 @@
     <input id="tippingPercentage" value="${order.franchiseOwner.tippingPercentage}">
     <input id="totalPrice" value="${order.getTotalCost()}">
     <input id="clientAddress" value="${order.client.address}">
+    <input id="clientEmail" value="${order.client.email}">
 </div>
 
 <%--Choose DG later--%>

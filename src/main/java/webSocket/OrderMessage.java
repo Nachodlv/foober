@@ -12,8 +12,9 @@ public class OrderMessage {
     private String foName;
     private long foPhone;
     private String clientAddress;
+    private String clientEmail;
 
-    public OrderMessage(boolean fromFO, int id, int elaborationTime, String stateOrder, String dgEmail, double totalPrice, int tippingPercentage, long clientPhone, String foName, long foPhone, String clientAddress) {
+    public OrderMessage(boolean fromFO, int id, int elaborationTime, String stateOrder, String dgEmail, double totalPrice, int tippingPercentage, long clientPhone, String foName, long foPhone, String clientAddress, String clientEmail) {
         this.fromFO = fromFO;
         this.id = id;
         this.elaborationTime = elaborationTime;
@@ -25,6 +26,7 @@ public class OrderMessage {
         this.foName = foName;
         this.foPhone = foPhone;
         this.clientAddress = clientAddress;
+        this.clientEmail = clientEmail;
     }
 
     public void setFromFO(boolean fromFO) {
@@ -114,4 +116,13 @@ public class OrderMessage {
     public long getFoPhone() {
         return foPhone;
     }
+
+    public String getClientEmail() {
+        return clientEmail;
+    }
+
+    public void setClientEmail(String clientEmail) {
+        this.clientEmail = clientEmail;
+    }
 }
+

@@ -77,13 +77,25 @@ public class Utils {
         return activeProducts;
     }
 
-    public static void sendEmail(OrderMessage message) {
-        String titleEmail = "Order received";
-        String messageEmail = "You have received an order!";
-        try {
-            GoogleMail.send(message.getDgEmail(), titleEmail, messageEmail);
-        } catch (MessagingException e) {
-            e.printStackTrace();
+    public static void sendEmail(OrderMessage message, boolean isOrderReceived) {
+        String titleEmail;
+        String messageEmail;
+        if (isOrderReceived) {
+            titleEmail = "Order received";
+            messageEmail = "You have received an order!";
+            try {
+                GoogleMail.send(message.getDgEmail(), titleEmail, messageEmail);
+            } catch (MessagingException e) {
+                e.printStackTrace();
+            }
+        } else {
+            titleEmail = "Order on its way";
+            messageEmail = "Your order has already been accepted by one of our delivery guys, and it is on its way!";
+            try {
+                GoogleMail.send(message.getClientEmail(), titleEmail, messageEmail);
+            } catch (MessagingException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
