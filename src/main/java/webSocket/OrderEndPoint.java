@@ -19,9 +19,9 @@ public class OrderEndPoint {
     @OnMessage
     public void handleMessage(OrderMessage message) {
         if (message.isFromFO()) {
-            Utils.sendEmail(message, true);
+            Utils.sendEmailDG(message);
         } else if (message.getStateOrder().equals("DELIVERING")) {
-            Utils.sendEmail(message, false);
+            Utils.sendEmailClient(message);
         }
         for (Session session : sessions) {
             try {

@@ -15,9 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-/**
- * @author Gonzalo de Achaval
- */
 public class Utils {
 
     private static byte[] convertStreamToByteArray(InputStream is) throws IOException {
@@ -61,7 +58,6 @@ public class Utils {
         return ImageIO.read(new ByteArrayInputStream(imgBytes));
     }
 
-
     public static List<Product> filterProducts(List<Product> products, HttpServletRequest request) {
         String searchBy = request.getParameter("searchProduct");
         Pattern pattern;
@@ -77,25 +73,23 @@ public class Utils {
         return activeProducts;
     }
 
-    public static void sendEmail(OrderMessage message, boolean isOrderReceived) {
-        String titleEmail;
-        String messageEmail;
-        if (isOrderReceived) {
-            titleEmail = "Order received";
-            messageEmail = "You have received an order!";
-            try {
-                GoogleMail.send(message.getDgEmail(), titleEmail, messageEmail);
-            } catch (MessagingException e) {
-                e.printStackTrace();
-            }
-        } else {
-            titleEmail = "Order on its way";
-            messageEmail = "Your order has already been accepted by one of our delivery guys, and it is on its way!";
-            try {
-                GoogleMail.send(message.getClientEmail(), titleEmail, messageEmail);
-            } catch (MessagingException e) {
-                e.printStackTrace();
-            }
+    public static void sendEmailDG(OrderMessage message) {
+        String titleEmail = "Order received";
+        String messageEmail = "You have received an order!";
+        try {
+            GoogleMail.send(message.getDgEmail(), titleEmail, messageEmail);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void sendEmailClient(OrderMessage message) {
+        String titleEmail = "Order on its way";
+        String messageEmail = "Your order has already been accepted by one of our delivery guys, and it is on its way!";
+        try {
+            GoogleMail.send(message.getClientEmail(), titleEmail, messageEmail);
+        } catch (MessagingException e) {
+            e.printStackTrace();
         }
     }
 }
