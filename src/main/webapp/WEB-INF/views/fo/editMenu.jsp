@@ -12,8 +12,7 @@
 <h1 align="left">Products: </h1>
 <form class="form-inline row" enctype="multipart/form-data">
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary ml-4 mr-5" data-toggle="modal" data-target="#exampleModal">Add product</button>
-
+    <button type="button" class="btn btn-primary ml-4 mr-5" data-toggle="modal" data-target="#exampleModal" onclick="closePopover()">Add product</button>
     <input type="text" class="form-control ml-2" placeholder="Search by name" name="searchProduct" value="${pageContext.request.getParameter("searchProduct")}">
     <a class="ml-2" href="${pageContext.request.contextPath}/editMenu"><i class="fas fa-times icon"></i></a>
     <button type="submit" class="btn btn-info ml-4">Search</button>
@@ -67,8 +66,8 @@
                 <th scope="col"></th>
                 <th scope="col">Name</th>
                 <th scope="col">Price</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
             </tr>
             </thead>
             <tbody>
@@ -133,5 +132,6 @@
 <jsp:include page="../bootstrapImportBody.jsp"/>
 <script src="../../../js/replaceNoImg.js"></script>
 <script src="../../../js/errorCatcher.js"></script>
+<script src="../../../js/fo/editMenu.js"></script>
 </body>
 </html>

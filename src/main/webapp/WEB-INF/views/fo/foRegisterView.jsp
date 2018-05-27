@@ -57,7 +57,7 @@
                     </label>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary" value="Submit">Submit</button>
+            <button type="submit" class="btn btn-primary" value="Submit" onclick="firstTime()">Submit</button>
             <div class="errorCatcher mt-2" style="max-width: 26rem;"></div>
         </form>
     </div>
@@ -65,6 +65,7 @@
 </div>
 
 <script src="../../../js/errorCatcher.js"></script>
+<script src="../../../js/fo/foRegister.js"></script>
 <jsp:include page="../bootstrapImportBody.jsp"/>
 
 </body>

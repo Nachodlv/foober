@@ -40,8 +40,18 @@
                 </div>
 
             </form>
+            <span id="popoverChooseClient" class="col-3 ml-2" data-toggle="popover" data-html="true" data-placement="right"
+                  data-content='
+                            <div class="d-flex align-items-center" >
+                                <h6 class="mr-3 title-popover">Choose a client to make a new order!</h6>
+                                <button id="closeChooseClient" type="button" class="close" data-dismiss="popover" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            <div>'
+            >
             <div class="fixed-panel">
                 <div class="errorCatcher"></div>
+
                 <table class="table table-striped table-hover table-bordered">
                     <thead>
                     <tr>
@@ -156,6 +166,7 @@
                     </tbody>
                 </table>
             </div>
+            </span>
         </div>
     </div>
 
@@ -228,10 +239,40 @@
             </div>
         </div>
     </div>
+
+    <%--Modal Disable popovers--%>
+    <div class="modal fade bd-example-modal-sm" id="popoversModal" tabindex="-1" role="dialog"
+         aria-labelledby="popoversModal" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Tutorial</h5>
+                </div>
+                <div class="modal-body d-flex flex-column justify-content-center mb-3">
+                    <span>The tutorial's popovers are enabled.</span>
+                    <span>Do you want to disable them?</span>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="disablePopovers()" data-dismiss="modal">Disable</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <footer class="footer fixed-bottom mb-3 ml-3">
-        <a href="${pageContext.request.contextPath}/editMenu" class="btn btn-outline-secondary "><i class="fas fa-cogs"
-                                                                                                    style="color:black"></i>
+        <span id="popoverEditMenu" data-toggle="popover" data-html="true" data-placement="top"
+        data-content='
+        <div class="d-flex align-items-center" >
+            <h6 class="mr-3 title-popover">Add a new product to your menu!</h6>
+            <button id="closeEditMenu" type="button" class="close" data-dismiss="popover" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div>'
+                >
+        <a href="${pageContext.request.contextPath}/editMenu" class="btn btn-outline-secondary "><i class="fas fa-cogs" style="color:black"></i>
             Edit menu</a>
+        </span>
     </footer>
 
     <jsp:include page="../bootstrapImportBody.jsp"/>
@@ -239,6 +280,7 @@
     <script src="../../../js/utils.js"></script>
     <script src="../../../js/fo/foMenu.js"></script>
     <script src="../../../js/errorCatcher.js"></script>
+    <script src="../../../js/popoverUtils.js"></script>
     <%--<script src="../../../js/dg/anonymusDG.js"></script>--%>
 </body>
 </html>

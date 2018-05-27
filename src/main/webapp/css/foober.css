@@ -103,3 +103,11 @@
 .rem1 {
     font-size: 1rem;
 }
+
+.title-popover{
+    margin-bottom: 0 !important;
+}
+
+.popover {
+    z-index: 0 !important;
+}

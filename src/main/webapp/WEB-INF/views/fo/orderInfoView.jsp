@@ -32,7 +32,16 @@
                     </td>
                     <td></td>
                     <td>
-                        <img src="" id="imgDG" style="width: 8rem;" class="rounded-circle">
+                        <span id="popoverAssignDG" data-toggle="popover" data-html="true" data-placement="right"
+                              data-content='
+                                <div class="d-flex align-items-center" >
+                                    <h6 class="mr-3 title-popover">Press here to assign a Delivery Guy!</h6>
+                                    <button id="closeAssignDG" type="button" class="close" data-dismiss="popover" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                <div>'>
+                            <img src="" id="imgDG" style="width: 8rem;" class="rounded-circle">
+                        </span>
                     </td>
                 </tr>
                 <tr>
@@ -128,10 +137,9 @@
     </div>
 </div>
 
-
+<jsp:include page="../bootstrapImportBody.jsp"/>
 <script src="../../../js/utils.js"></script>
 <script src="../../../js/starRating.js"></script>
 <script src="../../../js/fo/orderInfo.js"></script>
-<jsp:include page="../bootstrapImportBody.jsp"/>
 </body>
 </html>

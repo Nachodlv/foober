@@ -74,13 +74,24 @@
 
 <%--Choose DG later--%>
 <footer class="footer fixed-bottom mb-3 ml-3">
-    <a href="${pageContext.request.contextPath}/foMenu" class="btn btn-outline-dark"><i class="fas fa-clock" style="color:black"></i> Choose delivery-guy later</a>
+    <span id="popoverChooseDGLater" data-toggle="popover" data-html="true" data-placement="top"
+          data-content='
+        <div class="d-flex align-items-center" >
+            <h6 class="mr-3 title-popover">No delivery guys online? Click here!</h6>
+            <button id="closeChooseDGLater" type="button" class="close" data-dismiss="popover" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div>'
+    >
+        <a href="${pageContext.request.contextPath}/foMenu" class="btn btn-outline-dark"><i class="fas fa-clock" style="color:black"></i> Choose delivery-guy later</a>
+    </span>
 </footer>
 
+<jsp:include page="../bootstrapImportBody.jsp"/>
 <script src="../../../js/utils.js"></script>
 <script src="../../../js/starRating.js"></script>
 <script src="../../../js/fo/chooseDG.js"></script>
-<jsp:include page="../bootstrapImportBody.jsp"/>
+<script src="../../../js/popoverUtils.js"></script>
 <script>
     $(".dgs").click(function (event) {
         var email = event.currentTarget.id;

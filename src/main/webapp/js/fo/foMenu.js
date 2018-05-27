@@ -2,6 +2,7 @@ var orders;
 var openWS = [];
 getOrders();
 showOrderAcceptedModal();
+tutorialPopovers();
 
 window.onbeforeunload = closeSockets;
 window.onunload = closeSockets;
@@ -55,8 +56,7 @@ function setOrders(orders) {
     for (var i = 0; i < orders.length; i++) {
         var order = orders[i];
         var column = document.createElement('div');
-        column.className = 'col-md-4 text-center';
-        column.style = 'margin-bottom: 1rem;';
+        column.className = 'col-md-4 text-center order';
         column.id = orders[i].id;
         addLink(column, order);
 
@@ -160,4 +160,33 @@ function addLink(column, order){
         var finalUrl = url.join('/');
         window.open(finalUrl, "_self")
     };
+}
+
+function openPopovers(){
+    $("#popoverEditMenu").popover('show');
+    $("#popoverChooseClient").popover('show');
+    document.getElementById('closeChooseClient').addEventListener('click', function (ev) {
+        closePopover('popoverChooseClient')
+    });
+    document.getElementById('closeEditMenu').addEventListener('click', function (ev) {
+        closePopover('popoverEditMenu')
+    });
+}
+
+function tutorialPopovers(){
+    var noPopovers = localStorage.getItem("noPopovers");
+    if(!noPopovers){
+        var alreadyPopup = sessionStorage.getItem("popup");
+        if(!alreadyPopup) {
+            $('#popoversModal').modal();
+            sessionStorage.setItem('popup', 'true');
+        }
+
+    }
+}
+
+function disablePopovers() {
+    localStorage.setItem('noPopovers', 'true');
+    closePopover('popoverChooseClient');
+    closePopover('popoverEditMenu');
 }

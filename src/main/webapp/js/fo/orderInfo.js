@@ -30,10 +30,7 @@ function setOrder() {
         document.getElementById("dgName").innerHTML = 'not assigned';
         document.getElementById("dgPhone").innerHTML = 'not assigned';
         document.getElementById("dgEmail").innerHTML = 'not assigned';
-        var button = document.getElementById("but");
-        button.innerHTML = 'Choose DG';
-        button.hidden = false;
-        addLink(button);
+        openPopover();
     } else {
         var url = window.location.href.split('/');
         url[3] = 'images/' + order.deliveryGuy.email + '.png';
@@ -130,5 +127,20 @@ function openWebSocket(){
 function closeDeliveredModal(){
     $('#deliveredModal').modal('hide');
     $('#rateModal').modal();
+}
+
+function openPopover() {
+    if (typeof(Storage) !== "undefined") {
+        var noPopovers = localStorage.getItem("noPopovers");
+        if(!noPopovers) {
+            $("#popoverAssignDG").popover('show');
+            document.getElementById('closeAssignDG').addEventListener('click', function (ev) {
+                var element = $("#popoverAssignDG");
+                element.popover('hide');
+                element.popover('disable');
+            });
+        }
+    }
+
 }
 

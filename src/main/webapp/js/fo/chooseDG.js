@@ -211,3 +211,10 @@ function setDgs() {
         newDeliveryGuy(dgs[i]);
     }
 }
+
+function openPopovers(){
+    $("#popoverChooseDGLater").popover('show');
+    document.getElementById('closeChooseDGLater').addEventListener('click', function (ev) {
+        closePopover('popoverChooseDGLater')
+    });
+}

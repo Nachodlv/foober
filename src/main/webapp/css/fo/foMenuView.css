@@ -35,3 +35,8 @@ table.table-bordered > tbody > tr > td{
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+.order{
+    margin-bottom: 1rem;
+    cursor: pointer;
+}
