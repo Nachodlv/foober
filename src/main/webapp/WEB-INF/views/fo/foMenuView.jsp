@@ -65,10 +65,10 @@
                     <tbody>
                     <c:forEach items="${clients}" var="client">
                         <tr>
-                            <td onclick="window.location = '${pageContext.request.contextPath}/makingOrder?clientId=${client.id}';">${client.name}</td>
-                            <td onclick="window.location = '${pageContext.request.contextPath}/makingOrder?clientId=${client.id}';">${client.phone}</td>
-                            <td onclick="window.location = '${pageContext.request.contextPath}/makingOrder?clientId=${client.id}';">${client.address}</td>
-                            <td onclick="window.location = '${pageContext.request.contextPath}/makingOrder?clientId=${client.id}';">${client.email}</td>
+                            <td class="limitWidth" onclick="window.location = '${pageContext.request.contextPath}/makingOrder?clientId=${client.id}';">${client.name}</td>
+                            <td class="limitWidth" onclick="window.location = '${pageContext.request.contextPath}/makingOrder?clientId=${client.id}';">${client.phone}</td>
+                            <td class="limitWidth" onclick="window.location = '${pageContext.request.contextPath}/makingOrder?clientId=${client.id}';">${client.address}</td>
+                            <td class="limitWidth" onclick="window.location = '${pageContext.request.contextPath}/makingOrder?clientId=${client.id}';">${client.email}</td>
                             <td class="clientEdit" align="center">
                                 <button type="button" class="buttonWithFunction"><i class="fas fa-edit"
                                                                                     data-toggle="modal"

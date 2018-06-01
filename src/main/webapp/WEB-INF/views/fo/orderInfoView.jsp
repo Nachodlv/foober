@@ -15,7 +15,6 @@
         <div class="col d-flex flex-column">
             <h5>Useful Information</h5>
             <h4 class="text-muted" id="order"></h4>
-            <%--<div id="stars" class="stars"></div>--%>
             <table class="table-bordered" align="center" style="text-align:center;">
                 <tbody>
                 <tr>
@@ -45,22 +44,22 @@
                     </td>
                 </tr>
                 <tr>
-                    <td id="clientName"></td>
+                    <td id="clientName" class="p-2"></td>
                     <td style="padding: 1rem;"><i class="fas fa-info"></i></td>
-                    <td id="dgName" class="mx-2"></td>
+                    <td id="dgName" class="p-2"></td>
                 </tr>
                 <tr>
-                    <td id="clientPhone"></td>
+                    <td id="clientPhone" class="p-2"></td>
                     <td style="padding: 1rem;"><i class="fas fa-phone"></i></td>
-                    <td id="dgPhone" class="mx-2"></td>
+                    <td id="dgPhone" class="p-2"></td>
                 </tr>
                 <tr>
-                    <td id="clientEmail"></td>
+                    <td id="clientEmail" class="p-2"></td>
                     <td style="padding: 1rem;"><i class="fas fa-envelope"></i></td>
-                    <td id="dgEmail" class="mx-2"></td>
+                    <td id="dgEmail" class="p-2"></td>
                 </tr>
                 <tr>
-                    <td id="clientAddress"></td>
+                    <td id="clientAddress" class="p-2"></td>
                     <td style="padding: 1rem;"><i class="fas fa-map-marker"></i></td>
                     <td>-</td>
                 </tr>
