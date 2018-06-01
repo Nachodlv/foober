@@ -74,7 +74,7 @@ function setOrders(orders) {
             title.innerHTML = 'not assigned';
         } else {
             var url = window.location.href.split('/');
-            url[3] = 'images/' + order.deliveryGuy.email + '.png';
+            url[3] = 'images?imgID=' + order.deliveryGuy.email + '.png';
             img.src = url.join('/');
             title.innerHTML = order.deliveryGuy.name;
         }

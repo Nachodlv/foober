@@ -46,8 +46,8 @@ public class Utils {
 
     public static void writeImage(String picName, Part part, ServletContext servletContext) throws IOException {
         final BufferedImage img = getImageFromPart(part);
-        final String path = servletContext.getRealPath("/");
-        String finalPath = path + "images/" + picName + ".png";
+        String path = System.getProperty("imagesHome");
+        String finalPath = path + "/" + picName + ".png";
         final File file = new File(finalPath);
         ImageIO.write(img, "png", file);
     }

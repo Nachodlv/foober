@@ -33,7 +33,7 @@ function setOrder() {
         openPopover();
     } else {
         var url = window.location.href.split('/');
-        url[3] = 'images/' + order.deliveryGuy.email + '.png';
+        url[3] = 'images?imgID=' + order.deliveryGuy.email + '.png';
         imgDG.src = url.join('/');
 
         document.getElementById("dgName").innerHTML = order.deliveryGuy.name;
@@ -63,7 +63,7 @@ function setProducts() {
         img.width = 100;
         img.height = 100;
         var url = window.location.href.split('/');
-        url[3] = 'images/' + orderedProduct.product.id + '.png';
+        url[3] = 'images?imgID=' + orderedProduct.product.id + '.png';
         img.src = url.join('/');
         td.appendChild(img);
         var td2 = document.createElement('td');

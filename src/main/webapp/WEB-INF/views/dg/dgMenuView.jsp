@@ -25,7 +25,7 @@
         <div class="d-flex">
             <div>
                 <img width="120" height="120" class="rounded-circle"
-                     src="${pageContext.request.contextPath}/images/${loginedUser.email}.png">
+                     src="${pageContext.request.contextPath}/images?imgID=${loginedUser.email}.png">
             </div>
             <div class="ml-auto mr-3 mb-1">
                 <div class="row">

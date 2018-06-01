@@ -35,7 +35,7 @@
             <tbody>
             <c:forEach items="${products}"  var="product">
                 <tr class="product-row">
-                    <td><img width="100" height="100" src="http://localhost:8080/images/${product.id}.png"></td>
+                    <td><img width="100" height="100" src="http://localhost:8080//images?imgID=${product.id}.png"></td>
                     <td>${product.name}</td>
                     <td price="${product.price}" class="productPrice">${product.price} $</td>
                     <td style="width: 12%;"><input name = "${product.id}" class="quantityInput" type="number" min="0" style="width: 40%;"></td>
