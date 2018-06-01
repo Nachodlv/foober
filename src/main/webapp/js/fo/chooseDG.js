@@ -6,9 +6,9 @@ getAllDGs();
 dgSocket.onopen = function (ev) {
     dgSocket.onmessage = function (ev) {
         var deliveryGuy = JSON.parse(ev.data);
-        if(deliveryGuy.state === 'ONLINE_WAITING'){
+        if (deliveryGuy.state === 'ONLINE_WAITING') {
             newDeliveryGuy(deliveryGuy);
-        }else{
+        } else {
             deleteDeliveryGuy(deliveryGuy);
         }
     };
@@ -25,9 +25,9 @@ function closeSocket(event) {
     window.onunload = undefined;
 }
 
-function newDeliveryGuy(deliveryGuy){
+function newDeliveryGuy(deliveryGuy) {
     //check if it is already on the list
-    if(document.getElementById(deliveryGuy.email)) return;
+    if (document.getElementById(deliveryGuy.email)) return;
 
     var dgTable = document.getElementById('dgTable');
     var row = document.createElement('tr');
@@ -66,10 +66,10 @@ function newDeliveryGuy(deliveryGuy){
 function deleteDeliveryGuy(deliveryGuy) {
     var dgRow = document.getElementById(deliveryGuy.email);
     //check if it is the list before removing
-    if(dgRow) dgRow.parentNode.removeChild(dgRow);
+    if (dgRow) dgRow.parentNode.removeChild(dgRow);
 }
 
-function chooseDg(){
+function chooseDg() {
     var order = getOrder();
     var orderSocket = new WebSocket(getUrl('/orderSender/' + order.dgEmail));
     orderSocket.onopen = function (ev) {
@@ -96,45 +96,47 @@ function getOrder() {
     };
 }
 
-function onWindowClose(orderSocket){
+function onWindowClose(orderSocket) {
     //Close previous socket
     dgSocket.close();
     //Close order socket when window is closed
     window.onunload = window.onbeforeunload = orderSocketClose;
-    function orderSocketClose(){
+
+    function orderSocketClose() {
         orderSocket.close();
         window.onunload = window.onbeforeunload = undefined;
     }
 }
 
-function waitingForResponse(orderSocket){
+function waitingForResponse(orderSocket) {
     document.getElementById('table').hidden = true;
     document.getElementById('waitingForResponse').hidden = false;
+    document.getElementById('chooseDGLater').classList.add('disabled');
 
     orderSocket.onmessage = function (message) {
         var order = JSON.parse(message.data);
-        if(order.fromFO) return;
+        if (order.fromFO) return;
         orderSocket.close();
-        if(order.stateOrder === 'DELIVERING'){
+        document.getElementById('chooseDGLater').classList.remove('disabled');
+        if (order.stateOrder === 'DELIVERING') {
             //order accepted
             saveOrder(order.dgEmail);
             var newHref = window.location.href.split('/');
             newHref[3] = 'foMenu?orderAccepted=true';
             window.location.href = newHref.join('/');
-        }else{
+        } else {
             //order rejected
             document.getElementById('table').hidden = false;
             document.getElementById('waitingForResponse').hidden = true;
             errorCatcher('The delivery-guy rejected the order.');
         }
     }
-
 }
 
 function replaceMeansOfTransport() {
     var setTransport = document.getElementsByClassName("setMeansOfTransport");
-    for(var i = 0; i < setTransport.length; i++) {
-        switch(setTransport[i].innerHTML) {
+    for (var i = 0; i < setTransport.length; i++) {
+        switch (setTransport[i].innerHTML) {
             case '1':
                 setTransport[i].innerHTML = '<i class=\"fa fa-bicycle\" aria-hidden=\"true\"></i>';
                 break;
@@ -152,14 +154,14 @@ function saveEmail(email) {
     this.email = email;
 }
 
-function saveOrder(dgEmail){
+function saveOrder(dgEmail) {
     var xhttp = new XMLHttpRequest();
     var url = window.location.href += '?dgEmail=' + dgEmail;
     xhttp.open("POST", url, true);
     xhttp.send("dgEmail=" + dgEmail);
 }
 
-function errorCatcher(error){
+function errorCatcher(error) {
     var div = document.getElementById('orderRejected');
     div.innerHTML = '<div class="alert alert-danger alert-dismissible fade show" role="alert">\n' +
         error + '\n' +
@@ -169,13 +171,13 @@ function errorCatcher(error){
         '</div>';
 }
 
-function closeDgSocket(dgEmail){
+function closeDgSocket(dgEmail) {
 
 }
 
 function setRating(rating, total, div) {
     var html = '';
-    if(total > 0) {
+    if (total > 0) {
         var averageRating = rating / total;
         var absolutRating = Math.trunc(averageRating);
         var remaining = averageRating - absolutRating;
@@ -192,7 +194,7 @@ function setRating(rating, total, div) {
 
 function getAllDGs() {
     var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
+    xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
             dgs = JSON.parse(this.responseText);
             setDgs();
@@ -202,7 +204,7 @@ function getAllDGs() {
     var url = window.location.href.split('/');
     url[3] = 'getDGs';
     var urlFinal = url.join('/');
-    xhttp.open("GET", urlFinal , true);
+    xhttp.open("GET", urlFinal, true);
     xhttp.send();
 }
 
@@ -212,7 +214,7 @@ function setDgs() {
     }
 }
 
-function openPopovers(){
+function openPopovers() {
     $("#popoverChooseDGLater").popover('show');
     document.getElementById('closeChooseDGLater').addEventListener('click', function (ev) {
         closePopover('popoverChooseDGLater')

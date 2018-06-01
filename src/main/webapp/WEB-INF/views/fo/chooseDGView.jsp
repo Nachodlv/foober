@@ -11,6 +11,7 @@
 <div id="orderRejected"></div>
 
 <div class="fixed-panel">
+    <h2 class="mb-3">Choose your delivery-guy</h2>
     <table class="table table-striped table-hover table-bordered" id="table">
         <thead>
         <tr>
@@ -83,7 +84,7 @@
             </button>
             <div>'
     >
-        <a href="${pageContext.request.contextPath}/foMenu" class="btn btn-outline-dark"><i class="fas fa-clock" style="color:black"></i> Choose delivery-guy later</a>
+        <a id="chooseDGLater" href="${pageContext.request.contextPath}/foMenu" class="btn btn-outline-dark"><i class="fas fa-clock" style="color:black"></i> Choose delivery-guy later</a>
     </span>
 </footer>
 

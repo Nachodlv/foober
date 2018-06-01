@@ -47,17 +47,17 @@
                 <tr>
                     <td id="clientName"></td>
                     <td style="padding: 1rem;"><i class="fas fa-info"></i></td>
-                    <td id="dgName"></td>
+                    <td id="dgName" class="mx-2"></td>
                 </tr>
                 <tr>
                     <td id="clientPhone"></td>
                     <td style="padding: 1rem;"><i class="fas fa-phone"></i></td>
-                    <td id="dgPhone"></td>
+                    <td id="dgPhone" class="mx-2"></td>
                 </tr>
                 <tr>
                     <td id="clientEmail"></td>
                     <td style="padding: 1rem;"><i class="fas fa-envelope"></i></td>
-                    <td id="dgEmail"></td>
+                    <td id="dgEmail" class="mx-2"></td>
                 </tr>
                 <tr>
                     <td id="clientAddress"></td>
