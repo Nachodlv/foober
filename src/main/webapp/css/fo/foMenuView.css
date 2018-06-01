@@ -45,3 +45,11 @@ table.table-bordered > tbody > tr > td{
     max-width: 150px;
     word-wrap: break-word;
 }
+
+/*.limitWidth{*/
+    /*max-width: 150px;*/
+    /*white-space:nowrap;*/
+    /*overflow:hidden;*/
+    /*text-overflow:ellipsis;*/
+/*}*/
+

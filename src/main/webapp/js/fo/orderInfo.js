@@ -9,6 +9,7 @@ function getOrder() {
             order = JSON.parse(this.responseText);
             setOrder();
             setProducts();
+            getClientAvatar();
             if(order.stateOrder === 'DELIVERING') openWebSocket();
             else if(order.stateOrder === 'DELIVERED') $('#rateModal').modal();
         }
@@ -142,5 +143,17 @@ function openPopover() {
         }
     }
 
+}
+
+function getClientAvatar() {
+    var clientName = order.client.name;
+    var splitByName = clientName.split(' ');
+    var linkNames = "https://ui-avatars.com/api/?name=";
+    for (var i = 0; i<splitByName.length-1; i++) {
+        linkNames += splitByName[i] + '+';
+    }
+    linkNames += splitByName[i];
+    linkNames += '&rounded=true';
+    document.getElementById("imgClient").src = linkNames;
 }
 

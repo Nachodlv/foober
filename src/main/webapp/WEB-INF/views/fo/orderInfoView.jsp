@@ -26,8 +26,8 @@
                 </tr>
                 <tr>
                     <td>
-                        <img class="rounded-circle" src="${pageContext.request.contextPath}/images/anonymus.png"
-                             style="width: 8rem;">
+                        <%--src="${pageContext.request.contextPath}/images/anonymus.png" class="rounded-circle"--%>
+                        <img id="imgClient" src="" style="width: 8rem;">
                     </td>
                     <td></td>
                     <td>
