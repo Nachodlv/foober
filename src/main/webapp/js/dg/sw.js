@@ -6,5 +6,5 @@ function showNotification(){
         badge: '../../images/FooberLogo.png'
     };
 
-    self.swRegistration.showNotification(title, options);
+    if(self.swRegistration) self.swRegistration.showNotification(title, options);
 }

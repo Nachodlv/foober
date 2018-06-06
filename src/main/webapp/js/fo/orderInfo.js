@@ -31,7 +31,7 @@ function setOrder() {
         document.getElementById("dgName").innerHTML = 'not assigned';
         document.getElementById("dgPhone").innerHTML = 'not assigned';
         document.getElementById("dgEmail").innerHTML = 'not assigned';
-        openPopover();
+        openPopovers();
     } else {
         var url = window.location.href.split('/');
         url[3] = 'images?imgID=' + order.deliveryGuy.email + '.png';
@@ -130,20 +130,19 @@ function closeDeliveredModal(){
     $('#rateModal').modal();
 }
 
-function openPopover() {
-    if (typeof(Storage) !== "undefined") {
-        var noPopovers = localStorage.getItem("noPopovers");
-        if(!noPopovers) {
-            $("#popoverAssignDG").popover('show');
-            document.getElementById('closeAssignDG').addEventListener('click', function (ev) {
-                var element = $("#popoverAssignDG");
-                element.popover('hide');
-                element.popover('disable');
-            });
-        }
+openPopovers = function() {
+    var noPopovers = localStorage.getItem("noPopovers");
+    if(!noPopovers) {
+        $("#popoverAssignDG").popover('show');
+        document.getElementById('closeAssignDG').addEventListener('click', function (ev) {
+            closePopover('popoverAssignDG');
+        });
     }
+};
 
-}
+disablePopovers = function() {
+    closePopover('popoverAssignDG');
+};
 
 function getClientAvatar() {
     var clientName = order.client.name;

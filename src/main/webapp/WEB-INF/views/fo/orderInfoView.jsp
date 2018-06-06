@@ -140,5 +140,6 @@
 <script src="../../../js/utils.js"></script>
 <script src="../../../js/starRating.js"></script>
 <script src="../../../js/fo/orderInfo.js"></script>
+<script src="../../../js/popoverUtils.js"></script>
 </body>
 </html>

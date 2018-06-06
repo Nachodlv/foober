@@ -94,11 +94,7 @@
 <script src="../../../js/fo/chooseDG.js"></script>
 <script src="../../../js/popoverUtils.js"></script>
 <script>
-    $(".dgs").click(function (event) {
-        var email = event.currentTarget.id;
-        saveEmail(email);
-        $("#modalConfirmDG").modal();
-    })
+
 </script>
 
 </body>

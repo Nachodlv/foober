@@ -55,7 +55,7 @@ function newDeliveryGuy(deliveryGuy) {
 
     row.addEventListener('mousedown', function () {
         $("#modalConfirmDG").modal();
-        saveEmail(deliveryGuy.email);
+        email = deliveryGuy.email;
     });
 
     row.id = deliveryGuy.email;
@@ -150,9 +150,12 @@ function replaceMeansOfTransport() {
     }
 }
 
-function saveEmail(email) {
-    this.email = email;
-}
+// function saveEmail() {
+//     $(".dgs").click(function (event) {
+//         this.email = event.currentTarget.id;
+//         $("#modalConfirmDG").modal();
+//     })
+// }
 
 function saveOrder(dgEmail) {
     var xhttp = new XMLHttpRequest();
@@ -214,9 +217,13 @@ function setDgs() {
     }
 }
 
-function openPopovers() {
+openPopovers = function() {
     $("#popoverChooseDGLater").popover('show');
     document.getElementById('closeChooseDGLater').addEventListener('click', function (ev) {
         closePopover('popoverChooseDGLater')
     });
-}
+};
+
+disablePopovers = function(){
+    closePopover('popoverChooseDGLater');
+};

@@ -162,7 +162,9 @@ function addLink(column, order){
     };
 }
 
-function openPopovers(){
+openPopovers = function(){
+    $("#popoverEditMenu").popover('enable');
+    $("#popoverChooseClient").popover('enable');
     $("#popoverEditMenu").popover('show');
     $("#popoverChooseClient").popover('show');
     document.getElementById('closeChooseClient').addEventListener('click', function (ev) {
@@ -171,7 +173,13 @@ function openPopovers(){
     document.getElementById('closeEditMenu').addEventListener('click', function (ev) {
         closePopover('popoverEditMenu')
     });
-}
+};
+
+disablePopovers = function() {
+    localStorage.setItem('noPopovers', 'true');
+    closePopover('popoverChooseClient');
+    closePopover('popoverEditMenu');
+};
 
 function tutorialPopovers(){
     var noPopovers = localStorage.getItem("noPopovers");
@@ -185,8 +193,3 @@ function tutorialPopovers(){
     }
 }
 
-function disablePopovers() {
-    localStorage.setItem('noPopovers', 'true');
-    closePopover('popoverChooseClient');
-    closePopover('popoverEditMenu');
-}
