@@ -98,4 +98,14 @@ public class Utils {
             e.printStackTrace();
         }
     }
+
+    public static void sendEmailDGCancelled(OrderMessage message) {
+        String titleEmail = "Order cancelled";
+        String bodyTitle = "Your current order has been cancelled!";
+        try {
+            GoogleMail.send(message.getDgEmail(), titleEmail, bodyTitle);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+    }
 }

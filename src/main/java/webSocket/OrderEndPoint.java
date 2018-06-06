@@ -20,7 +20,11 @@ public class OrderEndPoint {
     @OnMessage
     public void handleMessage(OrderMessage message, @PathParam("email") String email) {
         if (message.isFromFO()) {
-            Utils.sendEmailDG(message);
+            if(message.getStateOrder().equals("CANCELLED")){
+                Utils.sendEmailDGCancelled(message);
+            } else {
+                Utils.sendEmailDG(message);
+            }
         } else if (message.getStateOrder().equals("DELIVERING")) {
             Utils.sendEmailClient(message);
         }
