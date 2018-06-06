@@ -1,5 +1,5 @@
 package model;
 
 public enum StateOrder {
-    WAITING, DELIVERING, DELIVERED, REVIEWED
+    WAITING, DELIVERING, DELIVERED, REVIEWED, CANCELED
 }

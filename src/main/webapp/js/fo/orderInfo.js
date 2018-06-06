@@ -1,4 +1,5 @@
 var order;
+var orderSocket;
 getOrder();
 
 
@@ -10,7 +11,10 @@ function getOrder() {
             setOrder();
             setProducts();
             getClientAvatar();
-            if(order.stateOrder === 'DELIVERING') openWebSocket();
+            if(order.stateOrder === 'DELIVERING'){
+                openWebSocket();
+                document.getElementById('cancelOrder').hidden = false;
+            }
             else if(order.stateOrder === 'DELIVERED') $('#rateModal').modal();
         }
     };
@@ -114,7 +118,7 @@ function addLink(img){
 }
 
 function openWebSocket(){
-    var orderSocket = new WebSocket(getUrl('/orderSender/' + order.deliveryGuy.email));
+    orderSocket = new WebSocket(getUrl('/orderSender/' + order.deliveryGuy.email));
     orderSocket.onmessage = function (ev) {
         var orderReceived = JSON.parse(ev.data);
         if(!orderReceived.fromFO && orderReceived.stateOrder === 'DELIVERED') {
@@ -183,3 +187,36 @@ function getRandomColor() {
             return 'ddd';
     }
 }
+function cancelOrder(){
+    changeOrderState('CANCELED', order);
+    $('#cancelSuccessfulModal').modal();
+
+    var xhttp = new XMLHttpRequest();
+    var newHref = window.location.href.split('/');
+    newHref[3] = 'dgMenu?state=CANCELED' + '&dgEmail=' + order.deliveryGuy.email;
+    xhttp.open("POST", newHref.join('/'), true);
+    xhttp.send();
+
+    orderSocket.send(JSON.stringify(transformOrder()));
+}
+
+function openCancelOrderModal() {
+    $('#cancelOrderModal').modal();
+}
+function transformOrder(){
+    return {
+        id: order.id,
+        foName: order.franchiseOwner.name,
+        elaborationTime: order.elaborationTime,
+        stateOrder: 'CANCELED',
+        fromFO: true,
+        dgEmail: order.deliveryGuy.email,
+        totalPrice: 0,
+        tippingPercentage: order.franchiseOwner.tippingPercentage,
+        clientPhone: order.client.phone,
+        clientAddress: order.client.address,
+        clientEmail: order.client.email,
+        foPhone: order.franchiseOwner.phone
+    }
+}
+

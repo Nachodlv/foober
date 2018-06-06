@@ -10,11 +10,14 @@ showRating();
 orderSocket.onopen = function (ev) {
     onlineWorking();
     orderSocket.onmessage = function (ev2) {
-        console.log(ev2.data);
         order = JSON.parse(ev2.data);
         if(order.fromFO){
-            showNotification(ev2);
-            showOrder(order);
+            if(order.stateOrder === 'CANCELED') {
+                orderCanceled();
+            }else {
+                showNotification(ev2);
+                showOrder(order);
+            }
         }
     }
 };
@@ -127,7 +130,7 @@ function changeState(state) {
     var xhttp = new XMLHttpRequest();
     document.getElementById("dgState").value = state;
     var newHref = window.location.href.split('/');
-    newHref[3] = 'dgMenu?state=' + state;
+    newHref[3] = 'dgMenu?state=' + state + '&dgEmail=' + order.dgEmail;
     xhttp.open("POST", newHref.join('/'), true);
     xhttp.send("state=" + state);
     sendState(state);
@@ -210,4 +213,13 @@ function showRating() {
     setRating(rating, ratingAmt, ratingDiv, 1.5);
     var stars = ratingDiv.innerHTML;
     ratingDiv.innerHTML = 'Your current rating is: ' + stars;
+}
+
+function orderCanceled(){
+    //FO changes dg state
+    //TO-DO mostrar modal
+    hideOrderToDeliver();
+    document.getElementById('offline').disabled = false;
+    document.getElementById('spinner').hidden = false;
+    document.getElementById("dgState").value = 'OFFLINE';
 }

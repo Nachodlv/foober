@@ -22,12 +22,12 @@ public class OrderFunctiontality extends AbstractFunctionality {
         return order;
     }
 
-    private static List<Order> getAllOrders() {
+    private static List<Order> getActiveOrders() {
         List list = null;
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            list = session.createQuery("FROM Order o where o.stateOrder != 'REVIEWED'").list();
+            list = session.createQuery("FROM Order o where o.stateOrder != 'REVIEWED' and o.stateOrder!='CANCELED'").list();
         } catch (HibernateException ex) {
             if (transaction != null) {
                 transaction.rollback();
@@ -43,7 +43,7 @@ public class OrderFunctiontality extends AbstractFunctionality {
     }
 
     public static List<Order> getOrdersByFO(String email) {
-        List<Order> orders = getAllOrders();
+        List<Order> orders = getActiveOrders();
         List<Order> foOrders = new ArrayList<>();
         if (orders == null) return null;
         for (Order order : orders) {
@@ -55,7 +55,7 @@ public class OrderFunctiontality extends AbstractFunctionality {
     }
 
     public static List<Order> getOrdersByDG(String email) {
-        List<Order> orders = getAllOrders();
+        List<Order> orders = getActiveOrders();
         List<Order> dgOrders = new ArrayList<>();
         if (orders == null) return null;
         for (Order order : orders) {

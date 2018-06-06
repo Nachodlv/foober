@@ -13,12 +13,15 @@ public class FranchiseOwner extends UserAccount {
     @Expose
     @Column(name = "name")
     private String name;
+    @Expose
     @Column(name = "phone")
     private long phone;
+    @Expose
     @Column(name = "address")
     private String address;
     @Column(name = "menuId")
     private int menuId;
+    @Expose
     @Column(name = "tippingPercentage")
     private int tippingPercentage;
     @OneToMany(mappedBy = "franchiseOwner", fetch = FetchType.EAGER)

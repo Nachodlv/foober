@@ -64,7 +64,7 @@
 
                     <tbody>
                     <c:forEach items="${clients}" var="client">
-                        <tr>
+                        <tr style="cursor: pointer">
                             <td class="limitWidth" onclick="window.location = '${pageContext.request.contextPath}/makingOrder?clientId=${client.id}';">${client.name}</td>
                             <td class="limitWidth" onclick="window.location = '${pageContext.request.contextPath}/makingOrder?clientId=${client.id}';">${client.phone}</td>
                             <td class="limitWidth" onclick="window.location = '${pageContext.request.contextPath}/makingOrder?clientId=${client.id}';">${client.address}</td>

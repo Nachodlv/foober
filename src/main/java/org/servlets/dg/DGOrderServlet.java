@@ -65,6 +65,9 @@ public class DGOrderServlet extends HttpServlet{
                 case "REVIEWED":
                     stateOrder = StateOrder.REVIEWED;
                     break;
+                case "CANCELED":
+                    stateOrder = StateOrder.CANCELED;
+                    break;
                 default:
                     stateOrder = StateOrder.WAITING;
                     break;

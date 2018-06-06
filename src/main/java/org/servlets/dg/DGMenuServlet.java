@@ -44,8 +44,10 @@ public class DGMenuServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        DeliveryGuy deliveryGuy = (DeliveryGuy) AppUtils.getLoginedUser(request.getSession());
+        final String dgEmail = request.getParameter("dgEmail");
         final String state = request.getParameter("state");
+
+        DeliveryGuy deliveryGuy = DGFunctionality.getDeliveryGuy(dgEmail);
 
         if (state != null) changeState(state, deliveryGuy, response, request);
     }

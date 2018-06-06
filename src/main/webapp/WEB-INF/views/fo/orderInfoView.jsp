@@ -81,6 +81,7 @@
 <footer class="footer fixed-bottom mb-3 ml-3">
     <a href="${pageContext.request.contextPath}/foMenu" class="btn btn-outline-dark"><i class="fas fa-undo" style="color:black"></i> Return
         to Main Menu</a>
+    <button id="cancelOrder" type="button" class="btn btn-outline-danger" onclick="openCancelOrderModal()" hidden>Cancel order</button>
 </footer>
 
 <div class="modal fade bd-example-modal-sm" id="rateModal" tabindex="-1" role="dialog"
@@ -123,14 +124,56 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="deliveredLabel">Delivered</h5>
-                <button type="button" class="close"onclick="closeDeliveredModal()" aria-label="Close">
+                <button type="button" class="close" onclick="closeDeliveredModal()" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body d-flex flex-column justify-content-center">
                 <span id="orderDelivered">Your order was delivered!</span>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" onclick="closeDeliveredModal()">Close</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeDeliveredModal()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%--Cancel order modal--%>
+<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" id="cancelOrderModal" aria-labelledby="cancelOrderLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cancelOrderLabel">Cancel order</h5>
+                <button type="button" class="close" aria-label="Close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body d-flex flex-column justify-content-center">
+                <h6 class="mb-3">Do you want to cancel the order?</h6>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" onclick="cancelOrder()" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%--Cancel successful modal--%>
+<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" id="cancelSuccessfulModal" aria-labelledby="cancelSuccessfulModal" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cancelSuccessfulLabel">Success</h5>
+                <button type="button" class="close" aria-label="Close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body d-flex flex-column justify-content-center">
+                <h6 class="mb-3">Your order was canceled successfully</h6>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
