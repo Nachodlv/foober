@@ -133,7 +133,9 @@ function closeDeliveredModal(){
 openPopovers = function() {
     var noPopovers = localStorage.getItem("noPopovers");
     if(!noPopovers) {
-        $("#popoverAssignDG").popover('show');
+        var assignDG = $("#popoverAssignDG");
+        assignDG.popover('enable');
+        assignDG.popover('show');
         document.getElementById('closeAssignDG').addEventListener('click', function (ev) {
             closePopover('popoverAssignDG');
         });

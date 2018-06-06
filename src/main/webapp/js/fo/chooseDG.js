@@ -218,7 +218,9 @@ function setDgs() {
 }
 
 openPopovers = function() {
-    $("#popoverChooseDGLater").popover('show');
+    var chooseDGLater = $("#popoverChooseDGLater");
+    chooseDGLater.popover('enable');
+    chooseDGLater.popover('show');
     document.getElementById('closeChooseDGLater').addEventListener('click', function (ev) {
         closePopover('popoverChooseDGLater')
     });

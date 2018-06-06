@@ -163,10 +163,12 @@ function addLink(column, order){
 }
 
 openPopovers = function(){
-    $("#popoverEditMenu").popover('enable');
-    $("#popoverChooseClient").popover('enable');
-    $("#popoverEditMenu").popover('show');
-    $("#popoverChooseClient").popover('show');
+    var editMenu = $('#popoverEditMenu');
+    var chooseClient = $('#popoverChooseClient');
+    editMenu.popover('enable');
+    chooseClient.popover('enable');
+    editMenu.popover('show');
+    chooseClient.popover('show');
     document.getElementById('closeChooseClient').addEventListener('click', function (ev) {
         closePopover('popoverChooseClient')
     });
