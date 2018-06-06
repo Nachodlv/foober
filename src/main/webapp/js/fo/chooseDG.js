@@ -1,5 +1,7 @@
 var dgSocket = new WebSocket(getUrl('/dgOnline'));
 var email;
+var DGphone;
+var DGname;
 var dgs;
 getAllDGs();
 
@@ -56,6 +58,9 @@ function newDeliveryGuy(deliveryGuy) {
     row.addEventListener('mousedown', function () {
         $("#modalConfirmDG").modal();
         email = deliveryGuy.email;
+        DGname = deliveryGuy.name;
+        DGphone = deliveryGuy.phone;
+
     });
 
     row.id = deliveryGuy.email;
@@ -92,7 +97,10 @@ function getOrder() {
         clientPhone: document.getElementById('clientPhone').value,
         clientAddress: document.getElementById('clientAddress').value,
         clientEmail: document.getElementById('clientEmail').value,
-        foPhone: document.getElementById('foPhone').value
+        foPhone: document.getElementById('foPhone').value,
+        dgName: DGname,
+        dgPhone: DGphone,
+        clientName: document.getElementById('clientName').value
     };
 }
 

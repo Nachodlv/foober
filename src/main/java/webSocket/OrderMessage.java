@@ -13,8 +13,11 @@ public class OrderMessage {
     private long foPhone;
     private String clientAddress;
     private String clientEmail;
+    private String dgName;
+    private long dgPhone;
+    private String clientName;
 
-    public OrderMessage(boolean fromFO, int id, int elaborationTime, String stateOrder, String dgEmail, double totalPrice, int tippingPercentage, long clientPhone, String foName, long foPhone, String clientAddress, String clientEmail) {
+    public OrderMessage(boolean fromFO, int id, int elaborationTime, String stateOrder, String dgEmail, double totalPrice, int tippingPercentage, long clientPhone, String foName, long foPhone, String clientAddress, String clientEmail, String dgName, long dgPhone, String clientName) {
         this.fromFO = fromFO;
         this.id = id;
         this.elaborationTime = elaborationTime;
@@ -27,6 +30,9 @@ public class OrderMessage {
         this.foPhone = foPhone;
         this.clientAddress = clientAddress;
         this.clientEmail = clientEmail;
+        this.dgName = dgName;
+        this.dgPhone = dgPhone;
+        this.clientName = clientName;
     }
 
     public void setFromFO(boolean fromFO) {
@@ -123,6 +129,30 @@ public class OrderMessage {
 
     public void setClientEmail(String clientEmail) {
         this.clientEmail = clientEmail;
+    }
+
+    public String getDgName() {
+        return dgName;
+    }
+
+    public void setDgName(String dgName) {
+        this.dgName = dgName;
+    }
+
+    public long getDgPhone() {
+        return dgPhone;
+    }
+
+    public void setDgPhone(long dgPhone) {
+        this.dgPhone = dgPhone;
+    }
+
+    public String getClientName() {
+        return clientName;
+    }
+
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
     }
 }
 

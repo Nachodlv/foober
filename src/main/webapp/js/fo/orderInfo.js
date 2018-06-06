@@ -155,6 +155,31 @@ function getClientAvatar() {
     }
     linkNames += splitByName[i];
     linkNames += '&rounded=true';
+    linkNames = linkNames + '&background=' + getRandomColor();
     document.getElementById("imgClient").src = linkNames;
 }
 
+function getRandomColor() {
+    switch(Math.floor((Math.random() * 6) + 1)) {
+        case 1:
+            return 'AFF7E3';
+            break;
+        case 2:
+            return 'FF2400';
+            break;
+        case 3:
+            return 'C8AAD0';
+            break;
+        case 4:
+            return 'FFD56F';
+            break;
+        case 5:
+            return 'CDF2EE';
+            break;
+        case 6:
+            return 'FFF0FF';
+            break;
+        default:
+            return 'ddd';
+    }
+}

@@ -75,9 +75,12 @@ public class Utils {
 
     public static void sendEmailDG(OrderMessage message) {
         String titleEmail = "Order received";
-        String messageEmail = "You have received an order!";
+        String bodyTitle = "You have received an order!";
+        String bodyInfo = "\nHere you have some basic information:\n<ul><li>Client address: " + message.getClientAddress() +
+                "</li><li>Client name: " + message.getClientName() + "</li></ul>\nGo to the app to get full order data!\n";
+        String messageBody = bodyTitle + bodyInfo;
         try {
-            GoogleMail.send(message.getDgEmail(), titleEmail, messageEmail);
+            GoogleMail.send(message.getDgEmail(), titleEmail, messageBody);
         } catch (MessagingException e) {
             e.printStackTrace();
         }
@@ -85,9 +88,12 @@ public class Utils {
 
     public static void sendEmailClient(OrderMessage message) {
         String titleEmail = "Order on its way";
-        String messageEmail = "Your order has already been accepted by one of our delivery guys, and it is on its way!";
+        String bodyTitle = "Your order has already been accepted by one of our delivery guys, and it is on its way!";
+        String bodyInfo = "\nIn case you need it, here is more information:\n<ul><li>Delivery-guy name: " + message.getDgName() +
+                "</li><li>Delivery-guy phone: " + message.getDgPhone() + "</li></ul>\n";
+        String messageBody = bodyTitle + bodyInfo;
         try {
-            GoogleMail.send(message.getClientEmail(), titleEmail, messageEmail);
+            GoogleMail.send(message.getClientEmail(), titleEmail, messageBody);
         } catch (MessagingException e) {
             e.printStackTrace();
         }

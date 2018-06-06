@@ -71,6 +71,9 @@
     <input id="totalPrice" value="${order.getTotalCost()}">
     <input id="clientAddress" value="${order.client.address}">
     <input id="clientEmail" value="${order.client.email}">
+    <input id="dgName" value="${order.deliveryGuy.name}">
+    <input id="dgPhone" value="${order.deliveryGuy.phone}">
+    <input id="clientName" value="${order.client.name}">
 </div>
 
 <%--Choose DG later--%>
