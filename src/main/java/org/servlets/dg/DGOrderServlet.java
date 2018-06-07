@@ -20,19 +20,33 @@ public class DGOrderServlet extends HttpServlet{
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
 
         String dgEmail = request.getParameter("dgEmail");
         final List<Order> orders = OrderFunctiontality.getOrdersByDG(dgEmail);
-        if(orders == null) return;
+        if(orders == null){
+            out.print("");
+            out.flush();
+            return;
+        }
 
         Order activeOrder = new Order();
+        boolean hasActiveOrder = false;
 
         for(Order order: orders){
             if(order.getStateOrder() == StateOrder.DELIVERING){
                 activeOrder = order;
+                hasActiveOrder = true;
                 break;
             }
         }
+
+        if(!hasActiveOrder){
+            out.print("");
+            out.flush();
+            return;
+        }
+
         FranchiseOwner franchiseOwner = activeOrder.getFranchiseOwner();
         Client client = activeOrder.getClient();
         DeliveryGuy dg = activeOrder.getDeliveryGuy();
@@ -43,7 +57,6 @@ public class DGOrderServlet extends HttpServlet{
         if(activeOrder.getDeliveryGuy() != null) orderMessage.setDgEmail(activeOrder.getDeliveryGuy().getEmail());
 
         String json = new Gson().toJson(orderMessage);
-        PrintWriter out = response.getWriter();
         out.print(json);
         out.flush();
     }

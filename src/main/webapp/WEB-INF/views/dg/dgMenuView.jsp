@@ -17,7 +17,7 @@
             <input hidden value="${loginedUser.name}">
             <input hidden value="${loginedUser.phone}">
             <input hidden value="${loginedUser.meansOfTransport}">
-            <input hidden value="${loginedUser.email}">
+            <input hidden id="email" value="${loginedUser.email}">
             <input hidden id="rating" value="${loginedUser.rating}">
             <input hidden id="ratingQuantity" value="${loginedUser.ratingQuantity}">
             <input hidden id="dgState" value="${loginedUser.state}">

@@ -167,22 +167,16 @@ function getRandomColor() {
     switch(Math.floor((Math.random() * 6) + 1)) {
         case 1:
             return 'AFF7E3';
-            break;
         case 2:
             return 'FF2400';
-            break;
         case 3:
             return 'C8AAD0';
-            break;
         case 4:
             return 'FFD56F';
-            break;
         case 5:
             return 'CDF2EE';
-            break;
         case 6:
             return 'FFF0FF';
-            break;
         default:
             return 'ddd';
     }
@@ -195,7 +189,7 @@ function cancelOrder(){
     var newHref = window.location.href.split('/');
     newHref[3] = 'dgMenu?state=CANCELED' + '&dgEmail=' + order.deliveryGuy.email;
     xhttp.open("POST", newHref.join('/'), true);
-    xhttp.send();
+    xhttp.send('state=CANCELED' + '&dgEmail=' + order.deliveryGuy.email);
 
     orderSocket.send(JSON.stringify(transformOrder()));
 }

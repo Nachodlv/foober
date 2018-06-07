@@ -129,10 +129,11 @@ function getDeliveryGuy(state){
 function changeState(state) {
     var xhttp = new XMLHttpRequest();
     document.getElementById("dgState").value = state;
+    var email = document.getElementById('email').value;
     var newHref = window.location.href.split('/');
-    newHref[3] = 'dgMenu?state=' + state + '&dgEmail=' + order.dgEmail;
+    newHref[3] = 'dgMenu?state=' + state + '&dgEmail=' + email;
     xhttp.open("POST", newHref.join('/'), true);
-    xhttp.send("state=" + state);
+    xhttp.send("state=" + state + '&dgEmail' + email);
     sendState(state);
 }
 
@@ -158,11 +159,6 @@ function onlineWorking(startWorking){
         //if order is undefined, getOrder (if the page reloads)
         if(!startWorking) getActiveOrder();
         else showOrderToDeliver();
-        delivering = true;
-
-        document.getElementById('spinner').hidden = true;
-        document.getElementById('offline').disabled = true;
-        document.getElementById('online').disabled = true;
     }
 }
 
@@ -170,8 +166,11 @@ function getActiveOrder() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
-            order = JSON.parse(this.responseText);
-            showOrderToDeliver();
+            if(this.responseText === '') login_logout('OFFLINE');
+            else {
+                order = JSON.parse(this.responseText);
+                showOrderToDeliver();
+            }
         }
     };
     var url = window.location.href.split('/');
@@ -183,6 +182,11 @@ function getActiveOrder() {
 }
 
 function showOrderToDeliver(){
+    delivering = true;
+    document.getElementById('spinner').hidden = true;
+    document.getElementById('offline').disabled = true;
+    document.getElementById('online').disabled = true;
+
     document.getElementById('order').hidden = false;
     document.getElementById('tableOrder').hidden = false;
     document.getElementById('finishDelivering').hidden = false;
@@ -219,7 +223,6 @@ function orderCanceled(){
     //FO changes dg state
     //TO-DO mostrar modal
     hideOrderToDeliver();
-    document.getElementById('offline').disabled = false;
-    document.getElementById('spinner').hidden = false;
+    document.getElementById('online').disabled = false;
     document.getElementById("dgState").value = 'OFFLINE';
 }
