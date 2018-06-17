@@ -38,15 +38,18 @@
                 </div>
             </div>
             <div class="form-row">
+                <div id="locationField" class="col-md-12 mb-4">
+                    <label>Address</label>
+                    <input class="form-control" id="autocomplete" placeholder="Enter your address"
+                           onFocus="geolocate()" type="text" required>
+                    <input hidden class="form-control" id="address" name="address" value="">
+                </div>
+            </div>
+            <div class="form-row">
                 <div class="col-md-6 mb-4">
                     <label>Phone</label>
                     <input type="text" pattern="[0-9]+" class="form-control" placeholder="Phone" name="phone"
                            value="" required>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label>Address</label>
-                    <input type="text" class="form-control" placeholder="Address" name="address" value=""
-                           required>
                 </div>
             </div>
             <div class="form-group">
@@ -66,7 +69,10 @@
 
 <script src="../../../js/errorCatcher.js"></script>
 <script src="../../../js/fo/foRegister.js"></script>
+<script src="../../../js/autocompleteAddress.js"></script>
 <jsp:include page="../bootstrapImportBody.jsp"/>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRtC9nTA8nx3D7jpH07HcU5SjpLhQgA6E&libraries=places&callback=initAutocomplete"
+        async defer></script>
 
 </body>
 </html>

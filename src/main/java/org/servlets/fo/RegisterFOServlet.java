@@ -40,10 +40,13 @@ public class RegisterFOServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/foRegister?error=Passwords do not match");
             return;
         }
-
+        String address = request.getParameter("address");
+        if(address.equals("")) {
+            response.sendRedirect(request.getContextPath() + "/foRegister?error=Invalid address");
+            return;
+        }
         String phone = request.getParameter("phone");
         String email = request.getParameter("email");
-        String address = request.getParameter("address");
         String name = request.getParameter("name");
         FranchiseOwner franchiseOwner = new FranchiseOwner(email, name, password, Long.parseLong(phone), address);
         try {

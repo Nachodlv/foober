@@ -11,7 +11,7 @@ import java.security.Security;
 import java.util.Properties;
 
 
-class GoogleMail {
+public class GoogleMail {
 
     private final static String USERNAME = "iFoober";
     private final static String PASSWORD = "fooberlab1";

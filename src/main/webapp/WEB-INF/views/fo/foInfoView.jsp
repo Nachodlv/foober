@@ -11,9 +11,7 @@
 <body class="outer">
 
 <h3 class="ml-3">Profile information</h3>
-<p class="text-danger">
-    ${pageContext.request.getParameter("error")}
-</p>
+<div class="errorCatcher mt-2"></div>
 <form method="POST" class="mt-5">
     <div class="container-fluid d-flex flex-column">
         <table class="table">
@@ -33,8 +31,12 @@
             </tr>
             <tr>
                 <td>Address</td>
-                <td><input value="${loginedUser.address}" class="form-control" placeholder="Address" name="address" required></td>
-                <td> </td>
+                <td>
+                    <input class="form-control" id="autocomplete" placeholder="Enter your address"
+                       onFocus="geolocate()" type="text" required>
+                    <input hidden class="form-control" id="address" name="address" value="${loginedUser.address}">
+                </td>
+
             </tr>
             <tr>
                 <td>Tipping percentage</td>
@@ -94,5 +96,10 @@
 </div>
 
 <jsp:include page="../bootstrapImportBody.jsp"/>
+<script src="../../../js/errorCatcher.js"></script>
+<script src="../../../js/autocompleteAddress.js"></script>
+<script src="../../../js/fo/foInfoView.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRtC9nTA8nx3D7jpH07HcU5SjpLhQgA6E&libraries=places&callback=initAutocomplete"
+        async defer></script>
 </body>
 </html>

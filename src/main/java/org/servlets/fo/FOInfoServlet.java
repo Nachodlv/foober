@@ -65,9 +65,11 @@ public class FOInfoServlet extends HttpServlet {
         int phone = Integer.parseInt(phoneString);
         int tippingPercentage = Integer.parseInt(tippingPercentageString);
         if (tippingPercentage > 100 || tippingPercentage < 5) {
-            request.setAttribute("errorTipping", "Percentage not valid");
-            RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/WEB-INF/views/foInfoView.jsp");
-            dispatcher.forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/foRegister?error=Percentage not valid");
+            return;
+        }
+        if(address.equals("")) {
+            response.sendRedirect(request.getContextPath() + "/foRegister?error=Invalid address");
             return;
         }
 
