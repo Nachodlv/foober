@@ -3,6 +3,7 @@ var openWS = [];
 getOrders();
 showOrderAcceptedModal();
 tutorialPopovers();
+showClientAddresses();
 
 window.onbeforeunload = closeSockets;
 window.onunload = closeSockets;
@@ -195,3 +196,24 @@ function tutorialPopovers(){
     }
 }
 
+function openNewClientModal(){
+    $('#exampleModal').modal();
+    initAutocomplete();
+}
+
+function openEditClient(placeId, clientId) {
+    fillAddressInput(placeId, document.getElementById('addressEdit' + clientId), undefined);
+    var modal = 'clientModal' + clientId;
+    $('#' + modal).modal();
+    initAutocomplete('addressEdit' + clientId, 'idAddressEdit' + clientId);
+}
+
+function showClientAddresses(){
+    var i = 0;
+    var element = document.getElementById('idAddress' + i);
+    while (element) {
+        fillAddressInput(element.value, undefined, document.getElementById('address' + i), true);
+        i++;
+        element = document.getElementById('idAddress' + i);
+    }
+}

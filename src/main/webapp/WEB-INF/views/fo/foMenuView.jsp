@@ -34,8 +34,7 @@
                            value="${pageContext.request.getParameter("searchClient")}">
                     <a class="col-1" href="${pageContext.request.contextPath}/foMenu"><i class="fas fa-times icon"></i></a>
                     <button type="submit" class="btn btn-info col-3">Search</button>
-                    <button type="button" class="btn btn-primary col-3 ml-2" data-toggle="modal"
-                            data-target="#exampleModal">New client
+                    <button type="button" class="btn btn-primary col-3 ml-2" onclick="openNewClientModal()">New client
                     </button>
                 </div>
 
@@ -63,16 +62,16 @@
                     </thead>
 
                     <tbody>
-                    <c:forEach items="${clients}" var="client">
+                    <c:forEach items="${clients}" var="client" varStatus="loop">
                         <tr style="cursor: pointer">
                             <td class="limitWidth" onclick="window.location = '${pageContext.request.contextPath}/makingOrder?clientId=${client.id}';">${client.name}</td>
                             <td class="limitWidth" onclick="window.location = '${pageContext.request.contextPath}/makingOrder?clientId=${client.id}';">${client.phone}</td>
-                            <td class="limitWidth" onclick="window.location = '${pageContext.request.contextPath}/makingOrder?clientId=${client.id}';">${client.address}</td>
+                            <td id="address${loop.index}" class="limitWidth" onclick="window.location = '${pageContext.request.contextPath}/makingOrder?clientId=${client.id}';"></td>
+                            <input hidden id="idAddress${loop.index}" value="${client.address}">
                             <td class="limitWidth" onclick="window.location = '${pageContext.request.contextPath}/makingOrder?clientId=${client.id}';">${client.email}</td>
                             <td class="clientEdit" align="center">
                                 <button type="button" class="buttonWithFunction"><i class="fas fa-edit"
-                                                                                    data-toggle="modal"
-                                                                                    data-target="#clientModal${client.id}"></i>
+                                                                                    onclick="openEditClient('${client.address}', '${client.id}')"></i>
                                 </button>
                             </td>
                         </tr>
@@ -102,11 +101,11 @@
                                                            name="clientPhone" value="${client.phone}" required>
                                                 </div>
                                                 <div class="">
-                                                    <label for="inlineAddressInputClient${client.id}">Address</label>
-                                                    <input type="text" class="form-control mb-2"
-                                                           id="inlineAddressInputClient${client.id}"
-                                                           placeholder="Address" name="clientAddress"
-                                                           value="${client.address}" required>
+                                                    <label for="addressEdit${client.id}">Address</label>
+                                                    <input id="addressEdit${client.id}" class="form-control mb-2" required>
+                                                    <input hidden type="text"
+                                                           id="idAddressEdit${client.id}"
+                                                           value="${client.address}" name="clientAddress" required>
                                                 </div>
                                                 <div class="">
                                                     <label for="inlineEmailInputClient${client.id}">Email</label>
@@ -126,12 +125,12 @@
                                             </div>
                                         </form>
                                     </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" value="Submit">
+                                            Close
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal" value="Submit">
-                                    Close
-                                </button>
                             </div>
                         </div>
                         <div class="modal fade bd-example-modal-sm" id="deleteClient${client.id}" tabindex="-1"
@@ -195,9 +194,10 @@
                                        name="clientPhone" required>
                             </div>
                             <div class="">
-                                <label for="inlineAddressInput">Address</label>
-                                <input type="text" class="form-control mb-2" id="inlineAddressInput"
-                                       placeholder="Address" name="clientAddress" required>
+                                <label for="autocomplete">Address</label>
+                                <input class="form-control" id="autocomplete" placeholder="Enter your address"
+                                       onFocus="geolocate()" type="text" required>
+                                <input hidden class="form-control" id="address" name="clientAddress">
                             </div>
                             <div class="">
                                 <label for="inlineEmailInput">Email</label>
@@ -277,10 +277,13 @@
 
     <jsp:include page="../bootstrapImportBody.jsp"/>
 
+    <script src="../../../js/autocompleteAddress.js"></script>
     <script src="../../../js/utils.js"></script>
     <script src="../../../js/fo/foMenu.js"></script>
     <script src="../../../js/errorCatcher.js"></script>
     <script src="../../../js/popoverUtils.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRtC9nTA8nx3D7jpH07HcU5SjpLhQgA6E&libraries=places"
+            async defer></script>
     <%--<script src="../../../js/dg/anonymusDG.js"></script>--%>
 </body>
 </html>

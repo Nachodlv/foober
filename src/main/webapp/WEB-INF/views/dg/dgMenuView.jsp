@@ -164,6 +164,7 @@
 </div>
 
 <script src="../../../js/utils.js"></script>
+<script src="../../../js/autocompleteAddress.js"></script>
 <script src="../../../js/starRating.js"></script>
 <script src="../../../js/dg/sw.js"></script>
 <script src="../../../js/dg/notificationDG.js"></script>

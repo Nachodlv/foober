@@ -43,7 +43,7 @@ function showOrder(order){
     document.getElementById('options').hidden = false;
     $('#foName').html(order.foName);
     $('#elaborationTime').html(order.elaborationTime + ' minutes');
-    $('#clientAddress').html(order.clientAddress);
+    fillAddressInput(order.clientAddress, undefined, document.getElementById('clientAddress'), true);
     $('#clientPhone').html(order.clientPhone);
     $('#totalPrice').html(order.totalPrice + '$');
     $('#tip').html(getTip(order.tippingPercentage, order.totalPrice) + '$');
@@ -193,7 +193,7 @@ function showOrderToDeliver(){
     document.getElementById('foNameDeliver').innerHTML = order.foName;
     document.getElementById('foPhoneDeliver').innerHTML = order.foPhone;
     document.getElementById('elaborationTimeDeliver').innerHTML = order.elaborationTime + ' minutes';
-    document.getElementById('clientAddressDeliver').innerHTML = order.clientAddress;
+    fillAddressInput(order.clientAddress, undefined, document.getElementById('clientAddressDeliver'), true);
     document.getElementById('clientPhoneDeliver').innerHTML = order.clientPhone;
     document.getElementById('totalPriceDeliver').innerHTML = order.totalPrice + '$';
     document.getElementById('tipDeliver').innerHTML = ((order.tippingPercentage * order.totalPrice) / 100).toString() + '$';

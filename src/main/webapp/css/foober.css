@@ -115,3 +115,7 @@
 a.disabled {
     pointer-events: none;
 }
+
+.pac-container {
+    z-index: 10000 !important;
+}

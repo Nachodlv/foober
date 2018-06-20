@@ -49,7 +49,7 @@ function setOrder() {
     document.getElementById("clientName").innerHTML = order.client.name;
     document.getElementById("clientPhone").innerHTML = order.client.phone;
     document.getElementById("clientEmail").innerHTML = order.client.email;
-    document.getElementById("clientAddress").innerHTML = order.client.address;
+    fillAddressInput(order.client.address, undefined, document.getElementById('clientAddress'), true);
 
     document.getElementById("totalCost").innerHTML = 'Total cost: ' + getTotalCost(order.orderedProducts) + '$';
 }

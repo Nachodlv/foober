@@ -12,5 +12,4 @@ function fillAddressInput(){
             document.getElementById('autocomplete').value = response.result.formatted_address;
         }
     });
-
 }

@@ -1,9 +1,12 @@
 var autocomplete;
+var fillIn;
 
-function initAutocomplete() {
+function initAutocomplete(autocompleteId, fillInId) {
+    autocompleteId = autocompleteId || 'autocomplete';
+    fillIn = fillInId || 'address';
     // Create the autocomplete object, restricting the search to geographical
     // location types.
-    var input = document.getElementById('autocomplete');
+    var input = document.getElementById(autocompleteId);
     autocomplete = new google.maps.places.Autocomplete(input,{types: []});
 
     google.maps.event.addDomListener(input, 'keydown', function(event) {
@@ -19,8 +22,7 @@ function initAutocomplete() {
 
 function fillInAddress() {
     // Get the place details from the autocomplete object.
-    var place = autocomplete.getPlace().place_id;
-    document.getElementById('address').value = place;
+    document.getElementById(fillIn).value = autocomplete.getPlace().place_id;
 }
 
 function geolocate() {
@@ -37,4 +39,28 @@ function geolocate() {
             autocomplete.setBounds(circle.getBounds());
         });
     }
+}
+
+function fillAddressInput(placeId, input, element, small){
+    var url = 'https://maps.googleapis.com/maps/api/place/details/json?placeid='+ placeId +'&key=AIzaSyDRtC9nTA8nx3D7jpH07HcU5SjpLhQgA6E';
+
+    $.ajax({
+        url: url,
+        type: "GET",
+        dataType: 'json',
+        cache: false,
+        success: function(response){
+            if(response.status === 'INVALID_REQUEST') {
+                console.error(response.status);
+                return;
+            }
+            if(small){
+                if(input)input.value = response.result.name;
+                else element.innerHTML = response.result.name;
+            }else {
+                if(input)input.value = response.result.formatted_address;
+                else element.innerHTML = response.result.formatted_address;
+            }
+        }
+    });
 }
