@@ -125,6 +125,7 @@ function openWebSocket(){
             $('#deliveredModal').modal({
                 backdrop: false
             });
+            document.getElementById('cancelOrder').hidden = true;
         }
     };
 }
@@ -183,6 +184,7 @@ function getRandomColor() {
 }
 function cancelOrder(){
     changeOrderState('CANCELED', order);
+    document.getElementById('cancelOrder').hidden = true;
     $('#cancelSuccessfulModal').modal();
 
     var xhttp = new XMLHttpRequest();

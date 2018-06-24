@@ -142,7 +142,7 @@
     </div>
 </div>
 
-<%--Time Out LogOut--%>
+<%--Time Out Logout--%>
 <div class="modal fade bd-example-modal-sm" id="timeOutModal" tabindex="-1" role="dialog"
      aria-labelledby="timeOutModal" aria-hidden="true">
     <div class="modal-dialog modal-sm">
@@ -162,6 +162,28 @@
         </div>
     </div>
 </div>
+
+<%--Modal order canceled--%>
+<div class="modal fade bd-example-modal-sm" id="canceledModal" tabindex="-1" role="dialog"
+     aria-labelledby="canceledModal" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="caceledLabel">Order canceled</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Your order was canceled.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script src="../../../js/utils.js"></script>
 <script src="../../../js/autocompleteAddress.js"></script>

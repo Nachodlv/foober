@@ -221,7 +221,7 @@ function showRating() {
 
 function orderCanceled(){
     //FO changes dg state
-    //TO-DO mostrar modal
+    $("#canceledModal").modal();
     hideOrderToDeliver();
     document.getElementById('online').disabled = false;
     document.getElementById("dgState").value = 'OFFLINE';

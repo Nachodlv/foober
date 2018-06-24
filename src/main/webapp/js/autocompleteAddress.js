@@ -52,6 +52,8 @@ function fillAddressInput(placeId, input, element, small){
         success: function(response){
             if(response.status === 'INVALID_REQUEST') {
                 console.error(response.status);
+                if(input) input.value = 'Undefined address';
+                else element.innerHTML = 'Undefined address';
                 return;
             }
             if(small){
