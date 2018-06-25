@@ -65,6 +65,7 @@
     <input id="id" value="${order.id}">
     <input id="foName" value="${order.franchiseOwner.name}">
     <input id="foPhone" value="${order.franchiseOwner.phone}">
+    <input id="foAddress" value="${order.franchiseOwner.address}">
     <input id="elaborationTime" value="${order.elaborationTime}">
     <input id="clientPhone" value="${order.client.phone}">
     <input id="tippingPercentage" value="${order.franchiseOwner.tippingPercentage}">

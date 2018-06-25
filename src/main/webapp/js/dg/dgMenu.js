@@ -5,22 +5,25 @@ var waitingResponse = false;
 var timeOutQuantity = 0;
 var delivering = false;
 var timeOut;
+start();
 showRating();
 
-orderSocket.onopen = function (ev) {
-    onlineWorking();
-    orderSocket.onmessage = function (ev2) {
-        order = JSON.parse(ev2.data);
-        if(order.fromFO){
-            if(order.stateOrder === 'CANCELED') {
-                orderCanceled();
-            }else {
-                showNotification(ev2);
-                showOrder(order);
+function start() {
+    orderSocket.onopen = function (ev) {
+        onlineWorking();
+        orderSocket.onmessage = function (ev2) {
+            order = JSON.parse(ev2.data);
+            if (order.fromFO) {
+                if (order.stateOrder === 'CANCELED') {
+                    orderCanceled();
+                } else {
+                    showNotification(ev2);
+                    showOrder(order);
+                }
             }
         }
-    }
-};
+    };
+}
 
 window.onbeforeunload = closeSocket;
 window.onunload = closeSocket;
@@ -197,11 +200,14 @@ function showOrderToDeliver(){
     document.getElementById('clientPhoneDeliver').innerHTML = order.clientPhone;
     document.getElementById('totalPriceDeliver').innerHTML = order.totalPrice + '$';
     document.getElementById('tipDeliver').innerHTML = ((order.tippingPercentage * order.totalPrice) / 100).toString() + '$';
+    document.getElementById('map').hidden = false;
+    startMap(order.foAddress, order.clientAddress);
 }
 
 function hideOrderToDeliver(){
     document.getElementById('order').hidden = true;
     document.getElementById('tableOrder').hidden = true;
+    document.getElementById('map').hidden = true;
     document.getElementById('finishDelivering').hidden = true;
 }
 
@@ -225,4 +231,17 @@ function orderCanceled(){
     hideOrderToDeliver();
     document.getElementById('online').disabled = false;
     document.getElementById("dgState").value = 'OFFLINE';
+}
+
+function startMap(foAddress, clientAddress){
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var origin = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+            setDirections(origin, foAddress, clientAddress);
+        });
+    }
+
 }

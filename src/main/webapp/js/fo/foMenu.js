@@ -3,7 +3,6 @@ var openWS = [];
 getOrders();
 showOrderAcceptedModal();
 tutorialPopovers();
-showClientAddresses();
 
 window.onbeforeunload = closeSockets;
 window.onunload = closeSockets;

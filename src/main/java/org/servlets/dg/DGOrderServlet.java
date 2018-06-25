@@ -52,7 +52,8 @@ public class DGOrderServlet extends HttpServlet{
         DeliveryGuy dg = activeOrder.getDeliveryGuy();
         OrderMessage orderMessage = new OrderMessage(false, activeOrder.getId(), activeOrder.getElaborationTime(),
                 activeOrder.getStateOrder().toString(), null, activeOrder.getTotalCost(),
-                franchiseOwner.getTippingPercentage(), client.getPhone(), franchiseOwner.getName(), franchiseOwner.getPhone(),client.getAddress(), client.getEmail(), dg.getName(), dg.getPhone(), client.getName());
+                franchiseOwner.getTippingPercentage(), client.getPhone(), franchiseOwner.getName(), franchiseOwner.getPhone(),
+                client.getAddress(), client.getEmail(), dg.getName(), dg.getPhone(), client.getName(), franchiseOwner.getAddress());
 
         if(activeOrder.getDeliveryGuy() != null) orderMessage.setDgEmail(activeOrder.getDeliveryGuy().getEmail());
 

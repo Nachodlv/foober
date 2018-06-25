@@ -100,7 +100,8 @@ function getOrder() {
         foPhone: document.getElementById('foPhone').value,
         dgName: DGname,
         dgPhone: DGphone,
-        clientName: document.getElementById('clientName').value
+        clientName: document.getElementById('clientName').value,
+        foAddress: document.getElementById('foAddress').value
     };
 }
 

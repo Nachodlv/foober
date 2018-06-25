@@ -5,19 +5,25 @@ public class OrderMessage {
     private int id;
     private int elaborationTime;
     private String stateOrder;
-    private String dgEmail;
     private double totalPrice;
-    private int tippingPercentage;
-    private long clientPhone;
-    private String foName;
-    private long foPhone;
-    private String clientAddress;
-    private String clientEmail;
+
+    private String dgEmail;
     private String dgName;
     private long dgPhone;
+
+    private String foName;
+    private long foPhone;
+    private String foAddress;
+    private int tippingPercentage;
+
+    private long clientPhone;
+    private String clientAddress;
+    private String clientEmail;
     private String clientName;
 
-    public OrderMessage(boolean fromFO, int id, int elaborationTime, String stateOrder, String dgEmail, double totalPrice, int tippingPercentage, long clientPhone, String foName, long foPhone, String clientAddress, String clientEmail, String dgName, long dgPhone, String clientName) {
+    public OrderMessage(boolean fromFO, int id, int elaborationTime, String stateOrder, String dgEmail, double totalPrice,
+                        int tippingPercentage, long clientPhone, String foName, long foPhone, String clientAddress,
+                        String clientEmail, String dgName, long dgPhone, String clientName, String foAddress) {
         this.fromFO = fromFO;
         this.id = id;
         this.elaborationTime = elaborationTime;
@@ -33,6 +39,7 @@ public class OrderMessage {
         this.dgName = dgName;
         this.dgPhone = dgPhone;
         this.clientName = clientName;
+        this.foAddress = foAddress;
     }
 
     public void setFromFO(boolean fromFO) {
@@ -153,6 +160,15 @@ public class OrderMessage {
 
     public void setClientName(String clientName) {
         this.clientName = clientName;
+    }
+
+    public void setFoAddress(String foAddress) {
+        this.foAddress = foAddress;
+    }
+
+    public String getFoAddress() {
+
+        return foAddress;
     }
 }
 

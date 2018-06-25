@@ -10,7 +10,6 @@
 <jsp:include page="../_header.jsp"/>
 <h2>Welcome, ${loginedUser.name}!</h2>
 <h6 id="ratingTitle" style="margin-bottom: 2rem;" class="text-muted"></h6>
-
 <div class="bg-light rounded">
     <form method="post" action="${pageContext.request.contextPath}/dgMenu">
         <div id="deliveryGuy">
@@ -44,7 +43,7 @@
     </form>
 </div>
 
-<div class="d-flex justify-content-center">
+<div class="d-flex justify-content-center flex-column">
     <%--Spinner--%>
     <div class="spinner" id="spinner" hidden>
         <h3 align="center">Waiting for orders...</h3>
@@ -87,6 +86,7 @@
         </table>
         <button type="button" id="finishDelivering" class="btn btn-outline-success spaced mr-auto ml-auto" onclick="finishDelivering()" hidden>Order delivered</button>
     </div>
+    <div id="map" hidden></div>
 </div>
 
 
@@ -183,14 +183,15 @@
         </div>
     </div>
 </div>
-
-
 <script src="../../../js/utils.js"></script>
+<script src="../../../js/directions.js"></script>
 <script src="../../../js/autocompleteAddress.js"></script>
 <script src="../../../js/starRating.js"></script>
 <script src="../../../js/dg/sw.js"></script>
 <script src="../../../js/dg/notificationDG.js"></script>
 <script src="../../../js/dg/dgMenu.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRtC9nTA8nx3D7jpH07HcU5SjpLhQgA6E&libraries=places&callback=initMap"
+        async defer></script>
 <jsp:include page="../bootstrapImportBody.jsp"/>
 </body>
 </html>

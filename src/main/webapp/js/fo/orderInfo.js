@@ -1,6 +1,5 @@
 var order;
 var orderSocket;
-getOrder();
 
 
 function getOrder() {

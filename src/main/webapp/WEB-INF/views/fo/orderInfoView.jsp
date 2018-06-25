@@ -185,5 +185,7 @@
 <script src="../../../js/starRating.js"></script>
 <script src="../../../js/fo/orderInfo.js"></script>
 <script src="../../../js/popoverUtils.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRtC9nTA8nx3D7jpH07HcU5SjpLhQgA6E&libraries=places&callback=getOrder"
+        async defer></script>
 </body>
 </html>
