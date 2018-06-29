@@ -240,7 +240,12 @@ function startMap(foAddress, clientAddress){
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
-            setDirections(origin, foAddress, clientAddress);
+            var directions = setDirections(origin, foAddress, clientAddress, document.getElementById('meansOfTransport').value);
+            var button = document.getElementById('getDirections');
+            button.hidden = false;
+            button.addEventListener('click', function () {
+                window.open(directions, '_blank');
+            })
         });
     }
 

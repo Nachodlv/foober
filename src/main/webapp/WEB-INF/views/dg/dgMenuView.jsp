@@ -15,7 +15,7 @@
         <div id="deliveryGuy">
             <input hidden value="${loginedUser.name}">
             <input hidden value="${loginedUser.phone}">
-            <input hidden value="${loginedUser.meansOfTransport}">
+            <input hidden id="meansOfTransport" value="${loginedUser.meansOfTransport}">
             <input hidden id="email" value="${loginedUser.email}">
             <input hidden id="rating" value="${loginedUser.rating}">
             <input hidden id="ratingQuantity" value="${loginedUser.ratingQuantity}">
@@ -87,6 +87,8 @@
         <button type="button" id="finishDelivering" class="btn btn-outline-success spaced mr-auto ml-auto" onclick="finishDelivering()" hidden>Order delivered</button>
     </div>
     <div id="map" hidden></div>
+        <button type="button" id="getDirections" class="btn btn-outline-info directions-button" hidden>Get directions</button>
+
 </div>
 
 

@@ -9,15 +9,15 @@ function initMap() {
     directionsDisplay.setMap(map);
 }
 
-function setDirections(origin, waypoint, destination){
+function setDirections(origin, waypoint, destination, meansOfTransport){
+    meansOfTransport = getMeansOfTransport(meansOfTransport);
     var directionsService = new google.maps.DirectionsService();
     var request = {
         origin: origin,
         destination: {placeId: destination},
         waypoints: [{location: {placeId: waypoint}}],
-        travelMode: 'DRIVING'
+        travelMode: meansOfTransport
     };
-
     directionsService.route(request, function(result, status) {
         if (status === 'OK') {
             directionsDisplay.setDirections(result);
@@ -27,4 +27,16 @@ function setDirections(origin, waypoint, destination){
             console.error(status);
         }
     });
+    return encodeURI('https://www.google.com/maps/dir/?api=1&destination=.&destination_place_id=' + destination +
+        '&waypoints=.&waypoint_place_ids=' + waypoint +
+        '&travelmode=' + meansOfTransport.toLowerCase());
+
+}
+
+function getMeansOfTransport(meansOfTransport){
+    switch (meansOfTransport) {
+        case '1': return 'BICYCLING';
+        case '2': return 'WALKING';
+        default: return 'DRIVING';
+    }
 }
