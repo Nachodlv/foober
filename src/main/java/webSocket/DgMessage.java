@@ -1,5 +1,7 @@
 package webSocket;
 
+import javafx.geometry.Pos;
+
 public class DgMessage {
     private String name;
     private int meansOfTransport;
@@ -8,8 +10,10 @@ public class DgMessage {
     private String email;
     private int ratingQuantity;
     private double rating;
+    private Position position;
 
-    public DgMessage(String name, int meansOfTransport, int phone, String state, String email, int ratingQuantity, double rating) {
+    public DgMessage(String name, int meansOfTransport, int phone, String state, String email, int ratingQuantity,
+                     double rating, Position position) {
         this.name = name;
         this.meansOfTransport = meansOfTransport;
         this.phone = phone;
@@ -17,6 +21,7 @@ public class DgMessage {
         this.email = email;
         this.rating = rating;
         this.ratingQuantity = ratingQuantity;
+        this.position = position;
     }
 
     public String getEmail() {
@@ -73,5 +78,14 @@ public class DgMessage {
 
     public void setRating(double rating) {
         this.rating = rating;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
+    }
+
+    public Position getPosition() {
+
+        return position;
     }
 }

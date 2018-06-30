@@ -25,7 +25,7 @@ public class OrderEndPoint {
             } else {
                 Utils.sendEmailDG(message);
             }
-        } else if (message.getStateOrder().equals("DELIVERING")) {
+        } else if (message.isAccepted()) {
             Utils.sendEmailClient(message);
         }
         for (Map.Entry<Session, String> session : sessions.entrySet()) {

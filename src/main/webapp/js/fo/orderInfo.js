@@ -125,8 +125,14 @@ function openWebSocket(){
                 backdrop: false
             });
             document.getElementById('cancelOrder').hidden = true;
+        }else if(!orderReceived.fromFO && orderReceived.stateOrder === 'DELIVERING'){
+            console.log(orderReceived.position);
+            //update position dg
         }
     };
+    setInterval(function(){
+        orderSocket.send(JSON.stringify(transformOrder('DELIVERING')))
+    }, 10000);
 }
 
 function closeDeliveredModal(){
@@ -192,18 +198,18 @@ function cancelOrder(){
     xhttp.open("POST", newHref.join('/'), true);
     xhttp.send('state=CANCELED' + '&dgEmail=' + order.deliveryGuy.email);
 
-    orderSocket.send(JSON.stringify(transformOrder()));
+    orderSocket.send(JSON.stringify(transformOrder('CANCELED')));
 }
 
 function openCancelOrderModal() {
     $('#cancelOrderModal').modal();
 }
-function transformOrder(){
+function transformOrder(stateOrder){
     return {
         id: order.id,
         foName: order.franchiseOwner.name,
         elaborationTime: order.elaborationTime,
-        stateOrder: 'CANCELED',
+        stateOrder: stateOrder,
         fromFO: true,
         dgEmail: order.deliveryGuy.email,
         totalPrice: 0,
@@ -211,7 +217,12 @@ function transformOrder(){
         clientPhone: order.client.phone,
         clientAddress: order.client.address,
         clientEmail: order.client.email,
-        foPhone: order.franchiseOwner.phone
+        foPhone: order.franchiseOwner.phone,
+        position: {
+            lat: 0,
+            lng: 0
+        },
+        accepted: false
     }
 }
 

@@ -16,6 +16,8 @@ function start() {
             if (order.fromFO) {
                 if (order.stateOrder === 'CANCELED') {
                     orderCanceled();
+                } else if(delivering){
+                    sendPosition();
                 } else {
                     showNotification(ev2);
                     showOrder(order);
@@ -72,6 +74,7 @@ function acceptOrder(){
     clearTimeout(timeOut);
     order.stateOrder = 'DELIVERING';
     order.fromFO = false;
+    order.accepted = true;
     orderSocket.send(JSON.stringify(order));
     delivering = true;
     changeState('ONLINE_WORKING');
@@ -82,6 +85,7 @@ function acceptOrder(){
 function refuseOrder(){
     clearTimeout(timeOut);
     order.fromFO = false;
+    order.accepted = false;
     orderSocket.send(JSON.stringify(order));
     hideOrder();
 }
@@ -209,6 +213,7 @@ function hideOrderToDeliver(){
     document.getElementById('tableOrder').hidden = true;
     document.getElementById('map').hidden = true;
     document.getElementById('finishDelivering').hidden = true;
+    document.getElementById('getDirections').hidden = true;
 }
 
 function forceLogOut(){
@@ -248,5 +253,17 @@ function startMap(foAddress, clientAddress){
             })
         });
     }
+}
 
+function sendPosition(){
+    if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(function (position) {
+            order.position = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+            order.fromFO = false;
+            orderSocket.send(JSON.stringify(order));
+        })
+    }
 }

@@ -101,7 +101,12 @@ function getOrder() {
         dgName: DGname,
         dgPhone: DGphone,
         clientName: document.getElementById('clientName').value,
-        foAddress: document.getElementById('foAddress').value
+        foAddress: document.getElementById('foAddress').value,
+        accepted: false,
+        position: {
+            lat: 0,
+            lng: 0
+        }
     };
 }
 
@@ -127,7 +132,7 @@ function waitingForResponse(orderSocket) {
         if (order.fromFO) return;
         orderSocket.close();
         document.getElementById('chooseDGLater').classList.remove('disabled');
-        if (order.stateOrder === 'DELIVERING') {
+        if (order.accepted) {
             //order accepted
             saveOrder(order.dgEmail);
             var newHref = window.location.href.split('/');

@@ -6,6 +6,8 @@ public class OrderMessage {
     private int elaborationTime;
     private String stateOrder;
     private double totalPrice;
+    private boolean accepted;
+    private Position position;
 
     private String dgEmail;
     private String dgName;
@@ -23,7 +25,8 @@ public class OrderMessage {
 
     public OrderMessage(boolean fromFO, int id, int elaborationTime, String stateOrder, String dgEmail, double totalPrice,
                         int tippingPercentage, long clientPhone, String foName, long foPhone, String clientAddress,
-                        String clientEmail, String dgName, long dgPhone, String clientName, String foAddress) {
+                        String clientEmail, String dgName, long dgPhone, String clientName, String foAddress, boolean accepted,
+                        Position position) {
         this.fromFO = fromFO;
         this.id = id;
         this.elaborationTime = elaborationTime;
@@ -40,6 +43,8 @@ public class OrderMessage {
         this.dgPhone = dgPhone;
         this.clientName = clientName;
         this.foAddress = foAddress;
+        this.accepted = accepted;
+        this.position = position;
     }
 
     public void setFromFO(boolean fromFO) {
@@ -169,6 +174,24 @@ public class OrderMessage {
     public String getFoAddress() {
 
         return foAddress;
+    }
+
+    public void setAccepted(boolean accepted) {
+        this.accepted = accepted;
+    }
+
+    public boolean isAccepted() {
+
+        return accepted;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
+    }
+
+    public Position getPosition() {
+
+        return position;
     }
 }
 

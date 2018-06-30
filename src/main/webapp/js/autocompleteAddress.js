@@ -41,32 +41,6 @@ function geolocate() {
     }
 }
 
-// function fillAddressInput(placeId, input, element, small){
-//     var url = 'http://maps.googleapis.com/maps/api/place/details/json?placeid='+ placeId +'&key=AIzaSyDRtC9nTA8nx3D7jpH07HcU5SjpLhQgA6E';
-//
-//     $.ajax({
-//         url: url,
-//         type: "GET",
-//         dataType: 'json',
-//         cache: false,
-//         success: function(response){
-//             if(response.status === 'INVALID_REQUEST') {
-//                 console.error(response.status);
-//                 if(input) input.value = 'Undefined address';
-//                 else element.innerHTML = 'Undefined address';
-//                 return;
-//             }
-//             if(small){
-//                 if(input)input.value = response.result.name;
-//                 else element.innerHTML = response.result.name;
-//             }else {
-//                 if(input)input.value = response.result.formatted_address;
-//                 else element.innerHTML = response.result.formatted_address;
-//             }
-//         }
-//     });
-// }
-
 function fillAddressInput(placeId, input, element, small) {
 
     var service = new google.maps.places.PlacesService(input || element);

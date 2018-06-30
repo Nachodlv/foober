@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import hibernate.OrderFunctiontality;
 import model.*;
 import webSocket.OrderMessage;
+import webSocket.Position;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -50,10 +51,12 @@ public class DGOrderServlet extends HttpServlet{
         FranchiseOwner franchiseOwner = activeOrder.getFranchiseOwner();
         Client client = activeOrder.getClient();
         DeliveryGuy dg = activeOrder.getDeliveryGuy();
+        Position position = new Position(0, 0);
         OrderMessage orderMessage = new OrderMessage(false, activeOrder.getId(), activeOrder.getElaborationTime(),
                 activeOrder.getStateOrder().toString(), null, activeOrder.getTotalCost(),
                 franchiseOwner.getTippingPercentage(), client.getPhone(), franchiseOwner.getName(), franchiseOwner.getPhone(),
-                client.getAddress(), client.getEmail(), dg.getName(), dg.getPhone(), client.getName(), franchiseOwner.getAddress());
+                client.getAddress(), client.getEmail(), dg.getName(), dg.getPhone(), client.getName(), franchiseOwner.getAddress(),
+                true, position);
 
         if(activeOrder.getDeliveryGuy() != null) orderMessage.setDgEmail(activeOrder.getDeliveryGuy().getEmail());
 

@@ -99,7 +99,7 @@
 <script src="../../../js/errorCatcher.js"></script>
 <script src="../../../js/autocompleteAddress.js"></script>
 <script src="../../../js/fo/foInfoView.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRtC9nTA8nx3D7jpH07HcU5SjpLhQgA6E&libraries=places&callback=initAutocomplete"
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRtC9nTA8nx3D7jpH07HcU5SjpLhQgA6E&libraries=places&callback=init"
         async defer></script>
 </body>
 </html>
