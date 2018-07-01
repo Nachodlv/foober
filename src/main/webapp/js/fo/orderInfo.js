@@ -12,6 +12,7 @@ function getOrder() {
             getClientAvatar();
             if(order.stateOrder === 'DELIVERING'){
                 openWebSocket();
+                initializeMap(order.client.address, order.franchiseOwner.address);
                 document.getElementById('cancelOrder').hidden = false;
             }
             else if(order.stateOrder === 'DELIVERED') $('#rateModal').modal();
@@ -118,6 +119,7 @@ function addLink(img){
 
 function openWebSocket(){
     orderSocket = new WebSocket(getUrl('/orderSender/' + order.deliveryGuy.email));
+    orderSocket.onopen = sendRequest;
     orderSocket.onmessage = function (ev) {
         var orderReceived = JSON.parse(ev.data);
         if(!orderReceived.fromFO && orderReceived.stateOrder === 'DELIVERED') {
@@ -125,14 +127,16 @@ function openWebSocket(){
                 backdrop: false
             });
             document.getElementById('cancelOrder').hidden = true;
+            document.getElementById('map').hidden = true;
         }else if(!orderReceived.fromFO && orderReceived.stateOrder === 'DELIVERING'){
             console.log(orderReceived.position);
             //update position dg
         }
     };
-    setInterval(function(){
+    setInterval(sendRequest, 10000);
+    function sendRequest() {
         orderSocket.send(JSON.stringify(transformOrder('DELIVERING')))
-    }, 10000);
+    }
 }
 
 function closeDeliveredModal(){
@@ -224,5 +228,25 @@ function transformOrder(stateOrder){
         },
         accepted: false
     }
+}
+
+function initializeMap(clientAddress, foAddress) {
+    initMap();
+    centerMap(foAddress);
+    transformPlaceIdToPosition(clientAddress, function (result) {
+        setMarker(result.geometry.location, generateDescriptionMarker('Client address'), 'C');
+    });
+    transformPlaceIdToPosition(foAddress, function (result) {
+        setMarker(result.geometry.location, generateDescriptionMarker('Franchise address'), 'F');
+    });
+}
+
+function generateDescriptionMarker(name) {
+    return '<div id="content">'+
+        '<div id="siteNotice">'+
+        '</div>'+
+        '<div id="bodyContent">'+
+        '<span>' + name + '</span>' +
+        '</div>';
 }
 

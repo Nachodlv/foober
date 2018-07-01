@@ -22,7 +22,7 @@ public class OrderEndPoint {
         if (message.isFromFO()) {
             if(message.getStateOrder().equals("CANCELLED")){
                 Utils.sendEmailDGCancelled(message);
-            } else {
+            } else if (message.getStateOrder().equals("WAITING")){
                 Utils.sendEmailDG(message);
             }
         } else if (message.isAccepted()) {

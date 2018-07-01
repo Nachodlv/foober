@@ -76,6 +76,7 @@
             </table>
         </div>
     </div>
+    <div id="map"></div>
 </div>
 
 <footer class="footer fixed-bottom mb-3 ml-3">
@@ -182,6 +183,7 @@
 <jsp:include page="../bootstrapImportBody.jsp"/>
 <script src="../../../js/utils.js"></script>
 <script src="../../../js/autocompleteAddress.js"></script>
+<script src="../../../js/directions.js"></script>
 <script src="../../../js/starRating.js"></script>
 <script src="../../../js/fo/orderInfo.js"></script>
 <script src="../../../js/popoverUtils.js"></script>

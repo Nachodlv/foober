@@ -11,3 +11,11 @@
     margin-bottom: 2rem;
     margin-top: 1rem;
 }
+
+#map {
+    width: 80%;
+    height: 400px;
+    position: relative;
+    overflow: hidden;
+    margin: 2rem auto 4rem auto;
+}

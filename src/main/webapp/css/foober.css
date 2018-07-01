@@ -119,11 +119,3 @@ a.disabled {
 .pac-container {
     z-index: 10000 !important;
 }
-
-#map {
-    width: 80%;
-    height: 500px;
-    position: relative;
-    overflow: hidden;
-    margin: 2rem auto;
-}

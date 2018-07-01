@@ -1,11 +1,12 @@
 var directionsDisplay;
+var map;
 function initMap() {
     directionsDisplay = new google.maps.DirectionsRenderer();
     var mapOptions = {
-        zoom:7,
+        zoom:12,
         center: {lat: 0, lng: 0}
     };
-    var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    map = new google.maps.Map(document.getElementById('map'), mapOptions);
     directionsDisplay.setMap(map);
 }
 
@@ -38,5 +39,47 @@ function getMeansOfTransport(meansOfTransport){
         case '1': return 'BICYCLING';
         case '2': return 'WALKING';
         default: return 'DRIVING';
+    }
+}
+
+function setMarker(position, description, label){
+    var marker = new google.maps.Marker({
+        position: position,
+        map: map,
+        label: label
+    });
+
+    if(description) {
+        var infowindow = new google.maps.InfoWindow({
+            content: description
+        });
+        marker.addListener('click', function() {
+            infowindow.open(map, marker);
+        });
+    }
+
+    return marker;
+}
+
+function transformPlaceIdToPosition(placeId, promiseFunction){
+    var service = new google.maps.places.PlacesService(map);
+    service.getDetails({
+        placeId: placeId
+    }, promiseFunction);
+}
+
+function centerMap(position){
+    if(!position && navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(function (position) {
+            map.setCenter({
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            });
+        })
+    }else {
+        transformPlaceIdToPosition(position, function (result) {
+            position = result.geometry.location;
+            map.setCenter(position);
+        })
     }
 }
