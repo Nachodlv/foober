@@ -10,7 +10,7 @@ function getOrders() {
         }
     };
     var url = window.location.href.split('/');
-    url[3] = 'allOrdersFO?foID=' + document.getElementById('foID').value;
+    url[3] = 'allOrdersDG?dgID=' + document.getElementById('dgID').value;
     xhttp.open("GET", url.join('/'), true);
     xhttp.send();
 }
@@ -22,24 +22,19 @@ function generateTable() {
         var row = document.createElement('tr');
         var orderID = document.createElement('td');
         var clientName = document.createElement('td');
-        var dgName = document.createElement('td');
+        var foName = document.createElement('td');
         var issuedTime = document.createElement('td');
         var status = document.createElement('td');
 
         orderID.innerHTML = order.id;
         clientName.innerHTML = order.client.name;
-        if (order.deliveryGuy) {
-            dgName.innerHTML = order.deliveryGuy.name;
-        } else {
-            dgName.innerHTML = ('no DG assigned yet').italics()
-        }
-
-        issuedTime.innerHTML = getTime(order.issuedTime);
+        foName.innerHTML = order.franchiseOwner.name;
+        issuedTime.textContent = getTime(order.issuedTime);
         status.innerHTML = order.stateOrder;
 
         row.appendChild(orderID);
         row.appendChild(clientName);
-        row.appendChild(dgName);
+        row.appendChild(foName);
         row.appendChild(issuedTime);
         row.appendChild(status);
         tableBody.appendChild(row);

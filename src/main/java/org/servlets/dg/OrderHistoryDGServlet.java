@@ -1,4 +1,4 @@
-package org.servlets.fo;
+package org.servlets.dg;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,14 +8,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet({"/foOrderHistory"})
-public class OrderHistoryFOServlet extends HttpServlet {
+@WebServlet({"/dgOrderHistory"})
+public class OrderHistoryDGServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher
                 = this.getServletContext()
-                .getRequestDispatcher("/WEB-INF/views/fo/orderHistoryFOView.jsp");
+                .getRequestDispatcher("/WEB-INF/views/dg/orderHistoryDGView.jsp");
 
         dispatcher.forward(request, response);
     }

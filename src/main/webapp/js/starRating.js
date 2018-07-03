@@ -1,4 +1,3 @@
-
 function starClick(starNumber){
     $('#rateModal').modal('hide');
     // var div = document.getElementById('stars');

@@ -66,4 +66,52 @@ public class OrderFunctiontality extends AbstractFunctionality {
         }
         return dgOrders;
     }
+
+    private static List<Order> getAllOrders() {
+        List list = null;
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            list = session.createQuery("FROM Order o").list();
+        } catch (HibernateException ex) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            ex.printStackTrace();
+        }
+        if (list == null) return null;
+        List<Order> orders = new ArrayList<>();
+        for (Object object : list) {
+            orders.add((Order) object);
+        }
+        return orders;
+    }
+
+    public static List<Order> getAllOrdersByDG(String email) {
+        List<Order> orders = getAllOrders();
+        List<Order> dgOrders = new ArrayList<>();
+        if (orders == null) return null;
+        for (Order order : orders) {
+            if(order.getDeliveryGuy() != null)
+                if (order.getDeliveryGuy().getEmail().equals(email))
+                    dgOrders.add(order);
+
+        }
+        return dgOrders;
+    }
+
+    public static List<Order> getAllOrdersByFO(String email) {
+        List<Order> orders = getAllOrders();
+        List<Order> foOrders = new ArrayList<>();
+        if (orders == null) return null;
+        for (Order order : orders) {
+            if(order.getFranchiseOwner() != null)
+                if (order.getFranchiseOwner().getEmail().equals(email))
+                    foOrders.add(order);
+
+        }
+        return foOrders;
+    }
+
+
 }
