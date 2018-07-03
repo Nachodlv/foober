@@ -256,13 +256,13 @@ function startMap(foAddress, clientAddress){
 }
 
 function sendPosition(){
+    order.fromFO = false;
     if(navigator.geolocation){
         navigator.geolocation.getCurrentPosition(function (position) {
             order.position = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
-            order.fromFO = false;
             orderSocket.send(JSON.stringify(order));
         })
     }

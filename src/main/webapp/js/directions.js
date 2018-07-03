@@ -3,7 +3,7 @@ var map;
 function initMap() {
     directionsDisplay = new google.maps.DirectionsRenderer();
     var mapOptions = {
-        zoom:12,
+        zoom:8,
         center: {lat: 0, lng: 0}
     };
     map = new google.maps.Map(document.getElementById('map'), mapOptions);
@@ -42,13 +42,14 @@ function getMeansOfTransport(meansOfTransport){
     }
 }
 
-function setMarker(position, description, label){
+function setMarker(position, name, label){
     var marker = new google.maps.Marker({
         position: position,
         map: map,
         label: label
     });
 
+    var description = generateDescriptionMarker(name);
     if(description) {
         var infowindow = new google.maps.InfoWindow({
             content: description
@@ -82,4 +83,13 @@ function centerMap(position){
             map.setCenter(position);
         })
     }
+}
+
+function generateDescriptionMarker(name) {
+    return '<div id="content">'+
+        '<div id="siteNotice">'+
+        '</div>'+
+        '<div id="bodyContent">'+
+        '<span>' + name + '</span>' +
+        '</div>';
 }

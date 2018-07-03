@@ -19,3 +19,8 @@
     overflow: hidden;
     margin: 2rem auto 4rem auto;
 }
+
+.limitWidth{
+    max-width: 200px;
+    word-wrap: break-word;
+}

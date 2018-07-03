@@ -1,6 +1,6 @@
 var order;
 var orderSocket;
-
+var dgMarker;
 
 function getOrder() {
     var xhttp = new XMLHttpRequest();
@@ -128,9 +128,9 @@ function openWebSocket(){
             });
             document.getElementById('cancelOrder').hidden = true;
             document.getElementById('map').hidden = true;
-        }else if(!orderReceived.fromFO && orderReceived.stateOrder === 'DELIVERING'){
+        } else if(!orderReceived.fromFO && orderReceived.stateOrder === 'DELIVERING'){
             console.log(orderReceived.position);
-            //update position dg
+            dgMarker.setPosition(new google.maps.LatLng(orderReceived.position.lat, orderReceived.position.lng ));
         }
     };
     setInterval(sendRequest, 10000);
@@ -234,19 +234,12 @@ function initializeMap(clientAddress, foAddress) {
     initMap();
     centerMap(foAddress);
     transformPlaceIdToPosition(clientAddress, function (result) {
-        setMarker(result.geometry.location, generateDescriptionMarker('Client address'), 'C');
+        setMarker(result.geometry.location, 'Client address', 'C');
     });
     transformPlaceIdToPosition(foAddress, function (result) {
-        setMarker(result.geometry.location, generateDescriptionMarker('Franchise address'), 'F');
+        setMarker(result.geometry.location, 'Franchise address', 'F');
     });
-}
-
-function generateDescriptionMarker(name) {
-    return '<div id="content">'+
-        '<div id="siteNotice">'+
-        '</div>'+
-        '<div id="bodyContent">'+
-        '<span>' + name + '</span>' +
-        '</div>';
+    var defaultPos = {lat:0, lng:0};
+    dgMarker = setMarker(defaultPos, 'DG position', 'D');
 }
 
