@@ -16,7 +16,7 @@
         <th style="cursor: pointer" scope="col" onclick="sortTable(0)">#</th>
         <th style="cursor: pointer" scope="col" onclick="sortTable(1)">Client's name</th>
         <th style="cursor: pointer" scope="col" onclick="sortTable(2)">Franchise name</th>
-        <th style="cursor: pointer" scope="col">Time issued</th>
+        <th style="cursor: pointer" scope="col" onclick="sortTable(0)">Time issued</th>
         <th style="cursor: pointer" scope="col" onclick="sortTable(4)">Status</th>
     </tr>
     </thead>

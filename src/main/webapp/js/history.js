@@ -8,7 +8,7 @@ function getTime(issuedTime) {
     var hours = minutes / 60;
     var days = hours / 24;
     if (minutes < 60) {
-        if (minutes<1.5) {
+        if (minutes < 1.5) {
             return minutes.toFixed(0) + " minute ago";
         }
         return minutes.toFixed(0) + " minutes ago";
@@ -19,7 +19,7 @@ function getTime(issuedTime) {
         }
         return hours.toFixed(0) + " hours ago";
     }
-    else if(days < 1.5){
+    else if (days < 1.5) {
         return days.toFixed(0) + " day ago";
     } else return days.toFixed(0) + " days ago";
 }

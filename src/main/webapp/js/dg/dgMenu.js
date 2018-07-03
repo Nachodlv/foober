@@ -158,6 +158,7 @@ function finishDelivering(){
 
     changeState('ONLINE_WAITING');
     changeOrderState('DELIVERED', order);
+    delivering = false;
 }
 
 function onlineWorking(startWorking){
