@@ -5,6 +5,7 @@
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a style="cursor: pointer" class="dropdown-item" onclick="window.location = '${pageContext.request.contextPath}' + '/${loginedUser.role}'.toLowerCase() + 'Info'">Edit profile</a>
+            <a style="cursor: pointer" class="dropdown-item" onclick="window.location = '${pageContext.request.contextPath}' + '/${loginedUser.role}'.toLowerCase() + 'OrderHistory'">Order History</a>
             <a class="dropdown-item" href="${pageContext.request.contextPath}/logout">Logout</a>
             <div class="form-check mt-2">
                 <input class="form-check-input" type="checkbox" value="" id="tutorialCheckbox" onchange="changeCheckbox()" style="position: relative; margin-left: 0">
@@ -16,4 +17,4 @@
     </div>
 </div>
 
-<script src="../../../js/header.js"></script>
+<script src="../../js/header.js"></script>
