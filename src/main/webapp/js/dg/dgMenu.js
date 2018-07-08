@@ -1,5 +1,6 @@
 var email = document.getElementById('deliveryGuy').childNodes[7].value;
 var orderSocket = new WebSocket(getUrl('/orderSender/' + email));
+var stateSocket = new WebSocket(getUrl('/dgOnline'));
 var order;
 var waitingResponse = false;
 var timeOutQuantity = 0;
@@ -17,13 +18,20 @@ function start() {
                 if (order.stateOrder === 'CANCELED') {
                     orderCanceled();
                 } else if(delivering){
-                    sendPosition();
+                    sendPositionOrderInfo();
                 } else {
                     showNotification(ev2);
                     showOrder(order);
                 }
             }
         }
+    };
+    stateSocket.onopen = function () {
+        stateSocket.onmessage = function (ev) {
+            var dg  = JSON.parse(ev.data);
+            if(dg.fromFo && dg.email === email)
+                sendState(document.getElementById('dgState').value)
+        };
     };
 }
 
@@ -110,27 +118,35 @@ function login_logout(state) {
 }
 
 function sendState(state){
-    var stateSocket = new WebSocket(getUrl('/dgOnline'));
-    stateSocket.onopen = function () {
-        stateSocket.send(getDeliveryGuy(state));
-        stateSocket.close();
-    };
+    var dg = getDeliveryGuy(state);
+    if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(function (position) {
+            dg.position = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+            stateSocket.send(JSON.stringify(dg));
+        })
+    }
 }
 
 function getDeliveryGuy(state){
     var div = document.getElementById('deliveryGuy').childNodes;
 
-    var dg =  {
+    return {
         name: div[1].value,
         phone: div[3].value,
         meansOfTransport: div[5].value,
         rating: document.getElementById("rating").value,
         ratingQuantity: document.getElementById("ratingQuantity").value,
         email: email,
-        state: state
+        state: state,
+        fromFo: false,
+        position: {
+            lat: undefined,
+            lng: undefined
+        }
     };
-
-    return JSON.stringify(dg);
 }
 
 function changeState(state) {
@@ -256,7 +272,7 @@ function startMap(foAddress, clientAddress){
     }
 }
 
-function sendPosition(){
+function sendPositionOrderInfo(){
     order.fromFO = false;
     if(navigator.geolocation){
         navigator.geolocation.getCurrentPosition(function (position) {

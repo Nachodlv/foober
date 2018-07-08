@@ -2,18 +2,23 @@ var dgSocket = new WebSocket(getUrl('/dgOnline'));
 var email;
 var DGphone;
 var DGname;
-var dgs;
+var deliveryGuys = [];
+var MAX_DGS = 5;
 getAllDGs();
 
 dgSocket.onopen = function (ev) {
     dgSocket.onmessage = function (ev) {
         var deliveryGuy = JSON.parse(ev.data);
+        if(deliveryGuy.fromFo) return;
         if (deliveryGuy.state === 'ONLINE_WAITING') {
             newDeliveryGuy(deliveryGuy);
         } else {
             deleteDeliveryGuy(deliveryGuy);
+            deleteDeliveryGuyFromHtml(deliveryGuy);
         }
     };
+    setInterval( requestPositions, 30000);
+
 };
 
 //When the window is closed, the socket closes
@@ -27,7 +32,7 @@ function closeSocket(event) {
     window.onunload = undefined;
 }
 
-function newDeliveryGuy(deliveryGuy) {
+function addDeliveryGuyToHtml(deliveryGuy) {
     //check if it is already on the list
     if (document.getElementById(deliveryGuy.email)) return;
 
@@ -68,7 +73,7 @@ function newDeliveryGuy(deliveryGuy) {
     replaceMeansOfTransport();
 }
 
-function deleteDeliveryGuy(deliveryGuy) {
+function deleteDeliveryGuyFromHtml(deliveryGuy) {
     var dgRow = document.getElementById(deliveryGuy.email);
     //check if it is the list before removing
     if (dgRow) dgRow.parentNode.removeChild(dgRow);
@@ -164,13 +169,6 @@ function replaceMeansOfTransport() {
     }
 }
 
-// function saveEmail() {
-//     $(".dgs").click(function (event) {
-//         this.email = event.currentTarget.id;
-//         $("#modalConfirmDG").modal();
-//     })
-// }
-
 function saveOrder(dgEmail) {
     var xhttp = new XMLHttpRequest();
     var url = window.location.href += '?dgEmail=' + dgEmail;
@@ -213,8 +211,8 @@ function getAllDGs() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
-            dgs = JSON.parse(this.responseText);
-            setDgs();
+            var dgs = JSON.parse(this.responseText);
+            createDgs(dgs);
             replaceMeansOfTransport();
         }
     };
@@ -225,11 +223,85 @@ function getAllDGs() {
     xhttp.send();
 }
 
-function setDgs() {
-    for (var i = 0; i < dgs.length; i++) {
-        newDeliveryGuy(dgs[i]);
+function createDgs(dgs){
+    for(var i=0;i<MAX_DGS&&i<dgs.length;i++){
+        var dg = dgs[i];
+        deliveryGuys.push({
+            info: {
+                name: dg.name,
+                phone: dg.phone,
+                meansOfTransport: dg.meansOfTransport,
+                rating: dg.rating,
+                ratingQuantity: dg.ratingQuantity,
+                email: dg.email,
+                state: dg.state,
+                fromFo: true,
+                position: {
+                    lat: undefined,
+                    lng: undefined
+                }
+            },
+            distance: undefined,
+            marker: undefined
+        });
+    }
+    requestPositions();
+}
+
+function setDistanceDg(deliveryGuy, position){
+    distanceAndTime(position, document.getElementById('foAddress').value, deliveryGuy.info.meansOfTransport,
+        function (response, status){
+            if (status === google.maps.DirectionsStatus.OK) {
+                deliveryGuy.distance = response.routes[0].legs[0].distance.value;
+            }
+            orderHtml();
+            //TODO add or modify the marker of the dg
+        });
+}
+
+function deleteDeliveryGuy(deliveryGuy){
+   for(var i=0;i<deliveryGuys.length;i++){
+       if(deliveryGuys[i].info.email === deliveryGuy.email){
+           deliveryGuys.splice(i, 1);
+       }
+   }
+}
+
+function newDeliveryGuy(infoDeliveryGuy){
+    var deliveryGuy = contains(infoDeliveryGuy);
+    if(deliveryGuy){
+        setDistanceDg(deliveryGuy, infoDeliveryGuy.position)
+    } else {
+        var length = deliveryGuys.push({
+            info: infoDeliveryGuy,
+            distance: undefined,
+            marker: undefined
+        });
+        setDistanceDg(deliveryGuys[length-1], infoDeliveryGuy.position);
     }
 }
+
+function contains(deliveryGuyInfo) {
+    for(var i=0;i<deliveryGuys.length;i++){
+        if(deliveryGuyInfo.email === deliveryGuys[i].info.email)return deliveryGuys[i];
+    }
+    return undefined;
+}
+
+function orderHtml(){
+//TODO order deliveryGuys array and modify the html
+}
+
+function requestPositions(){
+    deliveryGuys.forEach(function (dg) {
+        dg.info.fromFo = true;
+        dgSocket.send(JSON.stringify(dg.info))
+    })
+}
+
+disablePopovers = function(){
+    closePopover('popoverChooseDGLater');
+};
 
 openPopovers = function() {
     var chooseDGLater = $("#popoverChooseDGLater");
@@ -238,8 +310,4 @@ openPopovers = function() {
     document.getElementById('closeChooseDGLater').addEventListener('click', function (ev) {
         closePopover('popoverChooseDGLater')
     });
-};
-
-disablePopovers = function(){
-    closePopover('popoverChooseDGLater');
 };

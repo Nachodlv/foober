@@ -94,9 +94,12 @@
 
 <jsp:include page="../bootstrapImportBody.jsp"/>
 <script src="../../../js/utils.js"></script>
+<script src="../../../js/distanceBetweenPoints.js"></script>
 <script src="../../../js/starRating.js"></script>
 <script src="../../../js/fo/chooseDG.js"></script>
 <script src="../../../js/popoverUtils.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRtC9nTA8nx3D7jpH07HcU5SjpLhQgA6E&libraries=places&callback=initMap"
+        async defer></script>
 <script>
 
 </script>

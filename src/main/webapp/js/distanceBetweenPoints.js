@@ -1,21 +1,31 @@
-var directionsService = new google.maps.DirectionsService();
+var directionsService;
 //Esta inicializacion se DEBE hacer en el metodo que se llame en el CALLBACK del .jsp
 
 
-function distanceAndTime(from, to, mode) {
+function initMap() {
+    //TODO initialize map with the center in the fo address
+    directionsService = new google.maps.DirectionsService();
+}
+
+function distanceAndTime(from, to, mode, responseFunction) {
+    mode = getMeansOfTransport(mode);
+
     var rslt = new Array(2);
     var request = {
         origin: from,           //LatLng | String | google.maps.Place
-        destination: to,        //LatLng | String | google.maps.Place
+        destination: {placeId: to},        //LatLng | String | google.maps.Place
         travelMode: mode,       //google.maps.DirectionsTravelMode.DRIVING
         unitSystem: google.maps.UnitSystem.METRIC
     };
 
-    directionsService.route(request, function (response, status) {
-        if (status === google.maps.DirectionsStatus.OK) {
-            rslt[0] = response.routes[0].legs[0].distance.value + " meters";
-            rslt[1] = (response.routes[0].legs[0].duration.value)*60 + " minutes";
-        }
-    });
+    directionsService.route(request, responseFunction);
     return rslt;
+}
+
+function getMeansOfTransport(meansOfTransport){
+    switch (meansOfTransport) {
+        case '1': return 'BICYCLING';
+        case '2': return 'WALKING';
+        default: return 'DRIVING';
+    }
 }

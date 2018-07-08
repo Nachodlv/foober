@@ -11,9 +11,10 @@ public class DgMessage {
     private int ratingQuantity;
     private double rating;
     private Position position;
+    private boolean fromFo;
 
     public DgMessage(String name, int meansOfTransport, int phone, String state, String email, int ratingQuantity,
-                     double rating, Position position) {
+                     double rating, Position position, boolean fromFo) {
         this.name = name;
         this.meansOfTransport = meansOfTransport;
         this.phone = phone;
@@ -22,6 +23,7 @@ public class DgMessage {
         this.rating = rating;
         this.ratingQuantity = ratingQuantity;
         this.position = position;
+        this.fromFo = fromFo;
     }
 
     public String getEmail() {
@@ -87,5 +89,14 @@ public class DgMessage {
     public Position getPosition() {
 
         return position;
+    }
+
+    public void setFromFo(boolean fromFo) {
+        this.fromFo = fromFo;
+    }
+
+    public boolean isFromFo() {
+
+        return fromFo;
     }
 }
