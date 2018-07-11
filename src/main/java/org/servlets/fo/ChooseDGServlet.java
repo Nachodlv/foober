@@ -41,6 +41,7 @@ public class ChooseDGServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response){
+        final String dgLocation = request.getParameter("dgLocation");
         String dgEmail = request.getParameter("dgEmail");
         if(dgEmail != null) {
             Order order = (Order)request.getSession().getAttribute("order");
@@ -48,8 +49,10 @@ public class ChooseDGServlet extends HttpServlet {
             order.setStateOrder(StateOrder.DELIVERING);
             order.setDeliveryGuy(deliveryGuy);
             deliveryGuy.getOrders().add(order);
-            OrderFunctiontality.modifyModel(order);
+
             DGFunctionality.modifyModel(deliveryGuy);
+            order.setDgFirstLocation(dgLocation);
+            OrderFunctiontality.modifyModel(order);
         }
     }
 

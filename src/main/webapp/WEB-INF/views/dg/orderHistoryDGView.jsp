@@ -3,6 +3,7 @@
 <head>
     <jsp:include page="../bootstrapImportHeader.jsp"/>
     <link rel="stylesheet" href="../../../css/foober.css" type="text/css">
+    <link rel="stylesheet" href="../../../css/dg/dgHistory.css" type="text/css">
     <title>Order history DG</title>
 </head>
 <body class="outer">
@@ -10,7 +11,7 @@
 <jsp:include page="../_header.jsp"/>
 <input id="dgID" hidden value=${loginedUser.email}>
 
-<table id="table" class="table table-striped text-center">
+<table id="table" class="table table-striped text-center scrollRight">
     <thead>
     <tr>
         <th style="cursor: pointer" scope="col" onclick="sortTable(0)">#</th>

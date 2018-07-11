@@ -43,6 +43,9 @@ public class Order {
     @Expose
     @Column(name = "ratingDG")
     private double ratingDG;
+    @Expose
+    @Column(name = "dgFirstLocation")
+    private String dgFirstLocation;
 
     public Order() {
     }
@@ -140,5 +143,13 @@ public class Order {
         final long currentTime = System.currentTimeMillis();
         final long secondsFromIssued = TimeUnit.MILLISECONDS.toSeconds(currentTime - issuedTime);
         return (int) secondsFromIssued / 60;
+    }
+
+    public String getDgFirstLocation() {
+        return dgFirstLocation;
+    }
+
+    public void setDgFirstLocation(String dgFirstLocation) {
+        this.dgFirstLocation = dgFirstLocation;
     }
 }

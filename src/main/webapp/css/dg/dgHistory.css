@@ -1,0 +1,10 @@
+table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap; /* Set all of our table elements to display type block */
+}
+
+/* And here we will set our table to act normally after we hit 1024px */
+@media only screen and (min-width: 1024px) {
+    table { display: table; }
+}

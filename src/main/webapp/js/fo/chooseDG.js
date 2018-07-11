@@ -144,7 +144,7 @@ function waitingForResponse(orderSocket) {
         document.getElementById('chooseDGLater').classList.remove('disabled');
         if (order.accepted) {
             //order accepted
-            saveOrder(order.dgEmail);
+            saveOrder(order.dgEmail, order.position);
             var newHref = window.location.href.split('/');
             newHref[3] = 'foMenu?orderAccepted=true';
             window.location.href = newHref.join('/');
@@ -174,9 +174,11 @@ function replaceMeansOfTransport() {
     }
 }
 
-function saveOrder(dgEmail) {
+function saveOrder(dgEmail, dgLocation) {
+    var lat = dgLocation.lat;
+    var lng = dgLocation.lng;
     var xhttp = new XMLHttpRequest();
-    var url = window.location.href += '?dgEmail=' + dgEmail;
+    var url = window.location.href += '?dgEmail=' + dgEmail + '&dgLocation=' + lat + ',' + lng;
     xhttp.open("POST", url, true);
     xhttp.send("dgEmail=" + dgEmail);
 }

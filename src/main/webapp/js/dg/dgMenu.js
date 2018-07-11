@@ -83,7 +83,15 @@ function acceptOrder(){
     order.stateOrder = 'DELIVERING';
     order.fromFO = false;
     order.accepted = true;
-    orderSocket.send(JSON.stringify(order));
+    if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(function (position) {
+            order.position = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+            orderSocket.send(JSON.stringify(order));
+        })
+    }
     delivering = true;
     changeState('ONLINE_WORKING');
     onlineWorking(true);
