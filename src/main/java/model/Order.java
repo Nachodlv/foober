@@ -40,6 +40,9 @@ public class Order {
     @Expose
     @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
     private Set<OrderedProducts> orderedProducts = new HashSet<>();
+    @Expose
+    @Column(name = "ratingDG")
+    private double ratingDG;
 
     public Order() {
     }
@@ -123,6 +126,14 @@ public class Order {
             totalCost += product.getProduct().getPrice() * product.getQuantity();
         }
         return totalCost;
+    }
+
+    public double getRatingDG() {
+        return ratingDG;
+    }
+
+    public void setRatingDG(double ratingDG) {
+        this.ratingDG = ratingDG;
     }
 
     public int getMinutesSinceIssued() {

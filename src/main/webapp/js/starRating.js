@@ -9,7 +9,7 @@ function starClick(starNumber){
 function newReview(state, review){
     var xhttp = new XMLHttpRequest();
     var url = window.location.href.split('/');
-    url[3] = 'dgReview?dgEmail=' + order.deliveryGuy.email + '&review=' + review;
+    url[3] = 'dgReview?dgEmail=' + order.deliveryGuy.email + '&review=' + review + '&orderID=' + order.id;
     xhttp.open("POST", url.join('/') , true);
     xhttp.send();
 }
@@ -17,6 +17,7 @@ function newReview(state, review){
 function setRating(rating, total, div, size) {
     var html = '';
     size = size || 1; //if size is undefined the size is 1rem
+    if(rating === 0 || rating === undefined) div.innerHTML = 'no ratings yet'.italics();
     if(total > 0) {
         var averageRating = rating / total;
         var absolutRating = Math.trunc(averageRating);

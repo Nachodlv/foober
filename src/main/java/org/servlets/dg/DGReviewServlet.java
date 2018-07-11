@@ -1,7 +1,9 @@
 package org.servlets.dg;
 
 import hibernate.DGFunctionality;
+import hibernate.OrderFunctiontality;
 import model.DeliveryGuy;
+import model.Order;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,6 +20,11 @@ public class DGReviewServlet extends HttpServlet{
             throws ServletException, IOException {
         String review = request.getParameter("review");
         String dgEmail = request.getParameter("dgEmail");
+        String orderID = request.getParameter("orderID");
+
+        final Order order = OrderFunctiontality.getOrder(Integer.parseInt(orderID));
+        order.setRatingDG(Double.valueOf(review));
+        OrderFunctiontality.modifyModel(order);
 
         DeliveryGuy deliveryGuy = DGFunctionality.getDeliveryGuy(dgEmail);
         Double reviewDouble = Double.valueOf(review);

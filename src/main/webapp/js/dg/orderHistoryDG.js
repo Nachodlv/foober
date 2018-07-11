@@ -25,18 +25,21 @@ function generateTable() {
         var foName = document.createElement('td');
         var issuedTime = document.createElement('td');
         var status = document.createElement('td');
+        var rating = document.createElement('td');
 
         orderID.innerHTML = order.id;
         clientName.innerHTML = order.client.name;
         foName.innerHTML = order.franchiseOwner.name;
         issuedTime.textContent = getTime(order.issuedTime);
         status.innerHTML = order.stateOrder;
+        setRating(order.ratingDG, 1, rating, 1);
 
         row.appendChild(orderID);
         row.appendChild(clientName);
         row.appendChild(foName);
         row.appendChild(issuedTime);
         row.appendChild(status);
+        row.appendChild(rating);
         tableBody.appendChild(row);
     }
 }

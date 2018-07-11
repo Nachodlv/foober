@@ -18,6 +18,7 @@
         <th style="cursor: pointer" scope="col" onclick="sortTable(2)">Delivery-guy's name</th>
         <th style="cursor: pointer" scope="col" onclick="sortTable(0)">Time issued</th>
         <th style="cursor: pointer" scope="col" onclick="sortTable(4)">Status</th>
+        <th style="cursor: pointer" scope="col" onclick="sortTable(5)">Rating</th>
     </tr>
     </thead>
     <tbody id="tbody"></tbody>
@@ -29,6 +30,7 @@
         to Main Menu</a>
 </footer>
 
+<script src="../../../js/starRating.js"></script>
 <script src="../../../js/fo/orderHistoryFO.js"></script>
 <script src="../../../js/history.js"></script>
 <jsp:include page="../bootstrapImportBody.jsp"/>
