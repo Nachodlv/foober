@@ -1,6 +1,6 @@
 var directionsDisplay;
 var map;
-function initMap() {
+function initMap(centerAddress) {
     directionsDisplay = new google.maps.DirectionsRenderer();
     var mapOptions = {
         zoom:8,
@@ -8,6 +8,7 @@ function initMap() {
     };
     map = new google.maps.Map(document.getElementById('map'), mapOptions);
     directionsDisplay.setMap(map);
+    centerMap(centerAddress);
 }
 
 function setDirections(origin, waypoint, destination, meansOfTransport){
@@ -42,11 +43,14 @@ function getMeansOfTransport(meansOfTransport){
     }
 }
 
-function setMarker(position, name, label){
+function setMarker(position, name, label, color){
+    color = color || 'red';
     var marker = new google.maps.Marker({
         position: position,
         map: map,
-        label: label
+        label: label,
+        icon: 'http://maps.google.com/mapfiles/ms/icons/' + color + '-dot.png',
+        animation: google.maps.Animation.DROP
     });
 
     var description = generateDescriptionMarker(name);

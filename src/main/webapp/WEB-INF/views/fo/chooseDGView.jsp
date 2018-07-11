@@ -5,6 +5,7 @@
     <jsp:include page="../bootstrapImportHeader.jsp"/>
     <title>Choose delivery-guy</title>
     <link rel="stylesheet" href="../../../css/foober.css" type="text/css">
+    <link rel="stylesheet" href="../../../css/fo/chooseDg.css" type="text/css">
 </head>
 <body class="outer" onbeforeunload="closeSocket()">
 
@@ -16,7 +17,7 @@
         <thead>
         <tr>
             <th class="text-center" scope="col">Name</th>
-            <th class="text-center" scope="col">Status</th>
+            <th class="text-center" scope="col">Marker</th>
             <th class="text-center" scope="col" style="width: 20%;">Means Of Transport</th>
             <th class="text-center" scope="col">Phone</th>
             <th class="text-center" scope="col">Rating</th>
@@ -100,7 +101,7 @@
 <script src="../../../js/starRating.js"></script>
 <script src="../../../js/fo/chooseDG.js"></script>
 <script src="../../../js/popoverUtils.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRtC9nTA8nx3D7jpH07HcU5SjpLhQgA6E&libraries=places&callback=initMap"
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRtC9nTA8nx3D7jpH07HcU5SjpLhQgA6E&libraries=places&callback=initializeMap"
         async defer></script>
 <script>
 

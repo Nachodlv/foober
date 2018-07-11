@@ -231,8 +231,7 @@ function transformOrder(stateOrder){
 }
 
 function initializeMap(clientAddress, foAddress) {
-    initMap();
-    centerMap(foAddress);
+    initMap(foAddress);
     transformPlaceIdToPosition(clientAddress, function (result) {
         setMarker(result.geometry.location, 'Client address', 'C');
     });

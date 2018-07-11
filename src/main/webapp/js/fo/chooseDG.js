@@ -5,7 +5,8 @@ var DGname;
 var deliveryGuys = [];
 var MAX_DGS = 5;
 var UPDATE_TIME = 5000; //time in ms
-getAllDGs();
+var markerColors = ['green', 'blue', 'yellow', 'orange', 'purple'];
+var markerIndex = -1;
 
 dgSocket.onopen = function (ev) {
     dgSocket.onmessage = function (ev) {
@@ -22,6 +23,11 @@ dgSocket.onopen = function (ev) {
 
 };
 
+function initializeMap() {
+    initMap(document.getElementById('foAddress').value);
+    getAllDGs();
+}
+
 //When the window is closed, the socket closes
 window.onbeforeunload = closeSocket;
 window.onunload = closeSocket;
@@ -34,7 +40,7 @@ function closeSocket(event) {
 }
 
 function addDeliveryGuyToHtml(deliveryGuy, i) {
-    if(i > MAX_DGS) return;
+    if(i >= MAX_DGS) return;
 
     var dgTable = document.getElementById('dgTable');
     var row = document.createElement('tr');
@@ -42,22 +48,22 @@ function addDeliveryGuyToHtml(deliveryGuy, i) {
 
 
     var name = document.createElement('td');
-    var state = document.createElement('td');
+    var marker = document.createElement('td');
     var setMeansOfTransport = document.createElement('td');
     var phone = document.createElement('td');
     var rating = document.createElement('td');
     var distance = document.createElement('td');
 
     name.innerHTML = deliveryGuy.info.name;
-    state.innerHTML = "<td><i class=\"fa fa-circle\" aria-hidden=\"true\" style=\"color:green;\"></i></td>";
+    marker.innerHTML = "<td><i class=\"fa fa-circle\" aria-hidden=\"true\" style=\"color:" + deliveryGuy.markerInfo.color + ";\"></i></td>";
     setMeansOfTransport.className = "setMeansOfTransport";
     setMeansOfTransport.innerHTML = deliveryGuy.info.meansOfTransport;
     phone.innerHTML = deliveryGuy.info.phone;
     setRating(deliveryGuy.info.rating, deliveryGuy.info.ratingQuantity, rating);
-    distance.innerHTML = deliveryGuy.distance;
+    distance.innerHTML = deliveryGuy.distance + 'km';
 
     row.appendChild(name);
-    row.appendChild(state);
+    row.appendChild(marker);
     row.appendChild(setMeansOfTransport);
     row.appendChild(phone);
     row.appendChild(rating);
@@ -193,10 +199,6 @@ function errorCatcher(error) {
         '</div>';
 }
 
-function closeDgSocket(dgEmail) {
-
-}
-
 function setRating(rating, total, div) {
     var html = '';
     if (total > 0) {
@@ -249,7 +251,10 @@ function createDgs(dgs){
                 }
             },
             distance: undefined,
-            marker: undefined
+            markerInfo: {
+                marker: undefined,
+                color: undefined
+            }
         });
     }
     requestPositions();
@@ -259,16 +264,17 @@ function setDistanceDg(deliveryGuy, position){
     distanceAndTime(position, document.getElementById('foAddress').value, deliveryGuy.info.meansOfTransport,
         function (response, status){
             if (status === google.maps.DirectionsStatus.OK) {
-                deliveryGuy.distance = response.routes[0].legs[0].distance.value;
+                deliveryGuy.distance = response.routes[0].legs[0].distance.value / 1000;
             }
             orderHtml(deliveryGuy);
-            //TODO add or modify the marker of the dg
         });
 }
 
 function deleteDeliveryGuy(deliveryGuy){
    for(var i=0;i<deliveryGuys.length;i++){
        if(deliveryGuys[i].info.email === deliveryGuy.email){
+           deliveryGuys[i].markerInfo.marker.setMap(null);
+           deliveryGuys[i].markerInfo.marker = undefined;
            deliveryGuys.splice(i, 1);
        }
    }
@@ -278,7 +284,10 @@ function newDeliveryGuy(infoDeliveryGuy){
     var deliveryGuy = {
         info: infoDeliveryGuy,
         distance: undefined,
-        marker: undefined
+        markerInfo: {
+            color: undefined,
+            marker: undefined
+        }
     };
     setDistanceDg(deliveryGuy, infoDeliveryGuy.position);
 }
@@ -294,10 +303,12 @@ function remove(deliveryGuy) {
 
 function orderHtml(deliveryGuy){
     var added = false;
+    var previousMarkerInfo = {marker: undefined, color:undefined};
     for(var i=0;i<deliveryGuys.length;i++){
         var dg = deliveryGuys[i];
         //found his row, erase it
         if(dg.info.email === deliveryGuy.info.email) {
+            previousMarkerInfo = dg.markerInfo;
             deliveryGuys.splice(i, 1);
             deleteDeliveryGuyFromHtml(dg.info);
             i--;
@@ -305,8 +316,8 @@ function orderHtml(deliveryGuy){
         //Add the deliveryGuy in his corresponding position. (sorted by distance, undefined positions are the last ones)
         else if((!dg.distance || dg.distance > deliveryGuy.distance) && !added){
             added = true;
+            updateDeliveryGuy(deliveryGuy, i, previousMarkerInfo);
             deliveryGuys.splice(i, 0, deliveryGuy);
-            addDeliveryGuyToHtml(deliveryGuy, i);
         }
         //If the deliveryGuy was added, then it moves all rows one position below
         else if (added){
@@ -316,8 +327,20 @@ function orderHtml(deliveryGuy){
     //If the delivery wasn't added, then it adds it to the last position
     if(!added) {
         deliveryGuys.push(deliveryGuy);
-        addDeliveryGuyToHtml(deliveryGuy, deliveryGuys.length - 1);
+        updateDeliveryGuy(deliveryGuy, deliveryGuys.length - 1, previousMarkerInfo);
     }
+}
+
+function updateDeliveryGuy(deliveryGuy, index, previousMarkerInfo){
+    if(previousMarkerInfo.marker){
+        previousMarkerInfo.marker.setPosition(deliveryGuy.info.position);
+        deliveryGuy.markerInfo = previousMarkerInfo;
+    }else{
+        var color = getColor();
+        deliveryGuy.markerInfo.marker = setMarker(deliveryGuy.info.position, deliveryGuy.info.name, undefined, color);
+        deliveryGuy.markerInfo.color = color;
+    }
+    addDeliveryGuyToHtml(deliveryGuy, index);
 }
 
 function requestPositions(){
@@ -325,6 +348,12 @@ function requestPositions(){
         dg.info.fromFo = true;
         dgSocket.send(JSON.stringify(dg.info))
     })
+}
+
+function getColor(){
+    markerIndex = markerIndex===4 ? -1: markerIndex;
+    markerIndex++;
+    return markerColors[markerIndex];
 }
 
 disablePopovers = function(){
