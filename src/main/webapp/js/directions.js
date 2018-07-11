@@ -93,3 +93,19 @@ function generateDescriptionMarker(name) {
         '<span>' + name + '</span>' +
         '</div>';
 }
+
+function distanceAndTime(from, to, mode, responseFunction) {
+    var directionsService = new google.maps.DirectionsService();
+    mode = getMeansOfTransport(mode);
+
+    var rslt = new Array(2);
+    var request = {
+        origin: from,           //LatLng | String | google.maps.Place
+        destination: {placeId: to},        //LatLng | String | google.maps.Place
+        travelMode: mode,       //google.maps.DirectionsTravelMode.DRIVING
+        unitSystem: google.maps.UnitSystem.METRIC
+    };
+
+    directionsService.route(request, responseFunction);
+    return rslt;
+}

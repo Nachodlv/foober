@@ -119,7 +119,8 @@ function login_logout(state) {
 
 function sendState(state){
     var dg = getDeliveryGuy(state);
-    if(navigator.geolocation){
+    if(state === 'OFFLINE') stateSocket.send(JSON.stringify(dg));
+    else if(navigator.geolocation){
         navigator.geolocation.getCurrentPosition(function (position) {
             dg.position = {
                 lat: position.coords.latitude,
@@ -127,6 +128,8 @@ function sendState(state){
             };
             stateSocket.send(JSON.stringify(dg));
         })
+    }else {
+        stateSocket.send(JSON.stringify(dg));
     }
 }
 

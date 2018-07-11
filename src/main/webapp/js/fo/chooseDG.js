@@ -4,6 +4,7 @@ var DGphone;
 var DGname;
 var deliveryGuys = [];
 var MAX_DGS = 5;
+var UPDATE_TIME = 5000; //time in ms
 getAllDGs();
 
 dgSocket.onopen = function (ev) {
@@ -13,11 +14,11 @@ dgSocket.onopen = function (ev) {
         if (deliveryGuy.state === 'ONLINE_WAITING') {
             newDeliveryGuy(deliveryGuy);
         } else {
-            deleteDeliveryGuy(deliveryGuy);
             deleteDeliveryGuyFromHtml(deliveryGuy);
+            deleteDeliveryGuy(deliveryGuy);
         }
     };
-    setInterval( requestPositions, 30000);
+    setInterval( requestPositions, UPDATE_TIME);
 
 };
 
@@ -32,9 +33,8 @@ function closeSocket(event) {
     window.onunload = undefined;
 }
 
-function addDeliveryGuyToHtml(deliveryGuy) {
-    //check if it is already on the list
-    if (document.getElementById(deliveryGuy.email)) return;
+function addDeliveryGuyToHtml(deliveryGuy, i) {
+    if(i > MAX_DGS) return;
 
     var dgTable = document.getElementById('dgTable');
     var row = document.createElement('tr');
@@ -46,36 +46,41 @@ function addDeliveryGuyToHtml(deliveryGuy) {
     var setMeansOfTransport = document.createElement('td');
     var phone = document.createElement('td');
     var rating = document.createElement('td');
+    var distance = document.createElement('td');
 
-    name.innerHTML = deliveryGuy.name;
+    name.innerHTML = deliveryGuy.info.name;
     state.innerHTML = "<td><i class=\"fa fa-circle\" aria-hidden=\"true\" style=\"color:green;\"></i></td>";
     setMeansOfTransport.className = "setMeansOfTransport";
-    setMeansOfTransport.innerHTML = deliveryGuy.meansOfTransport;
-    phone.innerHTML = deliveryGuy.phone;
-    setRating(deliveryGuy.rating, deliveryGuy.ratingQuantity, rating);
+    setMeansOfTransport.innerHTML = deliveryGuy.info.meansOfTransport;
+    phone.innerHTML = deliveryGuy.info.phone;
+    setRating(deliveryGuy.info.rating, deliveryGuy.info.ratingQuantity, rating);
+    distance.innerHTML = deliveryGuy.distance;
 
     row.appendChild(name);
     row.appendChild(state);
     row.appendChild(setMeansOfTransport);
     row.appendChild(phone);
     row.appendChild(rating);
+    row.appendChild(distance);
 
     row.addEventListener('mousedown', function () {
         $("#modalConfirmDG").modal();
-        email = deliveryGuy.email;
-        DGname = deliveryGuy.name;
-        DGphone = deliveryGuy.phone;
+        email = deliveryGuy.info.email;
+        DGname = deliveryGuy.info.name;
+        DGphone = deliveryGuy.info.phone;
 
     });
 
-    row.id = deliveryGuy.email;
-    dgTable.appendChild(row);
+    row.id = deliveryGuy.info.email;
+    var rows = dgTable.childNodes;
+    if(rows.length === i) dgTable.appendChild(row);
+    else dgTable.replaceChild(row, dgTable.childNodes[i]);
     replaceMeansOfTransport();
 }
 
-function deleteDeliveryGuyFromHtml(deliveryGuy) {
-    var dgRow = document.getElementById(deliveryGuy.email);
-    //check if it is the list before removing
+function deleteDeliveryGuyFromHtml(deliveryGuyInfo) {
+    var dgRow = document.getElementById(deliveryGuyInfo.email);
+    //check if it is in the list before removing
     if (dgRow) dgRow.parentNode.removeChild(dgRow);
 }
 
@@ -224,7 +229,7 @@ function getAllDGs() {
 }
 
 function createDgs(dgs){
-    for(var i=0;i<MAX_DGS&&i<dgs.length;i++){
+    for(var i=0;i<dgs.length;i++){
         var dg = dgs[i];
         deliveryGuys.push({
             info: {
@@ -254,7 +259,7 @@ function setDistanceDg(deliveryGuy, position){
             if (status === google.maps.DirectionsStatus.OK) {
                 deliveryGuy.distance = response.routes[0].legs[0].distance.value;
             }
-            orderHtml();
+            orderHtml(deliveryGuy);
             //TODO add or modify the marker of the dg
         });
 }
@@ -268,28 +273,49 @@ function deleteDeliveryGuy(deliveryGuy){
 }
 
 function newDeliveryGuy(infoDeliveryGuy){
-    var deliveryGuy = contains(infoDeliveryGuy);
-    if(deliveryGuy){
-        setDistanceDg(deliveryGuy, infoDeliveryGuy.position)
-    } else {
-        var length = deliveryGuys.push({
-            info: infoDeliveryGuy,
-            distance: undefined,
-            marker: undefined
-        });
-        setDistanceDg(deliveryGuys[length-1], infoDeliveryGuy.position);
-    }
+    var deliveryGuy = {
+        info: infoDeliveryGuy,
+        distance: undefined,
+        marker: undefined
+    };
+    setDistanceDg(deliveryGuy, infoDeliveryGuy.position);
 }
 
-function contains(deliveryGuyInfo) {
+function remove(deliveryGuy) {
     for(var i=0;i<deliveryGuys.length;i++){
-        if(deliveryGuyInfo.email === deliveryGuys[i].info.email)return deliveryGuys[i];
+        if(deliveryGuy.info.email === deliveryGuys[i].info.email){
+            deliveryGuys.splice(i,1);
+            deleteDeliveryGuyFromHtml(deliveryGuy.info);
+        }
     }
-    return undefined;
 }
 
-function orderHtml(){
-//TODO order deliveryGuys array and modify the html
+function orderHtml(deliveryGuy){
+    var added = false;
+    for(var i=0;i<deliveryGuys.length;i++){
+        var dg = deliveryGuys[i];
+        //found his row, erase it
+        if(dg.info.email === deliveryGuy.info.email) {
+            deliveryGuys.splice(i, 1);
+            deleteDeliveryGuyFromHtml(dg.info);
+            i--;
+        }
+        //Add the deliveryGuy in his corresponding position. (sorted by distance, undefined positions are the last ones)
+        else if((!dg.distance || dg.distance > deliveryGuy.distance) && !added){
+            added = true;
+            deliveryGuys.splice(i, 0, deliveryGuy);
+            addDeliveryGuyToHtml(deliveryGuy, i);
+        }
+        //If the deliveryGuy was added, then it moves all rows one position below
+        else if (added){
+            addDeliveryGuyToHtml(dg, i);
+        }
+    }
+    //If the delivery wasn't added, then it adds it to the last position
+    if(!added) {
+        deliveryGuys.push(deliveryGuy);
+        addDeliveryGuyToHtml(deliveryGuy, deliveryGuys.length - 1);
+    }
 }
 
 function requestPositions(){

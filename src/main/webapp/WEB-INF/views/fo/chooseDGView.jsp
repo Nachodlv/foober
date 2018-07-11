@@ -20,11 +20,13 @@
             <th class="text-center" scope="col" style="width: 20%;">Means Of Transport</th>
             <th class="text-center" scope="col">Phone</th>
             <th class="text-center" scope="col">Rating</th>
+            <th class="text-center" scope="col">Distance</th>
         </tr>
         </thead>
         <tbody id="dgTable"></tbody>
     </table>
 </div>
+<div id="map"></div>
 
 <%--modal for confirming--%>
 <div class="modal fade bd-example-modal-sm" id="modalConfirmDG" tabindex="-1" role="dialog" aria-hidden="true">
@@ -94,7 +96,7 @@
 
 <jsp:include page="../bootstrapImportBody.jsp"/>
 <script src="../../../js/utils.js"></script>
-<script src="../../../js/distanceBetweenPoints.js"></script>
+<script src="../../../js/directions.js"></script>
 <script src="../../../js/starRating.js"></script>
 <script src="../../../js/fo/chooseDG.js"></script>
 <script src="../../../js/popoverUtils.js"></script>

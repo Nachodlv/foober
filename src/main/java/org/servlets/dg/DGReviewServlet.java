@@ -4,6 +4,7 @@ import hibernate.DGFunctionality;
 import hibernate.OrderFunctiontality;
 import model.DeliveryGuy;
 import model.Order;
+import model.StateOrder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,6 +25,7 @@ public class DGReviewServlet extends HttpServlet{
 
         final Order order = OrderFunctiontality.getOrder(Integer.parseInt(orderID));
         order.setRatingDG(Double.valueOf(review));
+        order.setStateOrder(StateOrder.REVIEWED);
         OrderFunctiontality.modifyModel(order);
 
         DeliveryGuy deliveryGuy = DGFunctionality.getDeliveryGuy(dgEmail);
