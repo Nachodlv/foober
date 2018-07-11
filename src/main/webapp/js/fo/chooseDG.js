@@ -4,7 +4,7 @@ var DGphone;
 var DGname;
 var deliveryGuys = [];
 var MAX_DGS = 5;
-var UPDATE_TIME = 5000; //time in ms
+var UPDATE_TIME = 30000; //time in ms
 var markerColors = ['green', 'blue', 'yellow', 'orange', 'purple'];
 var markerIndex = -1;
 
