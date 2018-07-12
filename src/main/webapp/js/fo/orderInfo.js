@@ -109,6 +109,7 @@ function getTotalCost(orderedProducts) {
 }
 
 function addLink(img){
+    imgDG.style.cursor = "pointer";
     img.onclick = function() {
         var url = window.location.href.split('/');
         url[3] = 'chooseDG';

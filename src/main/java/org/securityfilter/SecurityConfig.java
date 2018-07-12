@@ -27,6 +27,7 @@ class SecurityConfig {
         urlPatterns1.add("/foInfo");
         urlPatterns1.add("/chooseDG");
         urlPatterns1.add("/orderInfo");
+        urlPatterns1.add("/foOrderHistory");
 
         mapConfig.put(ROLE_FO, urlPatterns1);
 
@@ -36,6 +37,7 @@ class SecurityConfig {
         urlPatterns2.add("/userInfo");
         urlPatterns2.add("/dgMenu");
         urlPatterns2.add("/dgInfo");
+        urlPatterns2.add("/dgOrderHistory");
 
         mapConfig.put(ROLE_DG, urlPatterns2);
     }
