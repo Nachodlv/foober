@@ -11,8 +11,8 @@ function getOrder() {
             setProducts();
             getClientAvatar();
             if(order.stateOrder === 'DELIVERING'){
+                initializeMap(order.client.address, order.franchiseOwner.address, order.dgFirstLocation);
                 openWebSocket();
-                initializeMap(order.client.address, order.franchiseOwner.address);
                 document.getElementById('cancelOrder').hidden = false;
             }
             else if(order.stateOrder === 'DELIVERED') $('#rateModal').modal();
@@ -129,7 +129,6 @@ function openWebSocket(){
             document.getElementById('cancelOrder').hidden = true;
             document.getElementById('map').hidden = true;
         } else if(!orderReceived.fromFO && orderReceived.stateOrder === 'DELIVERING'){
-            console.log(orderReceived.position);
             dgMarker.setPosition(new google.maps.LatLng(orderReceived.position.lat, orderReceived.position.lng ));
         }
     };
@@ -230,7 +229,7 @@ function transformOrder(stateOrder){
     }
 }
 
-function initializeMap(clientAddress, foAddress) {
+function initializeMap(clientAddress, foAddress, dgFirstLocation) {
     initMap(foAddress);
     transformPlaceIdToPosition(clientAddress, function (result) {
         setMarker(result.geometry.location, 'Client address', 'C');
@@ -238,7 +237,11 @@ function initializeMap(clientAddress, foAddress) {
     transformPlaceIdToPosition(foAddress, function (result) {
         setMarker(result.geometry.location, 'Franchise address', 'F');
     });
-    var defaultPos = {lat:0, lng:0};
-    dgMarker = setMarker(defaultPos, 'DG position', 'D');
+    dgFirstLocation = dgFirstLocation.split(',');
+    var dgLocation = {
+        lat: parseFloat(dgFirstLocation[0]),
+        lng: parseFloat(dgFirstLocation[1])
+    };
+    dgMarker = setMarker(dgLocation, 'Delivery Guy', 'D');
 }
 
