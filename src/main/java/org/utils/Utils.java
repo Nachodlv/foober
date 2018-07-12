@@ -1,5 +1,8 @@
 package org.utils;
 
+import hibernate.OrderFunctiontality;
+import model.Order;
+import model.OrderedProducts;
 import model.Product;
 import webSocket.OrderMessage;
 
@@ -74,10 +77,11 @@ public class Utils {
     }
 
     public static void sendEmailDG(OrderMessage message) {
+
         String titleEmail = "Order received";
-        String bodyTitle = "You have received an order!";
-        String bodyInfo = "\nHere you have some basic information:\n<ul><li>Client address: " + message.getClientAddress() +
-                "</li><li>Client name: " + message.getClientName() + "</li></ul>\nGo to the app to get full order data!\n";
+        String bodyTitle = "<span>You have received an order!</span><br><span>From: " + message.getFoName() + "</span>";
+        StringBuilder bodyInfo = getProductTable(message);
+        bodyInfo.append("<br><br><span>Go to the app to get full order data!</span>");
         String messageBody = bodyTitle + bodyInfo;
         try {
             GoogleMail.send(message.getDgEmail(), titleEmail, messageBody);
@@ -88,9 +92,10 @@ public class Utils {
 
     public static void sendEmailClient(OrderMessage message) {
         String titleEmail = "Order on its way";
-        String bodyTitle = "Your order has already been accepted by one of our delivery guys, and it is on its way!";
-        String bodyInfo = "\nIn case you need it, here is more information:\n<ul><li>Delivery-guy name: " + message.getDgName() +
-                "</li><li>Delivery-guy phone: " + message.getDgPhone() + "</li></ul>\n";
+        String bodyTitle = "<span>Your order has already been accepted by one of our delivery guys, and it is on its way!</span>" +
+                "<br><span>Delivery-guy name: " + message.getDgName() + "</span>" +
+                "<br><span>Delivery-guy phone: " + message.getDgPhone() + "</span>";
+        StringBuilder bodyInfo = getProductTable(message);
         String messageBody = bodyTitle + bodyInfo;
         try {
             GoogleMail.send(message.getClientEmail(), titleEmail, messageBody);
@@ -107,5 +112,23 @@ public class Utils {
         } catch (MessagingException e) {
             e.printStackTrace();
         }
+    }
+
+    private static StringBuilder getProductTable(OrderMessage message) {
+        Order order = OrderFunctiontality.getOrder(message.getId());
+        StringBuilder bodyInfo = new StringBuilder("<br><span>Here you have some basic information:</span>" +
+                "<table style='width:80%;margin-top:30px;margin-bottom:30px;text-align:center'>" +
+                "<tr><th style='width:33%;'>Product</th><th style='width:33%;'>Quantity</th><th style='width:33%;'>Price</th></tr>");
+
+        for(OrderedProducts product: order.getOrderedProducts()) {
+            bodyInfo.append("<tr>");
+            bodyInfo.append("<td>").append(product.getProduct().getName()).append("</td>");
+            bodyInfo.append("<td>").append(product.getQuantity()).append("</td>");
+            bodyInfo.append("<td>$").append(product.getProduct().getPrice() * product.getQuantity()).append("</td>");
+            bodyInfo.append("</tr>");
+        }
+        bodyInfo.append("</table>");
+        bodyInfo.append("<span style='font-weight: bold;margin-left: auto;'>Total: $").append(message.getTotalPrice()).append("</span>");
+        return bodyInfo;
     }
 }
