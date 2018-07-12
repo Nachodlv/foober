@@ -3,7 +3,7 @@ var map;
 function initMap(centerAddress) {
     directionsDisplay = new google.maps.DirectionsRenderer();
     var mapOptions = {
-        zoom:8,
+        zoom:14,
         center: {lat: 0, lng: 0}
     };
     map = new google.maps.Map(document.getElementById('map'), mapOptions);
@@ -44,12 +44,11 @@ function getMeansOfTransport(meansOfTransport){
 }
 
 function setMarker(position, name, label, color){
-    color = color || 'red';
     var marker = new google.maps.Marker({
         position: position,
         map: map,
         label: label,
-        icon: 'http://maps.google.com/mapfiles/ms/icons/' + color + '-dot.png',
+        icon: color? 'http://maps.google.com/mapfiles/ms/icons/' + color + '-dot.png' : undefined,
         animation: google.maps.Animation.DROP
     });
 

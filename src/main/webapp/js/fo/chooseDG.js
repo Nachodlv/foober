@@ -24,7 +24,11 @@ dgSocket.onopen = function (ev) {
 };
 
 function initializeMap() {
-    initMap(document.getElementById('foAddress').value);
+    var foAddress = document.getElementById('foAddress').value;
+    initMap(foAddress);
+    transformPlaceIdToPosition(foAddress, function (result) {
+        setMarker(result.geometry.location, 'Franchise address', 'F');
+    });
     getAllDGs();
 }
 
@@ -60,7 +64,7 @@ function addDeliveryGuyToHtml(deliveryGuy, i) {
     setMeansOfTransport.innerHTML = deliveryGuy.info.meansOfTransport;
     phone.innerHTML = deliveryGuy.info.phone;
     setRating(deliveryGuy.info.rating, deliveryGuy.info.ratingQuantity, rating);
-    distance.innerHTML = deliveryGuy.distance + 'km';
+    distance.innerHTML = Math.round(deliveryGuy.distance*100)/100 + 'km';
 
     row.appendChild(name);
     row.appendChild(marker);
@@ -75,6 +79,12 @@ function addDeliveryGuyToHtml(deliveryGuy, i) {
         DGname = deliveryGuy.info.name;
         DGphone = deliveryGuy.info.phone;
 
+    });
+    row.addEventListener('mouseover', function () {
+        deliveryGuy.markerInfo.marker.setAnimation(google.maps.Animation.BOUNCE);
+    });
+    row.addEventListener('mouseout', function () {
+       deliveryGuy.markerInfo.marker.setAnimation(null);
     });
 
     row.id = deliveryGuy.info.email;
@@ -141,6 +151,7 @@ function onWindowClose(orderSocket) {
 function waitingForResponse(orderSocket) {
     document.getElementById('table').hidden = true;
     document.getElementById('waitingForResponse').hidden = false;
+    document.getElementById('map').hidden = true;
     document.getElementById('chooseDGLater').classList.add('disabled');
 
     orderSocket.onmessage = function (message) {
@@ -158,6 +169,7 @@ function waitingForResponse(orderSocket) {
             //order rejected
             document.getElementById('table').hidden = false;
             document.getElementById('waitingForResponse').hidden = true;
+            document.getElementById('map').hidden = false;
             errorCatcher('The delivery-guy rejected the order.');
         }
     }
